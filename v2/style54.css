@@ -1,0 +1,40 @@
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+ul{
+	list-style-type: none;
+	width: 200px;
+	border: none;
+	background-color: rgb(28, 28, 28);
+	height: 100%;
+	position: fixed;
+	overflow: auto;
+}
+
+ul li{
+	text-align: center;
+	padding: 5px;
+}
+
+ul li:last-child{
+	border-bottom: none;
+}
+
+ul li a{
+	text-decoration: none;
+	font-size: 150%;
+	color: black;
+	display: block;
+	padding: 5px;
+}
+
+ul li a:hover{
+	color: aliceblue;
+}
+
+ul li a:active{
+	color: #FFC300;
+}
