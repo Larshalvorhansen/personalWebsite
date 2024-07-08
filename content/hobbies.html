@@ -18,6 +18,7 @@
 
       .main-content {
         margin-left: 25%;
+        margin-right: 5%;
       }
     }
 
@@ -35,7 +36,7 @@
       }
 
       .main-content {
-        margin-top: 60px;
+        margin-top: 90px;
         /* Adjust based on the height of the sidebar */
       }
     }
@@ -49,10 +50,10 @@
       <img class="object-scale-down max-h-16 max-w-16 drop-shadow-md rounded-md m-auto" src="logo3.png" alt="" />
     </a>
     <a href="LambdaSim.html" class="block p-2 md:w-full text-center md:text-left">The Lambda Sim Project</a>
-    <a href="8bitComp.html" class="block p-2 md:w-full text-center md:text-left">Hobbby projects</a>
+    <a href="hobbies.html" class="block p-2 md:w-full text-center md:text-left">Hobbby projects</a>
     <a href="art.html" class="block p-2 md:w-full text-center md:text-left">Art</a>
     <a href="cv.html" class="block p-2 md:w-full text-center md:text-left">CV</a>
-    <a href="index.html" class="block p-2 md:w-full text-center md:text-left">About</a>
+    <a href="index.html" class="block p-2 md:w-full text-center md:text-left">About</a><br>
     <!-- Social Icons -->
     <div class="hidden md:flex place-content-baseline md:justify-content-flex-end md:space-x-4 display: block ml-2">
       <a href="mailto:larshalvorhansen@gmail.com" target="_blank" title="Send an email" rel="noreferrer"
@@ -92,51 +93,64 @@
   </div>
   <!-- Main Content -->
   <div class="main-content bg-white p-8 md:p-16">
-    <br> The 8-bit Computer
+    <h1 class="text-2xl textcolor-blue font-bold mb-4">The 8-bit Computer</h1>
+
     <body class="flex justify-center items-center min-h-screen bg-gray-100">
       <div class="flex space-x-4">
 
-          <img src="8bit.gif" alt="Image 1" class="w-1/3 h-auto">
-          <img src="8bitModules.webp" alt="Image 1" class="w-1/3 h-auto">
-          <!-- <img src="" alt="Image 1" class="w-1/3 h-auto"> -->
+        <img src="hobby/8bit.gif" alt="Image 1" class="w-1/3 h-auto">
+        <img src="hobby/8bitModules.webp" alt="Image 1" class="w-1/3 h-auto">
+        <!-- <img src="" alt="Image 1" class="w-1/3 h-auto"> -->
       </div>
-  </body>
+    </body>
     <br>
     <p>
 
       In this project, I followed Ben Eater’s amazing tutorials to build a simple 8-bit computer from scratch. This was
-      a deep dive into the fundamentals of computer architecture and logic design. The process as so far involved a lot of
-      breadboarding, wiring, and debugging. I'm not finished with the project yet, as I still need to make the program counter
+      a deep dive into the fundamentals of computer architecture and logic design. The process as so far involved a lot
+      of
+      breadboarding, wiring, and debugging. I'm not finished with the project yet, as I still need to make the program
+      counter
       and the memory. It is an incredibly rewarding project and teaches me a heck of a lot about to see my
       very own computer come to life!
     </p>
     <br>
     <br>
-    <br> Hobby project 2: Building a Synthesizer from Scratch
+    <br>
+    <h1 class="text-2xl textcolor-blue font-bold mb-4">Building modular synthesizers</h1>
     <div class="image-gallery">
-      <img src="image4.jpg" alt="Synthesizer Project - Step 1">
-      <img src="image5.jpg" alt="Synthesizer Project - Step 2">
-      <img src="image6.jpg" alt="Synthesizer Project - Step 3">
+    </div>
+    <div class="flex space-x-4">
+      <!-- <img src="hobby/makeSynthBok.jpg" alt="Synthesizer Project - Step 1"  class="w-1/3 h-auto"> -->
+      <img src="hobby/synthGen2.gif" alt="Synthesizer Project - Step 1" class="w-1/3 h-auto">
+      <img src="hobby/synthOut.gif" alt="Synthesizer Project - Step 1" class="w-1/2 h-auto">
     </div>
     <br>
-    <p>This synthesizer project was a true labor of love. I have always been fascinated by music and sound synthesis, so
-      I decided to build my own synthesizer. Starting with basic oscillators and filters, I designed and assembled the
-      entire circuit. Along the way, I learned a lot about analog electronics, waveforms, and signal processing. The
-      result is a custom synthesizer that produces a wide range of unique sounds.</p>
+    <p>This synthesizer project was a true labor of love. I have always been fascinated by music and sound synthesis,
+      and while studying electronic engineering sythesizers really became the best of both worlds. So for a couple of
+      years now, ive been playing around in <u><a href="https://vcvrack.com">VCV rack</a></u> ALOT.
+      Starting with basic oscillators and filters, I designed and assembled plenty of patches. Along the way, Ive
+      learned a lot about analog electronics, waveforms, and signal processing. The
+      result is a custom synthesizer that produces a wide range of unique sounds. For instance this <u><a
+          href="https://youtu.be/1qHBECwTMVs?feature=shared">generative minecraft music patch</a></u> or this <u><a
+          href="https://youtu.be/9idIGIK9Ju8?feature=shared">Todd Terje inspired patch</a></u>!</p>
     <br>
     <br>
-    <br> Hobby project 3: Building an Ever More Efficient Prime Number Generator
-    <div class="image-gallery">
-      <img src="image7.jpg" alt="Prime Number Generator - Python">
-      <img src="image8.jpg" alt="Prime Number Generator - C">
-      <img src="image9.jpg" alt="Prime Number Generator - FPGA">
-    </div>
     <br>
+    <h1 class="text-2xl textcolor-blue font-bold mb-4">Generating Prime Numbers</h1>
     <p>This project started with a simple Python script to generate prime numbers, but it quickly evolved as I sought to
-      improve its efficiency. I rewrote the algorithm in C, and then took it a step further by implementing it in
-      SystemVerilog to run on an FPGA. Each iteration brought its own set of challenges and learning experiences, from
-      optimizing algorithms to understanding hardware description languages and FPGA architecture.</p>
+      improve its efficiency. I rewrote the algorithm in C. Now I am taking it a step further by implementing it in
+      SystemVerilog to run on an FPGA. Each iteration brings its set of challenges and learning experiences, from
+      optimizing algorithms to understanding hardware description languages and FPGA architecture. <br><br> For some
+      reason I
+      really really like finding prime numbers, even though I know they are allready discovered.</p>
     <br>
+    Ofcource, im not exactly the first person who loves doing this. Currently the fastest algorithm for finding primes
+    under a certan limit is the <u><a href="https://en.wikipedia.org/wiki/Sieve_of_Atkin">Seive_of_Atkin</a></u>
+    algorithm. <br> <br>So here it is implemented in Python: <br> <br>
+    <div class="image-gallery">
+      <img src="hobby/atkinP.png" alt="Prime Number Generator - Python">
+    </div>
     <br>
   </div>
 

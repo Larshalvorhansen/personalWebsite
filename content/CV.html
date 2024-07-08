@@ -17,7 +17,8 @@
       }
 
       .main-content {
-        margin-left: 25%;
+        margin-left: 35%;
+        margin-right: 10%;
       }
     }
 
@@ -35,9 +36,16 @@
       }
 
       .main-content {
-        margin-top: 60px;
+        margin-top: 120px;
         /* Adjust based on the height of the sidebar */
       }
+    }
+
+    .pdf-frame {
+      width: 100%;
+      height: 65vh; /* Adjust the height as needed */
+      /* border: 2px solid #ffffff98; border-gray-300 */
+      margin-bottom: 1rem; /* mb-4 */
     }
   </style>
 </head>
@@ -46,15 +54,15 @@
   <!-- Sidebar -->
   <div class="sidebar bg-black text-white p-4">
     <a href="index.html">
-      <img class="object-scale-down max-h-16 max-w-16 drop-shadow-md rounded-md m-auto" src="logo3.png" alt="" />
+      <img class="object-scale-down max-h-16 max-w-16 drop-shadow-md rounded-md m-auto" src="logo3.png" alt="Logo" />
     </a>
     <a href="LambdaSim.html" class="block p-2 md:w-full text-center md:text-left">The Lambda Sim Project</a>
-    <a href="8bitComp.html" class="block p-2 md:w-full text-center md:text-left">Hobbby projects</a>
+    <a href="hobbies.html" class="block p-2 md:w-full text-center md:text-left">Hobbby projects</a>
     <a href="art.html" class="block p-2 md:w-full text-center md:text-left">Art</a>
     <a href="cv.html" class="block p-2 md:w-full text-center md:text-left">CV</a>
-    <a href="index.html" class="block p-2 md:w-full text-center md:text-left">About</a>
+    <a href="index.html" class="block p-2 md:w-full text-center md:text-left">About</a><br>
     <!-- Social Icons -->
-    <div class="hidden md:flex place-content-baseline md:justify-content-flex-end md:space-x-4 display: block ml-2">
+    <div class="hidden md:flex place-content-baseline md:justify-content-flex-end md:space-x-4 ml-2">
       <a href="mailto:larshalvorhansen@gmail.com" target="_blank" title="Send an email" rel="noreferrer"
         class="text-white">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
@@ -95,12 +103,13 @@
     <div class="container mx-auto">
       <h1 class="text-3xl font-bold mb-4">CV</h1>
       <h2 class="text-xl text-gray-500 mb-2">Norwegian:</h2>
-      <iframe src="cv.pdf" class="w-full h-[900px] border-2 border-gray-300 mb-4"></iframe>
+      <iframe src="cv.pdf" class="pdf-frame"></iframe>
       <div class="flex justify-center mb-8">
         <a href="cv.pdf" download class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Download Norwegian version</a>
       </div>
+      <br><br>
       <h2 class="text-xl text-gray-500 mb-2">English:</h2>
-      <iframe src="cv.pdf" class="w-full h-[900px] border-2 border-gray-300 mb-4"></iframe>
+      <iframe src="cv.pdf" class="pdf-frame"></iframe>
       <div class="flex justify-center">
         <a href="cv.pdf" download class="bg-blue-500 text-white px-20 py-2 rounded hover:bg-blue-600">Download English version</a>
       </div>
