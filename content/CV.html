@@ -38,10 +38,19 @@
 
       .main-content {
         margin-top: 120px;
-        /* Adjust based on the height of the sidebar */
-      }
+        /* Adjust based on the height of */ }}.gradient-text {
+      background: linear-gradient(45deg, #002896, #77cfff);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      transition: background-position 0.3s ease-in-out;
+      background-size: 200% 200%;
+      background-position: 0% 50%;
     }
 
+    .gradient-text:hover {
+      background-position: 100% 50%;
+    }
     .pdf-frame {
       width: 100%;
       height: 65vh; /* Adjust the height as needed */
@@ -107,13 +116,13 @@
       <h2 class="text-xl text-gray-500 mb-2">Norwegian version:</h2>
       <iframe src="cv.pdf" class="pdf-frame"></iframe>
       <div class="flex justify-center mb-8">
-        <a href="cv.pdf" download class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Download Norwegian CV</a>
+        <a href="cv.pdf" download class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-all duration-300">Download Norwegian CV</a>
       </div>
       <br>
       <h2 class="text-xl text-gray-500 mb-2">English version:</h2>
       <iframe src="CVengelsk.pdf" class="pdf-frame"></iframe>
       <div class="flex justify-center mb-8">
-        <a href="CVengelsk.pdf" download class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Download English CV</a>
+        <a href="CVengelsk.pdf" download class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-all duration-300">Download English CV</a>
       </div>
     </div>
 </body>

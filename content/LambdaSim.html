@@ -37,8 +37,18 @@
 
       .main-content {
         margin-top: 60px;
-        /* Adjust based on the height of the sidebar */
-      }
+        /* Adjust based on the height of */ }}.gradient-text {
+      background: linear-gradient(45deg, #002896, #77cfff);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      transition: background-position 0.3s ease-in-out;
+      background-size: 200% 200%;
+      background-position: 0% 50%;
+    }
+
+    .gradient-text:hover {
+      background-position: 100% 50%;
     }
   </style>
 </head>
@@ -172,7 +182,7 @@
     </b>
 
     <div class="flex justify-left">
-      <a href="https://github.com/Larshalvorhansen/LambdaSim" class="bg-black text-white px-20 py-2 rounded hover:bg-blue-500 hover:text-black hover:border-8 hover:border-black">Check out LambdaSim on GitHub</a>
+      <a href="https://github.com/Larshalvorhansen/LambdaSim" class="bg-black text-white px-20 py-2 rounded hover:bg-blue-500 hover:text-black hover:border-8 hover:border-black transition-all duration-200">Check out LambdaSim on GitHub</a>
     </div>
 
     <!-- <p>These examples illustrate how complex societal challenges can be modeled and analyzed through LambdaSim to

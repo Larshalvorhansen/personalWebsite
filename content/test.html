@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blue Gradient Beam Link</title>
+    <style>
+        .beam-link {
+            position: relative;
+            display: inline-block;
+            color: #007bff; /* Slightly blue color to mimic a traditional hyperlink */
+            text-decoration: underline; /* Underline the link */
+            overflow: hidden;
+            padding-bottom: 5px; /* Space below the text */
+            transition: color 0.3s ease;
+        }
+
+        .beam-link::before {
+            content: '';
+            position: absolute;
+            bottom: 0; /* Positions the beam below the text */
+            left: -100%;
+            width: 100%;
+            height: 3px; /* Thickness of the beam */
+            background: linear-gradient(90deg, rgba(0, 123, 255, 0) 0%, rgba(0, 123, 255, 1) 50%, rgba(0, 123, 255, 0) 100%);
+            transition: left 0.5s ease;
+        }
+
+        .beam-link:hover {
+            color: #0056b3; /* Darker blue on hover */
+            text-decoration: none; /* Remove underline on hover */
+        }
+
+        .beam-link:hover::before {
+            left: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <a href="#" class="beam-link">Hover over this link</a>
+
+</body>
+</html>
