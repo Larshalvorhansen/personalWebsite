@@ -50,8 +50,41 @@
     .gradient-text:hover {
       background-position: 100% 50%;
     }
+        .copy-box {
+            display: inline-block;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            cursor: pointer;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            color: #333;
+            margin-top: 20px;
+        }
+
+        .copy-box:hover {
+            background-color: #eaeaea;
+        }
   </style>
 </head>
+
+<script>
+    function copyEmail() {
+        const email = "larshalvorhansen1@gmail.com";
+        const tempInput = document.createElement("input");
+        tempInput.value = email;
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        document.execCommand("copy");
+        document.body.removeChild(tempInput);
+        alert("Email address copied to clipboard!");
+    }
+</script>
+
+
+
+
 
 <body class="bg-gray-0">
   <!-- Sidebar -->
@@ -110,6 +143,8 @@
           <a href="mailto:larshalvorhansen1@gmail.com" target="_blank" title="Send an email" rel="noreferrer">Feel free to drop me an email! </a>
         </div><br>
         (larshalvorhansen1@gmail.com)
+        <div class="copy-box" onclick="copyEmail()">Click to copy email: larshalvorhansen1@gmail.com</div>
+
       </div>
       <br>
       <br>
