@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DJ PALME</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-900 text-white font-sans">
+    <!-- Header / Navigation -->
+    <header class="flex justify-between items-center p-6">
+        <div class="text-2xl font-bold">🌴</div>
+        <nav>
+            <ul class="flex space-x-6">
+                <li><a href="#Om" class="hover:text-gray-400">Om</a></li>
+                <li><a href="#Musikk" class="hover:text-gray-400">Musikk</a></li>
+                <!-- <li><a href="#gallery" class="hover:text-gray-400">Gallery</a></li> -->
+                <li><a href="#contact" class="hover:text-gray-400">Kontakt</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="h-screen bg-cover bg-center flex items-center justify-center" style="background-image: url('path-to-your-image.jpg');">
+        <div class="text-center">
+            <h1 class="text-5xl md:text-7xl font-bold">DJ PALME</h1>
+            <p class="mt-4 text-2xl md:text-3xl">Bringing the party to life</p>
+            <a href="#Musikk" class="mt-8 inline-block px-6 py-3 bg-red-500 text-white font-semibold rounded-md hover:bg-red-600">Listen Now</a>
+        </div>
+    </section>
+
+    <!-- Om Me Section -->
+    <section id="Om" class="py-20 px-6 md:px-20 bg-gray-800">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <div>
+                <h2 class="text-4xl font-bold mb-4">Om Me</h2>
+                <p class="text-lg">I am DJ PALME, a passionate DJ with experience in mixing genres like [Genres]. I have performed at [notable venues/events], bringing energy and excitement to every event.</p>
+            </div>
+            <div>
+                <img src="path-to-your-photo.jpg" alt="DJ PALME" class="rounded-lg shadow-lg">
+            </div>
+        </div>
+    </section>
+
+    <!-- Musikk/Mixes Section -->
+    <section id="Musikk" class="py-20 px-6 md:px-20 bg-gray-900">
+        <div class="text-center mb-12">
+            <h2 class="text-4xl font-bold">Musikk & Mixes</h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Example of a mix embed -->
+            <div class="bg-gray-800 p-4 rounded-lg shadow-lg">
+                <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https://soundcloud.com/larsemann01"></iframe>
+            </div>
+            <!-- Example of a mix embed -->
+            <div class="bg-gray-800 p-4 rounded-lg shadow-lg">
+                <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https://soundcloud.com/larsemann01/fast"></iframe>
+            </div>
+            <!-- Example of a mix embed -->
+            <div class="bg-gray-800 p-4 rounded-lg shadow-lg">
+                <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https://soundcloud.com/larsemann01/distance"></iframe>
+            </div>
+            <!-- Repeat the above block for each mix -->
+        </div>
+        <div class="text-center mt-12">
+            <a href="path-to-your-press-kit.pdf" class="px-6 py-3 bg-red-500 text-white font-semibold rounded-md hover:bg-red-600">Download Press Kit</a>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-20 px-6 md:px-20 bg-gray-800">
+        <div class="text-center mb-12">
+            <h2 class="text-4xl font-bold">Gallery</h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <!-- Example of a gallery image -->
+            <div class="overflow-hidden rounded-lg shadow-lg">
+                <img src="path-to-your-image.jpg" alt="Gallery Image" class="w-full h-full object-cover hover:scale-105 transform transition duration-300">
+            </div>
+            <!-- Repeat the above block for each image -->
+        </div>
+    </section>
+
+    <!-- Kontakt Section -->
+    <section id="contact" class="py-20 px-6 md:px-20 bg-gray-900">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <div>
+                <h2 class="text-4xl font-bold mb-4">Ta kontakt</h2>
+                <form>
+                    <div class="mb-4">
+                        <label class="block mb-2 text-sm font-semibold" for="name">Navn/Arrangør</label>
+                        <input class="w-full p-3 bg-gray-800 rounded-lg" type="text" id="name" name="name" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block mb-2 text-sm font-semibold" for="email">E-post</label>
+                        <input class="w-full p-3 bg-gray-800 rounded-lg" type="email" id="email" name="email" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block mb-2 text-sm font-semibold" for="message">Melding</label>
+                        <textarea class="w-full p-3 bg-gray-800 rounded-lg" id="message" name="message" rows="5" required></textarea>
+                    </div>
+                    <button class="px-6 py-3 bg-red-500 text-white font-semibold rounded-md hover:bg-red-600">Send</button>
+                </form>
+            </div>
+            <div class="text-center md:text-left">
+                <h2 class="text-4xl font-bold mb-4">Follow Me</h2>
+                <div class="flex justify-center md:justify-start space-x-6">
+                    <!-- Social Media Icons -->
+                    <!-- <a href="https://www.instagram.com/yourprofile" target="_blank"><i class="fab fa-instagram text-2xl"></i></a>
+                    <a href="https://www.twitter.com/yourprofile" target="_blank"><i class="fab fa-twitter text-2xl"></i></a>
+                    <a href="https://www.facebook.com/yourprofile" target="_blank"><i class="fab fa-facebook text-2xl"></i></a>
+                </div> -->
+                <div class="">
+                    <p>Mail: <a href="larshalvorhansen1@gmail.com" class="underline">larshalvorhansen1@gmail.com</a></p>
+                    <p>Phone: <a href="tel:+4790809670" class="underline">908 09 670</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-6 bg-gray-800 text-center">
+        <!-- <div class="flex justify-center space-x-4 mb-4">
+            #Repeat Social Media Icons
+            <a href="https://www.instagram.com/yourprofile" target="_blank">Insta<i class="fab fa-instagram text-xl"></i></a>
+            <a href="https://www.twitter.com/yourprofile" target="_blank">X<i class="fab fa-twitter text-xl"></i></a>
+            <a href="https://www.facebook.com/yourprofile" target="_blank">facebook<i class="fab fa-facebook text-xl"></i></a>
+        </div> -->
+        <p class="text-sm">&copy; 2024 Lars Halvor Hansen. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
