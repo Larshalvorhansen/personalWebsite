@@ -1,4 +1,4 @@
-# Halvor Hansen's Personal Website
+# My Personal Website: halvorhansen.no
 
 Welcome to the repository for my personal website, [halvorhansen.no](https://halvorhansen.no). This site serves as my digital portfolio and a space where I share my projects, hobbies, and interests.
 
