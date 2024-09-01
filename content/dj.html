@@ -1,120 +1,298 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DJ Palme</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <!-- Include Neonderthaw font from Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Neonderthaw&display=swap" rel="stylesheet">
-  <style>
-    @keyframes subtle-flicker {
-      0%,
-      80%,
-      100% {
-        opacity: 1;
-        text-shadow: 0 0 5px #39FF14, 0 0 10px #39FF14, 0 0 15px #39FF14, 0 0 30px #FF00FF, 0 0 60px #FF00FF;
-      }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DJ PALME</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Matematica&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Tokyo+Zoo&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap" rel="stylesheet">
 
-      90% {
-        opacity: 0.95;
-        text-shadow: 0 0 4px #39FF14, 0 0 8px #39FF14, 0 0 12px #39FF14, 0 0 24px #FF00FF, 0 0 48px #FF00FF;
-      }
-    }
+    <style>
+        @font-face {
+            font-family: 'NeonCustomFont';
+            src: url('NEON____.TTF') format('truetype');
+        }
 
-    .neon-text {
-      /* font-family: 'Neonderthaw', cursive; */
-      font-size: 12rem; /* Increased font size */
-      color: #39FF14; /* Main neon color */
-      text-shadow: 0 0 2px #39FF14, 0 0 3px #39FF14, 0 0 15px #39FF14, 0 0 30px #FF00FF, 0 0 60px #FF00FF;
-      animation: subtle-flicker 2s infinite;
-      position: relative;
-      z-index: 20; /* Increased z-index to ensure visibility over the background image */
-      transition: transform 0.5s ease-in-out;
-      text-align: center;
-    }
+        header {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            z-index: 20;
+            transition: background-color 0.3s ease, padding 0.3s ease;
+        }
 
-    .palm-tree {
-      font-size: 8rem; /* Reduced font size of palm tree */
-      color: transparent; /* Make the inside of the emoji transparent */
-      text-shadow: -1px -1px 0 #39FF14, 1px -1px 0 #39FF14, -1px 1px 0 #39FF14, 1px 1px 0 #39FF14, 0 0 4px #39FF14, 0 0 8px #39FF14;
-      position: absolute;
-      z-index: 10; /* Below neon text but above the background image */
-      animation: subtle-flicker 2.5s infinite;
-      transition: transform 0.5s ease-in-out;
-      text-align: center;
-    }
+        header:hover {
+            background-color: rgba(0, 0, 0, 0.9);
+            padding: 0.75rem;
+        }
 
-    .scrolled {
-      transform: translateY(-100px);
-    }
+        @keyframes subtle-flicker {
+            0%, 80%, 100% {
+                opacity: 1;
+                text-shadow: 0 0 5px #10ff64, 0 0 10px #39FF14, 0 0 10px #39FF14, 0 0 20px #11ff00, 0 0 40px #0cffb2;
+            }
+            90% {
+                opacity: 0.95;
+                text-shadow: 0 0 4px #39FF14, 0 0 8px #39FF14, 0 0 12px #39FF14, 0 0 24px #00ff22, 0 0 48px #11ff00;
+            }
+        }
 
-    .container {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh; /* Full viewport height */
-      flex-direction: column; /* Centers content vertically */
-    }
+        .neon-text, .neon-text-small, .neon-text-3 {
+            font-family: 'NeonCustomFont', sans-serif;
+            color: #fcfffc;
+            text-shadow: 0 0 2px #00ff80, 0 0 3px #00f279, 0 0 15px #39FF14, 0 0 30px #7a387a, 0 0 60px #FF00FF;
+            animation: subtle-flicker 1.1s infinite;
+            text-align: center;
+            margin: 0;
+        }
 
-    .title-background {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 100%;
-      max-width: 800px; /* Restrict maximum width of the background image */
-      height: auto;
-      z-index: 5; /* Below palm tree and neon text */
-      opacity: 0.8; /* Slight transparency for effect */
-    }
-  </style>
-</head>
+        .neon-text {
+            font-size: 9rem;
+        }
 
-<body class="bg-black text-white">
+        .neon-text-small {
+            font-size: 3rem;
+            padding: 50px 50px;
+        }
 
-  <!-- Background video/image -->
-  <div class="relative h-screen overflow-hidden ">
-    <video autoplay muted loop class="absolute inset-0 w-full h-full object-cover" style="opacity: 0.1;">
-      <source src="festboddis2.mp4" type="video/mp4">
-      <!-- If video is not supported or unavailable, use an image -->
-      <img src="festIboddis2.mp4" alt="Party Background" class="absolute inset-0 w-full h-full object-cover" style="opacity: 0.5;">
-    </video>
+        .neon-text-3 {
+            font-size: 4rem;
+            color: #fcfffc00;
+        }
+
+        .palm-tree {
+            font-size: 4rem;
+            color: transparent;
+            text-shadow: -1px -1px 0 #00ffa2, 1px -1px 0 #39FF14, -1px 1px 0 #39FF14, 1px 1px 0 #39FF14, 0 0 4px #39FF14, 0 0 8px #39FF14;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .hero video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin: 0 1rem;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .btn {
+            font-family: 'Rubik Mono One', sans-serif;
+            background-color: #000000;
+            color: rgb(255, 255, 255);
+            font-size: 3rem;
+            padding: 0.5rem 1rem;
+            margin-top: 1rem;
+            border-radius: 0.5rem;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .btn:hover {
+            background-color: #75ff7e;
+            color: rgb(0, 0, 0);
+        }
     
-    <!-- Title container with centered content -->
-    <div id="scroll-title" class="container">
-      <!-- Generic background image for the title -->
-      <img src="palmeNeon2.png" alt="Title Background" class="title-background">
-      <!-- Palm tree symbol -->
-      <div class="palm-tree">🌴</div>
-      <!-- Neon text -->
-      <h1 class="neon-text">DJ Palme</h1>
-    </div>
-  </div>
+        .custom-green-button {
+            background-color: #37ff148b;
+            color: rgb(0, 0, 0);
+            box-shadow: 0 0 10px 15px rgba(55, 255, 20, 0.38);
+            transition: background-color box-shadow 0.3s ease-in-out, color 0.3s ease-in-out;
+        }
+        
+        .custom-green-button:hover {
+            background-color: #ffffff;
+            color: rgb(0, 0, 0);
+            box-shadow: 0 0 10px 15px rgba(255, 0, 225, 0.5);
+        }
+    </style>
+</head>
+<body id="top" class="bg-green-400 text-white font-sans">
+    <!-- Header / Navigation -->
+    <header>
+        <div class="flex justify-between items-center px-6 md:px-20">
+            <div class="neon-text-3"><a href="#top" >🌴</a></div>
+            
+            <nav>
+                <ul class="nav-list">
+                    <li><a href="#Musikk" class="neon-text-small scroll-link">____Musikk</a></li>
+                    <li><a href="#Om" class="neon-text-small scroll-link">__Om</a></li>
+                    <li><a href="#contact" class="neon-text-small scroll-link">Kontakt</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-  <!-- Content below -->
-  <div class="relative bg-black text-center py-10">
-    <div class="container mx-auto px-4">
-      <p class="text-lg mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque imperdiet sit amet augue vitae facilisis.</p>
-      <p class="text-lg mb-4">Vivamus lacinia libero eget velit consectetur, et varius orci lobortis. In viverra diam ut eros suscipit fermentum.</p>
-      <p class="text-lg mb-4">Maecenas accumsan ipsum non mauris egestas, et fringilla ligula blandit. Cras volutpat nulla et justo hendrerit, a pretium lorem dictum.</p>
-    </div>
-  </div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <video style="opacity: 0.17;" autoplay muted loop>
+            <source src="festboddis2.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="neon-text">__DJ_Palme__</h1>
+            <a href="#Musikk" class="btn scroll-link">Hør nå</a>
+        </div>
+    </section>
 
-  <script>
-    // JavaScript for scrolling effect
-    window.addEventListener('scroll', function () {
-      const title = document.getElementById('scroll-title');
-      if (window.scrollY > 50) {
-        title.classList.add('scrolled');
-      } else {
-        title.classList.remove('scrolled');
-      }
-    });
-  </script>
+    <!-- Musikk Section -->
+    <section id="Musikk" class="py-20 px-6 md:px-20 bg-green-400">
+        <div class="text-center mb-12">
+            <h2 class="text-5xl font-bold text-black">Musikk & Mixer</h2>
+
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Example of a mix embed -->
+            <div class="bg-green-700 p-4 rounded-lg shadow-lg">
+                <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https://soundcloud.com/larsemann01"></iframe>
+            </div>
+            <!-- Example of a mix embed -->
+            <div class="bg-green-700 p-4 rounded-lg shadow-lg">
+                <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https://soundcloud.com/larsemann01/fast"></iframe>
+            </div>
+            <!-- Example of a mix embed -->
+            <div class="bg-green-700 p-4 rounded-lg shadow-lg">
+                <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https://soundcloud.com/larsemann01/distance"></iframe>
+            </div>
+            <!-- Repeat the above block for each mix -->
+        </div>
+        <div class="text-center mt-12">
+            <a href="https://on.soundcloud.com/HRenuAfynLjxvvxZ8" class="btn">Gå til Soundcloud
+            </a>
+        </div>
+    </section>
+
+    <!-- Om Section -->
+<section id="Om" class="py-20 px-6 md:px-20 bg-green-700">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+      <div>
+        <h2 class="text-4xl font-bold mb-4 text-white">Om Meg</h2>
+        <p class="text-lg text-white">
+        <br>
+          DJ PALME, også kjent som Lars Halvor, er en lidenskapelig DJ med erfaring innen ulike musikksjangre. Jeg har et bredt musikalsk spekter, inspirert av artister som Todd Terje, David Guetta, Earth, Wind & Fire, Pitbull, samt syretekno og chill lounge-musikk. Jeg er kjent for å skape en uforglemmelig atmosfære med mine unike miksinger som kombinerer kjente popsanger med skjulte dansegulvskatter.
+          <br><br>
+          Selv om jeg har vært DJ i bare et halvt år, har jeg drevet med musikk siden jeg var 13 år. Jeg har spilt trommer, bass, og piano, og har erfaring fra flere band og utdanning fra Musikkfolkehøyskole. Min musikkarriere startet for alvor på Samfundet i Trondheim, hvor jeg har spilt på steder som Klubben, Bodegaen, Selskapssiden, og Strossa.
+          <br><br>
+          Tilbakemeldinger fra både publikum og andre DJs er svært positive. Publikum elsker energien og stemningen jeg bringer til hvert arrangement, og mine kollegaer setter pris på min evne til å skape sømløse overganger mellom låter, som blander det kjente med det uventede.
+        </p>
+      </div>
+      <div>
+        <p class="text-lg text-white">
+            <br>
+            For booking kan du kontakte meg på e-post: larshalvorhansen1@gmail.com, eller på telefon: 90809670. Jeg er alltid åpen for nye spillejobber og spennende samarbeid!
+            <br><br>
+            Utover DJ-ing, jobber jeg også med flere mixtapes som vil bli tilgjengelige på SoundCloud, og jeg planlegger å spille på flere utesteder i Trondheim. En av mine mest minneverdige opplevelser var å arrangere en Vulfpeck-konsert på folkehøyskolen, som ble en stor suksess – vi har til og med hele showet fanget på video!
+            <br><br>
+            Musikk handler for meg om å skape øyeblikk av glede og fellesskap, og jeg ser frem til å bringe denne energien til ditt neste arrangement!
+            <br><br>
+            <img src="pb.png" alt="DJ PALME" class="w-1/4 md:w-1/4 rounded-lg shadow-lg">
+
+          </p>
+        </div>
+    </div>
+  </section>
+
+    <!-- Kontakt Section -->
+    <section id="contact" class="py-20 px-6 md:px-20 bg-green-400">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center text-black font-bold">
+            <div>
+                <h2 class="text-4xl font-bold mb-4">Send en melding</h2>
+                <form>
+                    <div class="mb-4">
+                        <label class="block mb-2 text-sm font-semibold" for="name">Navn/Arrangør</label>
+                        <input class="w-full p-3 bg-green-700 rounded-lg" type="text" id="name" name="name" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block mb-2 text-sm font-semibold" for="email">E-post</label>
+                        <input class="w-full p-3 bg-green-700 rounded-lg" type="email" id="email" name="email" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block mb-2 text-sm font-semibold" for="message">Melding</label>
+                        <textarea class="w-full p-3 bg-green-700 rounded-lg" id="message" name="message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Send</button>
+                </form>
+            </div>
+            <div class="text-center md:text-left">
+                <h2 class="text-4xl font-bold mb-4">Kontakt info</h2>
+                <p>Mail: <a href="mailto:larshalvorhansen1@gmail.com" class="underline">larshalvorhansen1@gmail.com</a></p>
+                <p>Phone: <a href="tel:+4790809670" class="underline">908 09 670</a></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-6 bg-green-700 text-center">
+        <p class="text-sm">&copy; 2024 Lars Halvor Hansen. All Rights Reserved.</p>
+    </footer>
+
+    <!-- JavaScript to adjust scroll offset -->
+    <script>
+        document.querySelectorAll('a.scroll-link').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const headerOffset = document.querySelector('header').offsetHeight;
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                const elementPosition = targetElement.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+    
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+    
 </body>
-
 </html>
