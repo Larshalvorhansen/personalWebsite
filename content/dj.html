@@ -1,1 +1,120 @@
-oh yeah dette blir en dj side. DJPALME!
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DJ Palme</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <!-- Include Neonderthaw font from Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Neonderthaw&display=swap" rel="stylesheet">
+  <style>
+    @keyframes subtle-flicker {
+      0%,
+      80%,
+      100% {
+        opacity: 1;
+        text-shadow: 0 0 5px #39FF14, 0 0 10px #39FF14, 0 0 15px #39FF14, 0 0 30px #FF00FF, 0 0 60px #FF00FF;
+      }
+
+      90% {
+        opacity: 0.95;
+        text-shadow: 0 0 4px #39FF14, 0 0 8px #39FF14, 0 0 12px #39FF14, 0 0 24px #FF00FF, 0 0 48px #FF00FF;
+      }
+    }
+
+    .neon-text {
+      font-family: 'Neonderthaw', cursive;
+      font-size: 12rem; /* Increased font size */
+      color: #39FF14; /* Main neon color */
+      text-shadow: 0 0 2px #39FF14, 0 0 3px #39FF14, 0 0 15px #39FF14, 0 0 30px #FF00FF, 0 0 60px #FF00FF;
+      animation: subtle-flicker 2s infinite;
+      position: relative;
+      z-index: 20; /* Increased z-index to ensure visibility over the background image */
+      transition: transform 0.5s ease-in-out;
+      text-align: center;
+    }
+
+    .palm-tree {
+      font-size: 8rem; /* Reduced font size of palm tree */
+      color: transparent; /* Make the inside of the emoji transparent */
+      text-shadow: -1px -1px 0 #39FF14, 1px -1px 0 #39FF14, -1px 1px 0 #39FF14, 1px 1px 0 #39FF14, 0 0 4px #39FF14, 0 0 8px #39FF14;
+      position: absolute;
+      z-index: 10; /* Below neon text but above the background image */
+      animation: subtle-flicker 2.5s infinite;
+      transition: transform 0.5s ease-in-out;
+      text-align: center;
+    }
+
+    .scrolled {
+      transform: translateY(-100px);
+    }
+
+    .container {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh; /* Full viewport height */
+      flex-direction: column; /* Centers content vertically */
+    }
+
+    .title-background {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      max-width: 800px; /* Restrict maximum width of the background image */
+      height: auto;
+      z-index: 5; /* Below palm tree and neon text */
+      opacity: 0.8; /* Slight transparency for effect */
+    }
+  </style>
+</head>
+
+<body class="bg-black text-white">
+
+  <!-- Background video/image -->
+  <div class="relative h-screen overflow-hidden ">
+    <video autoplay muted loop class="absolute inset-0 w-full h-full object-cover" style="opacity: 0.1;">
+      <source src="festboddis2.mp4" type="video/mp4">
+      <!-- If video is not supported or unavailable, use an image -->
+      <img src="festIboddis2.mp4" alt="Party Background" class="absolute inset-0 w-full h-full object-cover" style="opacity: 0.5;">
+    </video>
+    
+    <!-- Title container with centered content -->
+    <div id="scroll-title" class="container">
+      <!-- Generic background image for the title -->
+      <img src="palmeNeon2.png" alt="Title Background" class="title-background">
+      <!-- Palm tree symbol -->
+      <div class="palm-tree">🌴</div>
+      <!-- Neon text -->
+      <h1 class="neon-text">DJ Palme</h1>
+    </div>
+  </div>
+
+  <!-- Content below -->
+  <div class="relative bg-black text-center py-10">
+    <div class="container mx-auto px-4">
+      <p class="text-lg mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque imperdiet sit amet augue vitae facilisis.</p>
+      <p class="text-lg mb-4">Vivamus lacinia libero eget velit consectetur, et varius orci lobortis. In viverra diam ut eros suscipit fermentum.</p>
+      <p class="text-lg mb-4">Maecenas accumsan ipsum non mauris egestas, et fringilla ligula blandit. Cras volutpat nulla et justo hendrerit, a pretium lorem dictum.</p>
+    </div>
+  </div>
+
+  <script>
+    // JavaScript for scrolling effect
+    window.addEventListener('scroll', function () {
+      const title = document.getElementById('scroll-title');
+      if (window.scrollY > 50) {
+        title.classList.add('scrolled');
+      } else {
+        title.classList.remove('scrolled');
+      }
+    });
+  </script>
+</body>
+
+</html>

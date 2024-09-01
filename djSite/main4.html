@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DJ PALME</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Neonderthaw&display=swap" rel="stylesheet">
+    <style>
+        @keyframes subtle-flicker {
+            0%, 80%, 100% {
+                opacity: 1;
+                text-shadow: 0 0 5px #39FF14, 0 0 10px #39FF14, 0 0 15px #39FF14, 0 0 30px #11ff00, 0 0 60px #00ff00;
+            }
+            90% {
+                opacity: 0.95;
+                text-shadow: 0 0 4px #39FF14, 0 0 8px #39FF14, 0 0 12px #39FF14, 0 0 24px #00ff22, 0 0 48px #11ff00;
+            }
+        }
+
+        .neon-text {
+            font-family: 'Neonderthaw', cursive;
+            font-size: 6rem;
+            color: #40ee21;
+            text-shadow: 0 0 2px #39FF14, 0 0 3px #39FF14, 0 0 15px #39FF14, 0 0 30px #7a387a, 0 0 60px #FF00FF;
+            animation: subtle-flicker 1.1s infinite;
+            text-align: center;
+            margin: 0;
+        }
+
+        .palm-tree {
+            font-size: 4rem;
+            color: transparent;
+            text-shadow: -1px -1px 0 #39FF14, 1px -1px 0 #39FF14, -1px 1px 0 #39FF14, 1px 1px 0 #39FF14, 0 0 4px #39FF14, 0 0 8px #39FF14;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .hero video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5); /* Dark overlay for better text contrast */
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+        }
+
+        header {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 1rem;
+            z-index: 20;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin: 0 1rem;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .btn {
+            background-color: #2fff00;
+            color: rgb(0, 0, 0);
+            padding: 0.5rem 1rem;
+            margin-top: 1rem;
+            border-radius: 0.5rem;
+            transition: background-color 0.3s ease;
+            text-decoration: none; /* Make sure button link appears as a button */
+        }
+
+        .btn:hover {
+            background-color: #ffffff;
+        }
+    
+        .custom-green-button {
+          background-color: #37ff148b; /* Bright neon green */
+          color: rgb(0, 0, 0); /* White text for contrast */
+          box-shadow: 0 0 10px 15px rgba(55, 255, 20, 0.38); /* Gaussian blur effect around the button */
+          transition: background-color box-shadow 0.3s ease-in-out, color 0.3s ease-in-out; /* Adjust hover speed */
+          
+        }
+        
+        .custom-green-button:hover {
+            background-color: #ffffff; /* Slightly darker green for hover effect */
+            color: rgb(0, 0, 0); /* White text for contrast */
+            box-shadow: 0 0 10px 15px rgba(255, 0, 225, 0.5); /* Gaussian blur effect around the button */
+        }
+    </style>
+</head>
+<body class="bg-purple-900 text-white font-sans">
+    <!-- Header / Navigation -->
+    <header>
+        <div class="flex justify-between items-center px-6">
+            <div class="neon-text">🌴</div>
+            
+            <nav>
+                <ul class="">
+                    <li>
+                      <a href="#Om" class="custom-green-button px-4 py-2 rounded hover:text-gray-100 transition duration-300 ease-in-out">
+                        Om
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#Musikk" class="custom-green-button px-4 py-2 rounded hover:text-gray-100 transition duration-300 ease-in-out">
+                        Musikk
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#contact" class="custom-green-button px-4 py-2 rounded hover:text-gray-100 transition duration-300 ease-in-out">
+                        Kontakt
+                      </a>
+                    </li>
+                  </ul>
+                  
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <video style="opacity: 0.1;" autoplay muted loop>
+            <source src="festboddis2.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="neon-text">DJ Palme</h1>
+            <a href="#Musikk" class="btn">Hør nå</a>
+        </div>
+    </section>
+      
+
+    <!-- Musikk Section -->
+    <section id="Musikk" class="py-20 px-6 md:px-20 bg-purple-900">
+        <div class="text-center mb-12">
+            <h2 class="text-4xl font-bold">Musikk & Mixes</h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Example of a mix embed -->
+            <div class="bg-purple-800 p-4 rounded-lg shadow-lg">
+                <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https://soundcloud.com/larsemann01"></iframe>
+            </div>
+            <!-- Example of a mix embed -->
+            <div class="bg-purple-800 p-4 rounded-lg shadow-lg">
+                <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https://soundcloud.com/larsemann01/fast"></iframe>
+            </div>
+            <!-- Example of a mix embed -->
+            <div class="bg-purple-800 p-4 rounded-lg shadow-lg">
+                <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https://soundcloud.com/larsemann01/distance"></iframe>
+            </div>
+            <!-- Repeat the above block for each mix -->
+        </div>
+        <div class="text-center mt-12">
+            <a href="path-to-your-press-kit.pdf" class="btn">Download Press Kit</a>
+        </div>
+    </section>
+
+<!-- Om Section -->
+<section id="Om" class="py-20 px-6 md:px-20 bg-purple-800">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+      <div>
+        <h2 class="text-4xl font-bold mb-4 text-white">Om Meg</h2>
+        <p class="text-lg text-white">
+        <br>
+          DJ PALME, også kjent som Lars Halvor, er en lidenskapelig DJ med erfaring innen ulike musikksjangre. Jeg har et bredt musikalsk spekter, inspirert av artister som Todd Terje, David Guetta, Earth, Wind & Fire, Pitbull, samt syretekno og chill lounge-musikk. Jeg er kjent for å skape en uforglemmelig atmosfære med mine unike miksinger som kombinerer kjente popsanger med skjulte dansegulvskatter.
+          <br><br>
+          Selv om jeg har vært DJ i bare et halvt år, har jeg drevet med musikk siden jeg var 13 år. Jeg har spilt trommer, bass, og piano, og har erfaring fra flere band og utdanning fra Musikkfolkehøyskole. Min musikkarriere startet for alvor på Samfundet i Trondheim, hvor jeg har spilt på steder som Klubben, Bodegaen, Selskapssiden, og Strossa.
+          <br><br>
+          Tilbakemeldinger fra både publikum og andre DJs er svært positive. Publikum elsker energien og stemningen jeg bringer til hvert arrangement, og mine kollegaer setter pris på min evne til å skape sømløse overganger mellom låter, som blander det kjente med det uventede.
+        </p>
+      </div>
+      <div>
+        <p class="text-lg text-white">
+            <br>
+            For booking kan du kontakte meg på e-post: larshalvorhansen1@gmail.com, eller på telefon: 90809670. Jeg er alltid åpen for nye spillejobber og spennende samarbeid!
+            <br><br>
+            Utover DJ-ing, jobber jeg også med flere mixtapes som vil bli tilgjengelige på SoundCloud, og jeg planlegger å spille på flere utesteder i Trondheim. En av mine mest minneverdige opplevelser var å arrangere en Vulfpeck-konsert på folkehøyskolen, som ble en stor suksess – vi har til og med hele showet fanget på video!
+            <br><br>
+            Musikk handler for meg om å skape øyeblikk av glede og fellesskap, og jeg ser frem til å bringe denne energien til ditt neste arrangement!
+            <br><br>
+            <img src="pb.png" alt="DJ PALME" class="w-1/4 md:w-1/4 rounded-lg shadow-lg">
+
+          </p>
+        </div>
+    </div>
+  </section>
+
+    <!-- Kontakt Section -->
+    <section id="contact" class="py-20 px-6 md:px-20 bg-purple-900">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <div>
+                <h2 class="text-4xl font-bold mb-4">Send en melding</h2>
+                <form>
+                    <div class="mb-4">
+                        <label class="block mb-2 text-sm font-semibold" for="name">Navn/Arrangør</label>
+                        <input class="w-full p-3 bg-purple-800 rounded-lg" type="text" id="name" name="name" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block mb-2 text-sm font-semibold" for="email">E-post</label>
+                        <input class="w-full p-3 bg-purple-800 rounded-lg" type="email" id="email" name="email" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block mb-2 text-sm font-semibold" for="message">Melding</label>
+                        <textarea class="w-full p-3 bg-purple-800 rounded-lg" id="message" name="message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Send</button>
+                </form>
+            </div>
+            <div class="text-center md:text-left">
+                <h2 class="text-4xl font-bold mb-4">Konakt info</h2>
+                <p>Mail: <a href="mailto:larshalvorhansen1@gmail.com" class="underline">larshalvorhansen1@gmail.com</a></p>
+                <p>Phone: <a href="tel:+4790809670" class="underline">908 09 670</a></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-6 bg-purple-800 text-center">
+        <p class="text-sm">&copy; 2024 Lars Halvor Hansen. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
