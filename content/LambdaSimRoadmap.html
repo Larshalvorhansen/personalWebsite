@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Roadmap</title>
+    <!-- Tailwind CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* Custom styles for roadmap */
+        .roadmap-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .roadmap-line {
+            position: absolute;
+            width: 4px;
+            background-color: #38bdf8; /* Light blue for plant stem */
+            height: 100%;
+        }
+
+        .roadmap-leaf {
+            position: relative;
+            display: inline-block;
+            padding: 1rem;
+            margin: 1rem;
+            border-radius: 9999px;
+            background-color: #f0fdfa; /* Light green leaf */
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .roadmap-leaf:hover {
+            transform: scale(1.1);
+        }
+
+        .leaf-detail-box {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 100%;
+            transform: translateY(-50%);
+            background-color: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            width: 200px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .roadmap-leaf:hover .leaf-detail-box {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .leaf-detail-box {
+                left: auto;
+                right: 100%;
+                transform: translateY(-50%);
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 p-6">
+
+    <!-- Roadmap Container -->
+    <div class="roadmap-container">
+        <!-- Roadmap Line -->
+        <div class="roadmap-line"></div>
+
+        <!-- Roadmap Leaf Example -->
+        <div class="roadmap-leaf">
+            <span>Phase 1: Research</span>
+            <!-- Hover Detail Box -->
+            <div class="leaf-detail-box">
+                <h4 class="font-bold">Phase 1: Research</h4>
+                <p>Conduct market analysis, research technologies, and explore initial project ideas.</p>
+            </div>
+        </div>
+
+        <!-- Additional Leaves with branching paths -->
+        <div class="roadmap-leaf">
+            <span>Phase 2: Design</span>
+            <div class="leaf-detail-box">
+                <h4 class="font-bold">Phase 2: Design</h4>
+                <p>Develop wireframes, create prototypes, and finalize design elements.</p>
+            </div>
+        </div>
+
+        <!-- Branching Example -->
+        <div class="roadmap-leaf" style="margin-left: 50px;">
+            <span>Parallel Task: Team Building</span>
+            <div class="leaf-detail-box">
+                <h4 class="font-bold">Team Building</h4>
+                <p>Identify potential team members and build a diverse team for project success.</p>
+            </div>
+        </div>
+
+        <div class="roadmap-leaf">
+            <span>Phase 3: Development</span>
+            <div class="leaf-detail-box">
+                <h4 class="font-bold">Phase 3: Development</h4>
+                <p>Start coding, integrate APIs, and develop core functionalities.</p>
+            </div>
+        </div>
+
+        <!-- More roadmap leaves and branches can be added here -->
+
+    </div>
+
+    <!-- Optional JavaScript for future enhancements -->
+
+    <script>
+        // JavaScript to enhance interactivity, if needed
+    </script>
+
+</body>
+
+</html>
+
