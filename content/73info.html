@@ -47,6 +47,76 @@
 
     <!-- Modal for Bus Times -->
     <div id="bus-modal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center hidden">
+
+<script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Additional CSS for clock animations */
+        @keyframes sweep {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .minute-hand {
+            animation: sweep 3600s linear infinite;
+        }
+    </style>
+
+    <div class="relative w-64 h-64 bg-white rounded-full shadow-lg flex items-center justify-center">
+        <!-- Clock face -->
+        <div class="absolute inset-0 flex items-center justify-center">
+            <svg class="w-full h-full" viewBox="0 0 100 100">
+                <!-- Clock outline -->
+                <circle cx="50" cy="50" r="48" stroke="black" stroke-width="1" fill="none" />
+
+                <!-- Clock marks -->
+                <g class="text-black">
+                    <line x1="50" y1="2" x2="50" y2="6" stroke="black" stroke-width="1" />
+                    <line x1="50" y1="98" x2="50" y2="94" stroke="black" stroke-width="1" />
+                    <line x1="2" y1="50" x2="6" y2="50" stroke="black" stroke-width="1" />
+                    <line x1="98" y1="50" x2="94" y2="50" stroke="black" stroke-width="1" />
+
+                    <!-- More marks here if needed -->
+                </g>
+            </svg>
+        </div>
+
+        <!-- Hour hand -->
+        <div id="hour-hand" class="absolute bg-black h-12 w-1 origin-bottom transform"></div>
+
+        <!-- Minute hand -->
+        <div id="minute-hand" class="minute-hand absolute bg-black h-16 w-1 origin-bottom transform"></div>
+
+        <!-- Second hand -->
+        <div id="second-hand" class="absolute bg-red-500 h-20 w-0.5 origin-bottom transform"></div>
+    </div>
+
+    <script>
+        function setClock() {
+            const now = new Date();
+            const secondHand = document.getElementById('second-hand');
+            const minuteHand = document.getElementById('minute-hand');
+            const hourHand = document.getElementById('hour-hand');
+
+            const seconds = now.getSeconds();
+            const minutes = now.getMinutes();
+            const hours = now.getHours();
+
+            const secondDegrees = ((seconds / 60) * 360);
+            const minuteDegrees = ((minutes / 60) * 360) + ((seconds / 60) * 6);
+            const hourDegrees = ((hours % 12) / 12 * 360) + ((minutes / 60) * 30);
+
+            secondHand.style.transform = `rotate(${secondDegrees}deg)`;
+            minuteHand.style.transform = `rotate(${minuteDegrees}deg)`;
+            hourHand.style.transform = `rotate(${hourDegrees}deg)`;
+        }
+
+        setInterval(setClock, 1000);
+        setClock(); // Initial call to set the clock immediately
+    </script>
         <div class="bg-white text-black p-8 rounded-lg shadow-lg relative w-1/2 max-w-md">
             <h2 class="text-2xl font-bold mb-4">Bus Times from Berg Studentby</h2>
             <p>Check the latest bus departure times directly on the ATB planner:</p>
