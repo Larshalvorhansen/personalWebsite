@@ -46,162 +46,95 @@
     </div>
 
     <!-- Modal for Bus Times -->
-    <div id="bus-modal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center hidden">
+    <!-- Modal for Bus Times -->
+<div id="bus-modal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center hidden">
+    <div class="bg-white text-black p-8 rounded-lg shadow-lg relative w-1/2 max-w-md">
+        <!-- Bus Times Content -->
+        <h2 class="text-2xl font-bold mb-4">Bus Times from Berg Studentby</h2>
+        <p>Check the latest bus departure times directly on the ATB planner:</p>
+        <a href="https://www.atb.no/reiseplanlegger/?direction=1&tplang=no&from=berg%20studentby&to=&Time=21%3A08&Date=01.09.2024&changepause=0&changepenalty=1" 
+           target="_blank" 
+           class="text-blue-500 underline block mt-4">Open ATB Bus Planner</a>
+        
+        <!-- Analog Clock -->
+        <div class="mt-8 flex items-center justify-center">
+            <div class="relative w-64 h-64 bg-white rounded-full shadow-lg flex items-center justify-center">
+                <!-- Clock face -->
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <svg class="w-full h-full" viewBox="0 0 100 100">
+                        <!-- Clock outline -->
+                        <circle cx="50" cy="50" r="48" stroke="black" stroke-width="1" fill="none" />
+                        <!-- Clock marks -->
+                        <g class="text-black">
+                            <line x1="50" y1="2" x2="50" y2="6" stroke="black" stroke-width="1" />
+                            <line x1="50" y1="98" x2="50" y2="94" stroke="black" stroke-width="1" />
+                            <line x1="2" y1="50" x2="6" y2="50" stroke="black" stroke-width="1" />
+                            <line x1="98" y1="50" x2="94" y2="50" stroke="black" stroke-width="1" />
+                            <!-- More marks here if needed -->
+                        </g>
+                    </svg>
+                </div>
+                <!-- Hour hand -->
+                <div id="hour-hand" class="absolute bg-black h-12 w-1 origin-bottom transform"></div>
+                <!-- Minute hand -->
+                <div id="minute-hand" class="minute-hand absolute bg-black h-16 w-1 origin-bottom transform"></div>
+                <!-- Second hand -->
+                <div id="second-hand" class="absolute bg-red-500 h-20 w-0.5 origin-bottom transform"></div>
+            </div>
+        </div>
+
+        <!-- Close Button -->
+        <button id="close-modal" class="absolute top-2 right-2 text-black text-xl">&times;</button>
+    </div>
+</div>
 
 <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        /* Additional CSS for clock animations */
-        @keyframes sweep {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
+<style>
+    /* Additional CSS for clock animations */
+    @keyframes sweep {
+        0% {
+            transform: rotate(0deg);
         }
-
-        .minute-hand {
-            animation: sweep 3600s linear infinite;
+        100% {
+            transform: rotate(360deg);
         }
-    </style>
+    }
 
-    <div class="relative w-64 h-64 bg-white rounded-full shadow-lg flex items-center justify-center">
-        <!-- Clock face -->
-        <div class="absolute inset-0 flex items-center justify-center">
-            <svg class="w-full h-full" viewBox="0 0 100 100">
-                <!-- Clock outline -->
-                <circle cx="50" cy="50" r="48" stroke="black" stroke-width="1" fill="none" />
+    .minute-hand {
+        animation: sweep 3600s linear infinite;
+    }
+</style>
 
-                <!-- Clock marks -->
-                <g class="text-black">
-                    <line x1="50" y1="2" x2="50" y2="6" stroke="black" stroke-width="1" />
-                    <line x1="50" y1="98" x2="50" y2="94" stroke="black" stroke-width="1" />
-                    <line x1="2" y1="50" x2="6" y2="50" stroke="black" stroke-width="1" />
-                    <line x1="98" y1="50" x2="94" y2="50" stroke="black" stroke-width="1" />
+<script>
+    function setClock() {
+        const now = new Date();
+        const secondHand = document.getElementById('second-hand');
+        const minuteHand = document.getElementById('minute-hand');
+        const hourHand = document.getElementById('hour-hand');
 
-                    <!-- More marks here if needed -->
-                </g>
-            </svg>
-        </div>
+        const seconds = now.getSeconds();
+        const minutes = now.getMinutes();
+        const hours = now.getHours();
 
-        <!-- Hour hand -->
-        <div id="hour-hand" class="absolute bg-black h-12 w-1 origin-bottom transform"></div>
+        const secondDegrees = ((seconds / 60) * 360);
+        const minuteDegrees = ((minutes / 60) * 360) + ((seconds / 60) * 6);
+        const hourDegrees = ((hours % 12) / 12 * 360) + ((minutes / 60) * 30);
 
-        <!-- Minute hand -->
-        <div id="minute-hand" class="minute-hand absolute bg-black h-16 w-1 origin-bottom transform"></div>
+        secondHand.style.transform = `rotate(${secondDegrees}deg)`;
+        minuteHand.style.transform = `rotate(${minuteDegrees}deg)`;
+        hourHand.style.transform = `rotate(${hourDegrees}deg)`;
+    }
 
-        <!-- Second hand -->
-        <div id="second-hand" class="absolute bg-red-500 h-20 w-0.5 origin-bottom transform"></div>
-    </div>
+    setInterval(setClock, 1000);
+    setClock(); // Initial call to set the clock immediately
 
-    <script>
-        function setClock() {
-            const now = new Date();
-            const secondHand = document.getElementById('second-hand');
-            const minuteHand = document.getElementById('minute-hand');
-            const hourHand = document.getElementById('hour-hand');
+    // JavaScript to handle modal open/close
+    document.getElementById('close-modal').addEventListener('click', function() {
+        document.getElementById('bus-modal').classList.add('hidden');
+    });
 
-            const seconds = now.getSeconds();
-            const minutes = now.getMinutes();
-            const hours = now.getHours();
-
-            const secondDegrees = ((seconds / 60) * 360);
-            const minuteDegrees = ((minutes / 60) * 360) + ((seconds / 60) * 6);
-            const hourDegrees = ((hours % 12) / 12 * 360) + ((minutes / 60) * 30);
-
-            secondHand.style.transform = `rotate(${secondDegrees}deg)`;
-            minuteHand.style.transform = `rotate(${minuteDegrees}deg)`;
-            hourHand.style.transform = `rotate(${hourDegrees}deg)`;
-        }
-
-        setInterval(setClock, 1000);
-        setClock(); // Initial call to set the clock immediately
-    </script>
-        <div class="bg-white text-black p-8 rounded-lg shadow-lg relative w-1/2 max-w-md">
-            <h2 class="text-2xl font-bold mb-4">Bus Times from Berg Studentby</h2>
-            <p>Check the latest bus departure times directly on the ATB planner:</p>
-            <a href="https://www.atb.no/reiseplanlegger/?direction=1&tplang=no&from=berg%20studentby&to=&Time=21%3A08&Date=01.09.2024&changepause=0&changepenalty=1" 
-               target="_blank" 
-               class="text-blue-500 underline block mt-4">Open ATB Bus Planner</a>
-            <!-- Close Button -->
-            <button id="close-modal" class="absolute top-2 right-2 text-black text-xl">&times;</button>
-        </div>
-    </div>
-
-    <!-- Include JavaScript -->
-    <script>
-        // Function to fetch and display a random line from burns.txt
-        function fetchRandomLine() {
-            fetch('burns.txt')
-                .then(response => response.text())
-                .then(data => {
-                    const lines = data.split('\n').filter(line => line.trim() !== ''); // Split text into lines and remove any empty lines
-                    const randomLine = lines[Math.floor(Math.random() * lines.length)]; // Get a random line
-                    document.getElementById('random-line').textContent = randomLine; // Display random line
-                })
-                .catch(error => console.error('Error fetching the text file:', error));
-        }
-
-        // Function to refresh the random line at midnight
-        function scheduleMidnightUpdate() {
-            const now = new Date();
-            const nextMidnight = new Date(
-                now.getFullYear(),
-                now.getMonth(),
-                now.getDate() + 1, // Set to the next day
-                0, 0, 0, 0 // Midnight
-            );
-
-            const timeUntilMidnight = nextMidnight - now; // Calculate milliseconds until midnight
-
-            setTimeout(() => {
-                fetchRandomLine(); // Update line at midnight
-                scheduleMidnightUpdate(); // Schedule the next update for the following day
-            }, timeUntilMidnight);
-        }
-
-        // Event listener for button to manually fetch a random line
-        document.getElementById('generate-line').addEventListener('click', fetchRandomLine);
-
-        // Initial fetch and scheduling
-        document.addEventListener('DOMContentLoaded', function () {
-            fetchRandomLine();
-            scheduleMidnightUpdate();
-        });
-
-        // Function to refresh the whole page at midnight
-        function refreshAtMidnight() {
-            const now = new Date();
-            const nextMidnight = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0);
-            const timeout = nextMidnight.getTime() - now.getTime();
-            
-            setTimeout(function() {
-                location.reload(true);
-            }, timeout);
-        }
-
-        // Additional function to refresh at midnight
-        document.addEventListener('DOMContentLoaded', function () {
-            refreshAtMidnight();
-        });
-
-        // Modal functionality
-        document.getElementById('open-modal').addEventListener('click', function() {
-            document.getElementById('bus-modal').classList.remove('hidden');
-        });
-
-        document.getElementById('close-modal').addEventListener('click', function() {
-            document.getElementById('bus-modal').classList.add('hidden');
-        });
-
-        // Close the modal when clicking outside of it
-        window.addEventListener('click', function(event) {
-            const modal = document.getElementById('bus-modal');
-            if (event.target === modal) {
-                modal.classList.add('hidden');
-            }
-        });
-    </script>
+    // Add additional JavaScript here if needed to open the modal
+</script>
 
 </body>
 </html>
