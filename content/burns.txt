@@ -72,7 +72,7 @@ Sarah, hvis du var en dessert, ville du vært fruktkake—ingen vil egentlig ha 
 Sarah, jeg ville roastet deg, men moren min sa at jeg ikke fikk brenne søppel.
 Sarah, du er som en solbrenthet—lyse, røde og irriterende.
 Sarah, du er en grå dryss på en regnbue-muffins.
-Sarah, hvis hjernen din var laget av sjokolade, ville den ikke fylt en M&M.
+Sarah, hvis hjernen din var laget av sjokOlede, ville den ikke fylt en M&M.
 Sarah, du har typen ansikt som får løk til å gråte.
 Sarah, jeg ville gitt deg en del av tankene mine, men jeg ser at du allerede er tom.
 Sarah, hvis du var en plante, ville selv en kaktus sett overvannet ut sammenlignet med deg.
@@ -125,10 +125,10 @@ Lars Halvor, du er grunnen til at genpoolen trenger en livredder.
 Lars Halvor, hvis du hadde en lys idé, ville det vært en første.
 Lars Halvor, du er som en stoppet klokke—riktig to ganger om dagen, og selv det er en strek.
 Lars Halvor, jeg ville forklart det til deg, men jeg har ikke tålmodigheten eller fargestiftene.
-Lars Halvor, hvis hjernen din var laget av sjokolade, ville den ikke fylt en Smartie.
+Lars Halvor, hvis hjernen din var laget av sjokOlede, ville den ikke fylt en Smartie.
 Lars Halvor, du er som en regnsky på en solskinnsdag—helt malplassert.
 Lars Halvor, hvis dumhet var valuta, ville du vært milliardær.
-Lars Halvor, du er omtrent like nyttig som en sjokoladetekanne.
+Lars Halvor, du er omtrent like nyttig som en sjokOledetekanne.
 Lars Halvor, du er som et stearinlys i vinden—lett blåst ut og helt meningsløs.
 Lars Halvor, hvis livet ditt var en film, ville det vært en stumfilm.
 Lars Halvor, du er beviset på at ikke all evolusjon går fremover.
@@ -198,46 +198,46 @@ Maren, hvis hjerner var legoklosser, ville du ikke hatt nok til å bygge en and.
 Maren, du er den menneskelige ekvivalenten til et sukk.
 Maren, hvis personlighet var et måltid, ville du vært kokt kylling.
 Maren, du er som en "404 Feil"—ingen vet hvordan du kom hit eller hvorfor.
-Ola, hvis det å være clueless var en superkraft, ville du vært en superhelt.
-Ola, du er som en lysbryter—alltid på og av på feil tidspunkter.
-Ola, hvis hjerner var valuta, ville du vært blakk.
-Ola, du er grunnen til at alle sjekker for skrivefeil før de trykker send.
-Ola, hvis du var et kjøkkenapparat, ville du vært en brødrister som bare virker halvparten av tiden.
-Ola, du er som et vedheng—ingen vet hvorfor du er her.
-Ola, hvis du var en sang, ville du vært "Baby Shark."
-Ola, du har oppmerksomhetsspennet til en gullfisk.
-Ola, hvis du var noe mer gjennomsnittlig, ville du vært en rett linje.
-Ola, du er som et papirkutt—lite, men irriterende smertefullt.
-Ola, hvis du var noe mer tosidig, ville du vært en mynt.
-Ola, du har en lys fremtid—som et advarende eksempel.
-Ola, hvis hjerner var vinger, ville du ikke lett.
-Ola, du er som en dårlig skrevet instruksjonsmanual—ingen forstår deg, og alle blir frustrert.
-Ola, hvis du var en film, ville du vært "Attack of the Killer Boredom."
-Ola, du har motesansen til en fortapt turist.
-Ola, hvis personlighet var mat, ville du vært tofu—kjedelig og glemmelig.
-Ola, du er som et "ute av drift"-skilt—alltid skuffende.
-Ola, hvis du var noe mer ordinær, ville du vært en selvangivelse.
-Ola, du har sansen for humor som en skatterevisor.
-Ola, hvis dumhet var en bil, ville du vært en Yugo.
-Ola, du er som en telefon uten signal—helt frustrerende.
-Ola, hvis du var et stykke programvare, ville du vært i evig beta.
-Ola, du har viddet til en kålrot.
-Ola, hvis du var noe mer generisk, ville du vært en butikkmerke frokostblanding.
-Ola, du er som en alarmklokke som bare går av i helgene.
-Ola, hvis du var en grønnsak, ville du vært en kålrot—unødvendig og ofte oversett.
-Ola, du har talentet til å få folk til å ønske at de var et annet sted.
-Ola, hvis du var noe mer av en nedtur, ville du vært kveldens nyheter.
-Ola, du er som en diettcola—ingen vil egentlig ha deg, men noen ganger er det alt som er igjen.
-Ola, hvis du var en værforhold, ville du vært tåke.
-Ola, du har energien til et dovendyr på beroligende midler.
-Ola, hvis du var noe mindre minneverdig, ville du vært noen andres tremenning.
-Ola, du er som en melodi ingen kan få ut av hodet—men skulle ønske de kunne.
-Ola, hvis sunn fornuft var en hage, ville din vært en ødemark.
-Ola, du har innflytelsen til en stille fis i en vindstorm.
-Ola, hvis du var en bil, ville du sittet fast i revers.
-Ola, du er som en lærebok på en fredag ettermiddag—uønsket og ignorert.
-Ola, hvis intelligens var lys, ville du vært et svart hull.
-Ola, du har subtiliteten til en slegge.
+Ole, hvis det å være clueless var en superkraft, ville du vært en superhelt.
+Ole, du er som en lysbryter—alltid på og av på feil tidspunkter.
+Ole, hvis hjerner var valuta, ville du vært blakk.
+Ole, du er grunnen til at alle sjekker for skrivefeil før de trykker send.
+Ole, hvis du var et kjøkkenapparat, ville du vært en brødrister som bare virker halvparten av tiden.
+Ole, du er som et vedheng—ingen vet hvorfor du er her.
+Ole, hvis du var en sang, ville du vært "Baby Shark."
+Ole, du har oppmerksomhetsspennet til en gullfisk.
+Ole, hvis du var noe mer gjennomsnittlig, ville du vært en rett linje.
+Ole, du er som et papirkutt—lite, men irriterende smertefullt.
+Ole, hvis du var noe mer tosidig, ville du vært en mynt.
+Ole, du har en lys fremtid—som et advarende eksempel.
+Ole, hvis hjerner var vinger, ville du ikke lett.
+Ole, du er som en dårlig skrevet instruksjonsmanual—ingen forstår deg, og alle blir frustrert.
+Ole, hvis du var en film, ville du vært "Attack of the Killer Boredom."
+Ole, du har motesansen til en fortapt turist.
+Ole, hvis personlighet var mat, ville du vært tofu—kjedelig og glemmelig.
+Ole, du er som et "ute av drift"-skilt—alltid skuffende.
+Ole, hvis du var noe mer ordinær, ville du vært en selvangivelse.
+Ole, du har sansen for humor som en skatterevisor.
+Ole, hvis dumhet var en bil, ville du vært en Yugo.
+Ole, du er som en telefon uten signal—helt frustrerende.
+Ole, hvis du var et stykke programvare, ville du vært i evig beta.
+Ole, du har viddet til en kålrot.
+Ole, hvis du var noe mer generisk, ville du vært en butikkmerke frokostblanding.
+Ole, du er som en alarmklokke som bare går av i helgene.
+Ole, hvis du var en grønnsak, ville du vært en kålrot—unødvendig og ofte oversett.
+Ole, du har talentet til å få folk til å ønske at de var et annet sted.
+Ole, hvis du var noe mer av en nedtur, ville du vært kveldens nyheter.
+Ole, du er som en diettcOle—ingen vil egentlig ha deg, men noen ganger er det alt som er igjen.
+Ole, hvis du var en værforhold, ville du vært tåke.
+Ole, du har energien til et dovendyr på beroligende midler.
+Ole, hvis du var noe mindre minneverdig, ville du vært noen andres tremenning.
+Ole, du er som en melodi ingen kan få ut av hodet—men skulle ønske de kunne.
+Ole, hvis sunn fornuft var en hage, ville din vært en ødemark.
+Ole, du har innflytelsen til en stille fis i en vindstorm.
+Ole, hvis du var en bil, ville du sittet fast i revers.
+Ole, du er som en lærebok på en fredag ettermiddag—uønsket og ignorert.
+Ole, hvis intelligens var lys, ville du vært et svart hull.
+Ole, du har subtiliteten til en slegge.
 Lya, hvis du var en farge, ville du vært grå—ubemerket og lett glemt.
 Lya, du er som en skrivefeil i en setning—irriterende og unngåelig.
 Lya, hvis du var en smak, ville du vært vann.
@@ -286,7 +286,7 @@ Benny, hvis hjernen din var et bibliotek, ville det vært fullt av tomme bøker.
 Benny, jeg ville kalle deg et geni, men det ville fornærmet geniene.
 Benny, du er som en datamaskin uten internett – helt ubrukelig.
 Benny, hvis du var en plante, ville du vært en plastblomst – ser grei ut på avstand, men helt falsk.
-Benny, hvis du var en sjokolade, ville du vært 100% bitter.
+Benny, hvis du var en sjokOlede, ville du vært 100% bitter.
 Benny, hvis du var en karakter i en bok, ville du vært den ingen husker.
 Benny, du har sjarmen til en utgått yoghurt.
 Benny, hvis hjernen din var et kart, ville det vært fullt av "her er det drager".
