@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: 0.4fr 1.3fr 1.3fr;
+      gap: 10px;
+      grid-auto-flow: row;
+      grid-template-areas:
+        "Top-left Top-left top-left"
+        "Top-left Top-left Middle-rigth"
+        "Bottom-left Bottom-rigth Bottom-rigth";
+      width: 90%;
+      max-width: 1200px;
+    }
+
+    .container > div {
+      background-color: white;
+      border-radius: 15px;
+    }
+
+    .Top-left { grid-area: Top-left; }
+    .Middle-rigth { grid-area: Middle-rigth; }
+    .top-left { grid-area: top-left; }
+    .Bottom-rigth { grid-area: Bottom-rigth; }
+    .Bottom-left { grid-area: Bottom-left; }
+
+    @media (max-width: 768px) {
+      .container {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        grid-template-areas:
+          "Top-left"
+          "top-left"
+          "Middle-rigth"
+          "Bottom-left"
+          "Bottom-rigth";
+      }
+    }
+  </style>
+  <title>Responsive Grid Layout</title>
+</head>
+<body>
+  <div class="container">
+    <div class="Top-left"></div>
+    <div class="Middle-rigth"></div>
+    <div class="top-left"></div>
+    <div class="Bottom-rigth"></div>
+    <div class="Bottom-left"></div>
+  </div>
+</body>
+</html>
