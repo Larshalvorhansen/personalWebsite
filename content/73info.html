@@ -34,9 +34,10 @@
             </div>
 
             <!-- Clock Hands -->
-            <div class="hand hour-hand"></div>
-            <div class="hand minute-hand"></div>
-            <div class="hand second-hand"></div>
+            <div class="hand hour-hand rotate-180"></div>
+<div class="hand minute-hand rotate-180"></div>
+<div class="hand second-hand rotate-180"></div>
+
 
             <!-- Center Point -->
             <div class="center"></div>
@@ -52,8 +53,8 @@
             const now = new Date(new Date().toLocaleString("en-US", { timeZone: "Europe/Oslo" }));
 
             const seconds = now.getSeconds();
-            const minutes = now.getMinutes() + seconds / 60;
-            const hours = (now.getHours() % 12) + minutes / 60;
+            const minutes = now.getMinutes() + 30 + (seconds / 60);
+            const hours = (now.getHours() % 12) + 6 + (minutes / 60);
 
             // Calculate angles for each hand
             const minutesDegrees = ((minutes / 60) * 360) + 90;
