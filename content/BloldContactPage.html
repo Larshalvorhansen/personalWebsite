@@ -5,20 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Halvor Hansen</title>
+  <link rel="icon" sizes="32x32" href="litenhh.png" />
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <meta name="description" content="Halvor Hansen - Learn more about my work and interests.">
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-  <link rel="manifest" href="/site.webmanifest">
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "url": "http://www.your-website.com",
-      "logo": "http://www.your-website.com/path/to/logo.png"
-    }
-    </script>
   <style>
     @media (min-width: 768px) {
       .sidebar {
@@ -62,34 +50,53 @@
     .gradient-text:hover {
       background-position: 100% 50%;
     }
+        .copy-box {
+            display: inline-block;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            cursor: pointer;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            color: #333;
+            margin-top: 20px;
+        }
 
-    .gradient-text {
-      background: linear-gradient(45deg, #002896, #77cfff);
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
-      transition: background-position 0.3s ease-in-out;
-      background-size: 200% 200%;
-      background-position: 0% 50%;
-    }
-
-    .gradient-text:hover {
-      background-position: 100% 50%;
-    }
+        .copy-box:hover {
+            background-color: #eaeaea;
+        }
   </style>
 </head>
 
-<body class="bg-white">
+<script>
+    function copyEmail() {
+        const email = "larshalvorhansen1@gmail.com";
+        const tempInput = document.createElement("input");
+        tempInput.value = email;
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        document.execCommand("copy");
+        document.body.removeChild(tempInput);
+        alert("Email address copied to clipboard!");
+    }
+</script>
+
+
+
+
+
+<body class="bg-gray-0">
   <!-- Sidebar -->
   <div class="sidebar bg-black text-white p-4">
     <a href="index.html">
       <img class="object-scale-down max-h-16 max-w-16 drop-shadow-md rounded-md m-auto" src="logo3.png" alt="" />
     </a>
     <a href="LambdaSim.html" class="block p-2 md:w-full text-center md:text-left">Lambdasim</a>
-		<a href="art.html" class="block p-2 md:w-full text-center md:text-left">Art</a>
-		<a href="Blogg.html" class="block p-2 md:w-full text-center md:text-left">Blogg</a>
-		<a href="cv.html" class="block p-2 md:w-full text-center md:text-left">CV</a>
-		<a href="index.html" class="block p-2 md:w-full text-center md:text-left">About</a><br>	
+    <a href="art.html" class="block p-2 md:w-full text-center md:text-left">Art</a>
+    <a href="Blogg.html" class="block p-2 md:w-full text-center md:text-left">Blogg</a>
+    <a href="cv.html" class="block p-2 md:w-full text-center md:text-left">CV</a>
+    <a href="index.html" class="block p-2 md:w-full text-center md:text-left">About</a><br>
     <!-- Social Icons -->
     <div class="hidden md:flex place-content-baseline md:justify-content-flex-end md:space-x-4 display: block ml-2">
       <a href="mailto:larshalvorhansen1@gmail.com" target="_blank" title="Send an email" rel="noreferrer"
@@ -127,20 +134,101 @@
       </a>
     </div>
   </div>
-  <!-- Main Content -->
-  <div class="main-content bg-white p-8 md:p-16">
-
-
-    <h1><u><b>Her skal det bli en blogg hurra :) ...</b></u></h1>
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOK3Txc_CrxPYGgwN60vkZA_6oY1aP3yy2Wg&s" alt="">
-
-    <br><br><br><br><br><br>
-    <br><br><br><br><br><br>
-    https://docs.google.com/spreadsheets/d/e/2PACX-1vShfXoB9wHItLmJyH-wxuOQNIb5LYE9z4x3ZUg91O0QEH_QdyfEtW5Qttt1y7BObsl6vHpBMtP5yptL/pub?gid=0&single=true&output=csv
+    <!-- Main Content -->
+    <div class="main-content bg-white p-8 md:p-16 transition-all duration-500">
+      <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-lg transition-all duration-500">
+        <h2 class="text-2xl font-bold mb-6 transition-all duration-500">Get in touch</h2>
+        <div class="bg-black text-white px-6 py-2 rounded hover:bg-blue-500 hover:text-black hover:border-8 hover:border-black transition-all duration-300">
+          <a href="mailto:larshalvorhansen1@gmail.com" target="_blank" title="Send an email" rel="noreferrer">Click to go straight to email! </a>
+        </div><br>
+          or
+        <div class="copy-box" onclick="copyEmail()">Click to copy: larshalvorhansen1@gmail.com</div>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <img src="boat.png" alt="boat" class="w-21 h-auto mr-4 float-left">
+      <br>👋またね
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+    </div>
   
-  
-    <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vShfXoB9wHItLmJyH-wxuOQNIb5LYE9z4x3ZUg91O0QEH_QdyfEtW5Qttt1y7BObsl6vHpBMtP5yptL/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
-  </div>
+  </body>
 
 </body>
 

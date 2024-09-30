@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lineclock by Lars Halvor</title>
+    <style>
+        #clock {
+            position: relative;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            border: 1px solid black;
+            margin: 20px auto;
+        }
+
+        .hand {
+            position: absolute;
+            width: 2px;
+            height: 200px;
+            background: red;
+            top: 50%;
+            left: 50%;
+            transform-origin: bottom;
+            transform: translate(-50%, -100%);
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <label for="hourSlider">Hours:</label>
+        <input type="range" id="hourSlider" min="0" max="23" value="12">
+        <label for="minuteSlider">Minutes:</label>
+        <input type="range" id="minuteSlider" min="0" max="59" value="30">
+    </div>
+    <div id="clock">
+        <div id="hourHand" class="hand" style="height: 100px; background: blue;"></div>
+        <div id="minuteHand" class="hand" style="height: 150px; background: green;"></div>
+    </div>
+
+    <script>
+        function updateClock() {
+            const hourSlider = document.getElementById('hourSlider');
+            const minuteSlider = document.getElementById('minuteSlider');
+            const hourHand = document.getElementById('hourHand');
+            const minuteHand = document.getElementById('minuteHand');
+
+            const hours = parseInt(hourSlider.value);
+            const minutes = parseInt(minuteSlider.value);
+
+            const hourAngle = 360 * (hours % 12) / 12 + 360 * (minutes / 60) / 12;
+            const minuteAngle = 360 * minutes / 60;
+
+            hourHand.style.transform = `translate(-50%, -100%) rotate(${hourAngle}deg)`;
+            minuteHand.style.transform = `translate(-50%, -100%) rotate(${minuteAngle}deg)`;
+        }
+
+        document.getElementById('hourSlider').addEventListener('input', updateClock);
+        document.getElementById('minuteSlider').addEventListener('input', updateClock);
+
+        // Initial clock update
+        updateClock();
+    </script>
+</body>
+
+</html>
