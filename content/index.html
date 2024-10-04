@@ -11,14 +11,30 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="manifest" href="/site.webmanifest">
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "url": "http://www.your-website.com",
-      "logo": "http://www.your-website.com/path/to/logo.png"
+  <!-- JSON-LD for Organization Schema -->
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "url": "http://www.your-website.com",
+    "logo": "http://www.your-website.com/path/to/logo.png"
+  }
+  </script>
+  
+  <!-- JavaScript Function to Copy Email to Clipboard -->
+  <script>
+    function copyToClipboard() {
+      const email = "lars@mail.com";
+      navigator.clipboard.writeText(email)
+        .then(() => {
+          alert("Email copied to clipboard: " + email);
+        })
+        .catch(err => {
+          console.error("Could not copy text: ", err);
+        });
     }
-    </script>
+  </script>
+  
   <style>
     @media (min-width: 768px) {
       .sidebar {
@@ -195,23 +211,23 @@
         </ul>
 
 <br>
-At this time I'm still quite open to discuss ideas and project plans and getting to know new people.
+<!-- At this time I'm still quite open to discuss ideas and project plans and getting to know new people. -->
 <br>
 
 
 <br>
+<img src="pb.png" alt="Your image description" class="w-32 h-auto rounded ml-2 mt-2">
+<br>
+
 <div class="flex justify-start">
-  <img src="pb.png" alt="Your image description" class="w-32 h-auto rounded ml-2 mt-2">
-</div>
-<br>
-<br>
-
-        <a href="contact.html" class="bg-gray-200 text-gray-800 font-bold py-2 px-4 rounded hover:bg-gray-300 transition">
-  Let's connect. Send me an email!
-  
-</a>
+  <br>
+  <div>
+    <button onclick="copyToClipboard()" class="bg-gray-200 text-gray-800 font-bold py-2 px-4 rounded hover:bg-gray-300 transition">
+      Let's connect! Click to copy my email address!
+    </button>
   </div>
 
+  
 </body>
 
 </html>
