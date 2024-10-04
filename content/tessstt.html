@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Halvor Hansen</title>
+  <link rel="icon" sizes="32x32" href="litenhh.png" />
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    /* Custom styles for roadmap */
+    .roadmap-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+  
+    .roadmap-line {
+      position: absolute;
+      width: 4px;
+      background-color: #376eff;
+      /* Light blue for plant stem */
+      height: 100%;
+    }
+  
+    .roadmap-leaf {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1rem;
+      margin: 1rem;
+      border-radius: 2rem;
+      background-color: #0070d2;
+      /* Light blue leaf */
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+  
+    .roadmap-leaf:hover {
+      transform: scale(1.05);
+    }
+  
+    .leaf-detail-box {
+      display: none;
+      margin-top: 1rem;
+      background-color: white;
+      border: 1px solid #ffffff;
+      border-radius: 2rem;
+      padding: 1rem;
+      width: 500px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+  
+    .roadmap-leaf.active .leaf-detail-box {
+      display: block;
+    }
+  
+    .roadmap-leaf-title {
+      text-align: center;
+      font-weight: bold;
+      color: #fff;
+    }
+  </style>
+</head>
+
+<body class="bg-gray-0">
+  <!-- Sidebar -->
+  <!-- (Sidebar content remains the same as before) -->
+
+  <!-- Main Content -->
+  <div>
+    <h1 class="text-2xl textcolor-blue font-bold mb-4 text-center">Project timeline</h1>
+    <div class="roadmap-container">
+      <!-- Roadmap Line -->
+      <div class="roadmap-line"></div>
+  
+      <!-- Roadmap Leaf Example -->
+      <div class="roadmap-leaf" onclick="toggleDetail(this)">
+        <span class="roadmap-leaf-title">February 2024 - Git hub repo started</span>
+        <div class="leaf-detail-box">
+          <h4 class="font-bold">Git hub repo for the whole project</h4>
+          <p>This is where the whole project lies. Several different approaches lie here. Small experimental baby steps
+            etc.</p>
+        </div>
+      </div>
+  
+      <!-- Additional Leaves with branching paths -->
+      <div class="roadmap-leaf" onclick="toggleDetail(this)">
+        <span class="roadmap-leaf-title">June 2024 - This website was created</span>
+        <div class="leaf-detail-box">
+          <h4 class="font-bold">June 2024 - This LambdaSim website was created</h4>
+          <p>With the purpose of sharing the project with friends, interested people, etc.</p>
+        </div>
+      </div>
+  
+      <div class="roadmap-leaf" onclick="toggleDetail(this)">
+        <span class="roadmap-leaf-title">End of August 2024 - Market research and experimental development</span>
+        <div class="leaf-detail-box">
+          <h4 class="font-bold">Directionless development?!</h4>
+          <p>Since this is a software-based project, there are, of course, no upfront costs. In fact, spending time
+            coding might even be worth it because of the learning outcomes. The time is well spent, even if there isn't
+            much of a direction yet. In parallel, the plan is to figure out what might be needed in the "real world"
+            market and what already exists concurrently.</p>
+        </div>
+      </div>
+  
+      <div class="roadmap-leaf" onclick="toggleDetail(this)">
+        <span class="roadmap-leaf-title">September 2024 - Relational Database</span>
+        <div class="leaf-detail-box">
+          <h4 class="font-bold">Development of a relational database</h4>
+          <p>
+            After some brainstorming, research, trial and error, the project has landed on building a relational
+            database. This is ideal for the simulation projects because it efficiently manages structured data and
+            complex relationships. It ensures data integrity through constraints, supports scalability, and allows
+            powerful querying with SQL.
+          </p>
+        </div>
+      </div>
+  
+      <div class="roadmap-leaf" onclick="toggleDetail(this)">
+        <span class="roadmap-leaf-title">The future...</span>
+        <div class="leaf-detail-box">
+          <h4 class="font-bold">Who knows what might happen here?</h4>
+          <p>Hopefully, this will get clearer. The goal is that this is super clear by the end of September.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript for Toggle Functionality -->
+<script>
+    function toggleDetail(element) {
+      // Toggle 'active' class on clicked leaf
+      element.classList.toggle('active');
+  
+      // Close all other open detail boxes if needed
+      const otherLeaves = document.querySelectorAll('.roadmap-leaf');
+      otherLeaves.forEach(leaf => {
+        if (leaf !== element && leaf.classList.contains('active')) {
+          leaf.classList.remove('active');
+        }
+      });
+    }
+  </script>
+</body>
+
+</html>

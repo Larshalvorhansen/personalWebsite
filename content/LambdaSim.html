@@ -77,7 +77,7 @@
       display: inline-block;
       padding: 1rem;
       margin: 1rem;
-      border-radius: 9999px;
+      border-radius: 2rem;
       background-color: #36adfa;
       /* Light green leaf */
       cursor: pointer;
@@ -85,35 +85,25 @@
     }
 
     .roadmap-leaf:hover {
-      transform: scale(1.1);
+      transform: scale(1.05);
     }
 
     .leaf-detail-box {
       display: none;
-      position: absolute;
-      top: 50%;
-      left: 100%;
-      transform: translateY(-50%);
+      margin-top: 1rem;
       background-color: white;
       border: 1px solid #ffffff;
-      border-radius: 0.5rem;
+      border-radius: 2rem;
       padding: 1rem;
-      width: 200px;
+      width: 500px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
 
-    .roadmap-leaf:hover .leaf-detail-box {
+    .roadmap-leaf.active .leaf-detail-box {
       display: block;
     }
+</style>
 
-    @media (max-width: 768px) {
-      .leaf-detail-box {
-        left: auto;
-        right: 100%;
-        transform: translateY(-50%);
-      }
-    }
-  </style>
 </head>
 
 <body class="bg-gray-0">
@@ -214,6 +204,17 @@
       decisions in a controlled environment, reducing the risks, costs, and ambiguities associated with trial-and-error
       in real-world policy testing.
     </p>
+
+    <br>
+    <div class="flex justify-left">
+      <br>
+      <a href="https://github.com/Larshalvorhansen/LambdaSim"
+        class="bg-black text-white px-20 py-4 rounded hover:bg-blue-500 hover:text-black hover:border-8 hover:border-black transition-all duration-200">
+        Check out LambdaSim on GitHub
+      </a><br>
+    </div>
+    
+
 <br>
     Examples of societal issues that could be simulated in this may include, but is not limited to:
     <ul class="list-disc list-inside pl-4">
@@ -250,89 +251,77 @@
     
 
 
+    <!-- Project Timeline -->
     <div>
-
-      <!-- Roadmap Container -->
       <h1 class="text-2xl textcolor-blue font-bold mb-4 text-center">Project timeline</h1>
-
-
       <div class="roadmap-container">
         <!-- Roadmap Line -->
         <div class="roadmap-line"></div>
 
         <!-- Roadmap Leaf Example -->
-        <div class="roadmap-leaf">
-          <span>February 2024 - Git hub repo started</span>
-          <!-- Hover Detail Box -->
+        <div class="roadmap-leaf" onclick="toggleDetail(this)">
+          <span>February 2024 - Git repo started</span>
           <div class="leaf-detail-box">
-            <h4 class="font-bold">Git hub repo for the whole project</h4>
-            <p>This is where the whole project lies. Several different approaches lie here. Small experimental babysteps
-              etc.</p>
+            <p>This is where the whole project lies. Several different approaches lie here. Small experimental baby
+              steps etc.</p>
           </div>
         </div>
 
         <!-- Additional Leaves with branching paths -->
-        <div class="roadmap-leaf">
+        <div class="roadmap-leaf" onclick="toggleDetail(this)">
           <span>June 2024 - This website was created</span>
           <div class="leaf-detail-box">
-            <h4 class="font-bold">June 2024 - This lambdasim website was created</h4>
-            <p>With the purpose of sharing the poject with firends, interested people and have </p>
+            <p>With the purpose of sharing the project with friends, interested people, etc.</p>
           </div>
         </div>
 
-        <!-- Branching Example -->
-        <div class="roadmap-leaf" style="margin-left: 50px;">
-          <span>End of August 2024 - Market research and experimental developement</span>
+        <div class="roadmap-leaf" onclick="toggleDetail(this)">
+          <span>August 2024 - Market research and experimental development</span>
           <div class="leaf-detail-box">
-            <h4 class="font-bold">Directionless developement?!</h4>
-            <p>Since this is a software based project, there are offcource no upfront costs.
-              Infact spending time on just coding migth ever be worth it because of the learning outcomes. The time is
-              well spendt, even if there isn't much of a direction yet. <br>
-              In paralell the plan is to figure out what migth be needed in the "real world" market and what allready
-              exists concurrently.
-            </p>
+            <p>Since this is a software-based project, there are, of course, no upfront costs. In fact, spending time
+              coding might even be worth it because of the learning outcomes. The time is well spent, even if there
+              isn't much of a direction yet. In parallel, the plan is to figure out what might be needed in the "real
+              world" market and what already exists concurrently.</p>
           </div>
         </div>
 
-        <div class="roadmap-leaf" style="margin-left: 50px;">
-          <span>September 2024 - Realtional Database</span>
+        <div class="roadmap-leaf" onclick="toggleDetail(this)">
+          <span>September 2024 - Relational Database</span>
           <div class="leaf-detail-box">
-            <h4 class="font-bold">Developement of a relational database</h4>
             <p>
               After some brainstorming, research, trial and error, the project has landed on building a relational
               database. This is ideal for the simulation projects because it efficiently manages structured data and
               complex relationships. It ensures data integrity through constraints, supports scalability, and allows
-              powerful querying with SQL. By organizing data into tables with clear relationships, it simplifies data
-              retrieval and analysis, even as the project grows. Additionally, relational databases handle concurrent
-              processes well and offer robust security, making them a solid choice for managing large-scale simulations.
+              powerful querying with SQL.
             </p>
           </div>
         </div>
 
-        <div class="roadmap-leaf">
+        <div class="roadmap-leaf" onclick="toggleDetail(this)">
           <span>The future...</span>
           <div class="leaf-detail-box">
-            <h4 class="font-bold">Who knows what migth happen here?</h4>
-            <p>Hopefully this will get clearer. The goal is that this is superclear by the end of september.</p>
+            <h4 class="font-bold">Who knows what might happen here?</h4>
+            <p>Hopefully, this will get clearer. The goal is that this is super clear by the end of September.</p>
           </div>
         </div>
-
-        <!-- More roadmap leaves and branches can be added here -->
-
       </div>
-    </div>
-    <br>
-    <div class="flex justify-left">
-      <a href="https://github.com/Larshalvorhansen/LambdaSim"
-        class="bg-black text-white px-20 py-2 rounded hover:bg-blue-500 hover:text-black hover:border-8 hover:border-black transition-all duration-200">Check
-        out LambdaSim on GitHub</a>
     </div>
   </div>
 
-  <!-- Optional JavaScript for future enhancements -->
-
+  <!-- JavaScript for Toggle Functionality -->
   <script>
-    // JavaScript to enhance interactivity, if needed
+    function toggleDetail(element) {
+      // Toggle 'active' class on clicked leaf
+      element.classList.toggle('active');
+  
+      // Close all other open detail boxes if needed
+      const otherLeaves = document.querySelectorAll('.roadmap-leaf');
+      otherLeaves.forEach(leaf => {
+        if (leaf !== element && leaf.classList.contains('active')) {
+          leaf.classList.remove('active');
+        }
+      });
+    }
   </script>
 
 </body>
