@@ -37,7 +37,11 @@
 
       .main-content {
         margin-top: 60px;
-        /* Adjust based on the height of */ }}.gradient-text {
+        /* Adjust based on the height of */
+      }
+    }
+
+    .gradient-text {
       background: linear-gradient(45deg, #002896, #77cfff);
       background-clip: text;
       -webkit-background-clip: text;
@@ -53,59 +57,61 @@
 
     /* Custom styles for roadmap */
     .roadmap-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
     }
 
     .roadmap-line {
-        position: absolute;
-        width: 4px;
-        background-color: #376eff; /* Light blue for plant stem */
-        height: 100%;
+      position: absolute;
+      width: 4px;
+      background-color: #376eff;
+      /* Light blue for plant stem */
+      height: 100%;
     }
 
     .roadmap-leaf {
-        position: relative;
-        display: inline-block;
-        padding: 1rem;
-        margin: 1rem;
-        border-radius: 9999px;
-        background-color: #36adfa; /* Light green leaf */
-        cursor: pointer;
-        transition: transform 0.3s ease;
+      position: relative;
+      display: inline-block;
+      padding: 1rem;
+      margin: 1rem;
+      border-radius: 9999px;
+      background-color: #36adfa;
+      /* Light green leaf */
+      cursor: pointer;
+      transition: transform 0.3s ease;
     }
 
     .roadmap-leaf:hover {
-        transform: scale(1.1);
+      transform: scale(1.1);
     }
 
     .leaf-detail-box {
-        display: none;
-        position: absolute;
-        top: 50%;
-        left: 100%;
-        transform: translateY(-50%);
-        background-color: white;
-        border: 1px solid #ffffff;
-        border-radius: 0.5rem;
-        padding: 1rem;
-        width: 200px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 100%;
+      transform: translateY(-50%);
+      background-color: white;
+      border: 1px solid #ffffff;
+      border-radius: 0.5rem;
+      padding: 1rem;
+      width: 200px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
 
     .roadmap-leaf:hover .leaf-detail-box {
-        display: block;
+      display: block;
     }
 
     @media (max-width: 768px) {
-        .leaf-detail-box {
-            left: auto;
-            right: 100%;
-            transform: translateY(-50%);
-        }
+      .leaf-detail-box {
+        left: auto;
+        right: 100%;
+        transform: translateY(-50%);
+      }
     }
   </style>
 </head>
@@ -117,10 +123,10 @@
       <img class="object-scale-down max-h-16 max-w-16 drop-shadow-md rounded-md m-auto" src="logo3.png" alt="" />
     </a>
     <a href="LambdaSim.html" class="block p-2 md:w-full text-center md:text-left">Lambdasim</a>
-		<a href="art.html" class="block p-2 md:w-full text-center md:text-left">Art</a>
-		<a href="Blogg.html" class="block p-2 md:w-full text-center md:text-left">Blogg</a>
-		<a href="cv.html" class="block p-2 md:w-full text-center md:text-left">CV</a>
-		<a href="index.html" class="block p-2 md:w-full text-center md:text-left">About</a><br>	
+    <a href="art.html" class="block p-2 md:w-full text-center md:text-left">Art</a>
+    <a href="Blogg.html" class="block p-2 md:w-full text-center md:text-left">Blogg</a>
+    <a href="cv.html" class="block p-2 md:w-full text-center md:text-left">CV</a>
+    <a href="index.html" class="block p-2 md:w-full text-center md:text-left">About</a><br>
     <!-- Social Icons -->
     <div class="hidden md:flex place-content-baseline md:justify-content-flex-end md:space-x-4 display: block ml-2">
       <a href="mailto:larshalvorhansen1@gmail.com" target="_blank" title="Send an email" rel="noreferrer"
@@ -166,148 +172,168 @@
       <img src="lambdaLogoCrop50.png" alt="Your image description" class="w-80 h-auto mr-4">
     </div>
     <br><br>
-    <h2 class="text-xl text-gray-500">Development has really started now as of October 2024! Here's a peek at what's driving this project along with a project timeline.<br></h2>
-    <br>
-
-
-    <p>Throughout human history, we have made remarkable progress in solving analytical problems. For
-      example, in 1977, we successfully calculated the precise trajectories for Voyager 1 and 2, ensuring
-      their successful journeys through space. Similarly, we have build increasingly more advanced arcitecture thanks to
-      the continual progress of material science, CAD software and general physics.
-      However, while these endevours are intricate and require
-      detailed calculations, they aren't truly complex.</p><br>
-
-    <p>Complexity arises when there are nonlinear relationships, feedback loops, and unstable dynamics.
-      Examples range from predicting traffic jams in a bustling city to understanding how the weather will unfold based
-      soly initial conditions.</p><br>
-
-    <p>Fortunately, we can make significant progress in predicting complex systems by breaking down the system into
-      smaller components often called agents. These agents follow a simpler set of rules reguarding how the act with
-      their enviroment. This approach allows us to iteratively simulate
-      the behavior of the entire system. By trying different values for the variables that we <i>can</i> change
-      in real-world scenarios within the simulation, we gain valuable insights about how the system as a
-      whole will be affected. As a consequence, this insight enables us to make better, more informed decisions
-      in the real world.</p><br>
-
-<b>
-      <p>
-        In science, testing a hypothesis is crucial for proving or disproving a theory. However, in economics,
-        especially on large scales, it is both analytically unpredictable and often very costly or impossible to test
-        new government policies, such as those listed here, before analyzing their real-world implementation results and
-        aftereffects. Additionally, in democratic governments, where new politicians are elected every four years, a
-        policy might be reversed before any meaningful impact, positive or negative, can be measured.
-      </p> <br>
-      <p>
-
-        This is the problem that Lambdasim aims to tackle. By creating detailed and dynamic models of economic
-        systems, simulations can predict the potential outcomes of various policies without the need for real-world
-        implementation. These simulations can account for numerous variables and their interactions, providing a more
-        comprehensive analysis of possible results. This approach allows policymakers to evaluate the potential impacts
-        of their decisions in a controlled environment, reducing the risks, costs, and ambiguities associated with
-        trial-and-error in real-world policy testing.
-      </p> <br>
-</b>
-    <p>Examples of societal issues that could be simulated in this may include, but is not limited to:<br> <br>
+    <h2 class="text-xl text-gray-500">Development has really started now as of October 2024! Here's a peek at what's
+      driving this project along with a project timeline.<br></h2>
+<br>
+    <p>
+      Throughout human history, we have made remarkable progress in solving analytical problems. For example, in 1977,
+      we successfully calculated the precise trajectories for Voyager 1 and 2, ensuring their successful journeys
+      through space. Similarly, we have built increasingly more advanced architecture thanks to the continual progress
+      of material science, CAD software and general physics. However, while these endeavors are intricate and require
+      detailed calculations, they aren't truly complex.
     </p>
-
-    <ul>
-      <li><strong>Economic Stimulus Package:</strong> How a large economic stimulus, such as a package of
-        tax cuts and public investments, affects economic growth, unemployment, and inflation over time.
-      </li><br>
-      <li><strong>Climate Quotas:</strong> The impact of how an implementation of a national system for trading climate
-        quotas will impact greenhouse gas emissions, industry, and the economy.</li><br>
-      <li><strong>Pandemic Preparedness:</strong> The effects of various strategies for managing a
-        pandemic crisis, including testing, tracing, vaccination, and lockdown measures, on both public
-        health and the economy.</li><br>
-      <li><strong>Tax Reform:</strong> The introduction of a new tax reform that changes tax rates for
-        different income groups and businesses, and its impact on income distribution, innovation and economic growth.
-      </li><br>
-      <li><strong>Public Transportation Expansion:</strong> The development of a new, comprehensive public
-        transportation system in urban areas and its impact on traffic patterns, air pollution, and
-        societal development.</li><br>
-      <li><strong>Social Housing Policy:</strong> The effects of a large-scale public investment in
-        affordable housing, and how this influences the housing market, social
-        mobility and public wellness.</li><br>
-      <!-- <li><strong>Energy Policy:</strong> The transition to renewable energy through subsidies for solar
-        and wind power, and its impact on energy prices, energy supply, and the environment.</li><br> -->
-      <li><strong>Education Reform:</strong> The implementation of a reform that introduces free higher
-        education, and how this affects student enrollment, education quality, and the labor market.
-      </li><br>
+<br>
+    <p>
+      Complexity arises when there are nonlinear relationships, feedback loops, and unstable dynamics. Examples range
+      from predicting traffic jams in a bustling city to understanding how the weather will unfold based solely on
+      initial conditions.
+    </p>
+<br>
+    <p>
+      Fortunately, we can make significant progress in predicting complex systems by breaking down the system into
+      smaller components often called agents. These agents follow a simpler set of rules regarding how they act with
+      their environment. This approach allows us to iteratively simulate the behavior of the entire system. By trying
+      different values for the variables that we can change in real-world scenarios within the simulation, we gain
+      valuable insights about how the system as a whole will be affected. As a consequence, this insight enables us to
+      make better, more informed decisions in the real world.
+    </p>
+<br>
+    <p>
+      In science, testing a hypothesis is crucial for proving or disproving a theory. However, in economics, especially
+      on large scales, it is both analytically unpredictable and often very costly or impossible to test new government
+      policies, such as those listed here, before analyzing their real-world implementation results and aftereffects.
+      Additionally, in democratic governments, where new politicians are elected every four years, a policy might be
+      reversed before any meaningful impact, positive or negative, can be measured.
+    </p>
+<br>
+    <p>
+      This is the problem that Lambdasim aims to tackle. By creating detailed and dynamic models of economic systems,
+      simulations can predict the potential outcomes of various policies without the need for real-world implementation.
+      These simulations can account for numerous variables and their interactions, providing a more comprehensive
+      analysis of possible results. This approach allows policymakers to evaluate the potential impacts of their
+      decisions in a controlled environment, reducing the risks, costs, and ambiguities associated with trial-and-error
+      in real-world policy testing.
+    </p>
+<br>
+    Examples of societal issues that could be simulated in this may include, but is not limited to:
+    <ul class="list-disc list-inside pl-4">
+      <li class="mb-2">
+        Economic Stimulus Package: How a large economic stimulus, such as a package of tax cuts and public investments,
+        affects economic growth, unemployment, and inflation over time.
+      </li>
+      <li class="mb-2">
+        Climate Quotas: The impact of how an implementation of a national system for trading climate quotas will impact
+        greenhouse gas emissions, industry, and the economy.
+      </li>
+      <li class="mb-2">
+        Pandemic Preparedness: The effects of various strategies for managing a pandemic crisis, including testing,
+        tracing, vaccination, and lockdown measures, on both public health and the economy.
+      </li>
+      <li class="mb-2">
+        Tax Reform: The introduction of a new tax reform that changes tax rates for different income groups and
+        businesses, and its impact on income distribution, innovation, and economic growth.
+      </li>
+      <li class="mb-2">
+        Public Transportation Expansion: The development of a new, comprehensive public transportation system in urban
+        areas and its impact on traffic patterns, air pollution, and societal development.
+      </li>
+      <li class="mb-2">
+        Social Housing Policy: The effects of a large-scale public investment in affordable housing, and how this
+        influences the housing market, social mobility, and public wellness.
+      </li>
+      <li class="mb-2">
+        Education Reform: The implementation of a reform that introduces free higher education, and how this affects
+        student enrollment, education quality, and the labor market.
+      </li>
     </ul>
-  
-  <div>
-
-  <!-- Roadmap Container -->
-    <h1 class="text-2xl textcolor-blue font-bold mb-4 text-center">Project timeline</h1>
-
     
-  <div class="roadmap-container">
-    <!-- Roadmap Line -->
-    <div class="roadmap-line"></div>
+    
 
-    <!-- Roadmap Leaf Example -->
-    <div class="roadmap-leaf">
-        <span>February 2024 - Git hub repo started</span>
-        <!-- Hover Detail Box -->
-        <div class="leaf-detail-box">
+
+    <div>
+
+      <!-- Roadmap Container -->
+      <h1 class="text-2xl textcolor-blue font-bold mb-4 text-center">Project timeline</h1>
+
+
+      <div class="roadmap-container">
+        <!-- Roadmap Line -->
+        <div class="roadmap-line"></div>
+
+        <!-- Roadmap Leaf Example -->
+        <div class="roadmap-leaf">
+          <span>February 2024 - Git hub repo started</span>
+          <!-- Hover Detail Box -->
+          <div class="leaf-detail-box">
             <h4 class="font-bold">Git hub repo for the whole project</h4>
-            <p>This is where the whole project lies. Several different approaches lie here. Small experimental babysteps etc.</p>
+            <p>This is where the whole project lies. Several different approaches lie here. Small experimental babysteps
+              etc.</p>
+          </div>
         </div>
-    </div>
 
-    <!-- Additional Leaves with branching paths -->
-    <div class="roadmap-leaf">
-        <span>June 2024 - This website was created</span>
-        <div class="leaf-detail-box">
+        <!-- Additional Leaves with branching paths -->
+        <div class="roadmap-leaf">
+          <span>June 2024 - This website was created</span>
+          <div class="leaf-detail-box">
             <h4 class="font-bold">June 2024 - This lambdasim website was created</h4>
             <p>With the purpose of sharing the poject with firends, interested people and have </p>
+          </div>
         </div>
-    </div>
 
-    <!-- Branching Example -->
-    <div class="roadmap-leaf" style="margin-left: 50px;">
-        <span>End of August 2024 - Market research and experimental developement</span>
-        <div class="leaf-detail-box">
+        <!-- Branching Example -->
+        <div class="roadmap-leaf" style="margin-left: 50px;">
+          <span>End of August 2024 - Market research and experimental developement</span>
+          <div class="leaf-detail-box">
             <h4 class="font-bold">Directionless developement?!</h4>
-            <p>Since this is a software based project, there are offcource no upfront costs. 
-              Infact spending time on just coding migth ever be worth it because of the learning outcomes. The time is well spendt, even if there isn't much of a direction yet. <br>
-              In paralell the plan is to figure out what migth be needed in the "real world" market and what allready exists concurrently. 
+            <p>Since this is a software based project, there are offcource no upfront costs.
+              Infact spending time on just coding migth ever be worth it because of the learning outcomes. The time is
+              well spendt, even if there isn't much of a direction yet. <br>
+              In paralell the plan is to figure out what migth be needed in the "real world" market and what allready
+              exists concurrently.
             </p>
+          </div>
         </div>
-    </div>
 
-    <div class="roadmap-leaf" style="margin-left: 50px;">
-        <span>September 2024 - Realtional Database</span>
-        <div class="leaf-detail-box">
+        <div class="roadmap-leaf" style="margin-left: 50px;">
+          <span>September 2024 - Realtional Database</span>
+          <div class="leaf-detail-box">
             <h4 class="font-bold">Developement of a relational database</h4>
-            <p> 
-              After some brainstorming, research, trial and error, the project has landed on building a relational database. This is ideal for the simulation projects because it efficiently manages structured data and complex relationships. It ensures data integrity through constraints, supports scalability, and allows powerful querying with SQL. By organizing data into tables with clear relationships, it simplifies data retrieval and analysis, even as the project grows. Additionally, relational databases handle concurrent processes well and offer robust security, making them a solid choice for managing large-scale simulations.
+            <p>
+              After some brainstorming, research, trial and error, the project has landed on building a relational
+              database. This is ideal for the simulation projects because it efficiently manages structured data and
+              complex relationships. It ensures data integrity through constraints, supports scalability, and allows
+              powerful querying with SQL. By organizing data into tables with clear relationships, it simplifies data
+              retrieval and analysis, even as the project grows. Additionally, relational databases handle concurrent
+              processes well and offer robust security, making them a solid choice for managing large-scale simulations.
             </p>
+          </div>
         </div>
-    </div>
 
-    <div class="roadmap-leaf">
-        <span>The future...</span>
-        <div class="leaf-detail-box">
+        <div class="roadmap-leaf">
+          <span>The future...</span>
+          <div class="leaf-detail-box">
             <h4 class="font-bold">Who knows what migth happen here?</h4>
             <p>Hopefully this will get clearer. The goal is that this is superclear by the end of september.</p>
+          </div>
         </div>
+
+        <!-- More roadmap leaves and branches can be added here -->
+
+      </div>
     </div>
+    <br>
+    <div class="flex justify-left">
+      <a href="https://github.com/Larshalvorhansen/LambdaSim"
+        class="bg-black text-white px-20 py-2 rounded hover:bg-blue-500 hover:text-black hover:border-8 hover:border-black transition-all duration-200">Check
+        out LambdaSim on GitHub</a>
+    </div>
+  </div>
 
-    <!-- More roadmap leaves and branches can be added here -->
+  <!-- Optional JavaScript for future enhancements -->
 
-</div></div>
-<br>
-<div class="flex justify-left">
-  <a href="https://github.com/Larshalvorhansen/LambdaSim" class="bg-black text-white px-20 py-2 rounded hover:bg-blue-500 hover:text-black hover:border-8 hover:border-black transition-all duration-200">Check out LambdaSim on GitHub</a>
-</div>
-</div>
-
-<!-- Optional JavaScript for future enhancements -->
-
-<script>
+  <script>
     // JavaScript to enhance interactivity, if needed
-</script>
+  </script>
 
 </body>
 
