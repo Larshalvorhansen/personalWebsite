@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Halvor Hansen</title>
+    <link rel="icon" sizes="32x32" href="litenhh.png" />
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        @media (min-width: 768px) {
+            .sidebar {
+                width: 25%;
+                height: 100vh;
+                position: fixed;
+                top: 0;
+                left: 0;
+            }
+
+            .main-content {
+                margin-left: 25%;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: fixed;
+                top: 0;
+                left: 0;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-around;
+                padding: 1rem;
+            }
+
+            .main-content {
+                margin-top: 60px;
+            }
+        }
+
+        .gradient-text {
+            background: linear-gradient(45deg, #002896, #77cfff);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            transition: background-position 0.3s ease-in-out;
+            background-size: 200% 200%;
+            background-position: 0% 50%;
+        }
+
+        .gradient-text:hover {
+            background-position: 100% 50%;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-0">
+    <!-- Sidebar -->
+    <div class="sidebar bg-black text-white p-4">
+        <a href="index.html">
+            <img class="object-scale-down max-h-16 max-w-16 drop-shadow-md rounded-md m-auto" src="logo3art.png" alt="" />
+        </a>
+        <a href="LambdaSim.html" class="block p-2 md:w-full text-center md:text-left">Lambdasim</a>
+        <a href="art.html" class="block p-2 md:w-full text-center md:text-left">Art</a>
+        <a href="Blogg.html" class="block p-2 md:w-full text-center md:text-left">Blogg</a>
+        <a href="cv.html" class="block p-2 md:w-full text-center md:text-left">CV</a>
+        <a href="index.html" class="block p-2 md:w-full text-center md:text-left">About</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content bg-white p-4 md:px-8 max-w-full mx-auto">
+        <br>
+        <h1 class="text-2xl textcolor-blue font-bold mb-4">Art gallery</h1>
+        <h2 class="text-xl text-gray-500 mb-10">In 2021, while playing in a band at <a
+                href="https://www.youtube.com/watch?v=qM78LnYnyf0" class="gradient-text font-bold">VikenFHS</a>, I got
+            an iPad for displaying sheet music. I soon discovered it’s also perfect for digital art! Check out my
+            artwork since then, starting with <a href="#target-section" class="gradient-text font-bold">the pieces from
+                2021</a>.
+        </h2>
+
+        <!-- Galleri med id for hvert bilde fra #0 til #40 -->
+        <div class="rounded-lg overflow-hidden shadow-md">
+            <!-- Start fra id="40" til id="0" -->
+            <img id="40" src="art/art40.png" alt="Dinna her no!" class="w-full h-auto object-cover">
+            <div class="px-4 py-2 text-gray-700">
+                <h3 class="text-base font-bold">Dinna her no!</h3>
+                <p class="text-sm">It's høst now! And it's so incredibly beautiful! Pictures really don't do it justice!
+                    (Woop woop)</p>
+                <p class="text-sm">October, 2024</p>
+            </div>
+            <br><br>
+
+            <img id="0" src="art/art0.jpg" alt="Old's-New's" class="w-full h-auto object-cover">
+            <div class="px-4 py-2 text-gray-700">
+                <h3 class="text-base font-bold">Old's-New's</h3>
+                <p class="text-sm">I got this great image of the northern lights in Trondheim! However, we all have seen
+                    these kinds of images before so I decided to spice it up a bit.</p>
+                <p class="text-sm">May, 2024</p>
+            </div>
+            <br><br>
+
+            <!-- Fortsett med id="1" til id="39" for hvert bilde -->
+            <img id="1" src="art/art1.jpg" alt="Future" class="w-full h-auto object-cover">
+            <div class="px-4 py-2 text-gray-700">
+                <h3 class="text-base font-bold">Future</h3>
+                <p class="text-sm">This was an early logo draft of Lambdasim</p>
+                <p class="text-sm">April 25, 2024</p>
+            </div>
+            <br><br>
+
+            <img id="2" src="art/art2.jpg" alt="Grass" class="w-full h-auto object-cover">
+            <div class="px-4 py-2 text-gray-700">
+                <h3 class="text-base font-bold">Grass</h3>
+                <p class="text-sm">Taken with the Sony a7 II</p>
+                <p class="text-sm">February 23, 2024</p>
+            </div>
+            <br><br>
+
+            <img id="3" src="art/art3.jpg" alt="DreamHouse" class="w-full h-auto object-cover">
+            <div class="px-4 py-2 text-gray-700">
+                <h3 class="text-base font-bold">DreamHouse</h3>
+                <p class="text-sm">This was the best I could get out of Dall-e in regards to what is a dream house from
+                    my pov. (The boat should have been a sailboat, but otherwise quite accurate)</p>
+                <p class="text-sm">December 19, 2023</p>
+            </div>
+            <br><br>
+
+            <!-- Fortsett med flere bilder, legg til id="4", "5" osv. til id="39" -->
+        </div>
+    </div>
+</body>
+
+</html>
