@@ -93,6 +93,11 @@
   </div>
 
   <!-- Script to Fetch and Render CSV Data -->
+  <div class="main-content bg-white p-8 md:p-16">
+    <h1 class="text-2xl font-bold mb-4">Blog Posts</h1>
+    <div id="blog-posts-container"></div> <!-- This will hold the dynamically generated blog posts -->
+  </div>
+
   <script>
     async function loadCSVData() {
       const response = await fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vShfXoB9wHItLmJyH-wxuOQNIb5LYE9z4x3ZUg91O0QEH_QdyfEtW5Qttt1y7BObsl6vHpBMtP5yptL/pub?gid=0&single=true&output=csv');
@@ -101,34 +106,36 @@
       // Parse CSV
       const rows = data.split('\n').map(row => row.split(','));
 
-      // Generate HTML table
-      let html = '<table class="min-w-full bg-white border border-gray-300">';
+      // Define the HTML container to hold the blog posts
+      const blogPostsContainer = document.getElementById('blog-posts-container');
+      let html = '';
+
+      // Assuming the CSV columns follow the order: Title, Date, Description, Image URL (Column D)
       rows.forEach((row, index) => {
-        if (index === 0) {
-          html += '<thead><tr>';
-          row.forEach(cell => {
-            html += `<th class="py-2 px-4 border-b">${cell}</th>`;
-          });
-          html += '</tr></thead><tbody>';
-        } else {
-          html += '<tr>';
-          row.forEach(cell => {
-            if (cell.startsWith("http") && (cell.endsWith(".png") || cell.endsWith(".jpg") || cell.endsWith(".jpeg") || cell.endsWith(".gif"))) {
-              html += `<td class="py-2 px-4 border-b"><img src="${cell}" alt="Image" class="max-h-32 mx-auto"/></td>`;
-            } else {
-              html += `<td class="py-2 px-4 border-b">${cell}</td>`;
-            }
-          });
-          html += '</tr>';
+        if (index > 0 && row.length >= 4) { // Skipping the header row and ensuring there's enough data
+          const title = row[0]; // Column A
+          const date = row[1]; // Column B
+          const description = row[2]; // Column C
+          const imageUrl = row[3]; // Column D
+
+          html += `
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <h2 class="text-xl font-semibold mb-2">${title}</h2>
+            <p class="text-gray-500 text-sm mb-4">${date}</p>
+            <img class="w-full max-h-64 object-cover rounded-md mb-4" src="${imageUrl}" alt="Blog Image">
+            <p class="text-gray-700">${description}</p>
+          </div>
+        `;
         }
       });
-      html += '</tbody></table>';
 
-      document.getElementById('data-table').innerHTML = html;
+      blogPostsContainer.innerHTML = html;
     }
 
     loadCSVData();
   </script>
+
+
 </body>
 
 </html>
