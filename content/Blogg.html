@@ -135,7 +135,7 @@
 
   <script>
     async function loadCSVData() {
-      const response = await fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vShfXoB9wHItLmJyH-wxuOQNIb5LYE9z4x3ZUg91O0QEH_QdyfEtW5Qttt1y7BObsl6vHpBMtP5yptL/pub?gid=0&single=true&output=csv');
+      const response = await fetch(`https://docs.google.com/spreadsheets/d/e/2PACX-1vShfXoB9wHItLmJyH-wxuOQNIb5LYE9z4x3ZUg91O0QEH_QdyfEtW5Qttt1y7BObsl6vHpBMtP5yptL/pub?gid=0&single=true&output=csv&cachebuster=${new Date().getTime()}`);
       const data = await response.text();
 
       // Parse CSV
@@ -145,21 +145,25 @@
       const blogPostsContainer = document.getElementById('blog-posts-container');
       let html = '';
 
-      // Assuming the CSV columns follow the order: Title, Date, Description, Image URL (Column D)
+      // Assuming the CSV columns follow the order: Date, Title, Description, Image URL (Columns A-D)
       rows.forEach((row, index) => {
-        if (index > 0 && row.length >= 4) { // Skipping the header row and ensuring there's enough data
-          const date = row[0]; // Column A
-          const title = row[1]; // Column B
-          const description = row[2]; // Column C
-          const imageUrl = row[3]; // Column D
-          html += `
-          <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
-            <h2 class="text-xl font-semibold mb-2">${title}</h2>
-            <p class="text-gray-500 text-sm mb-4">${date}</p>
-            <img class="w-full max-h-64 object-cover rounded-md mb-4" src="${imageUrl}" alt="Blog Image">
-            <p class="text-gray-700">${description}</p>
-          </div>
-        `;
+        if (index > 0 && row.length >= 4) { // Skipping the header row and ensuring there are at least 4 columns
+          const date = row[0].trim(); // Column A
+          const title = row[1].trim(); // Column B
+          const description = row[2].trim(); // Column C
+          const imageUrl = row[3].trim(); // Column D
+
+          // Ensure that none of the fields are empty before rendering the blog post
+          if (date && title && description && imageUrl) {
+            html += `
+              <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h2 class="text-xl font-semibold mb-2">${title}</h2>
+                <p class="text-gray-500 text-sm mb-4">${date}</p>
+                <img class="w-full max-h-64 object-cover rounded-md mb-4" src="${imageUrl}" alt="Blog Image">
+                <p class="text-gray-700">${description}</p>
+              </div>
+            `;
+          }
         }
       });
 
@@ -167,6 +171,7 @@
     }
 
     loadCSVData();
+
   </script>
 
 
