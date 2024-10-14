@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="no">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Halvor Hansen CMS</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-100">
+    <div class="container mx-auto py-10">
+        <h1 class="text-3xl font-bold text-center mb-10">Halvor Hansen CMS</h1>
+        <div id="posts" class="flex flex-col gap-6"></div>
+    </div>
+
+    <script>
+        // URL til CSV-dataen fra Google Sheets
+        const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vShfXoB9wHItLmJyH-wxuOQNIb5LYE9z4x3ZUg91O0QEH_QdyfEtW5Qttt1y7BObsl6vHpBMtP5yptL/pub?gid=0&single=true&output=csv&cachebuster=';
+
+        // List of possible file extensions
+        const possibleExtensions = ['.jpg', '.jpeg', '.png', '.gif'];
+
+        // Function to find the correct image file with any valid extension
+        async function findImageFile(index) {
+            for (const ext of possibleExtensions) {
+                const imageUrl = `./content/blogImages/${index + 1}${ext}`; // Ensure this is the correct path
+                console.log(`Trying image URL: ${imageUrl}`); // Log the image URL it's trying to load
+                const response = await fetch(imageUrl);
+                console.log(`Fetch response for ${imageUrl}: ${response.status}`); // Log the response status
+                if (response.ok) {
+                    return imageUrl; // Return the image URL if it exists
+                }
+            }
+            return null; // Return null if no image with the valid extension is found
+        }
+
+
+
+        // Function to fetch and parse CSV data
+        async function fetchData() {
+            try {
+                const response = await fetch(sheetUrl);
+                if (!response.ok) {
+                    throw new Error(`Network response was not ok: ${response.statusText}`);
+                }
+                const data = await response.text();
+                const rows = data.split('\n').slice(1); // Skip the header
+                return rows
+                    .map(row => {
+                        const [date, title, content] = row.split(','); // Removed imageFile column
+                        return { date, title, content };
+                    })
+                    .filter(post => post.title && post.content); // Filter out empty rows
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
+
+        // Function to generate cards with dynamic image handling
+        async function createCard(post, index) {
+            const imageUrl = await findImageFile(index); // Find the correct image with any extension
+
+            if (!imageUrl) {
+                console.warn(`No image found for post ${index + 1}`); // If no image is found, skip loading the image
+                return `
+                    <div class="bg-white shadow-md rounded-lg p-6">
+                        <h2 class="text-xl font-semibold mb-2">${post.title}</h2>
+                        <p class="text-gray-600 mb-4">${post.content}</p>
+                        <span class="text-sm text-gray-400">${post.date}</span>
+                    </div>
+                `;
+            }
+
+            return `
+                <div class="bg-white shadow-md rounded-lg p-6">
+                    <img src="${imageUrl}" alt="${post.title}" class="w-full h-48 object-cover rounded-t-lg mb-4">
+                    <h2 class="text-xl font-semibold mb-2">${post.title}</h2>
+                    <p class="text-gray-600 mb-4">${post.content}</p>
+                    <span class="text-sm text-gray-400">${post.date}</span>
+                </div>
+            `;
+        }
+
+        // Function to display posts on the page
+        async function displayPosts() {
+            const posts = await fetchData();
+            if (posts) {
+                const postsContainer = document.getElementById('posts');
+                const postCards = await Promise.all(posts.map((post, index) => createCard(post, index)));
+                postsContainer.innerHTML = postCards.join(''); // Display all the posts with images
+            } else {
+                console.error('No posts data to display');
+            }
+        }
+
+        // Run displayPosts when the page loads
+        displayPosts();
+    </script>
+
+</body>
+
+</html>
