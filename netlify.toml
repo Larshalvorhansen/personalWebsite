@@ -3,3 +3,9 @@
   to = "/blogg"
   status = 301
   force = true
+
+[[redirects]]
+  from = "/bloggern"
+  to = "/blogg"
+  status = 301
+  force = true
