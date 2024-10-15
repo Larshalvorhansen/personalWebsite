@@ -1,0 +1,5 @@
+[[redirects]]
+  from = "/blog"
+  to = "/blogg"
+  status = 301
+  force = true
