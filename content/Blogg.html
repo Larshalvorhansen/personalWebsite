@@ -157,7 +157,7 @@
                     dateElement.classList.add('text-gray-500', 'text-sm', 'mb-4');
 
                     const contentElement = document.createElement('p');
-                    contentElement.textContent = content;
+                    contentElement.innerHTML = content.replace(/\n/g, '<br>'); // Erstatt nye linjer med <br>
                     contentElement.classList.add('text-gray-700');
 
                     const imageElement = document.createElement('img');
