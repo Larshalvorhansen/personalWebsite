@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="no">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Min blogg</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .blog-post {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 text-gray-800">
+
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-4xl font-bold text-center mb-8">Blogginnlegg</h1>
+        <div id="posts-container" class="space-y-8"></div>
+    </div>
+
+    <script>
+        // Funksjon for å hente blogginnlegg fra Google Sheets
+        async function fetchBlogPosts() {
+            const sheetId = '1cooW6kZlSKUgBjK4uPnv4cynbw3nM7NjwMjDHHFJ6mY'; // Erstatt med din Google Sheet ID
+            const apiKey = 'AIzaSyABuVJIWSJiUqk01nvpYF4QVzmgyZDCaGc'; // Erstatt med din API-nøkkel
+
+            const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/FormSvar1!A2:D?key=${apiKey}`;
+
+            const response = await fetch(url);
+            const data = await response.json();
+            const posts = data.values;
+
+            const postsContainer = document.getElementById('posts-container');
+            postsContainer.innerHTML = ''; // Tøm gamle innlegg
+
+            // Gå gjennom hvert innlegg og vis det
+            posts.forEach((post, index) => {
+                const [title, content, date, imageUrl] = post;
+
+                const postElement = document.createElement('div');
+                postElement.classList.add('blog-post', 'bg-white', 'shadow-md', 'p-6', 'rounded-lg');
+
+                const titleElement = document.createElement('h2');
+                titleElement.textContent = title;
+                titleElement.classList.add('text-2xl', 'font-bold', 'mb-4');
+
+                const dateElement = document.createElement('small');
+                dateElement.textContent = date;
+                dateElement.classList.add('text-gray-600', 'mb-2', 'block');
+
+                const contentElement = document.createElement('p');
+                contentElement.textContent = content;
+                contentElement.classList.add('text-lg', 'mb-4');
+
+                const imageElement = document.createElement('img');
+                if (imageUrl) {
+                    imageElement.src = imageUrl;
+                } else {
+                    imageElement.src = `images/${index + 1}.jpg`; // Default bilde hvis ingen URL
+                }
+
+                postElement.appendChild(titleElement);
+                postElement.appendChild(dateElement);
+                postElement.appendChild(contentElement);
+                postElement.appendChild(imageElement);
+
+                postsContainer.appendChild(postElement);
+            });
+        }
+
+        // Kall på fetchBlogPosts når siden lastes
+        window.onload = fetchBlogPosts;
+    </script>
+
+</body>
+
+</html>
