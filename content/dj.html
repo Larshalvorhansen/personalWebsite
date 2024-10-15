@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,17 +32,23 @@
         }
 
         @keyframes subtle-flicker {
-            0%, 80%, 100% {
+
+            0%,
+            80%,
+            100% {
                 opacity: 1;
                 text-shadow: 0 0 5px #10ff64, 0 0 10px #39FF14, 0 0 10px #39FF14, 0 0 20px #11ff00, 0 0 40px #0cffb2;
             }
+
             90% {
                 opacity: 0.95;
                 text-shadow: 0 0 4px #39FF14, 0 0 8px #39FF14, 0 0 12px #39FF14, 0 0 24px #00ff22, 0 0 48px #11ff00;
             }
         }
 
-        .neon-text, .neon-text-small, .neon-text-3 {
+        .neon-text,
+        .neon-text-small,
+        .neon-text-3 {
             font-family: 'NeonCustomFont', sans-serif;
             color: #fcfffc;
             text-shadow: 0 0 2px #00ff80, 0 0 3px #00f279, 0 0 15px #39FF14, 0 0 30px #7a387a, 0 0 60px #FF00FF;
@@ -49,11 +56,11 @@
             text-align: center;
             margin: 0;
         }
-        
+
         .neon-text {
             font-size: 6rem;
         }
-        
+
         .neon-text-small {
             text-shadow: 0 0 2ipx #00ff80, 3 3 3px #00f279, 0 3 15px #39FF14, 0 3 30px #7a387a, 0 3 30px #FF00FF;
             font-size: 1rem;
@@ -135,19 +142,19 @@
             transition: background-color 0.3s ease;
             text-decoration: none;
         }
-        
+
         .btn:hover {
             background-color: #75ff7e;
             color: rgb(0, 0, 0);
         }
-    
+
         .custom-green-button {
             background-color: #37ff148b;
             color: rgb(0, 0, 0);
             box-shadow: 0 0 10px 15px rgba(55, 255, 20, 0.38);
             transition: background-color box-shadow 0.3s ease-in-out, color 0.3s ease-in-out;
         }
-        
+
         .custom-green-button:hover {
             background-color: #ffffff;
             color: rgb(0, 0, 0);
@@ -155,6 +162,7 @@
         }
     </style>
 </head>
+
 <body id="top" class="bg-green-400 text-white font-sans">
     <!-- Header / Navigation -->
     <header>
@@ -172,10 +180,11 @@
 
     <!-- Hero Section -->
     <section class="hero">
-    <video style="opacity: 0.3;" autoplay="autoplay" loop="loop" muted defaultMuted playsinline  oncontextmenu="return false;"  preload="auto"  id="myVideo">
-    <source src="festboddis2.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-</video>
+        <video style="opacity: 0.3;" autoplay="autoplay" loop="loop" muted defaultMuted playsinline
+            oncontextmenu="return false;" preload="auto" id="myVideo">
+            <source src="festboddis2.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
         <div class="hero-overlay"></div>
         <div class="hero-content">
             <h1 class="neon-text">_Palme_</h1>
@@ -183,93 +192,191 @@
         </div>
     </section>
 
-<!-- Scrollable Playlists Section -->
-<section id="Musikk" class="py-20 px-6 md:px-20 bg-green-400">
-    <div class="text-center mb-12">
-        <h2 class="text-5xl font-bold text-black">Spillelister</h2>
-    </div>
-    <div class="overflow-x-scroll flex space-x-6">
-        <!-- Playlist 1 -->
-        <div class="flex-none w-96 bg-green-700 p-6 rounded-lg shadow-lg">
-            <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/5ois2PsSD0zHfDVtdYYiLH?utm_source=generator" width="100%" height="400" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    <!-- Scrollable Playlists Section -->
+    <section id="Musikk" class="py-20 px-6 md:px-20 bg-green-400">
+        <div class="text-center mb-12">
+            <h2 class="text-5xl font-bold text-black">Spillelister</h2>
         </div>
-        <!-- Repeat for each playlist -->
-        <div class="flex-none w-96 bg-green-700 p-6 rounded-lg shadow-lg">
-            <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/5KIUvMVi0QHFrKufWs719H?utm_source=generator&theme=0" width="100%" height="400" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-        </div>
-        <div class="flex-none w-96 bg-green-700 p-6 rounded-lg shadow-lg">
-            <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/0nQLiP8w0AzIegIssKbqSw?utm_source=generator" width="100%" height="400" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-        </div>
-        <div class="flex-none w-96 bg-green-700 p-6 rounded-lg shadow-lg">
-            <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/7B8MXOd6gDPzbYFIK5Bgb5?utm_source=generator" width="100%" height="400" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-        </div>
-        <div class="flex-none w-96 bg-green-700 p-6 rounded-lg shadow-lg">
-            <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/4G2FUIoiuxeSQB3YVcavqa?utm_source=generator&theme=0" width="100%" height="400" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-        </div>
-        <div class="flex-none w-96 bg-green-700 p-6 rounded-lg shadow-lg">
-            <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/0Qvazk6hQ9GYkSNe2eksk8?utm_source=generator&theme=0" width="100%" height="400" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-        </div>
-        <div class="flex-none w-96 bg-green-700 p-6 rounded-lg shadow-lg">
-            <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/6K4bWmjNDukfiYQbR1qdpE?utm_source=generator" width="100%" height="400" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-        </div>
-        <div class="flex-none w-96 bg-green-700 p-6 rounded-lg shadow-lg">
-            <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/3i4pvGIaC4vkI3JLrdwsvc?utm_source=generator&theme=0" width="100%" height="400" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-        </div>
-        <div class="flex-none w-96 bg-green-700 p-6 rounded-lg shadow-lg">
-            <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/0ksEUIhm1fjuEeDS5tt9CZ?utm_source=generator" width="100%" height="400" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-        </div>
-        <div class="flex-none w-96 bg-green-700 p-6 rounded-lg shadow-lg">
-            <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/45jazcsujQYMMY2aXrxhuW?utm_source=generator&theme=0" width="100%" height="400" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-        </div>
-        <div class="flex-none w-96 bg-green-700 p-6 rounded-lg shadow-lg">
-            <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/4GisO10Zy8ZJmW0vJfs9ga?utm_source=generator" width="100%" height="400" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-        </div>
-        <div class="flex-none w-96 bg-green-700 p-6 rounded-lg shadow-lg">
-            <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/2wrXG5EJmEN1wWIRkuKavM?utm_source=generator" width="100%" height="400" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-        </div>
-        <div class="flex-none w-96 bg-green-700 p-6 rounded-lg shadow-lg">
-            <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/1AcrgQPPHyQSmHgWHGQMLw?utm_source=generator&theme=0" width="100%" height="400" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-        </div>
-        <div class="flex-none w-96 bg-green-700 p-6 rounded-lg shadow-lg">
-            <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/6XkLwAhCr5UBtfOSjfzr9Q?utm_source=generator" width="100%" height="400" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-        </div>
-        <div class="flex-none w-96 bg-green-700 p-6 rounded-lg shadow-lg">
-            <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/5mRzyp9687saLHDdTGOWwK?utm_source=generator&theme=0" width="100%" height="400" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-        </div>
-        <div class="flex-none w-96 bg-green-700 p-6 rounded-lg shadow-lg">
-            <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/6e50UWab7rHwmBqKCgjXt4?utm_source=generator" width="100%" height="400" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-        </div>
-        <div class="flex-none w-96 bg-green-700 p-6 rounded-lg shadow-lg">
-            <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/4UTwwQnXisIaLYhbJu6Q1L?utm_source=generator" width="100%" height="400" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-        </div>
-        <div class="flex-none w-96 bg-green-700 p-6 rounded-lg shadow-lg">
-            <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/13ASYI4uNZ2QIxKbSnk2tU?utm_source=generator" width="100%" height="400" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-        </div>
+        <div class="overflow-x-scroll flex space-x-6">
+            <!-- Playlist 1 -->
+            <div class="flex-none w-96 bg-green-700 p-6 rounded-lg shadow-lg">
+                <iframe style="border-radius:12px"
+                    src="https://open.spotify.com/embed/playlist/5ois2PsSD0zHfDVtdYYiLH?utm_source=generator"
+                    width="100%" height="400" frameBorder="0" allowfullscreen=""
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    loading="lazy"></iframe>
+            </div>
+            <!-- Repeat for each playlist -->
+            <div class="flex-none w-96 bg-green-700 p-6 rounded-lg shadow-lg">
+                <iframe style="border-radius:12px"
+                    src="https://open.spotify.com/embed/playlist/5KIUvMVi0QHFrKufWs719H?utm_source=generator&theme=0"
+                    width="100%" height="400" frameBorder="0" allowfullscreen=""
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    loading="lazy"></iframe>
+            </div>
+            <div class="flex-none w-96 bg-green-700 p-6 rounded-lg shadow-lg">
+                <iframe style="border-radius:12px"
+                    src="https://open.spotify.com/embed/playlist/0nQLiP8w0AzIegIssKbqSw?utm_source=generator"
+                    width="100%" height="400" frameBorder="0" allowfullscreen=""
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    loading="lazy"></iframe>
+            </div>
+            <div class="flex-none w-96 bg-green-700 p-6 rounded-lg shadow-lg">
+                <iframe style="border-radius:12px"
+                    src="https://open.spotify.com/embed/playlist/7B8MXOd6gDPzbYFIK5Bgb5?utm_source=generator"
+                    width="100%" height="400" frameBorder="0" allowfullscreen=""
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    loading="lazy"></iframe>
+            </div>
+            <div class="flex-none w-96 bg-green-700 p-6 rounded-lg shadow-lg">
+                <iframe style="border-radius:12px"
+                    src="https://open.spotify.com/embed/playlist/4G2FUIoiuxeSQB3YVcavqa?utm_source=generator&theme=0"
+                    width="100%" height="400" frameBorder="0" allowfullscreen=""
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    loading="lazy"></iframe>
+            </div>
+            <div class="flex-none w-96 bg-green-700 p-6 rounded-lg shadow-lg">
+                <iframe style="border-radius:12px"
+                    src="https://open.spotify.com/embed/playlist/0Qvazk6hQ9GYkSNe2eksk8?utm_source=generator&theme=0"
+                    width="100%" height="400" frameBorder="0" allowfullscreen=""
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    loading="lazy"></iframe>
+            </div>
+            <div class="flex-none w-96 bg-green-700 p-6 rounded-lg shadow-lg">
+                <iframe style="border-radius:12px"
+                    src="https://open.spotify.com/embed/playlist/6K4bWmjNDukfiYQbR1qdpE?utm_source=generator"
+                    width="100%" height="400" frameBorder="0" allowfullscreen=""
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    loading="lazy"></iframe>
+            </div>
+            <div class="flex-none w-96 bg-green-700 p-6 rounded-lg shadow-lg">
+                <iframe style="border-radius:12px"
+                    src="https://open.spotify.com/embed/playlist/3i4pvGIaC4vkI3JLrdwsvc?utm_source=generator&theme=0"
+                    width="100%" height="400" frameBorder="0" allowfullscreen=""
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    loading="lazy"></iframe>
+            </div>
+            <div class="flex-none w-96 bg-green-700 p-6 rounded-lg shadow-lg">
+                <iframe style="border-radius:12px"
+                    src="https://open.spotify.com/embed/playlist/0ksEUIhm1fjuEeDS5tt9CZ?utm_source=generator"
+                    width="100%" height="400" frameBorder="0" allowfullscreen=""
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    loading="lazy"></iframe>
+            </div>
+            <div class="flex-none w-96 bg-green-700 p-6 rounded-lg shadow-lg">
+                <iframe style="border-radius:12px"
+                    src="https://open.spotify.com/embed/playlist/45jazcsujQYMMY2aXrxhuW?utm_source=generator&theme=0"
+                    width="100%" height="400" frameBorder="0" allowfullscreen=""
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    loading="lazy"></iframe>
+            </div>
+            <div class="flex-none w-96 bg-green-700 p-6 rounded-lg shadow-lg">
+                <iframe style="border-radius:12px"
+                    src="https://open.spotify.com/embed/playlist/4GisO10Zy8ZJmW0vJfs9ga?utm_source=generator"
+                    width="100%" height="400" frameBorder="0" allowfullscreen=""
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    loading="lazy"></iframe>
+            </div>
+            <div class="flex-none w-96 bg-green-700 p-6 rounded-lg shadow-lg">
+                <iframe style="border-radius:12px"
+                    src="https://open.spotify.com/embed/playlist/2wrXG5EJmEN1wWIRkuKavM?utm_source=generator"
+                    width="100%" height="400" frameBorder="0" allowfullscreen=""
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    loading="lazy"></iframe>
+            </div>
+            <div class="flex-none w-96 bg-green-700 p-6 rounded-lg shadow-lg">
+                <iframe style="border-radius:12px"
+                    src="https://open.spotify.com/embed/playlist/1AcrgQPPHyQSmHgWHGQMLw?utm_source=generator&theme=0"
+                    width="100%" height="400" frameBorder="0" allowfullscreen=""
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    loading="lazy"></iframe>
+            </div>
+            <div class="flex-none w-96 bg-green-700 p-6 rounded-lg shadow-lg">
+                <iframe style="border-radius:12px"
+                    src="https://open.spotify.com/embed/playlist/6XkLwAhCr5UBtfOSjfzr9Q?utm_source=generator"
+                    width="100%" height="400" frameBorder="0" allowfullscreen=""
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    loading="lazy"></iframe>
+            </div>
+            <div class="flex-none w-96 bg-green-700 p-6 rounded-lg shadow-lg">
+                <iframe style="border-radius:12px"
+                    src="https://open.spotify.com/embed/playlist/5mRzyp9687saLHDdTGOWwK?utm_source=generator&theme=0"
+                    width="100%" height="400" frameBorder="0" allowfullscreen=""
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    loading="lazy"></iframe>
+            </div>
+            <div class="flex-none w-96 bg-green-700 p-6 rounded-lg shadow-lg">
+                <iframe style="border-radius:12px"
+                    src="https://open.spotify.com/embed/playlist/6e50UWab7rHwmBqKCgjXt4?utm_source=generator"
+                    width="100%" height="400" frameBorder="0" allowfullscreen=""
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    loading="lazy"></iframe>
+            </div>
+            <div class="flex-none w-96 bg-green-700 p-6 rounded-lg shadow-lg">
+                <iframe style="border-radius:12px"
+                    src="https://open.spotify.com/embed/playlist/4UTwwQnXisIaLYhbJu6Q1L?utm_source=generator"
+                    width="100%" height="400" frameBorder="0" allowfullscreen=""
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    loading="lazy"></iframe>
+            </div>
+            <div class="flex-none w-96 bg-green-700 p-6 rounded-lg shadow-lg">
+                <iframe style="border-radius:12px"
+                    src="https://open.spotify.com/embed/playlist/13ASYI4uNZ2QIxKbSnk2tU?utm_source=generator"
+                    width="100%" height="400" frameBorder="0" allowfullscreen=""
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    loading="lazy"></iframe>
+            </div>
 
-    </div>
-</section>
+        </div>
+    </section>
 
+    <!-- Musikk Section -->
     <!-- Musikk Section -->
     <section class="py-20 px-6 md:px-20 bg-green-400">
         <div class="text-center mb-12">
             <h2 class="text-5xl font-bold text-black">Mine egne sanger og mixer</h2>
+        </div>
+
+        <!-- Existing Mixes Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Repeat the above block for each mix -->
+            <!-- ... -->
+        </div>
+
+        <!-- Inserted clickable image -->
+        <div class="mt-2 text-center">
+            <h3 class="text-1xl font-bold text-black">Jeg spilte lørdagsmix på studentradien Sagtann!</h3>
+            <br>
+            <a href="https://radiorevolt.no/programmer/revoltdj/8079" target="_blank">
+                <img src="PalmePaaSagtannCover.png" alt="Radio Revolt DJ"
+                    class="inline-block w-64 transform transition duration-300 hover:scale-105">
+            </a>
+            
+            <br><br><br>
+            <a href="https://radiorevolt.no/programmer/revoltdj/8079" class="btn">Hør på RadioRevolt</a>
+            <br><br><br><br><br><br>
+        </div>
 
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <!-- Example of a mix embed -->
             <div class="bg-green-700 p-4 rounded-lg shadow-lg">
-                <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https://soundcloud.com/larsemann01"></iframe>
+                <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay"
+                    src="https://w.soundcloud.com/player/?url=https://soundcloud.com/larsemann01"></iframe>
             </div>
             <!-- Example of a mix embed -->
             <div class="bg-green-700 p-4 rounded-lg shadow-lg">
-                <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https://soundcloud.com/larsemann01/fast"></iframe>
+                <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay"
+                    src="https://w.soundcloud.com/player/?url=https://soundcloud.com/larsemann01/fast"></iframe>
             </div>
             <!-- Example of a mix embed -->
             <div class="bg-green-700 p-4 rounded-lg shadow-lg">
-                <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https://soundcloud.com/larsemann01/distance"></iframe>
+                <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay"
+                    src="https://w.soundcloud.com/player/?url=https://soundcloud.com/larsemann01/distance"></iframe>
             </div>
             <!-- Repeat the above block for each mix -->
         </div>
+
         <div class="text-center mt-12">
             <a href="https://on.soundcloud.com/HRenuAfynLjxvvxZ8" class="btn">Gå til Soundcloud
             </a>
@@ -282,44 +389,59 @@
 
 
     <!-- Om Section -->
-<section id="Om" class="py-20 px-6 md:px-20 bg-green-700">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-      <div>
-        <h2 class="text-4xl font-bold mb-4 text-white">Om Meg</h2>
-        <p class="text-lg text-white">
-        <br>
-          DJ PALME, også kjent som Lars Halvor, er en lidenskapelig DJ med erfaring innen ulike musikksjangre. Jeg har et bredt musikalsk spekter, inspirert av artister som Todd Terje, David Guetta, Earth, Wind & Fire, samt syretekno og chill lounge-musikk. Jeg er kjent for å skape en uforglemmelig atmosfære med mine unike miksinger som kombinerer kjente popsanger med skjulte dansegulvskatter. 
-          <br> Her er to artige eksempler: <br><a href="https://youtu.be/5mMVqRAKvdc?feature=shared&t=3" target="_blank" style="font-weight: bold; text-decoration: underline;">Mr.SaxoKernkraft på youtube</a>
-          <br><a href="https://youtu.be/O-K17d6pKv8?feature=shared&t=8" target="_blank" style="font-weight: bold; text-decoration: underline;">Delorian Jackson på youtube</a>
-          <br><br>
-          Selv om jeg har vært DJ i bare et halvt år, har jeg drevet med musikk siden jeg var 13 år. Jeg har spilt trommer, bass, og piano, og har erfaring fra flere band og utdanning fra Musikkfolkehøyskole. Min DJkarriere startet for alvor på Samfundet i Trondheim, hvor jeg har spilt på alle spillelokalene: Klubben, Bodegaen, Selskapssiden, Strossa, Storsalen, trappeoppgangen og til og med på en hybelfestival🤫.
-          <br><br>
-          Tilbakemeldinger fra både publikum og andre DJs er svært positive. Publikum elsker energien og stemningen jeg bringer til hvert arrangement, og mine kollegaer setter pris på min evne til å skape sømløse overganger mellom låter, som blander det kjente med det uventede.
-        </p>
-      </div>
-      <div>
-        <p class="text-lg text-white">
-            <br>
-            Utover DJ-ing, jobber jeg også med flere mixtapes som vil bli tilgjengelige på SoundCloud, og jeg planlegger å spille på flere utesteder i Trondheim. En av mine mest minneverdige opplevelser var å arrangere en Vulfpeck-konsert på folkehøyskolen, som ble en stor suksess – vi har til og med hele showet fanget på video!
-            <br><br>
-            Musikk handler for meg om å skape øyeblikk av glede og fellesskap, og jeg ser frem til å bringe denne energien til ditt neste arrangement!
-            <br>
-            <br>
-            For booking kan du kontakte meg på e-post: larshalvorhansen1@gmail.com, eller på telefon: 908 09 670. Jeg er alltid åpen for nye spillejobber og spennende samarbeid!
-            <br><br>
-            <img src="pb.png" alt="DJ PALME" class="w-1/4 md:w-1/4 rounded-lg shadow-lg">
+    <section id="Om" class="py-20 px-6 md:px-20 bg-green-700">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <div>
+                <h2 class="text-4xl font-bold mb-4 text-white">Om Meg</h2>
+                <p class="text-lg text-white">
+                    <br>
+                    DJ PALME, også kjent som Lars Halvor, er en lidenskapelig DJ med erfaring innen ulike musikksjangre.
+                    Jeg har et bredt musikalsk spekter, inspirert av artister som Todd Terje, David Guetta, Earth, Wind
+                    & Fire, samt syretekno og chill lounge-musikk. Jeg er kjent for å skape en uforglemmelig atmosfære
+                    med mine unike miksinger som kombinerer kjente popsanger med skjulte dansegulvskatter.
+                    <br> Her er to artige eksempler: <br><a href="https://youtu.be/5mMVqRAKvdc?feature=shared&t=3"
+                        target="_blank" style="font-weight: bold; text-decoration: underline;">Mr.SaxoKernkraft på
+                        youtube</a>
+                    <br><a href="https://youtu.be/O-K17d6pKv8?feature=shared&t=8" target="_blank"
+                        style="font-weight: bold; text-decoration: underline;">Delorian Jackson på youtube</a>
+                    <br><br>
+                    Selv om jeg har vært DJ i bare et halvt år, har jeg drevet med musikk siden jeg var 13 år. Jeg har
+                    spilt trommer, bass, og piano, og har erfaring fra flere band og utdanning fra Musikkfolkehøyskole.
+                    Min DJkarriere startet for alvor på Samfundet i Trondheim, hvor jeg har spilt på alle
+                    spillelokalene: Klubben, Bodegaen, Selskapssiden, Strossa, Storsalen, trappeoppgangen og til og med
+                    på en hybelfestival🤫.
+                    <br><br>
+                    Publikum elsker energien og stemningen jeg bringer til hvert arrangement, og gjengen fra KLST setter pris på de sømløse overganger mellom låter!
+                </p>
+            </div>
+            <div>
+                <p class="text-lg text-white">
+                    <br>
+                    Utover DJ-ing, jobber jeg også med flere mixtapes som vil bli tilgjengelige på SoundCloud, og jeg
+                    planlegger å spille på flere utesteder i Trondheim. En av mine mest minneverdige opplevelser var å
+                    arrangere en Vulfpeck-konsert på folkehøyskolen, som ble en stor suksess – vi har til og med hele
+                    showet fanget på video!
+                    <br><br>
+                    Musikk handler for meg om å skape øyeblikk av glede og fellesskap, og jeg ser frem til å bringe
+                    denne energien til ditt neste arrangement!
+                    <br>
+                    <br>
+                    For booking kan du kontakte meg på e-post: larshalvorhansen1@gmail.com, eller på telefon: 908 09
+                    670. Jeg er alltid åpen for nye spillejobber og spennende samarbeid!
+                    <br><br>
+                    <img src="pb.png" alt="DJ PALME" class="w-1/4 md:w-1/4 rounded-lg shadow-lg">
 
-          </p>
+                </p>
+            </div>
         </div>
-    </div>
-  </section>
+    </section>
 
 
 
     <!-- Kontakt Section -->
     <section id="contact" class="py-20 px-6 md:px-20 bg-green-400">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center text-black font-bold">
-            <div>
+            <!-- <div>
                 <h2 class="text-4xl font-bold mb-4">Send en melding</h2>
                 <form>
                     <div class="mb-4">
@@ -332,14 +454,16 @@
                     </div>
                     <div class="mb-4">
                         <label class="block mb-2 text-sm font-semibold" for="message">Melding</label>
-                        <textarea class="w-full p-3 bg-green-700 rounded-lg" id="message" name="message" rows="5" required></textarea>
+                        <textarea class="w-full p-3 bg-green-700 rounded-lg" id="message" name="message" rows="5"
+                            required></textarea>
                     </div>
                     <button type="submit" class="btn">Send</button>
                 </form>
-            </div>
+            </div> -->
             <div class="text-center md:text-left">
                 <h2 class="text-4xl font-bold mb-4">Kontakt info</h2>
-                <p>Mail: <a href="mailto:larshalvorhansen1@gmail.com" class="underline">larshalvorhansen1@gmail.com</a></p>
+                <p>Mail: <a href="mailto:larshalvorhansen1@gmail.com" class="underline">larshalvorhansen1@gmail.com</a>
+                </p>
                 <p>Phone: <a href="tel:+4790809670" class="underline">908 09 670</a></p>
             </div>
         </div>
@@ -347,8 +471,11 @@
 
     <!-- Footer -->
     <footer class="py-6 bg-green-700 text-center">
-        <p class="text-sm">&copy; 2024 Lars Halvor Hansen. <a href="https://m.media-amazon.com/images/I/61fHJY1GcdL._AC_UF894,1000_QL80_.jpg" target="_blank">All Rights Reversed.</a></p>
+        <p class="text-sm">&copy; 2024 Lars Halvor Hansen. <a
+                href="https://m.media-amazon.com/images/I/61fHJY1GcdL._AC_UF894,1000_QL80_.jpg" target="_blank">All
+                Rights Reversed.</a></p>
     </footer>
-    
+
 </body>
+
 </html>
