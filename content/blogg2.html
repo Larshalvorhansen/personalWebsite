@@ -87,12 +87,14 @@
             const posts = await fetchData();
             if (posts) {
                 const postsContainer = document.getElementById('posts');
-                const postCards = await Promise.all(posts.map((post, index) => createCard(post, index)));
+                const reversedPosts = posts.reverse(); // Reverse the posts array
+                const postCards = await Promise.all(reversedPosts.map((post, index) => createCard(post, index)));
                 postsContainer.innerHTML = postCards.join(''); // Display all the posts with images
             } else {
                 console.error('No posts data to display');
             }
         }
+
 
         // Run displayPosts when the page loads
         displayPosts();
