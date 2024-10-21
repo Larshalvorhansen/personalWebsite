@@ -139,7 +139,7 @@
                     throw new Error("Ingen data returnert fra Google Sheets.");
                 }
 
-                const posts = data.values;
+                const posts = data.values.reverse(); // Reverse the order of the posts
                 const postsContainer = document.getElementById('posts-container');
                 postsContainer.innerHTML = ''; // Tøm gamle innlegg
 
@@ -178,6 +178,7 @@
         }
 
         window.onload = fetchBlogPosts;
+
     </script>
 
 </body>
