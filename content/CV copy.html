@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Halvor Hansen</title>
+  <link rel="icon" sizes="32x32" href="litenhh.png" />
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    @media (min-width: 768px) {
+      .sidebar {
+        width: 25%;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+      }
+
+      .main-content {
+        margin-left: 35%;
+        margin-right: 10%;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: fixed;
+        top: 0;
+        left: 0;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        padding: 1rem;
+      }
+
+      .main-content {
+        margin-top: 120px;
+      }
+    }
+
+    .gradient-text {
+      background: linear-gradient(45deg, #FF5733, #3357FF);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      transition: background-position 0.3s ease-in-out;
+      background-size: 200% 200%;
+      background-position: 0% 50%;
+    }
+
+    .gradient-text:hover {
+      background-position: 100% 50%;
+    }
+
+    .pdf-frame {
+      width: 100%;
+      height: 65vh; /* Adjust the height as needed */
+      margin-bottom: 1rem; /* mb-4 */
+    }
+  </style>
+</head>
+
+<body class="bg-background">
+  <!-- Sidebar -->
+  <div class="sidebar bg-primary text-white p-4">
+    <a href="index.html">
+      <img class="object-scale-down max-h-16 max-w-16 drop-shadow-md rounded-md m-auto" src="logo3.png" alt="Logo" />
+    </a>
+    <a href="LambdaSim.html" class="block p-2 md:w-full text-center md:text-left text-secondary">Lambdasim</a>
+    <a href="art.html" class="block p-2 md:w-full text-center md:text-left text-secondary">Art</a>
+    <a href="Blogg.html" class="block p-2 md:w-full text-center md:text-left text-secondary">Blogg</a>
+    <a href="cv.html" class="block p-2 md:w-full text-center md:text-left text-secondary">CV</a>
+    <a href="index.html" class="block p-2 md:w-full text-center md:text-left text-secondary">About</a>
+    <br>
+    <!-- Social Icons -->
+    <div class="hidden md:flex place-content-baseline md:justify-content-flex-end md:space-x-4 ml-2">
+      <a href="mailto:larshalvorhansen1@gmail.com" target="_blank" title="Send an email" rel="noreferrer"
+        class="text-white hover:text-secondary">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+          class="h-6 w-6">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+        </svg>
+      </a>
+      <a href="https://x.com/lars_hansen1" target="_blank" title="Add me on X" rel="noreferrer" class="text-white hover:text-secondary">
+        <svg class="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" viewBox="0 0 24 24">
+          <path d="M13.795 10.533 20.68 2h-3.073l-5.255 6.517L7.69 2H1l7.806 10.91L1.47 22h3.074l5.705-7.07L15.31 22H22l-8.205-11.467Zm-2.38 2.95L9.97 11.464 4.36 3.627h2.31l4.528 6.317 1.443 2.02 6.018 8.409h-2.31l-4.934-6.89Z" />
+        </svg>
+      </a>
+      <!-- Add other social icons similarly -->
+    </div>
+  </div>
+  <!-- Main Content -->
+  <div class="main-content bg-background p-8 md:p-16">
+    <div class="container mx-auto">
+      <h1 class="text-3xl font-bold text-primary mb-4">CV</h1>
+      <h2 class="text-xl text-gray-500 mb-2">Norwegian:</h2>
+      <iframe src="cv.pdf" class="pdf-frame border-2 border-gray-300"></iframe>
+      <div class="flex justify-center mb-8">
+        <a href="cv.pdf" download class="bg-accent text-white px-4 py-2 rounded hover:bg-secondary transition-all duration-300">Download Norwegian CV</a>
+      </div>
+      <br>
+      <h2 class="text-xl text-gray-500 mb-2">English:</h2>
+      <iframe src="CVengelsk.pdf" class="pdf-frame border-2 border-gray-300"></iframe>
+      <div class="flex justify-center mb-8">
+        <a href="CVengelsk.pdf" download class="bg-accent text-white px-4 py-2 rounded hover:bg-secondary transition-all duration-300">Download English CV</a>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
