@@ -53,7 +53,7 @@
             // Get current time in Norwegian timezone (Europe/Oslo)
             const now = new Date(new Date().toLocaleString("en-US", { timeZone: "Europe/Oslo" }));
 
-            const seconds = now.getSeconds();
+            const seconds = now.getSeconds() + 3;
             const minutes = now.getMinutes() + 30 + (seconds / 60);
             const hours = (now.getHours() % 12) + 5.5  + (minutes / 60);
             
