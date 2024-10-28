@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <!-- Meta tags and title -->
     <meta charset="UTF-8">
@@ -9,20 +10,23 @@
     <!-- Include Tailwind CSS -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
+
 <body class="bg-black text-white font-sans">
 
     <!-- Grid Layout Container -->
     <div class="container mx-auto p-4">
         <div class="grid grid-cols-3 grid-rows-2 gap-4 h-screen">
-            
+
             <!-- Top Left & Top Middle (Merged Cells) for Wikipedia -->
             <div class="col-span-2 row-span-1 bg-black p-4 rounded-lg shadow-md overflow-hidden">
                 <h1 class="text-2xl font-bold mb-6 text-center text-white">Dagens Wiki</h1>
-                <iframe id="wikipedia-iframe" class="w-full h-full filter invert" src="https://en.wikipedia.org/wiki/Special:Random" loading="lazy"></iframe>
+                <iframe id="wikipedia-iframe" class="w-full h-full filter invert"
+                    src="https://en.wikipedia.org/wiki/Special:Random" loading="lazy"></iframe>
             </div>
-            
+
             <!-- Top Right for Clock Section -->
-            <div class="col-span-1 row-span-1 bg-black p-4 rounded-lg shadow-md overflow-hidden flex items-center justify-center">
+            <div
+                class="col-span-1 row-span-1 bg-black p-4 rounded-lg shadow-md overflow-hidden flex items-center justify-center">
                 <!-- Clock Section -->
                 <div class="clock-container">
                     <div class="clock relative">
@@ -52,14 +56,14 @@
                         // Get current time in Norwegian timezone (Europe/Oslo)
                         const now = new Date(new Date().toLocaleString("en-US", { timeZone: "Europe/Oslo" }));
 
-            const seconds = now.getSeconds();
-            const minutes = now.getMinutes() + 30 + (seconds / 60);
-            const hours = (now.getHours() % 12) + 5.5  + (minutes / 60);
-            
+                        const seconds = now.getSeconds();
+                        const minutes = now.getMinutes() + 30 + (seconds / 60);
+                        const hours = (now.getHours() % 12) + 5.5 + (minutes / 60);
 
-            // Calculate angles for each hand
-            const minutesDegrees = ((minutes / 60) * 360) + 90;
-            const hoursDegrees = ((hours / 12) * 360) + 90;
+
+                        // Calculate angles for each hand
+                        const minutesDegrees = ((minutes / 60) * 360) + 90;
+                        const hoursDegrees = ((hours / 12) * 360) + 90;
 
                         // Update style for each hand
                         minuteHand.style.transform = `rotate(${minutesDegrees}deg)`;
@@ -71,12 +75,14 @@
             </div>
 
             <!-- Bottom Left Section for BURN and Meme -->
-            <div class="col-span-1 row-span-1 bg-black p-4 rounded-lg shadow-md overflow-hidden flex flex-col items-center justify-center">
+            <div
+                class="col-span-1 row-span-1 bg-black p-4 rounded-lg shadow-md overflow-hidden flex flex-col items-center justify-center">
                 <h1 class="text-2xl font-bold mb-4 text-center text-white">Dagens BURN</h1>
                 <!-- Integrated Random Line Display Section -->
-                <p id="random-line" class="text-4xl text-gray-700 mb-6 text-center text-white">BURN is Loading...</p>
-                <button id="generate-line" class="bg-white text-black text-lg px-6 py-3 rounded block mx-auto">Generate</button>
-                
+                <p id="random-line" class="text-4xl mb-6 text-center text-white">BURN is Loading...</p>
+                <button id="generate-line"
+                    class="bg-black text-black text-lg px-6 py-3 rounded block mx-auto">Generate</button>
+
                 <!-- Meme Section -->
                 <h2 class="text-2xl font-bold mt-8 mb-4 text-center text-white">Dagens Meme</h2>
                 <img id="random-meme" src="" alt="Random Meme" class="w-full h-auto">
@@ -85,7 +91,8 @@
             <!-- Bottom Middle & Bottom Right (Merged Cells) for Weather Information -->
             <div class="col-span-2 row-span-1 bg-black p-4 rounded-lg shadow-md flex items-center justify-center">
                 <!-- Displaying the Weather Forecast Image -->
-                <img src="https://www.yr.no/nb/innhold/11-44085/meteogram.svg" alt="Weather Forecast for Trondheim" class="w-full h-auto filter invert">
+                <img src="https://www.yr.no/nb/innhold/11-44085/meteogram.svg" alt="Weather Forecast for Trondheim"
+                    class="w-full h-auto filter invert">
             </div>
 
         </div>
@@ -96,9 +103,8 @@
         <div class="bg-white text-black p-8 rounded-lg shadow-lg relative w-1/2 max-w-md">
             <h2 class="text-2xl font-bold mb-4">Bus Times from Berg Studentby</h2>
             <p>Check the latest bus departure times directly on the ATB planner:</p>
-            <a href="https://www.atb.no/reiseplanlegger/?direction=1&tplang=no&from=berg%20studentby&to=&Time=21%3A08&Date=01.09.2024&changepause=0&changepenalty=1" 
-               target="_blank" 
-               class="text-blue-500 underline block mt-4">Open ATB Bus Planner</a>
+            <a href="https://www.atb.no/reiseplanlegger/?direction=1&tplang=no&from=berg%20studentby&to=&Time=21%3A08&Date=01.09.2024&changepause=0&changepenalty=1"
+                target="_blank" class="text-blue-500 underline block mt-4">Open ATB Bus Planner</a>
             <!-- Close Button -->
             <button id="close-modal" class="absolute top-2 right-2 text-black text-xl">&times;</button>
         </div>
@@ -119,26 +125,29 @@
                 .catch(error => console.error('Error fetching the text file:', error));
         }
 
-        // Function to display a random meme
         function displayRandomMeme() {
-            fetch('content/memes/')
-                .then(response => response.text())
-                .then(html => {
-                    const parser = new DOMParser();
-                    const doc = parser.parseFromString(html, 'text/html');
-                    const links = Array.from(doc.querySelectorAll('a'));
-                    const imageFiles = links.map(link => link.getAttribute('href'))
-                        .filter(href => /\.(jpg|jpeg|png|gif|webp)$/i.test(href));
-                    if (imageFiles.length === 0) {
-                        console.error('No image files found in memes directory.');
-                        return;
-                    }
-                    const randomFile = imageFiles[Math.floor(Math.random() * imageFiles.length)];
-                    const memePath = 'content/memes/' + randomFile;
-                    document.getElementById('random-meme').src = memePath;
-                })
-                .catch(error => console.error('Error fetching the memes directory:', error));
+            const memeFolderPath = './memes/'; // Update this path to your meme folder
+            const totalMemes = 10; // Total number of meme images in the folder
+
+            // Select a random meme image and random extension
+            const randomMemeNumber = Math.floor(Math.random() * totalMemes) + 1;
+            const extensions = ['.jpg'];
+            const randomExtension = extensions[Math.floor(Math.random() * extensions.length)];
+            const memePath = `${memeFolderPath}${randomMemeNumber}${randomExtension}`;
+
+            // Set the random meme image to the img tag
+            document.getElementById('random-meme').src = memePath;
+
+            // Attach this function to the Generate button on the first run
+            const generateButton = document.getElementById('generate-line');
+            generateButton.removeEventListener('click', displayRandomMeme); // Clear any previous listener
+            generateButton.addEventListener('click', displayRandomMeme);
         }
+
+        // Initial call to set up the event listener when the page loads
+        displayRandomMeme();
+
+
 
         // Function to refresh the random line and meme at midnight
         function scheduleMidnightUpdate() {
@@ -172,8 +181,8 @@
             const now = new Date();
             const nextMidnight = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0);
             const timeout = nextMidnight.getTime() - now.getTime();
-            
-            setTimeout(function() {
+
+            setTimeout(function () {
                 location.reload(true);
             }, timeout);
         }
@@ -184,16 +193,16 @@
         });
 
         // Modal functionality
-        document.getElementById('open-modal').addEventListener('click', function() {
+        document.getElementById('open-modal').addEventListener('click', function () {
             document.getElementById('bus-modal').classList.remove('hidden');
         });
 
-        document.getElementById('close-modal').addEventListener('click', function() {
+        document.getElementById('close-modal').addEventListener('click', function () {
             document.getElementById('bus-modal').classList.add('hidden');
         });
 
         // Close the modal when clicking outside of it
-        window.addEventListener('click', function(event) {
+        window.addEventListener('click', function (event) {
             const modal = document.getElementById('bus-modal');
             if (event.target === modal) {
                 modal.classList.add('hidden');
@@ -215,6 +224,7 @@
             justify-content: center;
             align-items: center;
         }
+
         .hand {
             height: 6px;
             background: #ffffff;
@@ -224,13 +234,16 @@
             transform-origin: 0% 50%;
             transform: rotate(90deg);
         }
+
         .hand.hour-hand {
             width: 30%;
             height: 6px;
         }
+
         .hand.minute-hand {
             width: 45%;
         }
+
         .hand.second-hand {
             width: 45%;
             background: #EF4444;
@@ -238,6 +251,7 @@
             animation: rotate 60s linear infinite;
             animation-delay: -30s;
         }
+
         .center {
             position: absolute;
             width: 10px;
@@ -246,6 +260,7 @@
             border-radius: 50%;
             z-index: 10;
         }
+
         .clock-face {
             position: absolute;
             width: 100%;
@@ -254,6 +269,7 @@
             justify-content: center;
             align-items: center;
         }
+
         .number {
             position: absolute;
             font-size: 1.5rem;
@@ -264,6 +280,7 @@
             from {
                 transform: rotate(90deg);
             }
+
             to {
                 transform: rotate(450deg);
             }
@@ -271,4 +288,5 @@
     </style>
 
 </body>
+
 </html>
