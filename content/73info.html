@@ -20,9 +20,25 @@
             <!-- Top Left & Top Middle (Merged Cells) for Wikipedia -->
             <div class="col-span-2 row-span-1 bg-black p-4 rounded-lg shadow-md overflow-hidden">
                 <h1 class="text-2xl font-bold mb-6 text-center text-white">Dagens Wiki</h1>
-                <iframe id="wikipedia-iframe" class="w-full h-full filter invert"
-                    src="https://en.wikipedia.org/wiki/Special:Random" loading="lazy"></iframe>
+                <iframe id="wikipedia-iframe" class="w-full h-full filter invert" loading="lazy"></iframe>
             </div>
+
+            <script>
+                // Fetch the hello.txt file and load a random line as Wikipedia link
+                fetch('wikiLinks.txt')
+                    .then(response => response.text())
+                    .then(text => {
+                        // Split the text into lines
+                        const lines = text.split('\n').filter(line => line.trim() !== "");
+
+                        // Choose a random line
+                        const randomLine = lines[Math.floor(Math.random() * lines.length)];
+
+                        // Set the Wikipedia iframe to the random link
+                        document.getElementById('wikipedia-iframe').src = `https://en.wikipedia.org/wiki/${encodeURIComponent(randomLine.trim())}`;
+                    })
+                    .catch(error => console.error('Error loading hello.txt:', error));
+            </script>
 
             <!-- Top Right for Clock Section -->
             <div
@@ -47,7 +63,8 @@
                         <div class="center"></div>
                     </div>
                     <!-- Feedback Section -->
-                    <div class="col-span-1 row-span-1 bg-black p-4 rounded-lg shadow-md flex flex-col items-center justify-center mt-4">
+                    <div
+                        class="col-span-1 row-span-1 bg-black p-4 rounded-lg shadow-md flex flex-col items-center justify-center mt-4">
                         <h2 class="text-2xl font-bold mb-4 text-center text-white">Feedback</h2>
                         <img src="feedbackQR.png" alt="Feedback QR Code" class="w-1/2 h-auto filter invert">
                     </div>

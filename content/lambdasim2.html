@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scrollable Vertical Timeline</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 flex flex-col items-center py-10">
+
+    <!-- Timeline Container -->
+    <div
+        class="timeline-container flex flex-col items-center p-5 space-y-8 overflow-y-auto h-[500px] bg-white rounded-lg shadow-md w-[80%] max-w-lg">
+
+        <!-- Timeline Item 1 -->
+        <div class="timeline-item relative flex flex-col items-center p-4 bg-white shadow-lg rounded-lg max-w-sm">
+            <div
+                class="timeline-icon absolute -top-4 left-1/2 transform -translate-x-1/2 bg-blue-500 rounded-full w-8 h-8 flex items-center justify-center text-white">
+                 
+            </div>
+            <h3 class="text-lg font-semibold mt-5"></h3>
+            <p class="text-sm text-gray-600 mt-2">This is a description of the event. It's a little bit longer to show
+                how the text appears.</p>
+            <p class="text-xs text-gray-400 mt-1">Date: January 1, 2024</p>
+        </div>
+        <!-- Timeline Item 1 -->
+        <div class="timeline-item relative flex flex-col items-center p-4 bg-white shadow-lg rounded-lg max-w-sm">
+            <div
+                class="timeline-icon absolute -top-4 left-1/2 transform -translate-x-1/2 bg-blue-500 rounded-full w-8 h-8 flex items-center justify-center text-white">
+                📅
+            </div>
+            <h3 class="text-lg font-semibold mt-5">Event Title 1</h3>
+            <p class="text-sm text-gray-600 mt-2">This is a description of the event. It's a little bit longer to show
+                how the text appears.</p>
+            <p class="text-xs text-gray-400 mt-1">Date: January 1, 2024</p>
+        </div>
+        <!-- Timeline Item 1 -->
+        <div class="timeline-item relative flex flex-col items-center p-4 bg-white shadow-lg rounded-lg max-w-sm">
+            <div
+                class="timeline-icon absolute -top-4 left-1/2 transform -translate-x-1/2 bg-blue-500 rounded-full w-8 h-8 flex items-center justify-center text-white">
+                📅
+            </div>
+            <h3 class="text-lg font-semibold mt-5">Event Title 1</h3>
+            <p class="text-sm text-gray-600 mt-2">This is a description of the event. It's a little bit longer to show
+                how the text appears.</p>
+            <p class="text-xs text-gray-400 mt-1">Date: January 1, 2024</p>
+        </div>
+        <!-- Timeline Item 1 -->
+        <div class="timeline-item relative flex flex-col items-center p-4 bg-white shadow-lg rounded-lg max-w-sm">
+            <div
+                class="timeline-icon absolute -top-4 left-1/2 transform -translate-x-1/2 bg-blue-500 rounded-full w-8 h-8 flex items-center justify-center text-white">
+                📅
+            </div>
+            <h3 class="text-lg font-semibold mt-5">Event Title 1</h3>
+            <p class="text-sm text-gray-600 mt-2">This is a description of the event. It's a little bit longer to show
+                how the text appears.</p>
+            <p class="text-xs text-gray-400 mt-1">Date: January 1, 2024</p>
+        </div>
+        <!-- Timeline Item 1 -->
+        <div class="timeline-item relative flex flex-col items-center p-4 bg-white shadow-lg rounded-lg max-w-sm">
+            <div
+                class="timeline-icon absolute -top-4 left-1/2 transform -translate-x-1/2 bg-blue-500 rounded-full w-8 h-8 flex items-center justify-center text-white">
+                📅
+            </div>
+            <h3 class="text-lg font-semibold mt-5">Event Title 1</h3>
+            <p class="text-sm text-gray-600 mt-2">This is a description of the event. It's a little bit longer to show
+                how the text appears.</p>
+            <p class="text-xs text-gray-400 mt-1">Date: January 1, 2024</p>
+        </div>
+        <!-- Timeline Item 1 -->
+        <div class="timeline-item relative flex flex-col items-center p-4 bg-white shadow-lg rounded-lg max-w-sm">
+            <div
+                class="timeline-icon absolute -top-4 left-1/2 transform -translate-x-1/2 bg-blue-500 rounded-full w-8 h-8 flex items-center justify-center text-white">
+                📅
+            </div>
+            <h3 class="text-lg font-semibold mt-5">Event Title 1</h3>
+            <p class="text-sm text-gray-600 mt-2">This is a description of the event. It's a little bit longer to show
+                how the text appears.</p>
+            <p class="text-xs text-gray-400 mt-1">Date: January 1, 2024</p>
+        </div>
+
+        <!-- Timeline Item 2 -->
+        <div class="timeline-item relative flex flex-col items-center p-4 bg-white shadow-lg rounded-lg max-w-sm">
+            <div
+                class="timeline-icon absolute -top-4 left-1/2 transform -translate-x-1/2 bg-green-500 rounded-full w-8 h-8 flex items-center justify-center text-white">
+                🕒
+            </div>
+            <h3 class="text-lg font-semibold mt-5">Event Title 2</h3>
+            <p class="text-sm text-gray-600 mt-2">Another description here to fill out the item text.</p>
+            <p class="text-xs text-gray-400 mt-1">Date: February 14, 2024</p>
+        </div>
+
+        <!-- Add more timeline items here as needed -->
+
+    </div>
+
+    <!-- Scroll Buttons -->
+    <div class="flex justify-center space-x-4 my-5">
+        <button onclick="scrollTimeline(-200)" class="p-2 bg-gray-200 rounded hover:bg-gray-300">↑ Scroll Up</button>
+        <button onclick="scrollTimeline(200)" class="p-2 bg-gray-200 rounded hover:bg-gray-300">↓ Scroll Down</button>
+    </div>
+
+    <script>
+        function scrollTimeline(amount) {
+            document.querySelector(".timeline-container").scrollBy({
+                top: amount,
+                behavior: "smooth",
+            });
+        }
+    </script>
+
+</body>
+
+</html>
