@@ -12,6 +12,7 @@ This website is a reflection of my journey as a student and an enthusiast of bot
 - **Hobbies and Interests**: A dedicated section to share my personal interests, such as digital art and creative tech tinkering.
 - **Professional Overview**: Includes my CV and a summary of my academic and professional experiences.
 - **Contact Information**: Ways to get in touch with me, whether you're interested in my work, potential collaborations, or just want to connect.
+- **Blog**
 
 ### Purpose
 
