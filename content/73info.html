@@ -110,25 +110,86 @@
                 <img id="random-meme" src="" alt="Random Meme" class="w-full h-auto">
             </div>
 
+
+
+
+
+            <script>
+                async function fetchDepartures() {
+                    const url = 'https://api.entur.io/journey-planner/v3/graphql'; // Placeholder, use Entur’s actual API URL.
+                    const query = `{
+            stopPlace(id: "NSR:StopPlace:43666") {
+                estimatedCalls(timeRange: 3600, numberOfDepartures: 5) {
+                    serviceJourney {
+                        line {
+                            publicCode
+                        }
+                    }
+                    destinationDisplay {
+                        frontText
+                    }
+                    expectedArrivalTime
+                }
+            }
+        }`;
+
+                    const response = await fetch(url, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'ET-Client-Name': 'YourAppName' // Replace with your actual app name or key
+                        },
+                        body: JSON.stringify({ query })
+                    });
+
+                    const data = await response.json();
+                    displayDepartures(data.data.stopPlace.estimatedCalls);
+                }
+
+                function displayDepartures(departures) {
+                    const container = document.getElementById('departures-container');
+                    container.innerHTML = departures.map(dep => {
+                        const busNumber = dep.serviceJourney.line.publicCode; // Bus number
+                        const destination = dep.destinationDisplay.frontText; // Destination
+                        const arrivalTime = new Date(dep.expectedArrivalTime); // Convert to Date object
+
+                        // Format time to 24-hour format (HH:mm)
+                        const formattedTime = arrivalTime.toLocaleTimeString('no-NO', {
+                            hour: '2-digit',
+                            minute: '2-digit',
+                            hour12: false // Ensures 24-hour format
+                        });
+
+                        return `
+                <div class="mb-2">
+                    <span class="text-2xl">${formattedTime} - </span>
+                    <span class="text-2xl font-bold">${busNumber}</span> 
+                    <span class="text-2xl">${destination}</span>
+                </div>
+            `;
+                    }).join('');
+                }
+
+                fetchDepartures();
+            </script>
+
+
             <!-- Bottom Middle & Bottom Right (Merged Cells) for Weather Information -->
-            <div class="col-span-2 row-span-1 bg-black p-4 rounded-lg shadow-md flex items-center justify-center">
+            <div class="col-span-2 row-span-0 bg-black p-4 rounded-lg shadow-md flex flex-col items-center space-y-4">
+                OMG BUSS TIDER! er på INFORSKJERMEN HVA SKEEEER!?
+                <!-- Displaying Departures (Bus Information) -->
+                <div id="departures-container"
+                    class="text-white-600 bg-blue-500 p-4 rounded-lg shadow-md w-[550px] h-[250px] overflow-hidden text-ellipsis">
+                    <!-- Bus information content goes here -->
+                </div>
+                
                 <!-- Displaying the Weather Forecast Image -->
                 <img src="https://www.yr.no/nb/innhold/11-44085/meteogram.svg" alt="Weather Forecast for Trondheim"
-                    class="w-full h-auto filter invert">
+                class="w-full h-auto filter invert">
             </div>
 
-        </div>
-    </div>
 
-    <!-- Modal for Bus Times -->
-    <div id="bus-modal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center hidden">
-        <div class="bg-white text-black p-8 rounded-lg shadow-lg relative w-1/2 max-w-md">
-            <h2 class="text-2xl font-bold mb-4">Bus Times from Berg Studentby</h2>
-            <p>Check the latest bus departure times directly on the ATB planner:</p>
-            <a href="https://www.atb.no/reiseplanlegger/?direction=1&tplang=no&from=berg%20studentby&to=&Time=21%3A08&Date=01.09.2024&changepause=0&changepenalty=1"
-                target="_blank" class="text-blue-500 underline block mt-4">Open ATB Bus Planner</a>
-            <!-- Close Button -->
-            <button id="close-modal" class="absolute top-2 right-2 text-black text-xl">&times;</button>
+
         </div>
     </div>
 
