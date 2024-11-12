@@ -111,27 +111,24 @@
             </div>
 
 
-
-
-
             <script>
                 async function fetchDepartures() {
-                    const url = 'https://api.entur.io/journey-planner/v3/graphql'; // Placeholder, use Entur’s actual API URL.
+                    const url = 'https://api.entur.io/journey-planner/v3/graphql';
                     const query = `{
-            stopPlace(id: "NSR:StopPlace:43666") {
-                estimatedCalls(timeRange: 3600, numberOfDepartures: 5) {
-                    serviceJourney {
-                        line {
-                            publicCode
+                        stopPlace(id: "NSR:StopPlace:43666") {
+                            estimatedCalls(timeRange: 3600, numberOfDepartures: 5) {
+                                serviceJourney {
+                                    line {
+                                        publicCode
+                                    }
+                                }
+                                destinationDisplay {
+                                    frontText
+                                }
+                                expectedArrivalTime
+                            }
                         }
-                    }
-                    destinationDisplay {
-                        frontText
-                    }
-                    expectedArrivalTime
-                }
-            }
-        }`;
+                    }`;
 
                     const response = await fetch(url, {
                         method: 'POST',
@@ -161,17 +158,21 @@
                         });
 
                         return `
-                <div class="mb-2">
-                    <span class="text-2xl">${formattedTime} - </span>
-                    <span class="text-2xl font-bold">${busNumber}</span> 
-                    <span class="text-2xl">${destination}</span>
-                </div>
-            `;
+                            <div class="mb-2">
+                                <span class="text-2xl">${formattedTime} - </span>
+                                <span class="text-2xl font-bold">${busNumber}</span> 
+                                <span class="text-2xl">${destination}</span>
+                            </div>
+                        `;
                     }).join('');
                 }
 
+                // Initial call to fetch bus times
                 fetchDepartures();
+                // Set interval to call fetchDepartures every 30 seconds (30000 milliseconds)
+                setInterval(fetchDepartures, 30000);
             </script>
+
 
 
             <!-- Bottom Middle & Bottom Right (Merged Cells) for Weather Information -->
@@ -182,10 +183,10 @@
                     class="text-white-600 bg-blue-500 p-4 rounded-lg shadow-md w-[550px] h-[250px] overflow-hidden text-ellipsis">
                     <!-- Bus information content goes here -->
                 </div>
-                
+
                 <!-- Displaying the Weather Forecast Image -->
                 <img src="https://www.yr.no/nb/innhold/11-44085/meteogram.svg" alt="Weather Forecast for Trondheim"
-                class="w-full h-auto filter invert">
+                    class="w-full h-auto filter invert">
             </div>
 
 
