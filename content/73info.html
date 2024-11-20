@@ -127,20 +127,20 @@
                 async function fetchDepartures() {
                     const url = 'https://api.entur.io/journey-planner/v3/graphql';
                     const query = `{
-                        stopPlace(id: "NSR:StopPlace:43666") {
-                            estimatedCalls(timeRange: 3600, numberOfDepartures: 5) {
-                                serviceJourney {
-                                    line {
-                                        publicCode
-                                    }
-                                }
-                                destinationDisplay {
-                                    frontText
-                                }
-                                expectedArrivalTime
-                            }
-                        }
-                    }`;
+        stopPlace(id: "NSR:StopPlace:43666") {
+            estimatedCalls(timeRange: 3600, numberOfDepartures: 5) {
+                serviceJourney {
+                    line {
+                        publicCode
+                    }
+                }
+                destinationDisplay {
+                    frontText
+                }
+                expectedArrivalTime
+            }
+        }
+    }`;
 
                     const response = await fetch(url, {
                         method: 'POST',
@@ -154,6 +154,9 @@
                     const data = await response.json();
                     displayDepartures(data.data.stopPlace.estimatedCalls);
                 }
+
+                // Oppdater busstider oftere (f.eks. hvert 10. sekund)
+                setInterval(fetchDepartures, 10000); // Oppdaterer hvert 10. sekund
 
                 function displayDepartures(departures) {
                     const container = document.getElementById('departures-container');
