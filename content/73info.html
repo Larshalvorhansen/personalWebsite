@@ -46,21 +46,29 @@
                 <!-- Clock Section -->
                 <div class="clock-container">
                     <div class="clock relative">
-                        <div class="clock-face">
-                            <!-- Numbers for Clock -->
-                            <div class="number" style="top: 10px; left: 50%; transform: translateX(-50%);">12</div>
-                            <div class="number" style="top: 50%; left: 10px; transform: translateY(-50%);">9</div>
-                            <div class="number" style="top: 50%; right: 10px; transform: translateY(-50%);">3</div>
-                            <div class="number" style="bottom: 10px; left: 50%; transform: translateX(-50%);">6</div>
-                        </div>
-
-                        <!-- Clock Hands -->
-                        <div class="hand hour-hand rotate-180"></div>
-                        <div class="hand minute-hand rotate-180"></div>
-                        <div class="hand second-hand rotate-180"></div>
-
-                        <!-- Center Point -->
-                        <div class="center"></div>
+                        <title>Simple Clock</title>
+                        <style>
+                            #clock {
+                                font-family: 'Arial', sans-serif;
+                                color: #ffffff;
+                                font-size: 24px;
+                                text-align: center;
+                                padding: 20px;
+                                margin-top: 20%;
+                            }
+                        </style>
+                        <div id="clock"></div>
+                        <script>
+                            function updateClock() {
+                                const now = new Date();
+                                const hours = String(now.getHours()).padStart(2, '0');
+                                const minutes = String(now.getMinutes()).padStart(2, '0');
+                                const seconds = String(now.getSeconds()).padStart(2, '0');
+                                document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
+                            }
+                            setInterval(updateClock, 1000);
+                            updateClock();
+                        </script>
                     </div>
                     <!-- Feedback Section -->
                     <div
@@ -299,80 +307,6 @@
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        .clock {
-            width: 300px;
-            height: 300px;
-            border: 10px solid #ffffff;
-            border-radius: 50%;
-            position: relative;
-            margin: 50px auto;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .hand {
-            height: 6px;
-            background: #ffffff;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform-origin: 0% 50%;
-            transform: rotate(90deg);
-        }
-
-        .hand.hour-hand {
-            width: 30%;
-            height: 6px;
-        }
-
-        .hand.minute-hand {
-            width: 45%;
-        }
-
-        .hand.second-hand {
-            width: 45%;
-            background: #EF4444;
-            height: 1px;
-            animation: rotate 60s linear infinite;
-            animation-delay: -30s;
-        }
-
-        .center {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background-color: #ffffff;
-            border-radius: 50%;
-            z-index: 10;
-        }
-
-        .clock-face {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .number {
-            position: absolute;
-            font-size: 1.5rem;
-            color: #ffffff;
-        }
-
-        @keyframes rotate {
-            from {
-                transform: rotate(90deg);
-            }
-
-            to {
-                transform: rotate(450deg);
-            }
-        }
-    </style>
 
 </body>
 
