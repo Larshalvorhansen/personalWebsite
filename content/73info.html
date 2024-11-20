@@ -71,28 +71,32 @@
                 </div>
 
                 <script>
-                    function updateClock() {
-                        const minuteHand = document.querySelector('.minute-hand');
-                        const hourHand = document.querySelector('.hour-hand');
+                    function displayDepartures(departures) {
+                        const container = document.getElementById('departures-container');
+                        container.innerHTML = departures.map(dep => {
+                            const busNumber = dep.serviceJourney.line.publicCode; // Bus number
+                            const destination = dep.destinationDisplay.frontText; // Destination
+                            const arrivalTimeUTC = new Date(dep.expectedArrivalTime); // Convert to Date object in UTC
 
-                        // Get current time in Norwegian timezone (Europe/Oslo)
-                        const now = new Date(new Date().toLocaleString("en-US", { timeZone: "Europe/Oslo" }));
+                            // Convert UTC time to local time
+                            const arrivalTimeLocal = new Date(arrivalTimeUTC.toLocaleString('en-US', { timeZone: 'Europe/Oslo' }));
 
-                        const seconds = now.getSeconds();
-                        const minutes = now.getMinutes() + 30 + (seconds / 60);
-                        const hours = (now.getHours() % 12) + 5.5 + (minutes / 60);
+                            // Format time to 24-hour format (HH:mm)
+                            const formattedTime = arrivalTimeLocal.toLocaleTimeString('no-NO', {
+                                hour: '2-digit',
+                                minute: '2-digit',
+                                hour12: false // Ensures 24-hour format
+                            });
 
-
-                        // Calculate angles for each hand
-                        const minutesDegrees = ((minutes / 60) * 360) + 90;
-                        const hoursDegrees = ((hours / 12) * 360) + 90;
-
-                        // Update style for each hand
-                        minuteHand.style.transform = `rotate(${minutesDegrees}deg)`;
-                        hourHand.style.transform = `rotate(${hoursDegrees}deg)`;
+                            return `
+            <div class="mb-2">
+                <span class="text-2xl">${formattedTime} - </span>
+                <span class="text-2xl font-bold">${busNumber}</span> 
+                <span class="text-2xl">${destination}</span>
+            </div>
+        `;
+                        }).join('');
                     }
-
-                    setInterval(updateClock, 1000); // Update every second
                 </script>
             </div>
 
@@ -177,7 +181,6 @@
 
             <!-- Bottom Middle & Bottom Right (Merged Cells) for Weather Information -->
             <div class="col-span-2 row-span-0 bg-black p-4 rounded-lg shadow-md flex flex-col items-center space-y-4">
-                OMG BUSS TIDER! er på INFORSKJERMEN HVA SKEEEER!?
                 <!-- Displaying Departures (Bus Information) -->
                 <div id="departures-container"
                     class="text-white-600 bg-blue-500 p-4 rounded-lg shadow-md w-[550px] h-[250px] overflow-hidden text-ellipsis">
