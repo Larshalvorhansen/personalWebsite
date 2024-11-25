@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script>
+        // Startdato
+        const startDate = new Date("2024-11-25");
+
+        // Funksjon for å hente og parse CSV
+        async function fetchCSV() {
+            const response = await fetch('fisk.csv'); // Bytt til riktig CSV-fil
+            if (!response.ok) {
+                throw new Error("Feil ved lasting av CSV: " + response.statusText);
+            }
+            const csvText = await response.text();
+            console.log(csvText); // Debugging
+            return parseCSV(csvText);
+        }
+
+        // Funksjon for å parse CSV til et array
+        function parseCSV(csv) {
+            const lines = csv.trim().split("\n");
+            const headers = lines[0].split(",");
+            return lines.slice(1).map(line => {
+                const values = line.split(",");
+                return headers.reduce((obj, header, index) => {
+                    obj[header.trim()] = values[index].trim();
+                    return obj;
+                }, {});
+            });
+        }
+
+        // Få dagens dag basert på startdato
+        function getDayNumber(start) {
+            const today = new Date();
+            const diffTime = today - start;
+            return Math.floor(diffTime / (1000 * 60 * 60 * 24)) + 1;
+        }
+
+        // Oppdater sideinnholdet
+        async function updateContent() {
+            try {
+                const data = await fetchCSV();
+                const dayNumber = getDayNumber(startDate);
+                const todayData = data.find(entry => parseInt(entry.Day) === (dayNumber % data.length || data.length));
+
+                if (!todayData) throw new Error("Ingen data funnet for dagens dag.");
+
+                // Generer innhold
+                document.querySelector(".content").innerHTML = `
+                    <p><strong>Dag ${todayData.Day}:</strong></p>
+                    <ul>
+                        <li>${todayData["Old Testament"]}</li>
+                        <li>${todayData["New Testament"]}</li>
+                        <li>${todayData["Psalms & Proverbs"]}</li>
+                    </ul>
+                    <p>Du kan lese disse tekstene her: <a href="https://halvorhansen.no/fisk" target="_blank">halvorhansen.no/fisk</a></p>
+                `;
+            } catch (error) {
+                document.querySelector(".content").innerHTML = `
+                    <p>Det oppstod en feil: ${error.message}</p>
+                `;
+                console.error(error);
+            }
+        }
+
+        // Oppdater innhold når siden lastes
+        document.addEventListener("DOMContentLoaded", updateContent);
+    </script>
+    <style>
+        /* Samme CSS som tidligere */
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Dagens Bibeltekst</h1>
+        </div>
+        <div class="content">
+            <!-- Innhold blir dynamisk generert her -->
+        </div>
+    </div>
+</body>
+
+</html>

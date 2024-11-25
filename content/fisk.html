@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSV Line Viewer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+
+    <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+        <h1 class="text-2xl font-bold mb-4">CSV Line Viewer</h1>
+        <div id="display-area" class="text-lg text-gray-700 mb-4">
+            Click "Next" to start
+        </div>
+        <button id="next-button" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+            Next
+        </button>
+    </div>
+
+    <script>
+        let lines = []; // Will hold the CSV lines
+        let currentIndex = 0;
+
+        // Get references to the display area and button
+        const displayArea = document.getElementById('display-area');
+        const nextButton = document.getElementById('next-button');
+
+        // Fetch the CSV file
+        async function fetchCSV() {
+            try {
+                const response = await fetch('fisk.csv'); // Replace 'data.csv' with your file's path
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const text = await response.text();
+                lines = text.split('\n').filter(line => line.trim() !== ''); // Parse and clean up lines
+            } catch (error) {
+                displayArea.textContent = 'Error loading CSV file.';
+                console.error('Failed to fetch CSV:', error);
+            }
+        }
+
+        // Add event listener for the "Next" button
+        nextButton.addEventListener('click', () => {
+            if (lines.length === 0) {
+                displayArea.textContent = 'Loading CSV...';
+                return;
+            }
+            if (currentIndex < lines.length) {
+                displayArea.textContent = lines[currentIndex];
+                currentIndex++;
+            } else {
+                displayArea.textContent = 'No more lines!';
+                nextButton.disabled = true;
+                nextButton.classList.add('bg-gray-400', 'cursor-not-allowed');
+                nextButton.classList.remove('bg-blue-500', 'hover:bg-blue-600');
+            }
+        });
+
+        // Fetch the CSV file when the page loads
+        fetchCSV();
+    </script>
+
+</body>
+</html>
