@@ -1,64 +1,133 @@
+# Writing the HTML with required features to a file for demonstration.
+html_code = """
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Send SMS with Twilio</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        async function sendSMS() {
-            const to = document.getElementById('phoneNumber').value;
-            const message = document.getElementById('message').value;
-
-            if (!to || !message) {
-                alert('Please enter both the phone number and message.');
-                return;
-            }
-
-            try {
-                const response = await fetch('https://your-backend-url/send-sms', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ to, message }),
-                });
-
-                if (response.ok) {
-                    alert('Message sent successfully!');
-                } else {
-                    alert('Failed to send message.');
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                alert('An error occurred while sending the message.');
-            }
-        }
-    </script>
+    <title>Daily Tracker</title>
 </head>
 
-<body class="bg-gray-100 min-h-screen flex items-center justify-center">
-    <div class="bg-white shadow-md rounded-lg p-8 w-full max-w-md">
-        <h1 class="text-2xl font-bold text-center text-gray-800 mb-4">Send SMS with Twilio</h1>
+<body class="bg-gray-100 flex flex-col items-center justify-center min-h-screen">
+    <h1 class="text-2xl font-bold mb-4">Daily Tracker with Contribution Graph</h1>
+    <table class="table-auto bg-white shadow-md rounded-lg overflow-hidden mb-4">
+        <thead>
+            <tr class="bg-gray-200">
+                <th class="px-4 py-2">Day</th>
+                <th class="px-4 py-2">Date</th>
+                <th class="px-4 py-2">Old Testament</th>
+                <th class="px-4 py-2">Read?</th>
+                <th class="px-4 py-2">New Testament</th>
+                <th class="px-4 py-2">Read?</th>
+                <th class="px-4 py-2">Psalms & Proverbs</th>
+                <th class="px-4 py-2">Read?</th>
+            </tr>
+        </thead>
+        <tbody id="daily-rows"></tbody>
+    </table>
 
-        <div class="mb-4">
-            <label for="phoneNumber" class="block text-gray-700 font-semibold mb-2">Recipient Phone Number:</label>
-            <input type="text" id="phoneNumber" placeholder="+1234567890"
-                class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+    <div class="flex flex-col items-center">
+        <h2 class="text-lg font-semibold mb-2">Contribution Graph</h2>
+        <div class="grid grid-cols-12 gap-1 text-xs text-gray-500 w-full">
+            <span class="text-center">Jan</span>
+            <span class="text-center">Feb</span>
+            <span class="text-center">Mar</span>
+            <span class="text-center">Apr</span>
+            <span class="text-center">May</span>
+            <span class="text-center">Jun</span>
+            <span class="text-center">Jul</span>
+            <span class="text-center">Aug</span>
+            <span class="text-center">Sep</span>
+            <span class="text-center">Oct</span>
+            <span class="text-center">Nov</span>
+            <span class="text-center">Dec</span>
         </div>
 
-        <div class="mb-4">
-            <label for="message" class="block text-gray-700 font-semibold mb-2">Message:</label>
-            <textarea id="message" placeholder="Your message here..."
-                class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"></textarea>
+        <div class="flex">
+            <div class="flex flex-col space-y-1 mr-2 text-xs text-gray-500">
+                <span>Sun</span>
+                <span>Mon</span>
+                <span>Tue</span>
+                <span>Wed</span>
+                <span>Thu</span>
+                <span>Fri</span>
+                <span>Sat</span>
+            </div>
+            <div class="grid grid-rows-7 grid-flow-col gap-1" id="contribution-graph"></div>
         </div>
-
-        <button onclick="sendSMS()"
-            class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg">
-            Send Message
-        </button>
     </div>
+
+    <script>
+        const csvData = [
+            "1,2,4,7,14,245,322",
+            "Day, Old Testament, Read?, New Testament, Read?, Psalms & Proverbs, Read?",
+            "1, Genesis 1 and Genesis 2:1-17, [x], Matthew 1:1-25, [x], Psalm 1:1-6, [x]",
+            "2, Genesis 2:18-25 and Genesis 3 and Genesis 4:1-16, [x], Matthew 2:1-18, [x], Psalm 2:1-12, [x]",
+            "3, Genesis 4:17-26 and Genesis 5 and Genesis 6, [x], Matthew 2:19-23 and Matthew 3, [x], Psalm 3:1-8, [x]"
+        ];
+
+        const startingDate = new Date(2023, 0, 1); // Starting from January 1, 2023
+        const completedDays = csvData[0].split(',').map(Number);
+        const rows = csvData.slice(2);
+        const dailyRowsContainer = document.getElementById('daily-rows');
+        const contributionGraph = document.getElementById('contribution-graph');
+
+        function formatDate(dayNumber) {
+            const date = new Date(startingDate);
+            date.setDate(date.getDate() + dayNumber - 1);
+            return date.toDateString();
+        }
+
+        rows.forEach(row => {
+            const data = row.split(', ');
+            const dayNumber = parseInt(data[0]);
+            const date = formatDate(dayNumber);
+
+            const tr = document.createElement('tr');
+            tr.className = 'bg-gray-100 border-t';
+
+            const dayCell = `<td class="px-4 py-2">${dayNumber}</td>`;
+            const dateCell = `<td class="px-4 py-2">${date}</td>`;
+            const oldTestament = `<td class="px-4 py-2">${data[1]}</td>`;
+            const oldTestamentCheck = `<td class="px-4 py-2"><input type="checkbox" ${data[2] === '[x]' ? 'checked' : ''
+                }></td>`;
+            const newTestament = `<td class="px-4 py-2">${data[3]}</td>`;
+            const newTestamentCheck = `<td class="px-4 py-2"><input type="checkbox" ${data[4] === '[x]' ? 'checked' : ''
+                }></td>`;
+            const psalms = `<td class="px-4 py-2">${data[5]}</td>`;
+            const psalmsCheck = `<td class="px-4 py-2"><input type="checkbox" ${data[6] === '[x]' ? 'checked' : ''
+                }></td>`;
+
+            tr.innerHTML =
+                dayCell +
+                dateCell +
+                oldTestament +
+                oldTestamentCheck +
+                newTestament +
+                newTestamentCheck +
+                psalms +
+                psalmsCheck;
+
+            dailyRowsContainer.appendChild(tr);
+        });
+
+        for (let i = 1; i <= 365; i++) {
+            const dayBox = document.createElement('div');
+            dayBox.classList.add('w-4', 'h-4', 'rounded-sm', 'transition-colors', 'duration-200');
+            dayBox.classList.add(completedDays.includes(i) ? 'bg-green-500' : 'bg-gray-300');
+            contributionGraph.appendChild(dayBox);
+        }
+    </script>
 </body>
 
 </html>
+"""
+
+# Save the HTML code to a file
+file_path = "/mnt/data/Daily_Tracker_with_Contribution_Graph.html"
+with open(file_path, "w") as file:
+file.write(html_code)
+
+file_path

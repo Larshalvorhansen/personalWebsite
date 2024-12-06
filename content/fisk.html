@@ -1,113 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <title>Contribution Graph</title>
+    <title>Document</title>
 </head>
-
-<body class="bg-gray-100 flex items-center justify-center min-h-screen">
-    <div class="flex flex-col items-center">
-        <h1 class="text-xl font-bold mb-4">2017 Contributions</h1>
-
-        <!-- Month Labels -->
-        <div class="grid grid-cols-12 gap-1 mb-2 text-xs text-gray-500 w-full">
-            <span class="text-center">Jan</span>
-            <span class="text-center">Feb</span>
-            <span class="text-center">Mar</span>
-            <span class="text-center">Apr</span>
-            <span class="text-center">May</span>
-            <span class="text-center">Jun</span>
-            <span class="text-center">Jul</span>
-            <span class="text-center">Aug</span>
-            <span class="text-center">Sep</span>
-            <span class="text-center">Oct</span>
-            <span class="text-center">Nov</span>
-            <span class="text-center">Dec</span>
-        </div>
-
-        <!-- Contribution Grid -->
-        <div class="flex">
-            <!-- Day Labels -->
-            <div class="flex flex-col space-y-1 mr-2 text-xs text-gray-500">
-                <span>Sun</span>
-                <span>Mon</span>
-                <span>Tue</span>
-                <span>Wed</span>
-                <span>Thu</span>
-                <span>Fri</span>
-                <span>Sat</span>
-            </div>
-
-            <!-- Contribution Squares -->
-            <div class="grid grid-rows-7 grid-flow-col gap-1">
-                <!-- Boxes for each day of the year -->
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // Helper function to get the date for a given day number
-        function getDateFromDay(dayNumber) {
-            const date = new Date(2017, 0); // Start at January 1, 2017
-            date.setDate(dayNumber); // Add the day number
-            return date.toDateString(); // Return formatted date string
-        }
-
-        // Function to generate the contribution grid
-        function generateGrid(csvData) {
-            const container = document.querySelector('.grid-rows-7');
-            container.innerHTML = ''; // Clear existing content
-
-            for (let i = 1; i <= 365; i++) {
-                const dayBox = document.createElement('div');
-                dayBox.classList.add('w-4', 'h-4', 'rounded-sm', 'transition-colors', 'duration-200');
-
-                // Apply green color if the day is in the CSV data, otherwise gray
-                if (csvData.includes(i)) {
-                    dayBox.classList.add('bg-green-500');
-                } else {
-                    dayBox.classList.add('bg-gray-300');
-                }
-
-                // Add hover effect
-                dayBox.addEventListener('mouseenter', () => {
-                    dayBox.classList.add('ring', 'ring-offset-1', 'ring-green-700');
-                });
-                dayBox.addEventListener('mouseleave', () => {
-                    dayBox.classList.remove('ring', 'ring-offset-1', 'ring-green-700');
-                });
-
-                // Add a tooltip with the date
-                dayBox.setAttribute('title', getDateFromDay(i));
-
-                // Append day box to the container
-                container.appendChild(dayBox);
-            }
-        }
-
-        // Fetch CSV file and process it
-        fetch('content/fisk.csv')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Failed to load fisk.csv');
-                }
-                return response.text();
-            })
-            .then(csvText => {
-                const lines = csvText.trim().split('\n');
-                if (lines.length > 0) {
-                    const firstLine = lines[0];
-                    const csvData = firstLine.split(',').map(Number); // Convert to array of numbers
-                    generateGrid(csvData);
-                }
-            })
-            .catch(error => {
-                console.error('Error loading CSV file:', error);
-            });
-    </script>
+<body>
+    Fisk
+    
 </body>
-
 </html>
