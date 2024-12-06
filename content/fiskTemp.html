@@ -12,6 +12,9 @@
     <div class="flex flex-col items-center">
         <h1 class="text-xl font-bold mb-4">2017 Contributions</h1>
 
+        <!-- CSV File Input -->
+        <input type="file" id="csvFileInput" class="mb-4 p-2 border border-gray-300 rounded" accept=".csv">
+
         <!-- Month Labels -->
         <div class="grid grid-cols-12 gap-1 mb-2 text-xs text-gray-500 w-full">
             <span class="text-center">Jan</span>
@@ -42,13 +45,13 @@
             </div>
 
             <!-- Contribution Squares -->
-            <div class="grid grid-rows-7 grid-flow-col gap-1">
-                <!-- Boxes for each day of the year -->
-            </div>
+            <div class="grid grid-rows-7 grid-flow-col gap-1"></div>
         </div>
     </div>
 
     <script>
+        const container = document.querySelector('.grid-rows-7');
+
         // Helper function to get the date for a given day number
         function getDateFromDay(dayNumber) {
             const date = new Date(2017, 0); // Start at January 1, 2017
@@ -58,8 +61,7 @@
 
         // Function to generate the contribution grid
         function generateGrid(csvData) {
-            const container = document.querySelector('.grid-rows-7');
-            container.innerHTML = ''; // Clear existing content
+            container.innerHTML = ''; // Clear the container first
 
             for (let i = 1; i <= 365; i++) {
                 const dayBox = document.createElement('div');
@@ -88,25 +90,23 @@
             }
         }
 
-        // Fetch CSV file and process it
-        fetch('content/fisk.csv')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Failed to load fisk.csv');
-                }
-                return response.text();
-            })
-            .then(csvText => {
-                const lines = csvText.trim().split('\n');
-                if (lines.length > 0) {
-                    const firstLine = lines[0];
-                    const csvData = firstLine.split(',').map(Number); // Convert to array of numbers
-                    generateGrid(csvData);
-                }
-            })
-            .catch(error => {
-                console.error('Error loading CSV file:', error);
-            });
+        // Event listener for file input
+        document.getElementById('csvFileInput').addEventListener('change', function (event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const text = e.target.result;
+                    const lines = text.split('\n');
+                    if (lines.length > 0) {
+                        const firstLine = lines[0].trim();
+                        const csvData = firstLine.split(',').map(Number); // Parse the first line into numbers
+                        generateGrid(csvData); // Generate the grid using parsed data
+                    }
+                };
+                reader.readAsText(file);
+            }
+        });
     </script>
 </body>
 
