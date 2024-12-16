@@ -15,7 +15,6 @@
 
         h1.title {
             font-family: 'Bentham', serif;
-            /* Apply Bentham to the title */
         }
 
         h1,
@@ -31,84 +30,93 @@
             letter-spacing: 0.1em;
             text-transform: uppercase;
         }
+
+        /* Custom Margins for Superwide Layouts */
+        @media (min-width: 1600px) {
+            .superwide {
+                max-width: 1400px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
     </style>
 </head>
 
 <body class="bg-white text-gray-900">
 
     <!-- Header -->
-    <header class="px-20 md:px-60 lg:px-80 py-16">
-        <h1 class="title text-7xl md:text-9xl font-bold leading-tight tracking-tight uppercase">
+    <header class="px-6 md:px-12 lg:px-20 xl:px-32 py-12 superwide">
+        <h1 class="title text-5xl md:text-7xl lg:text-9xl font-bold leading-tight tracking-tight uppercase">
             Economic Out<span class="text-blue-500 lowercase">λ</span>ook
         </h1>
-        <p class="mt-6 text-5xl md:text-2xl text-gray-700">
+        <p class="mt-4 text-lg md:text-2xl text-gray-700">
             A weekly status update and prediction of the future.
         </p>
-        <p class="text-2xl text-gray-500 mt-2">
+        <p class="text-sm md:text-lg text-gray-500 mt-2">
             <b>In the beginning this will be quite beef, maybe bad and probably straight out factually wrong.</b> <br>
             The point is for me to just get started and to improve over time.
         </p>
     </header>
 
     <!-- Main Content -->
-    <main class="px-20 md:px-60 lg:px-80 py-16 space-y-24">
+    <main class="px-6 md:px-12 lg:px-20 xl:px-32 py-12 space-y-16 superwide">
 
         <!-- Week 51 -->
         <section class="relative">
-            <div class="flex items-center space-x-4 mb-8">
-                <h2 class="text-6xl font-bold text-gray-500">
+            <div class="flex items-center space-x-2 mb-6">
+                <h2 class="text-4xl md:text-6xl font-bold text-gray-500">
                     2024
                 </h2>
                 <div class="flex-grow border-t-2 border-gray-300"></div>
             </div>
-            <h2 class="text-5xl md:text-6xl font-bold text-gray-500 mb-8">
+            <h2 class="text-4xl md:text-6xl font-bold text-gray-500 mb-6">
                 Week 51
             </h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <!-- World Status -->
                 <div>
-                    <h3 class="text-2xl md:text-4xl font-bold mb-6">
+                    <h3 class="text-2xl md:text-3xl font-bold mb-4">
                         World <span class="text-blue-500">Status</span>
                     </h3>
-                    <p class="text-2xl md:text-3xl leading-relaxed text-gray-700">
-                        The US currently has the highest total GDP($29 trillion) followed by China(18) and Germany(4).
-                        Donald J. Trump is the worlds most powerfull world leader. The rate of human polution is still
-                        much higher han what is neccecary for benefiting humanity in the medium and long term. However,
-                        carbon cutting initiatives are on the rise allthough they often don't meet the promised target
-                        nor the amount neccecary(allthough what is neccacary is subjective ofcource). <br><br>
-                        The total share of democracies in the world peaked in 2010 at around 50% of the worlds countries
-                        and seem to have been declining sligthly from 2017 until now. <a
+                    <p class="text-base md:text-xl leading-relaxed text-gray-700">
+                        The US currently has the highest total GDP ($29 trillion) followed by China (18) and Germany
+                        (4). Donald J. Trump is the world's most powerful world leader. The rate of human pollution is
+                        still much higher than what is necessary for benefiting humanity in the medium and long term.
+                        However, carbon-cutting initiatives are on the rise although they often don't meet the promised
+                        target nor the amount necessary (although what is necessary is subjective, of course). <br><br>
+                        The total share of democracies in the world peaked in 2010 at around 50% of the world's
+                        countries and seems to have been declining slightly from 2017 until now. <a
                             href="https://ourworldindata.org/grapher/countries-democracies-autocracies-row?facet=none"
                             class="text-blue-500 font-bold">[1]</a><br>
-                    <figure class="flex flex-col items-center my-8">
+                    </p>
+                    <figure class="flex flex-col items-center my-6">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/1/11/Democracy_Index_2022.svg"
-                            alt="Democracy Index 2022 map" class="max-w-full h-auto">
+                            alt="Democracy Index 2022 map" class="w-full md:w-auto h-auto">
                         <figcaption class="text-gray-600 text-center mt-4">
-                            Democracy Index 2022: A global perspective on democratic governance. Image from wikimedia commons
+                            Democracy Index 2022: A global perspective on democratic governance. Image from Wikimedia Commons
                         </figcaption>
                     </figure>
-                    </p>
                 </div>
                 <!-- World Prediction -->
                 <div>
-                    <h3 class="text-2xl md:text-4xl font-bold mb-6">
+                    <h3 class="text-2xl md:text-3xl font-bold mb-4">
                         World Prediction
                     </h3>
-                    <p class="text-2xl md:text-3xl leading-relaxed text-gray-700">
-                        The gulf stream will stop flowing with a very high cetanty within the next 10-15 years. This
-                        will cause the average yearly temperature of the northern european coastal countres to be
-                        conciterably lower(from around 5-10 degrees celcius). <a
+                    <p class="text-base md:text-xl leading-relaxed text-gray-700">
+                        The Gulf Stream will stop flowing with a very high certainty within the next 10-15 years. This
+                        will cause the average yearly temperature of the northern European coastal countries to be
+                        considerably lower (from around 5-10 degrees Celsius). <a
                             href="https://www.ipcc.ch/report/ar6/wg1/figures/chapter-9/faq-9-3-figure-1"
                             class="text-blue-500 font-bold">[2]</a><br><br>
-                        Intel will allmost go down under causing non-asian chip production will become critically low as
-                        there are only three main producers: TSMC, Samsung and Intel. This is only the top of the isberg
-                        for the US however as it will soon be slung into a great economic downfall. With Trumps
-                        agressive/chaotic macroeconomic policy there is a higher probablitiy that it will happen sooner
-                        rather than later.<a
+                        Intel will almost go down under, causing non-Asian chip production to become critically low as
+                        there are only three main producers: TSMC, Samsung, and Intel. This is only the tip of the
+                        iceberg for the US, however, as it will soon be slung into a great economic downfall. With
+                        Trump's aggressive/chaotic macroeconomic policy, there is a higher probability that it will
+                        happen sooner rather than later.<a
                             href="https://www.amazon.com/Changing-World-Order-Nations-Succeed/dp/1982160276"
-                            class="text-blue-500 font-bold">[3]</a> The west will feel a strong incentive to invest in a
-                        new semiconductor fab as China takes military controll of TSMC and Taiwan(a disputed country) in
-                        general. It is noteworthy to mention here however that TSMC relies heavily on machines from
+                            class="text-blue-500 font-bold">[3]</a> The West will feel a strong incentive to invest in a
+                        new semiconductor fab as China takes military control of TSMC and Taiwan (a disputed country) in
+                        general. It is noteworthy to mention here, however, that TSMC relies heavily on machines from
                         ASML, a Dutch company.
                     </p>
                 </div>
@@ -116,15 +124,15 @@
         </section>
 
     </main>
+
     <!-- Footer -->
-    <footer class="px-20 md:px-60 lg:px-80 py-16 space-y-24">
-        <p class="text-sm">
-            2024 Economic Out<span class="text-blue-600">λ</span>ook.  All rights <a
+    <footer class="px-6 md:px-12 lg:px-20 xl:px-32 py-12 superwide">
+        <p class="text-xs md:text-sm text-gray-600">
+            2024 Economic Out<span class="text-blue-600">λ</span>ook. All rights <a
             href="https://www.pngpacks.com/uploads/data/2162/IMG_mdugW0ZKKpxn.png"
             class="text-blue-500 font-bold">reversed</a>.
         </p>
     </footer>
-
 
 </body>
 
