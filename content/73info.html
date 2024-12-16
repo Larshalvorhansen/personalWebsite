@@ -93,19 +93,31 @@
                 const rows = (await response.text()).trim().split('\n');
                 const randomRow = rows[Math.floor(Math.random() * rows.length)];
                 const [city, country, flagUrl, imageUrl] = randomRow.split(',').map(item => item.trim());
+        
                 document.getElementById('hovedstad-container').innerHTML = `
                     <h3 class="text-xl font-semibold mb-2">${city}, ${country}</h3>
-                    <img src="${flagUrl}" alt="Flag of ${country}" class="w-20 h-auto mx-auto mb-4">
+                    <img id="flag-image" src="${flagUrl}" alt="Flag of ${country}" class="w-20 h-auto mx-auto mb-4">
                     <img src="${imageUrl}" alt="${city}" class="w-full h-auto rounded-lg">
+                    <div id="flag-fallback" style="display:none;"></div>
                 `;
+        
+                const flagImage = document.getElementById('flag-image');
+                const flagFallback = document.getElementById('flag-fallback');
+        
+                // Add an error event listener to the flag image
+                flagImage.addEventListener('error', () => {
+                    flagImage.style.display = 'none'; // Hide the broken image
+                    flagFallback.style.display = 'block'; 
+                });
             }
+        
             fetchAndDisplayHovedstad();
         </script>
 
         <!-- Daily Burn -->
         <div class="DailyBurn bg-black p-4 rounded-lg shadow-md text-center">
             <!-- <h2 class="text-2xl font-bold mb-4">Dagens BURN</h2> -->
-            <p id="random-line" class="text-4xl mb-4">Loading...</p>
+            <p id="random-line" class="text-5xl mb-4">Loading...</p>
             <button onclick="fetchRandomLine()" class="px-4 py-2 bg-black text-black rounded">
                 Get New Line
             </button>
