@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSV Display</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+  <div id="container" class="bg-white rounded-lg shadow-lg p-6 max-w-sm hidden">
+    <img id="city-image" src="" alt="City Image" class="rounded-lg w-full mb-4">
+    <div class="flex items-center">
+      <img id="flag-image" src="" alt="Flag Image" class="w-12 h-8 mr-3">
+      <h2 id="city-name" class="text-xl font-bold"></h2>
+    </div>
+    <p id="description" class="mt-4 text-gray-600"></p>
+  </div>
+
+  <script>
+    // Function to fetch CSV, parse it, and display a random row
+    async function fetchAndDisplayRandomCSVLine() {
+      try {
+        // Fetch the CSV file
+        const response = await fetch('hei.csv');
+        const csvText = await response.text();
+
+        // Split CSV into lines and pick a random one (skip the header if present)
+        const lines = csvText.split('\n').filter(line => line.trim() !== '');
+        const randomLine = lines[Math.floor(Math.random() * lines.length)];
+
+        // Parse the line into columns (assuming CSV format is consistent)
+        const [cityName, country, imageUrl, flagUrl, description] = randomLine.split(',');
+
+        // Populate the HTML elements with the parsed data
+        document.getElementById('city-name').textContent = `${cityName}, ${country}`;
+        document.getElementById('city-image').src = imageUrl;
+        document.getElementById('flag-image').src = flagUrl;
+        document.getElementById('description').textContent = description;
+
+        // Show the container
+        document.getElementById('container').classList.remove('hidden');
+      } catch (error) {
+        console.error('Error fetching or parsing the CSV file:', error);
+      }
+    }
+
+    // Call the function on page load
+    fetchAndDisplayRandomCSVLine();
+  </script>
+</body>
+</html>

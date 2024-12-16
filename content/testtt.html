@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>73Info</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+    <div class="bg-white shadow-md rounded p-6 w-3/4 max-w-md text-center">
+        <h1 class="text-2xl font-bold mb-4">Random Capital City</h1>
+        <div id="city-display" class="text-gray-700">
+            <p class="text-lg mb-4">Click the button to load a random city!</p>
+        </div>
+        <button onclick="fetchRandomCity()" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700">
+            Get Random City
+        </button>
+    </div>
+
+    <script>
+        // Fetch and display a random city from hei.csv
+        function fetchRandomCity() {
+            fetch('hei.csv')
+                .then(response => {
+                    if (!response.ok) throw new Error('CSV file not found!');
+                    return response.text();
+                })
+                .then(data => {
+                    // Parse the CSV content
+                    const lines = data.split('\n').filter(line => line.trim() !== '');
+                    const randomLine = lines[Math.floor(Math.random() * lines.length)];
+
+                    // Split CSV into columns and clean up the values
+                    const columns = randomLine.split(',').map(item => item.trim());
+                    if (columns.length < 4) throw new Error('Invalid CSV format');
+
+                    const [city, country, flagUrl, imageUrl] = columns;
+
+                    // Update the city display dynamically
+                    document.getElementById('city-display').innerHTML = `
+                        <h2 class="text-3xl font-bold mb-2">${city}</h2>
+                        <p class="text-sm text-gray-500 mb-4">${country}</p>
+                        <img src="${flagUrl}" alt="Flag of ${country}" class="mx-auto mb-4" style="width: 80px; height: auto;">
+                        <img src="${imageUrl}" alt="${city}" class="mx-auto rounded" style="width: 100%; height: auto; object-fit: contain;">
+                    `;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('city-display').innerHTML = `
+                        <p class="text-red-500">Error: ${error.message}</p>
+                    `;
+                });
+        }
+    </script>
+</body>
+
+</html>
