@@ -38,21 +38,31 @@
   <style>
     @media (min-width: 768px) {
       .sidebar {
-        width: 25%;
+        width: auto;
+        /* Let the width adjust based on the content */
+        max-width: 25%;
+        /* Set a maximum width */
         height: 100vh;
         position: fixed;
         top: 0;
         left: 0;
+        z-index: 1;
       }
 
       .main-content {
-        margin-left: 25%;
+        margin-left: 17%;
+        margin-right: 5%;
+        /* Adjust based on the sidebar width */
+        z-index: 1;
       }
     }
 
     @media (max-width: 767px) {
       .sidebar {
         width: 100%;
+        /* Full width in smaller screens */
+        max-width: none;
+        /* Ignore the max-width constraint */
         height: auto;
         position: fixed;
         top: 0;
@@ -67,20 +77,6 @@
         margin-top: 60px;
         /* Adjust based on the height of */
       }
-    }
-
-    .gradient-text {
-      background: linear-gradient(45deg, #002896, #77cfff);
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
-      transition: background-position 0.3s ease-in-out;
-      background-size: 200% 200%;
-      background-position: 0% 50%;
-    }
-
-    .gradient-text:hover {
-      background-position: 100% 50%;
     }
 
     .gradient-text {

@@ -5,64 +5,95 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Halvor Hansen</title>
-	<link rel="preload" href="logo3.png" as="image">
-	<link rel="icon" sizes="32x32" href="litenhh.png" />
-
 	<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+	<meta name="description" content="Halvor Hansen - Learn more about my work and interests.">
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<!-- JSON-LD for Organization Schema -->
+	<script type="application/ld+json">
+	{
+	  "@context": "https://schema.org",
+	  "@type": "Organization",
+	  "url": "http://www.your-website.com",
+	  "logo": "http://www.your-website.com/path/to/logo.png"
+	}
+	</script>
+  
+	<!-- JavaScript Function to Copy Email to Clipboard -->
+	<script>
+	  function copyToClipboard() {
+		const email = "larshalvorhansen1@gmail.com";
+		navigator.clipboard.writeText(email)
+		  .then(() => {
+			alert("Email copied to clipboard: " + email);
+		  })
+		  .catch(err => {
+			console.error("Could not copy text: ", err);
+		  });
+	  }
+	</script>
+  
 	<style>
-		html {
-			scroll-behavior: smooth;
+	  @media (min-width: 768px) {
+		.sidebar {
+		  width: auto;
+		  /* Let the width adjust based on the content */
+		  max-width: 25%;
+		  /* Set a maximum width */
+		  height: 100vh;
+		  position: fixed;
+		  top: 0;
+		  left: 0;
+		  z-index: 1;
 		}
-
-		@media (min-width: 768px) {
-			.sidebar {
-				width: 25%;
-				height: 100vh;
-				position: fixed;
-				top: 0;
-				left: 0;
-			}
-
-			.main-content {
-				margin-left: 25%;
-			}
+  
+		.main-content {
+		  margin-left: 21%;
+		  margin-right: 5%;
+		  /* Adjust based on the sidebar width */
+		  z-index: 1;
 		}
-
-		/* update */
-		@media (max-width: 767px) {
-			.sidebar {
-				width: 100%;
-				height: auto;
-				position: fixed;
-				top: 0;
-				left: 0;
-				display: flex;
-				flex-direction: row;
-				justify-content: space-around;
-				padding: 1rem;
-			}
-
-			.main-content {
-				margin-top: 60px;
-				/* Adjust based on the height of */
-			}
+	  }
+  
+	  @media (max-width: 767px) {
+		.sidebar {
+		  width: 100%;
+		  /* Full width in smaller screens */
+		  max-width: none;
+		  /* Ignore the max-width constraint */
+		  height: auto;
+		  position: fixed;
+		  top: 0;
+		  left: 0;
+		  display: flex;
+		  flex-direction: row;
+		  justify-content: space-around;
+		  padding: 1rem;
 		}
-
-		.gradient-text {
-			background: linear-gradient(45deg, #002896, #77cfff);
-			background-clip: text;
-			-webkit-background-clip: text;
-			color: transparent;
-			transition: background-position 0.3s ease-in-out;
-			background-size: 200% 200%;
-			background-position: 0% 50%;
+  
+		.main-content {
+		  margin-top: 60px;
+		  /* Adjust based on the height of */
 		}
-
-		.gradient-text:hover {
-			background-position: 100% 50%;
-		}
+	  }
+  
+	  .gradient-text {
+		background: linear-gradient(45deg, #002896, #77cfff);
+		background-clip: text;
+		-webkit-background-clip: text;
+		color: transparent;
+		transition: background-position 0.3s ease-in-out;
+		background-size: 200% 200%;
+		background-position: 0% 50%;
+	  }
+  
+	  .gradient-text:hover {
+		background-position: 100% 50%;
+	  }
 	</style>
-</head>
+  </head>
 <!-- update -->
 
 <body class="bg-gray-0">
