@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Google Sheets API v4 Example</title>
+</head>
+
+<body>
+    <div id="posts-container"></div>
+
+    <script>
+        const sheetId = '1cooW6kZlSKUgBjK4uPnv4cynbw3nM7NjwMjDHHFJ6mY';
+        const apiKey = 'AIzaSyABuVJIWSJiUqk01nvpYF4QVzmgyZDCaGc'; // Replace with your actual API key
+        const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/economicOutlook!A2:D?key=${apiKey}`;
+
+        async function loadData() {
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    throw new Error(`HTTP error! status: ${response.status}, message: ${errorText}`);
+                }
+                const data = await response.json();
+
+                if (!data.values || data.values.length === 0) {
+                    document.getElementById('posts-container').innerHTML = "<p>No data found.</p>";
+                    return;
+                }
+
+                document.getElementById('posts-container').innerHTML = data.values.reverse().map(([date, title, content, imageUrl]) => {
+                    const contentParts = content.split("|||");
+                    const worldStatus = contentParts[0] ? contentParts[0].replace(/\n/g, '<br>') : "No World Status provided.";
+                    const worldPrediction = contentParts[1] ? contentParts[1].replace(/\n/g, '<br>') : "No World Prediction provided.";
+
+                    return `
+                        <div class="week-container">
+                            <div class="week-title">${title}</div>
+                            <div class="grid-container">
+                                <div>
+                                    <div class="section-title">World Status</div>
+                                    <div class="content">${worldStatus}</div>
+                                </div>
+                                <div>
+                                    <div class="section-title">World Prediction</div>
+                                    <div class="content">${worldPrediction}</div>
+                                </div>
+                            </div>
+                            <div class="sources">
+                                Sources:<br>
+                                ${imageUrl ? imageUrl.split("|||").map((link, index) => `<a href="${link}" target="_blank">[${index + 1}]</a>`).join(" ") : "No sources provided."}
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+
+            } catch (error) {
+                console.error("Error loading data:", error);
+                document.getElementById('posts-container').innerHTML = `<p>Error loading data: ${error.message}</p>`;
+            }
+        }
+
+        loadData(); // Call the function to load data
+    </script>
+</body>
+
+</html>

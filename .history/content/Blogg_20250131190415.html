@@ -137,8 +137,8 @@
     <script>
         async function fetchBlogPosts() {
             try {
-                const sheetId = '1cooW6kZlSKUgBjK4uPnv4cynbw3nM7NjwMjDHHFJ6mY';
-                const apiKey = 'AIzaSyABuVJIWSJiUqk01nvpYF4QVzmgyZDCaGc';
+                const sheetId = '1cooW6kZlSKUgBjK4uPnv4cynbw3nM7NjwMjDHHFJ6mY'; // Erstatt med riktig ID
+                const apiKey = 'AIzaSyABuVJIWSJiUqk01nvpYF4QVzmgyZDCaGc'; // Erstatt med riktig API-nøkkel
                 const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/Sheet2!A2:D?key=${apiKey}`;
 
                 const response = await fetch(url);

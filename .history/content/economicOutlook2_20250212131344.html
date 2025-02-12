@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Google Sheets API v4 Example</title>
+    <script src="https://apis.google.com/js/api.js"></script>
+</head>
+
+<body>
+    <div id="posts-container"></div>
+
+    <script>
+        // Client ID from the Google Cloud Console (Credentials page)
+        const CLIENT_ID = 'YOUR_CLIENT_ID'; // Replace with your Client ID
+
+        // Array of API discovery doc URLs for APIs used by the quickstart
+        const DISCOVERY_DOCS = ['https://sheets.googleapis.com/$discovery/rest?version=v4'];
+
+        // Authorization scopes required by the quickstart. If modifying these scopes, delete your previously saved credentials
+        // at ~/.credentials/sheets.googleapis.com-nodejs-quickstart.json
+        const SCOPES = 'https://www.googleapis.com/auth/spreadsheets.readonly';
+
+        let tokenClient;
+        let gapiInited = false;
+        let gisInited = false;
+
+        function gapiLoaded() {
+            gapi.load('client', initClient);
+        }
+
+        function gisLoaded() {
+            tokenClient = google.accounts.oauth2.initTokenClient({
+                client_id: CLIENT_ID,
+                scope: SCOPES,
+                callback: '' // No immediate callback needed
+            });
+            gisInited = true;
+            maybeEnableSignInButton();
+        }
+
+        function maybeEnableSignInButton() {
+            if (gapiInited && gisInited) {
+                document.getElementById('sign-in-button').disabled = false;
+            }
+        }
+
+        // Initialize the gapi.client library and set up sign-in.
+        function initClient() {
+            gapi.client.init({
+                apiKey: 'YOUR_API_KEY', // Still needed for client initialization, but NOT for the actual request
+                clientId: CLIENT_ID,
+                discoveryDocs: DISCOVERY_DOCS,
+                scope: SCOPES,
+            }).then(function () {
+                gapiInited = true;
+                maybeEnableSignInButton();
+
+                // Listen for sign-in state changes.
+                gapi.auth2.getAuthInstance().isSignedIn.listen(updateSignInStatus);
+
+                // Handle the initial sign-in state.
+                updateSignInStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+            }, function (error) {
+                appendPre('Error initializing the client: ' + error.message);
+            });
+        }
+
+        function updateSignInStatus(isSignedIn) {
+            if (isSignedIn) {
+                // Authorize button removed.
+                loadData(); // Load data after successful sign-in
+            } else {
+                // Sign in button
+                const signInButton = document.createElement('button');
+                signInButton.id = 'sign-in-button';
+                signInButton.textContent = 'Sign in with Google';
+                signInButton.addEventListener('click', handleSignInClick);
+                document.body.insertBefore(signInButton, document.getElementById('posts-container'));
+
+                document.getElementById('sign-in-button').disabled = true; // Disable until APIs are loaded
+            }
+        }
+
+        function handleSignInClick(event) {
+            tokenClient.requestAccessToken();
+        }
+
+        // Load data from Google Sheets
+        async function loadData() {
+            try {
+                const response = await gapi.client.sheets.spreadsheets.values.get({
+                    spreadsheetId: '1cooW6kZlSKUgBjK4uPnv4cynbw3nM7NjwMjDHHFJ6mY', // Your Sheet ID
+                    range: 'Sheet2!A2:D' // Your range
+                });
+
+                const data = response.result;
+                const values = data.values;
+
+                if (!values || values.length === 0) {
+                    document.getElementById('posts-container').innerHTML = "<p>No data found.</p>";
+                    return;
+                }
+
+                document.getElementById('posts-container').innerHTML = values.reverse().map(([date, title, content, imageUrl]) => {
+                    // ... (rest of your data processing and HTML generation code remains the same)
+                }).join('');
+
+            } catch (error) {
+                console.error("Error loading data:", error);
+                document.getElementById('posts-container').innerHTML = "<p>Error loading data. Check the console.</p>";
+            }
+        }
+
+        // Append a pre element to the body containing the given message
+        function appendPre(message) {
+            const pre = document.createElement('pre');
+            pre.textContent = message;
+            document.body.appendChild(pre);
+        }
+    </script>
+    <script async defer
+        src="https://apis.google.com/js/api:client:auth2.js?onload=gapiLoaded&callback=gisLoaded"></script>
+</body>
+
+</html>
