@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robert Burns Quote</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            /* Ensure full viewport height */
+            margin: 0;
+            /* Remove default margins */
+        }
+
+        .quote-container {
+            background-color: #111;
+            /* Slightly lighter background */
+            padding: 2rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            max-width: 800px;
+            /* Limit width on larger screens */
+            text-align: center;
+            /* Center the text */
+        }
+
+        .quote {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        .author {
+            margin-top: 1rem;
+            font-size: 1rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="quote-container">
+        <p class="quote" id="burns-quote"></p>
+        <p class="author"></p>
+    </div>
+
+    <script>
+        fetch('burnsV2.txt')
+            .then(response => response.text())
+            .then(text => {
+                const lines = text.split('\n').filter(line => line.trim() !== "");
+                const randomLine = lines[Math.floor(Math.random() * lines.length)];
+                document.getElementById('burns-quote').textContent = randomLine.trim();
+            })
+            .catch(error => {
+                console.error('Error fetching Burns quotes:', error);
+                document.getElementById('burns-quote').textContent = "Failed to load quote.";
+            });
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="no">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studier</title>
+    <style>
+        .box {
+            border: 1px solid black;
+            padding: 10px;
+            margin: 10px;
+            display: inline-block;
+            width: 300px;
+        }
+    </style>
+    <script>
+        const data = [
+            { studium: 'Kjønnsstudier', kategori: 'Kjønnsstudier', universitet: 'NTNU' },
+            { studium: 'Kjønnsstudier', kategori: 'Kjønnsstudier', universitet: 'UiO' },
+            { studium: 'Fred og konfliktstudier', kategori: 'Fred og konfliktstudier', universitet: 'Bjørknes Høyskole' },
+            { studium: 'Peace and Conflict Studies', kategori: 'Fred og konfliktstudier', universitet: 'UiT' },
+            { studium: 'Postkoloniale studier', kategori: 'Postkoloniale studier', universitet: 'UiO' },
+            { studium: 'Astrologi og esoteriske studier', kategori: 'Astrologi og esoteriske studier', universitet: 'Ingen formelle studier tilgjengelig' },
+            { studium: 'Sosiologi (uten spesialisering)', kategori: 'Sosiologi', universitet: 'UiO' },
+            { studium: 'Sosiologi (uten spesialisering)', kategori: 'Sosiologi', universitet: 'NTNU' },
+            { studium: 'Kunsthistorie', kategori: 'Kunsthistorie', universitet: 'UiO' },
+            { studium: 'Kunsthistorie', kategori: 'Kunsthistorie', universitet: 'UiB' },
+            { studium: 'Folkloristikk', kategori: 'Folkloristikk', universitet: 'UiO' },
+            { studium: 'Mediestudier (uten teknisk retning)', kategori: 'Medievitenskap', universitet: 'UiO' },
+            { studium: 'Mediestudier (uten teknisk retning)', kategori: 'Medievitenskap', universitet: 'UiB' },
+            { studium: 'Filosofi', kategori: 'Filosofi', universitet: 'UiO' },
+            { studium: 'Filosofi', kategori: 'Filosofi', universitet: 'NTNU' },
+            { studium: 'Teater og drama', kategori: 'Drama og teater', universitet: 'NTNU' },
+            { studium: 'Teater og drama', kategori: 'Teaterproduksjon og skuespillerfag', universitet: 'HiØ' },
+            { studium: 'Musikkvitenskap', kategori: 'Musikkvitenskap', universitet: 'UiO' },
+            { studium: 'Musikkvitenskap', kategori: 'Musikkvitenskap', universitet: 'NTNU' },
+            { studium: 'Klassiske studier (latin og gresk)', kategori: 'Klassiske fag', universitet: 'UiO' },
+            { studium: 'Antropologi', kategori: 'Social Anthropology', universitet: 'UiO' },
+            { studium: 'Antropologi', kategori: 'Social Anthropology', universitet: 'UiB' },
+            { studium: 'Retorikk', kategori: 'Retorikk og språklig kommunikasjon', universitet: 'UiO' },
+            { studium: 'Samfunnsplanlegging og kulturforståelse', kategori: 'Samfunnsplanlegging og kulturforståelse', universitet: 'UiT' },
+            { studium: 'Samtidsdans', kategori: 'Samtidsdans', universitet: 'KHiO' },
+            { studium: 'Kreativ skriving', kategori: 'Kreativ skriving', universitet: 'UiT' },
+            { studium: 'Journalistikk (uten spesialisering)', kategori: 'Journalistikk', universitet: 'OsloMet' },
+            { studium: 'Journalistikk (uten spesialisering)', kategori: 'Journalistikk', universitet: 'UiB' },
+            { studium: 'Bibliotek- og informasjonsvitenskap', kategori: 'Bibliotek- og informasjonsvitenskap', universitet: 'OsloMet' },
+            { studium: 'Arabiske studier', kategori: 'Midtøsten-studier med arabisk', universitet: 'UiO' },
+            { studium: 'Etnomusikologi', kategori: 'Etnomusikologi', universitet: 'UiO' },
+            { studium: 'Scenekunst', kategori: 'Scenekunst', universitet: 'UiB' },
+            { studium: 'Kulturstudier', kategori: 'Kulturstudier', universitet: 'UiO' },
+            { studium: 'Norsk språk og litteratur', kategori: 'Norsk språk og litteratur', universitet: 'UiT' },
+            { studium: 'Anvendt teologi', kategori: 'Anvendt teologi', universitet: 'NLA Høgskolen' },
+            { studium: 'Husdyrvitenskap (uten landbruksaspekt)', kategori: 'Husdyrvitenskap', universitet: 'NMBU' },
+            { studium: 'Lingvistikk', kategori: 'Lingvistikk', universitet: 'UiO' },
+            { studium: 'Lingvistikk', kategori: 'Språkvitenskap', universitet: 'NTNU' },
+            { studium: 'TV-produksjon (når det ikke finnes jobber i bransjen)', kategori: 'TV-ledelse', universitet: 'Høyskolen Kristiania' },
+            { studium: 'Spilldesign (uten programmering)', kategori: 'Spilldesign', universitet: 'Høyskolen Kristiania' }
+        ];
+
+        function getRandomLine() {
+            const randomIndex = Math.floor(Math.random() * data.length);
+            return data[randomIndex];
+        }
+
+        function displayRandomLine() {
+            const line = getRandomLine();
+            const container = document.getElementById('container');
+            container.innerHTML = `
+                <div class="box">
+                    <strong>Studium:</strong> ${line.studium}<br>
+                    <strong>Kategori:</strong> ${line.kategori}<br>
+                    <strong>Universitet/Høyskole:</strong> ${line.universitet}
+                </div>
+            `;
+        }
+    </script>
+</head>
+
+<body>
+    <div id="container"></div>
+    <button onclick="displayRandomLine()">Vis Tilfeldig Linje</button>
+</body>
+
+</html>

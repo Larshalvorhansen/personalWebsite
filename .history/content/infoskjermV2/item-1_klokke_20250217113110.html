@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="no">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Klokke</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 2em;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="klokke">00:00:00</div>
+    <div style="font-size: 26px;">“Time is real” – Aristoteles</div>
+    <script>
+        function oppdaterKlokke() {
+            const nå = new Date();
+            const timer = String(nå.getHours()).padStart(2, '0');
+            const minutter = String(nå.getMinutes()).padStart(2, '0');
+            const sekunder = String(nå.getSeconds()).padStart(2, '0');
+            document.getElementById('klokke').textContent = `${timer}:${minutter}:${sekunder}`;
+        }
+
+        setInterval(oppdaterKlokke, 1000);
+        oppdaterKlokke(); // Oppdater klokken umiddelbart når siden lastes
+    </script>
+</body>
+
+</html>

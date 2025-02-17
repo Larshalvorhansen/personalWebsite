@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="no">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tilfeldig bilde</title>
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+
+<body>
+    <img id="randomImage" src="" alt="Tilfeldig bilde">
+
+    <script>
+        // Antall bilder
+        const totalImages = 300;
+
+        // Funksjon for å generere en tilfeldig tall mellom 1 og totalImages
+        function getRandomImageNumber() {
+            return Math.floor(Math.random() * totalImages) + 1;
+        }
+
+        // Sett src-attributtet til et tilfeldig bilde
+        const randomImage = document.getElementById('randomImage');
+        const imageNumber = getRandomImageNumber();
+        randomImage.src = `ptable/grunnstoff${imageNumber}.jpg`;
+    </script>
+</body>
+
+</html>

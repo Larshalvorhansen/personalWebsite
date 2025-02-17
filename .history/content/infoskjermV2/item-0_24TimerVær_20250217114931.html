@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="no">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Graph</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            /* Fjern alle marger */
+            padding: 0;
+            /* Fjern all padding */
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 10px;
+            /* Litt margin øverst for overskriften */
+        }
+
+        canvas {
+            /* Her kan du justere canvasens størrelse om du vil */
+            width: 800px;
+            /* Eksempelbredde */
+            height: 600px;
+            /* Eksempelhøyde */
+            display: block;
+            /* Hindrer liten glippe under canvas */
+            margin: 10px auto;
+            /* Sentrer canvas */
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Weather in Trondheim</h1>
+    <canvas id="weatherChart"></canvas>
+
+    <script>
+        const url = "https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=63.4305&lon=10.3951";
+
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                const times = data.properties.timeseries.slice(0, 24).map(entry => {
+                    const date = new Date(entry.time);
+                    return date.toLocaleTimeString('no-NO', { hour: '2-digit', minute: '2-digit' });
+                });
+                const temperatures = data.properties.timeseries.slice(0, 24).map(entry => entry.data.instant.details.air_temperature);
+                const windSpeeds = data.properties.timeseries.slice(0, 24).map(entry => entry.data.instant.details.wind_speed);
+                const rainfall = data.properties.timeseries.slice(0, 24).map(entry => entry.data.next_1_hours?.details.precipitation_amount || 0);
+
+                const ctx = document.getElementById('weatherChart').getContext('2d');
+
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: times,
+                        datasets: [
+                            { label: 'Temperature (°C)', data: temperatures, borderColor: '#ff6384', backgroundColor: 'rgba(255, 99, 132, 0.1)', fill: true, yAxisID: 'y' },
+                            { label: 'Wind Speed (m/s)', data: windSpeeds, borderColor: '#36a2eb', backgroundColor: 'rgba(54, 162, 235, 0.1)', fill: true, yAxisID: 'y1' },
+                            { label: 'Rainfall (mm)', data: rainfall, borderColor: '#4bc0c0', backgroundColor: 'rgba(75, 192, 192, 0.1)', fill: true, yAxisID: 'y2' }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false, // Important: Allow canvas to resize
+                        interaction: { mode: 'index', intersect: false },
+                        plugins: {
+                            legend: { labels: { color: '#ffffff' } }
+                        },
+                        scales: {
+                            x: { ticks: { color: '#ffffff' }, grid: { color: '#333333' } },
+                            y: { type: 'linear', display: true, position: 'left', ticks: { color: '#ffffff' }, grid: { color: '#333333' } },
+                            y1: { type: 'linear', display: true, position: 'right', ticks: { color: '#ffffff' }, grid: { drawOnChartArea: false } },
+                            y2: { type: 'linear', display: true, position: 'right', ticks: { color: '#ffffff' }, grid: { drawOnChartArea: false } }
+                        }
+                    }
+                });
+            })
+            .catch(error => console.error("Error fetching weather data:", error));
+    </script>
+</body>
+
+</html>

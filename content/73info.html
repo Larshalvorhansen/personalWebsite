@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <!-- Meta tags and title -->
     <meta charset="UTF-8">
@@ -20,13 +21,33 @@
                 "Feedback DailyBurn Weather Weather";
         }
 
-        .Weather { grid-area: Weather; }
-        .Clock { grid-area: Clock; }
-        .Feedback { grid-area: Feedback; }
-        .DailyWiki { grid-area: DailyWiki; }
-        .DailyMeme { grid-area: DailyMeme; }
-        .DailyCapital { grid-area: DailyCapital; }
-        .DailyBurn { grid-area: DailyBurn; }
+        .Weather {
+            grid-area: Weather;
+        }
+
+        .Clock {
+            grid-area: Clock;
+        }
+
+        .Feedback {
+            grid-area: Feedback;
+        }
+
+        .DailyWiki {
+            grid-area: DailyWiki;
+        }
+
+        .DailyMeme {
+            grid-area: DailyMeme;
+        }
+
+        .DailyCapital {
+            grid-area: DailyCapital;
+        }
+
+        .DailyBurn {
+            grid-area: DailyBurn;
+        }
     </style>
 </head>
 
@@ -36,11 +57,13 @@
     <div class="container mx-auto p-4 custom-grid h-screen">
         <!-- Weather -->
         <div class="Weather bg-black p-4 rounded-lg shadow-md flex items-center justify-center">
-            <img src="https://www.yr.no/nb/innhold/11-44085/meteogram.svg" alt="Weather Forecast" class="w-full h-auto filter invert">
+            <img src="https://www.yr.no/nb/innhold/11-44085/meteogram.svg" alt="Weather Forecast"
+                class="w-full h-auto filter invert">
         </div>
 
         <!-- Clock -->
-        <div class="Clock bg-black text-4xl font-bold flex flex-col items-center justify-center p-4 rounded-lg shadow-md">
+        <div
+            class="Clock bg-black text-4xl font-bold flex flex-col items-center justify-center p-4 rounded-lg shadow-md">
             <div id="clock" class="mb-2">00:00:00</div>
             <div class="text-xl font-light text-gray-300">"Time is real" - Aristoteles</div>
         </div>
@@ -49,7 +72,7 @@
                 const now = new Date();
                 document.getElementById('clock').textContent = now.toLocaleTimeString('no-NO', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
             }, 1000);
-            </script>
+        </script>
 
         <!-- Feedback QR Code -->
         <div class="Feedback bg-black p-4 rounded-lg shadow-md flex flex-col items-center justify-center">
@@ -93,24 +116,24 @@
                 const rows = (await response.text()).trim().split('\n');
                 const randomRow = rows[Math.floor(Math.random() * rows.length)];
                 const [city, country, flagUrl, imageUrl] = randomRow.split(',').map(item => item.trim());
-        
+
                 document.getElementById('hovedstad-container').innerHTML = `
                     <h3 class="text-xl font-semibold mb-2">${city}, ${country}</h3>
                     <img id="flag-image" src="${flagUrl}" alt="Flag of ${country}" class="w-20 h-auto mx-auto mb-4">
                     <img src="${imageUrl}" alt="${city}" class="w-full h-auto rounded-lg">
                     <div id="flag-fallback" style="display:none;"></div>
                 `;
-        
+
                 const flagImage = document.getElementById('flag-image');
                 const flagFallback = document.getElementById('flag-fallback');
-        
+
                 // Add an error event listener to the flag image
                 flagImage.addEventListener('error', () => {
                     flagImage.style.display = 'none'; // Hide the broken image
-                    flagFallback.style.display = 'block'; 
+                    flagFallback.style.display = 'block';
                 });
             }
-        
+
             fetchAndDisplayHovedstad();
         </script>
 
@@ -136,4 +159,5 @@
         </script>
     </div>
 </body>
+
 </html>

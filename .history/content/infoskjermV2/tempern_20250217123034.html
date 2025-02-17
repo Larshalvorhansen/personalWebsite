@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NASA Picture of the Day</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+
+        #nasa-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        #description {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #333;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #title {
+            font-size: 1.5em;
+            color: #222;
+            margin-top: 20px;
+        }
+
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>NASA Picture of the Day (Yesterday)</h1>
+    <div id="apod">
+        <div id="title"></div>
+        <img id="nasa-image" src="" alt="NASA Picture of the Day">
+        <p id="description"></p>
+        <p id="error" class="error"></p>
+    </div>
+
+    <script>
+        // Replace with your NASA API key
+        const apiKey = 'FUxdL1jOQ2Ibu9LhrKKC5GU4MS2nhUkNVMOcgYX8'; // Replace with your actual API key
+
+        // Get yesterday's date in YYYY-MM-DD format
+        const getYesterdayDate = () => {
+            const today = new Date();
+            const yesterday = new Date(today);
+            yesterday.setDate(today.getDate()); // Subtract 1 day
+            return yesterday.toISOString().split('T')[0]; // Format as YYYY-MM-DD
+        };
+
+        const yesterdayDate = getYesterdayDate();
+        const apodUrl = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}&date=${yesterdayDate}`;
+
+        // Fetch the APOD data for yesterday
+        fetch(apodUrl)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                const imageElement = document.getElementById('nasa-image');
+                const descriptionElement = document.getElementById('description');
+                const titleElement = document.getElementById('title');
+                const errorElement = document.getElementById('error');
+
+                // Clear any previous errors
+                errorElement.textContent = '';
+
+                // Set the title, image source, and description
+                titleElement.textContent = data.title;
+                imageElement.src = data.url;
+                imageElement.alt = data.title;
+                descriptionElement.textContent = data.explanation;
+
+                // Handle video case (APOD can sometimes be a video)
+                if (data.media_type === 'video') {
+                    imageElement.style.display = 'none'; // Hide the image element
+                    descriptionElement.innerHTML = `
+                        <p>Yesterday's APOD is a video. <a href="${data.url}" target="_blank">Watch it here</a>.</p>
+                        <p>${data.explanation}</p>
+                    `;
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching the NASA APOD data:', error);
+                document.getElementById('error').textContent = 'Failed to load NASA Picture of the Day. Please try again later.';
+            });
+    </script>
+</body>
+
+</html>

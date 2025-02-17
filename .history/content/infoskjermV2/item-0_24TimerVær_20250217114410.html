@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="no">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Graph</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            background-color: #121212;
+            /* Dark mode background */
+            color: #ffffff;
+            /* White text */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        canvas {
+            max-width: 800px;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Weather in Trondheim</h1>
+    <canvas id="weatherChart"></canvas>
+
+    <script>
+        // Yr API endpoint for Trondheim
+        const url = "https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=63.4305&lon=10.3951";
+
+        // Fetch weather data
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                // Extract time and temperature data
+                const times = data.properties.timeseries.slice(0, 24).map(entry => {
+                    const date = new Date(entry.time);
+                    return date.toLocaleTimeString('no-NO', { hour: '2-digit', minute: '2-digit' });
+                });
+                const temperatures = data.properties.timeseries.slice(0, 24).map(entry => entry.data.instant.details.air_temperature);
+
+                // Get the canvas context
+                const ctx = document.getElementById('weatherChart').getContext('2d');
+
+                // Create the chart
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: times,
+                        datasets: [{
+                            label: 'Temperature (°C)',
+                            data: temperatures,
+                            borderColor: '#00ff00', // Green line
+                            backgroundColor: 'rgba(0, 255, 0, 0.1)', // Light green fill
+                            fill: true,
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                labels: {
+                                    color: '#ffffff' // White text for legend
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                ticks: {
+                                    color: '#ffffff' // White text for x-axis
+                                },
+                                grid: {
+                                    color: '#333333' // Dark grid lines
+                                }
+                            },
+                            y: {
+                                ticks: {
+                                    color: '#ffffff' // White text for y-axis
+                                },
+                                grid: {
+                                    color: '#333333' // Dark grid lines
+                                }
+                            }
+                        }
+                    }
+                });
+            })
+            .catch(error => console.error("Error fetching weather data:", error));
+    </script>
+</body>
+
+</html>

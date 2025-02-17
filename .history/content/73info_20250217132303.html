@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Meta tags and title -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Wiki</title>
+    <!-- Include Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom CSS for full-height iframe */
+        .DailyWiki {
+            height: 100vh;
+            width: 100vw;
+        }
+    </style>
+</head>
+
+<body class="bg-black text-white font-sans">
+
+    <!-- Daily Wiki Page -->
+    <div class="DailyWiki bg-black p-4 rounded-lg shadow-md overflow-hidden">
+        <iframe id="wikipedia-iframe" class="w-full h-full filter invert"></iframe>
+    </div>
+
+    <script>
+        // Fetch a random Wikipedia link from the text file and load it into the iframe
+        fetch('wikiLinks.txt')
+            .then(response => response.text())
+            .then(text => {
+                const lines = text.split('\n').filter(line => line.trim() !== "");
+                const randomLine = lines[Math.floor(Math.random() * lines.length)];
+                const iframe = document.getElementById('wikipedia-iframe');
+                iframe.src = `https://en.wikipedia.org/wiki/${encodeURIComponent(randomLine.trim())}`;
+
+                // Wait for iframe to load and inject CSS to hide specific elements
+                iframe.onload = function () {
+                    const css = `
+                        #toc, /* Table of Contents */
+                        .vector-menu-appearance { /* Appearance tab */
+                            display: none !important;
+                        }`;
+                    const style = document.createElement('style');
+                    style.textContent = css;
+                    iframe.contentWindow.document.head.appendChild(style);
+                };
+            })
+            .catch(error => {
+                console.error('Error fetching wiki links:', error);
+            });
+    </script>
+</body>
+
+</html>

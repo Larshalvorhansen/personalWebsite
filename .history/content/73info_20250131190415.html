@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta tags and title -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Informational Website</title>
+    <!-- Include Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom CSS for grid layout */
+        .custom-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1.4fr 1.9fr 1fr;
+            grid-template-rows: 1fr 1.2fr 0.8fr;
+            gap: 0;
+            grid-template-areas:
+                "DailyWiki DailyWiki DailyMeme Clock"
+                "DailyWiki DailyWiki DailyCapital DailyCapital"
+                "Feedback DailyBurn Weather Weather";
+        }
+
+        .Weather { grid-area: Weather; }
+        .Clock { grid-area: Clock; }
+        .Feedback { grid-area: Feedback; }
+        .DailyWiki { grid-area: DailyWiki; }
+        .DailyMeme { grid-area: DailyMeme; }
+        .DailyCapital { grid-area: DailyCapital; }
+        .DailyBurn { grid-area: DailyBurn; }
+    </style>
+</head>
+
+<body class="bg-black text-white font-sans">
+
+    <!-- Main Container -->
+    <div class="container mx-auto p-4 custom-grid h-screen">
+        <!-- Weather -->
+        <div class="Weather bg-black p-4 rounded-lg shadow-md flex items-center justify-center">
+            <img src="https://www.yr.no/nb/innhold/11-44085/meteogram.svg" alt="Weather Forecast" class="w-full h-auto filter invert">
+        </div>
+
+        <!-- Clock -->
+        <div class="Clock bg-black text-4xl font-bold flex flex-col items-center justify-center p-4 rounded-lg shadow-md">
+            <div id="clock" class="mb-2">00:00:00</div>
+            <div class="text-xl font-light text-gray-300">"Time is real" - Aristoteles</div>
+        </div>
+        <script>
+            setInterval(() => {
+                const now = new Date();
+                document.getElementById('clock').textContent = now.toLocaleTimeString('no-NO', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            }, 1000);
+            </script>
+
+        <!-- Feedback QR Code -->
+        <div class="Feedback bg-black p-4 rounded-lg shadow-md flex flex-col items-center justify-center">
+            <h2 class="text-2xl font-bold mb-4">Feedback</h2>
+            <img src="feedbackQR.png" alt="Feedback QR Code" class="w-32 h-auto filter invert">
+        </div>
+
+        <!-- Daily Wiki Page -->
+        <div class="DailyWiki bg-black p-4 rounded-lg shadow-md overflow-hidden">
+            <!-- <h2 class="text-2xl font-bold mb-4 text-center">Dagens Mattewiki</h2> -->
+            <iframe id="wikipedia-iframe" class="w-full h-full filter invert"></iframe>
+        </div>
+        <script>
+            fetch('wikiLinks.txt')
+                .then(response => response.text())
+                .then(text => {
+                    const lines = text.split('\n').filter(line => line.trim() !== "");
+                    const randomLine = lines[Math.floor(Math.random() * lines.length)];
+                    document.getElementById('wikipedia-iframe').src = `https://en.wikipedia.org/wiki/${encodeURIComponent(randomLine.trim())}`;
+                });
+        </script>
+
+        <!-- Daily Meme -->
+        <div class="DailyMeme bg-black p-4 rounded-lg shadow-md flex items-center justify-center">
+            <img id="random-meme" src="" alt="Random Meme" class="w-full h-auto rounded-lg">
+        </div>
+        <script>
+            const totalMemes = 33;
+            const randomMeme = Math.floor(Math.random() * totalMemes) + 1;
+            document.getElementById('random-meme').src = `./memes/${randomMeme}.jpg`;
+        </script>
+
+        <!-- Daily Capital City -->
+        <div class="DailyCapital bg-black p-4 rounded-lg shadow-md text-center">
+            <h2 class="text-2xl font-bold mb-4">Dagens Hovedstad</h2>
+            <div id="hovedstad-container"></div>
+        </div>
+        <script>
+            async function fetchAndDisplayHovedstad() {
+                const response = await fetch('hei.csv');
+                const rows = (await response.text()).trim().split('\n');
+                const randomRow = rows[Math.floor(Math.random() * rows.length)];
+                const [city, country, flagUrl, imageUrl] = randomRow.split(',').map(item => item.trim());
+        
+                document.getElementById('hovedstad-container').innerHTML = `
+                    <h3 class="text-xl font-semibold mb-2">${city}, ${country}</h3>
+                    <img id="flag-image" src="${flagUrl}" alt="Flag of ${country}" class="w-20 h-auto mx-auto mb-4">
+                    <img src="${imageUrl}" alt="${city}" class="w-full h-auto rounded-lg">
+                    <div id="flag-fallback" style="display:none;"></div>
+                `;
+        
+                const flagImage = document.getElementById('flag-image');
+                const flagFallback = document.getElementById('flag-fallback');
+        
+                // Add an error event listener to the flag image
+                flagImage.addEventListener('error', () => {
+                    flagImage.style.display = 'none'; // Hide the broken image
+                    flagFallback.style.display = 'block'; 
+                });
+            }
+        
+            fetchAndDisplayHovedstad();
+        </script>
+
+        <!-- Daily Burn -->
+        <div class="DailyBurn bg-black p-4 rounded-lg shadow-md text-center">
+            <!-- <h2 class="text-2xl font-bold mb-4">Dagens BURN</h2> -->
+            <p id="random-line" class="text-5xl mb-4">Loading...</p>
+            <button onclick="fetchRandomLine()" class="px-4 py-2 bg-black text-black rounded">
+                Get New Line
+            </button>
+        </div>
+        <script>
+            function fetchRandomLine() {
+                fetch('burns.txt')
+                    .then(response => response.text())
+                    .then(data => {
+                        const lines = data.split('\n').filter(line => line.trim() !== '');
+                        const randomLine = lines[Math.floor(Math.random() * lines.length)];
+                        document.getElementById('random-line').textContent = randomLine;
+                    });
+            }
+            fetchRandomLine();
+        </script>
+    </div>
+</body>
+</html>

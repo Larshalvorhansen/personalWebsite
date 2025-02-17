@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="no">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hovedside</title>
+    <style>
+        /* Fjern margin og padding fra body og html */
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            /* Forhindrer scrolling */
+        }
+
+        div {
+            overflow: hidden;
+            /* Hindrer at innholdet flyter utenfor */
+            border: 0px solid black;
+            /* For å se grensene til div-ene */
+            padding: 0px;
+            /* Gir litt luft inni div-ene */
+            box-sizing: border-box;
+            /* Sikrer at padding ikke øker størrelsen */
+            width: 100%;
+            /* Juster etter behov */
+            height: auto;
+            /* Eller en spesifikk høyde om du ønsker */
+        }
+
+        /* Angry Grid Layout */
+        .angry-grid {
+            display: grid;
+            grid-template-rows: repeat(10, 1fr);
+            /* 10 rader */
+            grid-template-columns: repeat(5, 1fr);
+            /* 5 kolonner */
+            gap: 0px;
+            height: 100vh;
+            /* Tar opp hele høyden av viewporten */
+            width: 100vw;
+            /* Tar opp hele bredden av viewporten */
+        }
+
+        /* Grid items */
+        #item-0 {
+            background-color: #699B6C;
+            grid-area: 1 / 1 / 3 / 4;
+        }
+
+        #item-1 {
+            background-color: #AB657B;
+            grid-area: 1 / 5 / 2 / 6;
+        }
+
+        #item-2 {
+            background-color: #856CDB;
+            grid-area: 2 / 4 / 3 / 6;
+        }
+
+        #item-3 {
+            background-color: #D5F795;
+            grid-area: 3 / 4 / 5 / 6;
+        }
+
+        #item-4 {
+            background-color: #DC5EA5;
+            grid-area: 5 / 4 / 7 / 6;
+        }
+
+        #item-5 {
+            background-color: #DB68FE;
+            grid-area: 7 / 4 / 9 / 6;
+        }
+
+        #item-6 {
+            background-color: #9CDDBD;
+            grid-area: 3 / 1 / 9 / 4;
+        }
+
+        #item-7 {
+            background-color: #59D69B;
+            grid-area: 9 / 5 / 10 / 6;
+        }
+
+        #item-8 {
+            background-color: #8BD75A;
+            grid-area: 10 / 5 / 11 / 6;
+        }
+
+        #item-9 {
+            background-color: #DDDF6B;
+            grid-area: 9 / 3 / 11 / 5;
+        }
+
+        #item-10 {
+            background-color: #7AB9B7;
+            grid-area: 9 / 1 / 11 / 3;
+        }
+
+        #item-11 {
+            background-color: #7A5D76;
+            grid-area: 1 / 4 / 2 / 5;
+        }
+
+        /* Justering for iframe */
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="angry-grid">
+        <div id="item-0">item-0 24 timer vær<iframe src="item-0_24TimerVær.html" title="noe"></iframe></div>
+        <div id="item-1">item-1 Klokke&nbsp;<iframe src="item-1_klokke.html" title="noe"></iframe></div>
+    </div>
+    <div id="item-2">item-2 Dagens hovedstad&nbsp;<iframe src="item-2_dagensHovedstad.html" title="noe"></iframe>
+        <div id="item-3">item-3 dagensNasaBilde&nbsp;<iframe src="item-3_dagensNasaBilde.html" title="noe"></iframe>
+        </div>
+        <div id="item-4">item-4 Dagens Grunnstoff&nbsp;<iframe src="item-4_dagensGrunnstoff.html" title="noe"></iframe>
+        </div>
+        <div id="item-5">item-5 Dagens antenne&nbsp;<iframe src="item-5_dagensAntenne.html" title="noe"></iframe></div>
+        <div id="item-6">item-6 Dagens wiki&nbsp;<iframe src="item-6_dagensWiki.html" title="noe"></iframe></div>
+        <div id="item-7">item-7 Dagens ubrukelige studie&nbsp;<iframe src="item-7_feedback.html" title="noe"></iframe>
+        </div>
+        <div id="item-8">item-8 feedback&nbsp;<iframe src="item-8_feedback.html" title="noe"></iframe></div>
+        <div id="item-9">item-9 Dagens Burn&nbsp;<iframe src="item-9_dagensBurn.html" title="noe"></iframe></div>
+        <div id="item-10">item-10 Dagens meme&nbsp;<iframe src="item-10_dagensMeme.html" title="noe"></iframe></div>
+        <div id="item-11">item-11 vær om en time&nbsp;<iframe src="item-11_værBildeOmEnTime.html" title="noe"></iframe>
+        </div>
+    </div>
+</body>
+
+</html>
