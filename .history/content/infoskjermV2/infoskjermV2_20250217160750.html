@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="no">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hovedside</title>
+    <style>
+        /* Fjern margin og padding fra body og html */
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            /* Forhindrer scrolling */
+        }
+
+        div {
+            overflow: hidden;
+            /* Hindrer at innholdet flyter utenfor */
+            border: 0px solid black;
+            /* For å se grensene til div-ene */
+            padding: 0px;
+            /* Gir litt luft inni div-ene */
+            box-sizing: border-box;
+            /* Sikrer at padding ikke øker størrelsen */
+            width: 100%;
+            /* Juster etter behov */
+            height: auto;
+            /* Eller en spesifikk høyde om du ønsker */
+        }
+
+        /* Angry Grid Layout */
+        .angry-grid {
+            display: grid;
+            grid-template-rows: repeat(10, 1fr);
+            /* 10 rader */
+            grid-template-columns: repeat(5, 1fr);
+            /* 5 kolonner */
+            gap: 0px;
+            height: 100vh;
+            /* Tar opp hele høyden av viewporten */
+            width: 100vw;
+            /* Tar opp hele bredden av viewporten */
+        }
+
+        #item-0 {
+            background-color: black;
+            grid-area: 1 / 1 / 3 / 4;
+        }
+
+        #item-1 {
+            background-color: black;
+            grid-area: 1 / 5 / 2 / 6;
+        }
+
+        #item-2 {
+            background-color: black;
+            grid-area: 2 / 4 / 3 / 6;
+        }
+
+        #item-3 {
+            background-color: black;
+            grid-area: 3 / 4 / 5 / 6;
+        }
+
+        #item-4 {
+            background-color: black;
+            grid-area: 5 / 4 / 7 / 6;
+        }
+
+        #item-5 {
+            background-color: black;
+            grid-area: 7 / 4 / 9 / 6;
+        }
+
+        #item-6 {
+            background-color: black;
+            grid-area: 3 / 1 / 9 / 4;
+        }
+
+        #item-7 {
+            background-color: black;
+            grid-area: 9 / 5 / 10 / 6;
+        }
+
+        #item-8 {
+            background-color: black;
+            grid-area: 10 / 5 / 11 / 6;
+        }
+
+        #item-9 {
+            background-color: black;
+            grid-area: 9 / 3 / 11 / 5;
+        }
+
+        #item-10 {
+            background-color: black;
+            grid-area: 9 / 1 / 11 / 3;
+        }
+
+        #item-11 {
+            background-color: black;
+            grid-area: 1 / 4 / 2 / 5;
+        }
+
+        /* Adjust the grid areas for the specified items */
+        #item-2 {
+            background-color: black;
+            grid-area: 2 / 4 / 3 / 5;
+            /* Smaller area for dagensHovedstad */
+        }
+
+        #item-4 {
+            background-color: black;
+            grid-area: 5 / 4 / 6 / 5;
+            /* Smaller area for dagensGrunnstoff */
+        }
+
+        #item-7 {
+            background-color: black;
+            grid-area: 9 / 5 / 10 / 6;
+            /* Smaller area for dagensUbrukeligeStudie */
+        }
+
+        #item-9 {
+            background-color: black;
+            grid-area: 9 / 3 / 10 / 5;
+            /* Smaller area for dagensBurn */
+        }
+
+        #item-10 {
+            background-color: black;
+            grid-area: 9 / 1 / 10 / 3;
+            /* Smaller area for dagensMeme */
+        }
+
+        /* Justering for iframe */
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="angry-grid">
+        <div id="item-0"><iframe src="item-0_24TimerVær.html" title="noe"></iframe></div>
+        <div id="item-1"><iframe src="item-1_klokke.html" title="noe"></iframe></div>
+        <div id="item-2"><iframe src="item-2_dagensHovedstad.html" title="noe"></iframe></div>
+        <div id="item-3"><iframe src="item-3_dagensNasaBilde.html" title="noe"></iframe></div>
+        <div id="item-4"><iframe src="item-4_dagensGrunnstoff.html" title="noe"></iframe></div>
+        <div id="item-5"><iframe src="item-5_dagensAntenne.html" title="noe"></iframe></div>
+        <div id="item-6"><iframe src="item-6_dagensWiki.html" title="noe"></iframe></div>
+        <div id="item-7"><iframe src="item-7_dagensUbrukeligeStudie.html" title="noe"></iframe></div>
+        <div id="item-8"><iframe src="item-8_feedback.html" title="noe"></iframe></div>
+        <div id="item-9"><iframe src="item-9_dagensBurn.html" title="noe"></iframe></div>
+        <div id="item-10"><iframe src="item-10_dagensMeme.html" title="noe"></iframe></div>
+        <div id="item-11"><iframe src="item-11_værBildeOmEnTime.html" title="noe"></iframe></div>
+    </div>
+</body>
+
+</html>

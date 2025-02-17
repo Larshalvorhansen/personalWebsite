@@ -11,43 +11,34 @@
             margin: 0;
             padding: 0;
             height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .image-container {
-
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            overflow: hidden;
         }
 
         img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
+            width: 50%;
+            height: 50%;
+            object-fit: cover;
         }
     </style>
 </head>
 
 <body>
-    <div class="image-container">
-        <img id="randomImage" src="" alt="Tilfeldig bilde">
-    </div>
+    <img id="randomImage" src="" alt="Tilfeldig bilde">
 
     <script>
+        // Antall bilder
         const totalImages = 33;
 
+        // Funksjon for å generere en tilfeldig tall mellom 1 og totalImages
         function getRandomImageNumber() {
             return Math.floor(Math.random() * totalImages) + 1;
         }
 
+        // Sett src-attributtet til et tilfeldig bilde
         const randomImage = document.getElementById('randomImage');
         const imageNumber = getRandomImageNumber();
-        randomImage.src = `antenner/antenne${imageNumber}.png`; // Make sure the path is correct
+        randomImage.src = `memes/${imageNumber}.jpg`;
     </script>
-
 </body>
 
 </html>
