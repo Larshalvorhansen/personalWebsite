@@ -5,6 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hovedside</title>
+    
+    <script>
+        (function() {
+            const lastUpdate = localStorage.getItem("lastUpdate");
+            const today = new Date().toDateString(); // Get today's date as a string
+
+            if (lastUpdate !== today) {
+                localStorage.setItem("lastUpdate", today);
+                location.reload(); // Reload the page
+            }
+        })();
+    </script>
+
     <style>
         /* Fjern margin og padding fra body og html */
         html,
