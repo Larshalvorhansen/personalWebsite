@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .qr-container {
+            display: flex;
+            flex-direction: column;
+            /* Plasserer teksten over QR-koden */
+            align-items: center;
+            /* Sentrerer innholdet horisontalt */
+            margin-bottom: 20px;
+            /* Legger til litt avstand under hver container */
+        }
+
+        .qr-container img {
+            width: 200px;
+            /* Juster størrelsen på QR-kodene etter behov */
+            height: 200px;
+        }
+
+        html,
+        body {
+            background-color: #000000 !important;
+            color: #FFFFFF;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="qr-container">
+        <span>Legge til bilder</span>
+        <img src="lenkeTilBilder.png" alt="lenkeTilBilder">
+    </div>
+
+    <div class="qr-container">
+        <span>Feedback? Legg inn her da vel</span>
+        <img src="lenkeTilForm.png" alt="lenkeTilForm">
+    </div>
+</body>
+
+</html>

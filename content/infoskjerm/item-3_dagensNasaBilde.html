@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NASA Picture of the Day</title>
+    <style>
+        html,
+        body {
+            background-color: #000000 !important;
+            color: #FFFFFF;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+
+        #nasa-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        #description {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: white;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #title {
+            font-size: 1.5em;
+            color: white;
+            margin-top: 20px;
+        }
+
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+
+        #apod.apod-content {
+            display: flex;
+            /* Enable flexbox */
+            align-items: flex-start;
+            /* Align items to the top */
+            gap: 20px;
+            /* Add some space between image and text */
+        }
+
+        #apod img {
+            max-width: 300px;
+            /* Or whatever width you want for the image */
+            height: auto;
+        }
+
+        #apod.text-content {
+            flex: 1;
+            /* Allow text to take up remaining space */
+        }
+
+        /* Optional: Add some basic styling for the error message */
+        .error {
+            color: red;
+        }
+
+        #apod .apod-content {
+            display: flex;
+            align-items: flex-start;
+            /* Align to top */
+            gap: 20px;
+            /* Space between image and text */
+        }
+
+        #apod img {
+            max-width: 300px;
+            /* Or your preferred width */
+            height: auto;
+        }
+
+        #apod .text-content {
+            flex: 1;
+            /* Text takes up remaining space */
+        }
+
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="apod">
+        <div class="apod-content">
+            <img id="nasa-image" src="" alt="NASA Picture of the Day">
+            <div class="text-content">
+                <div id="title"></div>
+                <p id="description"></p>
+                <p id="error" class="error"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Replace with your NASA API key
+        const apiKey = 'FUxdL1jOQ2Ibu9LhrKKC5GU4MS2nhUkNVMOcgYX8'; // Replace with your actual API key
+
+        // Get yesterday's date in YYYY-MM-DD format
+        const getYesterdayDate = () => {
+            const today = new Date();
+            const yesterday = new Date(today);
+            yesterday.setDate(today.getDate()); // Subtract 1 day
+            return yesterday.toISOString().split('T')[0]; // Format as YYYY-MM-DD
+        };
+
+        const yesterdayDate = getYesterdayDate();
+        const apodUrl = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}&date=${yesterdayDate}`;
+
+        // Fetch the APOD data for yesterday
+        fetch(apodUrl)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                const imageElement = document.getElementById('nasa-image');
+                const descriptionElement = document.getElementById('description');
+                const titleElement = document.getElementById('title');
+                const errorElement = document.getElementById('error');
+
+                // Clear any previous errors
+                errorElement.textContent = '';
+
+                // Set the title, image source, and description
+                titleElement.textContent = data.title;
+                imageElement.src = data.url;
+                imageElement.alt = data.title;
+                descriptionElement.textContent = data.explanation;
+
+                // Handle video case (APOD can sometimes be a video)
+                if (data.media_type === 'video') {
+                    imageElement.style.display = 'none'; // Hide the image element
+                    descriptionElement.innerHTML = `
+                        <p>Yesterday's APOD is a video. <a href="${data.url}" target="_blank">Watch it here</a>.</p>
+                        <p>${data.explanation}</p>
+                    `;
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching the NASA APOD data:', error);
+                document.getElementById('error').textContent = 'Failed to load NASA Picture of the Day. Please try again later.';
+            });
+    </script>
+</body>
+
+</html>

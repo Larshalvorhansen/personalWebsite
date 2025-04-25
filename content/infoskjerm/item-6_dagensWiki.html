@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Meta tags and title -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Wikipedia Article</title>
+    <!-- Include Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Make the body and html take full height */
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Make the iframe take full available space */
+        #wikipedia-iframe {
+            flex-grow: 1;
+            width: 100%;
+            border: none;
+        }
+
+        html,
+        body {
+            background-color: #000000 !important;
+            color: #FFFFFF;
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <!-- Daily Wiki Page -->
+    <!-- <h2 class="text-2xl font-bold mb-4 text-center">Dagens Wikipedia</h2> -->
+    <iframe id="wikipedia-iframe" class="filter invert"></iframe>
+
+    <script>
+        fetch('wikiLinks.txt')
+            .then(response => response.text())
+            .then(text => {
+                const lines = text.split('\n').filter(line => line.trim() !== "");
+                const randomLine = lines[Math.floor(Math.random() * lines.length)];
+                document.getElementById('wikipedia-iframe').src = `https://en.wikipedia.org/wiki/${encodeURIComponent(randomLine.trim())}`;
+            });
+    </script>
+
+</body>
+
+</html>
