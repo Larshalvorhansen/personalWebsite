@@ -23,7 +23,7 @@
     <!-- JavaScript to Fetch Random Lines -->
     <script>
         function fetchRandomLine() {
-            fetch('burnsV2.txt')
+            fetch('melding.txt')
                 .then(response => response.text())
                 .then(data => {
                     const lines = data.split('\n').filter(line => line.trim() !== '');
