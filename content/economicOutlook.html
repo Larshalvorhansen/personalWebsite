@@ -90,14 +90,14 @@ The goal is for this website to display economic outlooks that I, Lars Halvor, h
   // Replace newlines with <br> tags
   .replace(/\n/g, '<br>');
 
-        postElement.innerHTML = `
-          <h2 class="text-2xl font-bold mb-2">Week ${weekNum}</h2>
-          <small class="text-sm mb-4 block">${timestamp}</small>
-          <p class="mb-4"><strong>Status:</strong> ${status}<br><br><strong>Prediction:</strong> ${prediction}</p>
-          <img src="${imageUrl || `images/${index + 1}.jpg`}" alt="${caption || ''}" class="w-full max-h-64 object-cover rounded-md mb-2">
-          <p class="text-sm italic mb-4">${caption || ''}</p>
-          <p class="text-xs"><strong>Sources:</strong><br>${linkedSources}</p>
-        `;
+postElement.innerHTML = `
+  <h2 class="text-2xl font-bold mb-2">Week ${weekNum}</h2>
+  <small class="text-sm mb-4 block">${timestamp}</small>
+  <p class="mb-4"><strong>Status:</strong> ${status}<br><br><strong>Prediction:</strong> ${prediction}</p>
+  <img src="${imageUrl || `images/${index + 1}.jpg`}" alt="${caption || ''}" class="w-full object-cover rounded-md mb-2">
+  <p class="text-sm italic mb-4">${caption || ''}</p>
+  <p class="text-xs"><strong>Sources:</strong><br>${linkedSources}</p>
+`;
 
         postsContainer.appendChild(postElement);
       });
