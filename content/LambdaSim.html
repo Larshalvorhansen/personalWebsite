@@ -257,6 +257,21 @@
         advantage of agent based modeing and various methods from multivariat
         data analysis.<br />
       </h2>
+
+<button
+  id="updates-button"
+  class="fixed bottom-5 right-5 px-4 py-2 text-white rounded-lg shadow transition-opacity duration-500"
+  style="background-color: #2979FF;"
+  onclick="
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    const btn = document.getElementById('updates-button');
+    btn.style.opacity = '0';
+    setTimeout(() => btn.style.display = 'none', 500);
+  "
+>
+  Click to see the newest updates
+</button>
+
       <br />
       <!-- <p>
       Throughout human history, we have made remarkable progress in solving analytical problems. For example, in 1977,
