@@ -2,116 +2,140 @@
 The goal is for this website to display economic outlooks that I, Lars Halvor, have placed in a private spreadsheet online. A great CRM system if i can get it to work.
 -->
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<style>
+  <style>
     * {
-      font-family: 'Space Grotesk', sans-serif;
+      font-family: "Space Grotesk", sans-serif;
     }
 
     h1.title {
-        font-family: 'Bentham', serif;
+      font-family: "Bentham", serif;
     }
   </style>
-  
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Economic Outλook</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet" />
-  <link rel="manifest" href="/site.webmanifest">
-  <script src="https://cdn.tailwindcss.com"></script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Economic Outλook</title>
 
-</head>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="manifest" href="/site.webmanifest" />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
 
-<body class="p-8 md:p-16 max-w-5xl mx-auto">
+  <body class="p-8 md:p-16 max-w-4kjxl mx-auto">
+    <!-- Header -->
+    <header class="mb-12">
+      <!-- Load Bentham font from Google Fonts -->
+      <link
+        href="https://fonts.googleapis.com/css2?family=Bentham&display=swap"
+        rel="stylesheet"
+      />
 
-  <!-- Header -->
-  <header class="mb-12">
-<!-- Load Bentham font from Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Bentham&display=swap" rel="stylesheet">
-
-<!-- Tailwind HTML -->
-<h1 class="title text-5xl md:text-7xl lg:text-9xl font-bold leading-tight tracking-tight uppercase font-bentham">
-  Economic Out
-  <a href="https://halvorhansen.no/lambdasim"
-     target="_blank"
-     rel="noopener noreferrer"
-     class="inline text-blue-500 lowercase align-baseline leading-none no-underline hover:text-blue-700 tracking-tighter mx-[-0.1em] font-bentham">
-    λ
-  </a>
-  ook
-</h1>
-    <p class="mt-4 text-lg md:text-2xl text-gray-700">
-      A, soon to be weekly, status update and prediction of the future.
-    </p>
-    <p class="mt-2 text-sm md:text-lg text-gray-500">
-      <b>As this website is only in its infancy weekly updates will start out quite brief. Please also sprinkle some grains of salt when reading as im only in my 2nd year of an economics bachelor.</b><br>
-      The point here is for me to just get some wheels turning and to improve over time.
-    </p>
-  <!--  <p class="mt-2 text-sm md:text-lg text-gray-500">
+      <!-- Tailwind HTML -->
+      <h1
+        class="title text-5xl md:text-7xl lg:text-9xl font-bold leading-tight tracking-tight uppercase font-bentham"
+      >
+        Economic Out
+        <a
+          href="https://halvorhansen.no/lambdasim"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline text-blue-500 lowercase align-baseline leading-none no-underline hover:text-blue-700 tracking-tighter mx-[-0.1em] font-bentham"
+        >
+          λ
+        </a>
+        ook
+      </h1>
+      <p class="mt-4 text-lg md:text-2xl text-gray-700">
+        A, soon to be, weekly status update and prediction of the future.
+      </p>
+      <p class="mt-2 text-sm md:text-lg text-gray-500">
+        <b
+          >As this website is only in its infancy weekly updates will start out
+          quite brief. Please also sprinkle some grains of salt when reading as
+          im only in my 2nd year of an economics bachelor.</b
+        ><br />
+        The point here is for me to just get some wheels turning and to improve
+        over time.
+      </p>
+      <!--  <p class="mt-2 text-sm md:text-lg text-gray-500">
       <b>Since week 5 this site has been down prioritized. However, I will pick this up again at week 19. Stay tuned!</b>
     </p>-->
-  </header>
+    </header>
 
-  <!-- Main Content -->
-  <main>
-    <div id="posts-container" class="divide-y divide-gray-300"></div>
-  </main>
+    <!-- Main Content -->
+    <main>
+      <div id="posts-container" class="divide-y divide-gray-300"></div>
+    </main>
 
- <script>
-  async function fetchBlogPosts() {
-    try {
-      const sheetId = '1cooW6kZlSKUgBjK4uPnv4cynbw3nM7NjwMjDHHFJ6mY';
-      const apiKey = 'AIzaSyABuVJIWSJiUqk01nvpYF4QVzmgyZDCaGc';
-      const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/EO2Response!A2:G?key=${apiKey}`;
+    <script>
+      async function fetchBlogPosts() {
+        try {
+          const sheetId = "1cooW6kZlSKUgBjK4uPnv4cynbw3nM7NjwMjDHHFJ6mY";
+          const apiKey = "AIzaSyABuVJIWSJiUqk01nvpYF4QVzmgyZDCaGc";
+          const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/EO2Response!A2:G?key=${apiKey}`;
 
-      const response = await fetch(url);
-      const data = await response.json();
-      if (!data.values) throw new Error("Ingen data returnert fra Google Sheets.");
+          const response = await fetch(url);
+          const data = await response.json();
+          if (!data.values)
+            throw new Error("Ingen data returnert fra Google Sheets.");
 
-      const posts = data.values.reverse();
-      const postsContainer = document.getElementById('posts-container');
-      postsContainer.innerHTML = '';
+          const posts = data.values.reverse();
+          const postsContainer = document.getElementById("posts-container");
+          postsContainer.innerHTML = "";
 
-      posts.forEach((post, index) => {
-        const [timestamp, weekNum, status, prediction, imageUrl, sources, caption] = post;
+          posts.forEach((post, index) => {
+            const [
+              timestamp,
+              weekNum,
+              status,
+              prediction,
+              imageUrl,
+              sources,
+              caption,
+            ] = post;
 
-        const postElement = document.createElement('div');
-        postElement.className = 'py-8';
+            const postElement = document.createElement("div");
+            postElement.className = "py-8";
 
-        const linkedSources = sources
-  // Convert markdown-style links [text](url) to HTML links
-  .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, (match, text, url) =>
-    `<a href="${url}" target="_blank" rel="noopener noreferrer" class="text-blue-500 underline">${text}</a>`
-  )
-  // Convert plain URLs to HTML links (only if not already part of an anchor tag)
-  .replace(/(?<!["'=\])])(https?:\/\/[^\s<]+)/g, url =>
-    `<a href="${url}" target="_blank" rel="noopener noreferrer" class="text-blue-500 underline">${url}</a>`
-  )
-  // Replace newlines with <br> tags
-  .replace(/\n/g, '<br>');
+            const linkedSources = sources
+              // Convert markdown-style links [text](url) to HTML links
+              .replace(
+                /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g,
+                (match, text, url) =>
+                  `<a href="${url}" target="_blank" rel="noopener noreferrer" class="text-blue-500 underline">${text}</a>`,
+              )
+              // Convert plain URLs to HTML links (only if not already part of an anchor tag)
+              .replace(
+                /(?<!["'=\])])(https?:\/\/[^\s<]+)/g,
+                (url) =>
+                  `<a href="${url}" target="_blank" rel="noopener noreferrer" class="text-blue-500 underline">${url}</a>`,
+              )
+              // Replace newlines with <br> tags
+              .replace(/\n/g, "<br>");
 
-postElement.innerHTML = `
+            postElement.innerHTML = `
   <h2 class="text-2xl font-bold mb-2">Week ${weekNum}</h2>
   <small class="text-sm mb-4 block">${timestamp}</small>
   <p class="mb-4"><strong>Status:</strong> ${status}<br><br><strong>Prediction:</strong> ${prediction}</p>
-  <img src="${imageUrl || `images/${index + 1}.jpg`}" alt="${caption || ''}" class="w-full object-cover rounded-md mb-2">
-  <p class="text-sm italic mb-4">${caption || ''}</p>
+  <img src="${imageUrl || `images/${index + 1}.jpg`}" alt="${caption || ""}" class="w-full object-cover rounded-md mb-2">
+  <p class="text-sm italic mb-4">${caption || ""}</p>
   <p class="text-xs"><strong>Sources:</strong><br>${linkedSources}</p>
 `;
 
-        postsContainer.appendChild(postElement);
-      });
-    } catch (error) {
-      console.error('Feil under henting av blogginnlegg:', error);
-    }
-  }
+            postsContainer.appendChild(postElement);
+          });
+        } catch (error) {
+          console.error("Feil under henting av blogginnlegg:", error);
+        }
+      }
 
-  window.onload = fetchBlogPosts;
-</script>
-</body>
-
+      window.onload = fetchBlogPosts;
+    </script>
+  </body>
 </html>
