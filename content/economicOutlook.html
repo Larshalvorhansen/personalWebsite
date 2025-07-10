@@ -102,6 +102,16 @@ The goal is for this website to display economic outlooks that I, Lars Halvor, h
               caption,
             ] = post;
 
+            // Check for manual year divider
+            if (timestamp && timestamp.trim().startsWith("---")) {
+              const yearHeader = document.createElement("h2");
+              yearHeader.textContent = timestamp.replace(/-/g, "").trim();
+              yearHeader.className =
+                "text-4xl font-bold text-gray-800 mt-8 mb-4 border-b pb-2";
+              postsContainer.appendChild(yearHeader);
+              return;
+            }
+
             const postElement = document.createElement("div");
             postElement.className = "py-8";
 
