@@ -76,52 +76,52 @@ The goal is for this website to display economic outlooks that I, Lars Halvor, h
     </main>
 
     <script>
-            async function fetchBlogPosts() {
-              try {
-                const sheetId = "1cooW6kZlSKUgBjK4uPnv4cynbw3nM7NjwMjDHHFJ6mY";
-                const apiKey = const apiKey = process.env.API_KEY;
-                const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/EO2Response!A2:G?key=${apiKey}`;
+      async function fetchBlogPosts() {
+        try {
+          const sheetId = "1cooW6kZlSKUgBjK4uPnv4cynbw3nM7NjwMjDHHFJ6mY";
+          const apiKey = process.env.API_KEY;
+          const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/EO2Response!A2:G?key=${apiKey}`;
 
-                const response = await fetch(url);
-                const data = await response.json();
-                if (!data.values)
-                  throw new Error("Ingen data returnert fra Google Sheets.");
+          const response = await fetch(url);
+          const data = await response.json();
+          if (!data.values)
+            throw new Error("Ingen data returnert fra Google Sheets.");
 
-                const posts = data.values.reverse();
-                const postsContainer = document.getElementById("posts-container");
-                postsContainer.innerHTML = "";
+          const posts = data.values.reverse();
+          const postsContainer = document.getElementById("posts-container");
+          postsContainer.innerHTML = "";
 
-                posts.forEach((post, index) => {
-                  const [
-                    timestamp,
-                    weekNum,
-                    status,
-                    prediction,
-                    imageUrl,
-                    sources,
-                    caption,
-                  ] = post;
+          posts.forEach((post, index) => {
+            const [
+              timestamp,
+              weekNum,
+              status,
+              prediction,
+              imageUrl,
+              sources,
+              caption,
+            ] = post;
 
-                  const postElement = document.createElement("div");
-                  postElement.className = "py-8";
+            const postElement = document.createElement("div");
+            postElement.className = "py-8";
 
-                  const linkedSources = sources
-                    // Convert markdown-style links [text](url) to HTML links
-                    .replace(
-                      /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g,
-                      (match, text, url) =>
-                        `<a href="${url}" target="_blank" rel="noopener noreferrer" class="text-blue-500 underline">${text}</a>`,
-                    )
-                    // Convert plain URLs to HTML links (only if not already part of an anchor tag)
-                    .replace(
-                      /(?<!["'=\])])(https?:\/\/[^\s<]+)/g,
-                      (url) =>
-                        `<a href="${url}" target="_blank" rel="noopener noreferrer" class="text-blue-500 underline">${url}</a>`,
-                    )
-                    // Replace newlines with <br> tags
-                    .replace(/\n/g, "<br>");
+            const linkedSources = sources
+              // Convert markdown-style links [text](url) to HTML links
+              .replace(
+                /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g,
+                (match, text, url) =>
+                  `<a href="${url}" target="_blank" rel="noopener noreferrer" class="text-blue-500 underline">${text}</a>`,
+              )
+              // Convert plain URLs to HTML links (only if not already part of an anchor tag)
+              .replace(
+                /(?<!["'=\])])(https?:\/\/[^\s<]+)/g,
+                (url) =>
+                  `<a href="${url}" target="_blank" rel="noopener noreferrer" class="text-blue-500 underline">${url}</a>`,
+              )
+              // Replace newlines with <br> tags
+              .replace(/\n/g, "<br>");
 
-                  postElement.innerHTML = `
+            postElement.innerHTML = `
         <h2 class="text-2xl font-bold mb-2">Week ${weekNum}</h2>
         <small class="text-sm mb-4 block">${timestamp}</small>
         <p class="mb-4"><strong>Status:</strong> ${status}<br><br><strong>Prediction:</strong> ${prediction}</p>
@@ -130,14 +130,14 @@ The goal is for this website to display economic outlooks that I, Lars Halvor, h
         <p class="text-xs"><strong>Sources:</strong><br>${linkedSources}</p>
       `;
 
-                  postsContainer.appendChild(postElement);
-                });
-              } catch (error) {
-                console.error("Feil under henting av blogginnlegg:", error);
-              }
-            }
+            postsContainer.appendChild(postElement);
+          });
+        } catch (error) {
+          console.error("Feil under henting av blogginnlegg:", error);
+        }
+      }
 
-            window.onload = fetchBlogPosts;
+      window.onload = fetchBlogPosts;
     </script>
   </body>
 </html>
