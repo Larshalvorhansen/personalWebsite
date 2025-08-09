@@ -1,0 +1,137 @@
+{
+  "bands": [
+    {
+      "layer": "ITU",
+      "label": "ELF",
+      "fmin": 3,
+      "fmax": 3e1,
+      "img": "img/itu/elf.jpg"
+    },
+    {
+      "layer": "ITU",
+      "label": "SLF",
+      "fmin": 3e1,
+      "fmax": 3e2,
+      "img": "img/itu/slf.jpg"
+    },
+    {
+      "layer": "ITU",
+      "label": "ULF",
+      "fmin": 3e2,
+      "fmax": 3e3,
+      "img": "img/itu/ulf.jpg"
+    },
+    {
+      "layer": "ITU",
+      "label": "VLF",
+      "fmin": 3e3,
+      "fmax": 3e4,
+      "img": "img/itu/vlf.jpg"
+    },
+    {
+      "layer": "ITU",
+      "label": "LF",
+      "fmin": 3e4,
+      "fmax": 3e5,
+      "img": "img/itu/lf.jpg"
+    },
+    {
+      "layer": "ITU",
+      "label": "MF",
+      "fmin": 3e5,
+      "fmax": 3e6,
+      "img": "img/itu/mf.jpg"
+    },
+    {
+      "layer": "ITU",
+      "label": "HF",
+      "fmin": 3e6,
+      "fmax": 3e7,
+      "img": "img/itu/hf.jpg"
+    },
+    {
+      "layer": "ITU",
+      "label": "VHF",
+      "fmin": 3e7,
+      "fmax": 3e8,
+      "img": "img/itu/vhf.jpg"
+    },
+    {
+      "layer": "ITU",
+      "label": "UHF",
+      "fmin": 3e8,
+      "fmax": 3e9,
+      "img": "img/itu/uhf.jpg"
+    },
+    {
+      "layer": "ITU",
+      "label": "SHF (Microwave)",
+      "fmin": 3e9,
+      "fmax": 3e10,
+      "img": "img/itu/shf.jpg"
+    },
+    {
+      "layer": "ITU",
+      "label": "EHF (mmWave)",
+      "fmin": 3e10,
+      "fmax": 3e11,
+      "img": "img/itu/ehf.jpg"
+    },
+    {
+      "layer": "ITU",
+      "label": "THF",
+      "fmin": 3e11,
+      "fmax": 3e12,
+      "img": "img/itu/thf.jpg"
+    },
+    {
+      "layer": "Telescope",
+      "label": "COBE",
+      "fmin": 3e10,
+      "fmax": 3e14,
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Cosmic_Background_Explorer_spacecraft_model.png/330px-Cosmic_Background_Explorer_spacecraft_model.png"
+    },
+    {
+      "layer": "Telescope",
+      "label": "WMAP",
+      "fmin": 2.3e10,
+      "fmax": 9.4e10,
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/WMAP_spacecraft_diagram.jpg/250px-WMAP_spacecraft_diagram.jpg"
+    },
+    {
+      "layer": "Telescope",
+      "label": "Planck",
+      "fmin": 3e10,
+      "fmax": 8.57e11,
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Model_of_the_Planck_Satellite.jpg/250px-Model_of_the_Planck_Satellite.jpg"
+    },
+    {
+      "layer": "Telescope",
+      "label": "Herschel Space Observatory",
+      "fmin": 4.464e11,
+      "fmax": 5.455e12,
+      "img": "https://upload.wikimedia.org/wikipedia/commons/0/03/Herschel_Space_Observatory.jpg"
+    },
+    {
+      "layer": "Telescope",
+      "label": "Spitzer Space Telescope",
+      "fmin": 1.875e12,
+      "fmax": 8.333e13,
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Spitzer_space_telescope.jpg/330px-Spitzer_space_telescope.jpg"
+    },
+    {
+      "layer": "Telescope",
+      "label": "James Webb Space Telescope (JWST)",
+      "fmin": 1.053e13,
+      "fmax": 5.0e14,
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/James_Webb_Space_Telescope_illustration.jpg/330px-James_Webb_Space_Telescope_illustration.jpg"
+    },
+    {
+      "layer": "Telescope",
+      "label": "Hubble Space Telescope (HST)",
+      "fmin": 1.2e14,
+      "fmax": 2.609e15,
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/HST-SM4.jpeg/330px-HST-SM4.jpeg"
+    }
+  ]
+}

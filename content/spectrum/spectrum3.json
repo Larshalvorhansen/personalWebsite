@@ -1,0 +1,349 @@
+{
+  "bands": [
+    { "layer": "ITU", "label": "ELF", "fmin": 3, "fmax": 30 },
+    { "layer": "ITU", "label": "SLF", "fmin": 30, "fmax": 300 },
+    { "layer": "ITU", "label": "ULF", "fmin": 300, "fmax": 3000 },
+    { "layer": "ITU", "label": "VLF", "fmin": 3000, "fmax": 30000 },
+    { "layer": "ITU", "label": "LF", "fmin": 30000, "fmax": 300000 },
+    { "layer": "ITU", "label": "MF", "fmin": 300000, "fmax": 3000000 },
+    { "layer": "ITU", "label": "HF", "fmin": 3000000, "fmax": 30000000 },
+    { "layer": "ITU", "label": "VHF", "fmin": 30000000, "fmax": 300000000 },
+    { "layer": "ITU", "label": "UHF", "fmin": 300000000, "fmax": 3000000000 },
+    {
+      "layer": "ITU",
+      "label": "SHF (Microwave)",
+      "fmin": 3000000000,
+      "fmax": 30000000000
+    },
+    {
+      "layer": "ITU",
+      "label": "EHF (mmWave)",
+      "fmin": 30000000000,
+      "fmax": 300000000000
+    },
+    {
+      "layer": "ITU",
+      "label": "THF",
+      "fmin": 300000000000,
+      "fmax": 3000000000000
+    },
+    { "layer": "ITU", "label": "HF-1", "fmin": 3000000, "fmax": 6000000 },
+    { "layer": "ITU", "label": "HF-2", "fmin": 6000000, "fmax": 12000000 },
+    { "layer": "ITU", "label": "HF-3", "fmin": 12000000, "fmax": 24000000 },
+    { "layer": "ITU", "label": "VHF Low", "fmin": 30000000, "fmax": 88000000 },
+    {
+      "layer": "ITU",
+      "label": "VHF High",
+      "fmin": 174000000,
+      "fmax": 216000000
+    },
+    {
+      "layer": "ITU",
+      "label": "UHF Low",
+      "fmin": 300000000,
+      "fmax": 600000000
+    },
+    {
+      "layer": "ITU",
+      "label": "UHF High",
+      "fmin": 600000000,
+      "fmax": 1000000000
+    },
+    {
+      "layer": "ITU",
+      "label": "Sub-THz (illustrative)",
+      "fmin": 300000000000,
+      "fmax": 1000000000000
+    },
+
+    {
+      "layer": "NASA",
+      "label": "L-band (near-Earth)",
+      "fmin": 1000000000,
+      "fmax": 2000000000
+    },
+    {
+      "layer": "NASA",
+      "label": "S-band (general)",
+      "fmin": 2000000000,
+      "fmax": 4000000000
+    },
+    {
+      "layer": "NASA",
+      "label": "C-band (general)",
+      "fmin": 4000000000,
+      "fmax": 8000000000
+    },
+    {
+      "layer": "NASA",
+      "label": "X-band (general)",
+      "fmin": 8000000000,
+      "fmax": 12000000000
+    },
+    {
+      "layer": "NASA",
+      "label": "Ku-band (general)",
+      "fmin": 12000000000,
+      "fmax": 18000000000
+    },
+    {
+      "layer": "NASA",
+      "label": "K-band (general)",
+      "fmin": 18000000000,
+      "fmax": 27000000000
+    },
+    {
+      "layer": "NASA",
+      "label": "Ka-band (general)",
+      "fmin": 27000000000,
+      "fmax": 40000000000
+    },
+    {
+      "layer": "NASA",
+      "label": "DSN S uplink (~deep-space)",
+      "fmin": 2100000000,
+      "fmax": 2300000000
+    },
+    {
+      "layer": "NASA",
+      "label": "DSN S downlink (~deep-space)",
+      "fmin": 2200000000,
+      "fmax": 2400000000
+    },
+    {
+      "layer": "NASA",
+      "label": "DSN X uplink (~7.1–7.3 GHz)",
+      "fmin": 7145000000,
+      "fmax": 7235000000
+    },
+    {
+      "layer": "NASA",
+      "label": "DSN X downlink (~8.4–8.5 GHz)",
+      "fmin": 8400000000,
+      "fmax": 8500000000
+    },
+    {
+      "layer": "NASA",
+      "label": "DSN Ka uplink (~34 GHz)",
+      "fmin": 34200000000,
+      "fmax": 34700000000
+    },
+    {
+      "layer": "NASA",
+      "label": "DSN Ka downlink (~32 GHz)",
+      "fmin": 31800000000,
+      "fmax": 32300000000
+    },
+    {
+      "layer": "NASA",
+      "label": "Mars Relay UHF (illustrative)",
+      "fmin": 401000000,
+      "fmax": 437000000
+    },
+    {
+      "layer": "NASA",
+      "label": "TDRSS S",
+      "fmin": 2200000000,
+      "fmax": 2300000000
+    },
+    {
+      "layer": "NASA",
+      "label": "TDRSS Ku",
+      "fmin": 13700000000,
+      "fmax": 15000000000
+    },
+    {
+      "layer": "NASA",
+      "label": "TDRSS Ka",
+      "fmin": 25500000000,
+      "fmax": 27000000000
+    },
+    {
+      "layer": "NASA",
+      "label": "Lunar relay X (illustrative)",
+      "fmin": 8450000000,
+      "fmax": 8500000000
+    },
+    {
+      "layer": "NASA",
+      "label": "Planetary radar S (illustrative)",
+      "fmin": 2350000000,
+      "fmax": 2400000000
+    },
+    {
+      "layer": "NASA",
+      "label": "Planetary radar X (illustrative)",
+      "fmin": 9300000000,
+      "fmax": 10000000000
+    },
+
+    {
+      "layer": "Natural/Human",
+      "label": "Schumann Resonances",
+      "fmin": 7,
+      "fmax": 60
+    },
+    {
+      "layer": "Natural/Human",
+      "label": "Lightning (VLF)",
+      "fmin": 3000,
+      "fmax": 30000
+    },
+    {
+      "layer": "Natural/Human",
+      "label": "AM Broadcast (MW)",
+      "fmin": 530000,
+      "fmax": 1710000
+    },
+    {
+      "layer": "Natural/Human",
+      "label": "Shortwave Broadcast",
+      "fmin": 2300000,
+      "fmax": 26100000
+    },
+    {
+      "layer": "Natural/Human",
+      "label": "CB Radio",
+      "fmin": 26965000,
+      "fmax": 27405000
+    },
+    {
+      "layer": "Natural/Human",
+      "label": "Airband (VHF AM)",
+      "fmin": 118000000,
+      "fmax": 137000000
+    },
+    {
+      "layer": "Natural/Human",
+      "label": "Marine VHF",
+      "fmin": 156000000,
+      "fmax": 162000000
+    },
+    {
+      "layer": "Natural/Human",
+      "label": "FM Broadcast",
+      "fmin": 88000000,
+      "fmax": 108000000
+    },
+    {
+      "layer": "Natural/Human",
+      "label": "TV (UHF example)",
+      "fmin": 470000000,
+      "fmax": 694000000
+    },
+    {
+      "layer": "Natural/Human",
+      "label": "GSM/Cell 700–800 MHz (illustr.)",
+      "fmin": 700000000,
+      "fmax": 880000000
+    },
+    {
+      "layer": "Natural/Human",
+      "label": "Cell 1.8 GHz (illustr.)",
+      "fmin": 1710000000,
+      "fmax": 1880000000
+    },
+    {
+      "layer": "Natural/Human",
+      "label": "Cell 2.6 GHz (illustr.)",
+      "fmin": 2500000000,
+      "fmax": 2700000000
+    },
+    {
+      "layer": "Natural/Human",
+      "label": "GNSS L1/E1/L1-C/A",
+      "fmin": 1559000000,
+      "fmax": 1610000000
+    },
+    {
+      "layer": "Natural/Human",
+      "label": "GNSS L2",
+      "fmin": 1215000000,
+      "fmax": 1240000000
+    },
+    {
+      "layer": "Natural/Human",
+      "label": "GNSS L5/E5",
+      "fmin": 1164000000,
+      "fmax": 1188000000
+    },
+    {
+      "layer": "Natural/Human",
+      "label": "Wi-Fi / Bluetooth (2.4 GHz)",
+      "fmin": 2400000000,
+      "fmax": 2500000000
+    },
+    {
+      "layer": "Natural/Human",
+      "label": "Wi-Fi (5 GHz)",
+      "fmin": 5150000000,
+      "fmax": 5825000000
+    },
+    {
+      "layer": "Natural/Human",
+      "label": "Wi-Fi 6E (6 GHz)",
+      "fmin": 5925000000,
+      "fmax": 7125000000
+    },
+    {
+      "layer": "Natural/Human",
+      "label": "Microwave Oven (ISM)",
+      "fmin": 2440000000,
+      "fmax": 2460000000
+    },
+    {
+      "layer": "Natural/Human",
+      "label": "Weather Radar (S-band)",
+      "fmin": 2700000000,
+      "fmax": 3000000000
+    },
+    {
+      "layer": "Natural/Human",
+      "label": "Marine Radar (X-band)",
+      "fmin": 9300000000,
+      "fmax": 10000000000
+    },
+    {
+      "layer": "Natural/Human",
+      "label": "Automotive Radar",
+      "fmin": 76000000000,
+      "fmax": 81000000000
+    },
+    {
+      "layer": "Natural/Human",
+      "label": "Hydrogen Line (21 cm)",
+      "fmin": 1419000000,
+      "fmax": 1421000000
+    },
+    {
+      "layer": "Natural/Human",
+      "label": "Water Vapor Absorption",
+      "fmin": 22220000000,
+      "fmax": 22300000000
+    },
+    {
+      "layer": "Natural/Human",
+      "label": "Oxygen Band (~60 GHz)",
+      "fmin": 57000000000,
+      "fmax": 64000000000
+    },
+    {
+      "layer": "Natural/Human",
+      "label": "Infrared (illustrative)",
+      "fmin": 3000000000000,
+      "fmax": 400000000000000
+    },
+    {
+      "layer": "Natural/Human",
+      "label": "X-ray",
+      "fmin": 30000000000000000,
+      "fmax": 30000000000000000000
+    },
+    {
+      "layer": "Natural/Human",
+      "label": "Gamma-ray",
+      "fmin": 30000000000000000000,
+      "fmax": 30000000000000000000000
+    }
+  ]
+}
