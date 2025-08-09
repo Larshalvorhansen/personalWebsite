@@ -3,51 +3,68 @@
 /* ======================== Config ======================== */
 const COLORS = {
   ITU: "#2563eb",
-  NASA: "#16a34a",
-  "Natural/Human": "#f59e0b",
+  Telescope: "#6d28d9",
+  Natural: "#16a34a",
+  Human: "#f59e0b",
+  "Extreme Physics": "#dc2626",
 };
 
 const ROWS = [
-  { key: "ITU", label: "ITU Radio Bands" },
-  { key: "Telescope", label: "Telescopes on different spectrums" },
-  { key: "Natural/Human", label: "Natural vs Human-made" },
+  { key: "ITU", label: "Radio Bands" },
+  { key: "Telescope", label: "Telescopes" },
+  { key: "Natural", label: "Natural" },
+  { key: "Human", label: "Human-made" },
+  { key: "Extreme Physics", label: "Theoretical Physics" },
 ];
+
+// lane behavior per row
+const LANE_CFG = {
+  Telescope: { maxLanes: 4, laneGapPx: 3, packEps: 1e-9 },
+  Natural: { maxLanes: 2, laneGapPx: 2, packEps: 1e-9 },
+  Human: { maxLanes: 2, laneGapPx: 2, packEps: 1e-9 },
+  "Extreme Physics": { maxLanes: 1, laneGapPx: 2, packEps: 1e-9 },
+};
 
 const VISIBLE_LIGHT = { fmin: 4.0e14, fmax: 7.5e14 };
 const DEFAULT_DOMAIN = { fmin: 3, fmax: 3e22 };
-
-// Layout room for extra axis tracks
-const LAYOUT = { topPad: 80, bottomPad: 110 };
+const LAYOUT = { topPad: 100, bottomPad: 130 };
+const ROW_LABEL_X = 20;
 
 /* ======================== Physical constants & helpers ======================== */
 const C = 299_792_458;
 const H = 6.626_070_15e-34;
 const QE = 1.602_176_634e-19;
 const WIEN_B = 2.897_771_955e-3;
-
 const wavelengthFromF = (f) => C / f;
 const energyEVFromF = (f) => (H * f) / QE;
 const tempFromF_Wien = (f) => WIEN_B / (C / f);
 
 function fmtWavelength(m) {
-  if (m >= 1) return `${m.toFixed(2)} m`;
-  if (m >= 1e-3) return `${(m * 1e3).toFixed(2)} mm`;
-  if (m >= 1e-6) return `${(m * 1e6).toFixed(2)} µm`;
-  if (m >= 1e-9) return `${(m * 1e9).toFixed(2)} nm`;
-  return `${(m * 1e12).toFixed(2)} pm`;
+  if (m === 0) return "0 m";
+  const exp = Math.floor(Math.log10(Math.abs(m)));
+  const mant = m / Math.pow(10, exp);
+  return `${mant.toFixed(2)}×10${exp >= 0 ? "⁺" + exp : "⁻" + Math.abs(exp)} m`;
 }
 function fmtEnergyEV(e) {
-  if (e >= 1) return `${e.toFixed(2)} eV`;
-  if (e >= 1e-3) return `${(e * 1e3).toFixed(2)} meV`;
-  if (e >= 1e-6) return `${(e * 1e6).toFixed(1)} µeV`;
-  if (e >= 1e-9) return `${(e * 1e9).toFixed(1)} neV`;
+  const fmt = (v, d) => parseFloat(v.toFixed(d)).toString();
+  if (e >= 1) return `${fmt(e, 1)} eV`;
+  if (e >= 1e-3) return `${fmt(e * 1e3, 1)} meV`;
+  if (e >= 1e-6) return `${fmt(e * 1e6, 1)} µeV`;
+  if (e >= 1e-9) return `${fmt(e * 1e9, 1)} neV`;
   return `${e.toExponential(1)} eV`;
 }
 function fmtTempK(T) {
-  if (T < 1e3) return `${T.toFixed(0)} K`;
-  if (T < 1e6) return `${(T / 1e3).toFixed(1)} kK`;
-  if (T < 1e9) return `${(T / 1e6).toFixed(1)} MK`;
-  return `${(T / 1e9).toFixed(1)} GK`;
+  const fmt = (v, d) => parseFloat(v.toFixed(d)).toString();
+  if (T < 1e3) return `${fmt(T, 0)} K`;
+  if (T < 1e6) return `${fmt(T / 1e3, 1)} kK`;
+  if (T < 1e9) return `${fmt(T / 1e6, 1)} MK`;
+  return `${fmt(T / 1e9, 1)} GK`;
+}
+function fmtSciHz(v) {
+  if (v === 0) return "0 Hz";
+  const exp = Math.floor(Math.log10(Math.abs(v)));
+  const mant = v / Math.pow(10, exp);
+  return `${mant.toFixed(3)}×10${exp >= 0 ? "⁺" + exp : "⁻" + Math.abs(exp)} Hz`;
 }
 
 /* ======================== State ======================== */
@@ -106,9 +123,7 @@ function requestImage(url) {
   if (!url) return null;
   const cached = imageCache.get(url);
   if (cached) return cached;
-
   const entry = { img: new Image(), status: "loading" };
-  // Try to avoid tainting if server sends CORS headers
   entry.img.crossOrigin = "anonymous";
   entry.img.onload = () => {
     entry.status = "ok";
@@ -123,14 +138,18 @@ function requestImage(url) {
   return entry;
 }
 
-/* ======================== Drawing helpers ======================== */
+/* ======================== Drawing ======================== */
 function drawBackground() {
   const W = viewWidth(),
     H = viewHeight();
-  ctx.fillStyle = "#ffffff";
-  ctx.fillRect(0, 0, W, H);
 
-  // grid vertical bounds between extra tracks
+  // clear + subtle white underlay
+  ctx.save();
+  ctx.fillStyle = "rgba(255,255,255,0.3)";
+  ctx.fillRect(0, 0, W, H);
+  ctx.restore();
+
+  // grid bounds
   const yGridTop = LAYOUT.topPad - 30;
   const yGridBottom = H - (LAYOUT.bottomPad - 30);
 
@@ -146,7 +165,7 @@ function drawBackground() {
     ctx.moveTo(0, y);
     ctx.lineTo(W, y);
     ctx.stroke();
-    ctx.fillText(r.label, 10, y - 8);
+    ctx.fillText(r.label, ROW_LABEL_X, y - 8);
   });
   ctx.restore();
 
@@ -276,7 +295,6 @@ function drawVisibleLightGradient() {
 
 /* ===== draw rounded-rect image with 'cover' crop ===== */
 function drawRoundedImage(img, x, y, w, h, r, alpha = 0.9) {
-  // clip rounded rect
   const rr = Math.min(r, w / 2, h / 2);
   ctx.save();
   ctx.beginPath();
@@ -287,17 +305,48 @@ function drawRoundedImage(img, x, y, w, h, r, alpha = 0.9) {
   ctx.arcTo(x, y, x + w, y, rr);
   ctx.closePath();
   ctx.globalAlpha = alpha;
-  // compute cover crop
   const iw = img.naturalWidth,
     ih = img.naturalHeight;
-  const scale = Math.max(w / iw, h / ih);
-  const sw = w / scale,
-    sh = h / scale;
-  const sx = (iw - sw) / 2;
-  const sy = (ih - sh) / 2;
+  const s = Math.max(w / iw, h / ih);
+  const sw = w / s,
+    sh = h / s;
+  const sx = (iw - sw) / 2,
+    sy = (ih - sh) / 2;
   ctx.clip();
   ctx.drawImage(img, sx, sy, sw, sh, x, y, w, h);
   ctx.restore();
+}
+
+/* ======================== Lane packing ======================== */
+function packLanes(rowKey, rowBands) {
+  const cfg = LANE_CFG[rowKey];
+  if (!cfg) {
+    rowBands.forEach((b) => (b.__lane = 0));
+    return 1;
+  }
+  const eps = cfg.packEps || 0;
+  const sorted = [...rowBands].sort((a, b) => a.fmin - b.fmin);
+  const lanes = [];
+  sorted.forEach((b) => {
+    let placed = false;
+    for (let li = 0; li < lanes.length; li++) {
+      if (b.fmin >= lanes[li] - eps) {
+        b.__lane = li;
+        lanes[li] = b.fmax;
+        placed = true;
+        break;
+      }
+    }
+    if (!placed) {
+      b.__lane = lanes.length;
+      lanes.push(b.fmax);
+    }
+  });
+  const used = Math.min(lanes.length, cfg.maxLanes);
+  if (lanes.length > cfg.maxLanes)
+    for (const b of sorted)
+      if (b.__lane >= cfg.maxLanes) b.__lane = cfg.maxLanes - 1;
+  return used;
 }
 
 /* ======================== Bands (images + labels) ======================== */
@@ -307,10 +356,16 @@ function drawBands() {
 
   ROWS.forEach((row, rowIdx) => {
     if (!enabled.has(row.key)) return;
+
     const yCenter = rowY(rowIdx);
     const rowBands = bands.filter((b) => b.layer === row.key);
+    if (!rowBands.length) return;
 
-    // 1) band images (or color fallback)
+    const cfg = LANE_CFG[row.key];
+    const lanesUsed = packLanes(row.key, rowBands);
+    const laneGap = cfg ? cfg.laneGapPx || 0 : 0;
+    const laneH = cfg ? (h - laneGap * (lanesUsed - 1)) / lanesUsed : h;
+
     for (const b of rowBands) {
       const x1 = worldToX(b.fmin);
       const x2 = worldToX(b.fmax);
@@ -319,29 +374,27 @@ function drawBands() {
       const left = Math.max(-1000, x1);
       const right = Math.min(viewWidth() + 1000, x2);
       const w = Math.max(1, right - left);
-      const top = yCenter - h / 2;
-      const r = radius;
+      const topBase = yCenter - h / 2;
+      const top = topBase + b.__lane * (laneH + laneGap);
+      const r = radius * (laneH / h);
 
-      // try image
       let drewImg = false;
       if (b.img) {
         const entry = requestImage(b.img);
         if (entry && entry.status === "ok") {
-          drawRoundedImage(entry.img, left, top, w, h, r, 0.95);
+          drawRoundedImage(entry.img, left, top, w, laneH, r, 0.95);
           drewImg = true;
         }
       }
-
       if (!drewImg) {
-        // fallback colored pill
         ctx.save();
         ctx.fillStyle = COLORS[row.key] || "#334155";
-        ctx.globalAlpha = 0.2;
+        ctx.globalAlpha = 0.22;
         ctx.beginPath();
         ctx.moveTo(left + r, top);
-        ctx.arcTo(left + w, top, left + w, top + h, r);
-        ctx.arcTo(left + w, top + h, left, top + h, r);
-        ctx.arcTo(left, top + h, left, top, r);
+        ctx.arcTo(left + w, top, left + w, top + laneH, r);
+        ctx.arcTo(left + w, top + laneH, left, top + laneH, r);
+        ctx.arcTo(left, top + laneH, left, top, r);
         ctx.arcTo(left, top, left + w, top, r);
         ctx.closePath();
         ctx.fill();
@@ -349,46 +402,42 @@ function drawBands() {
       }
     }
 
-    // 2) label declutter (map-style)
+    // labels per lane
     ctx.font = "12px system-ui";
-    const labels = rowBands
-      .map((b) => {
-        const cx = (worldToX(b.fmin) + worldToX(b.fmax)) / 2;
-        const width = ctx.measureText(b.label).width;
-        return { band: b, cx, width };
-      })
-      .filter((l) => l.cx + l.width / 2 > 0 && l.cx - l.width / 2 < viewWidth())
-      .sort((a, b) => a.cx - b.cx);
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    for (let li = 0; li < lanesUsed; li++) {
+      const laneBands = rowBands.filter((b) => b.__lane === li);
+      const labels = laneBands
+        .map((b) => {
+          const cx = (worldToX(b.fmin) + worldToX(b.fmax)) / 2;
+          const width = ctx.measureText(b.label).width;
+          return { band: b, cx, width };
+        })
+        .filter(
+          (l) => l.cx + l.width / 2 > 0 && l.cx - l.width / 2 < viewWidth(),
+        )
+        .sort((a, b) => a.cx - b.cx);
 
-    const laneOffsets = [0, -12, +12];
-    const placed = [];
-    for (const label of labels) {
-      let laneFound = null;
-      for (let li = 0; li < laneOffsets.length; li++) {
-        const lane = placed.filter((p) => p.lane === li);
-        const overlaps = lane.some(
+      const placed = [];
+      for (const label of labels) {
+        const overlaps = placed.some(
           (p) => Math.abs(label.cx - p.cx) < label.width / 2 + p.width / 2 + 6,
         );
-        if (!overlaps) {
-          laneFound = li;
-          break;
-        }
+        if (!overlaps) placed.push(label);
       }
-      if (laneFound != null) placed.push({ ...label, lane: laneFound });
-    }
 
-    for (const p of placed) {
-      const ly = yCenter + laneOffsets[p.lane];
-      ctx.save();
-      ctx.textAlign = "center";
-      ctx.textBaseline = "middle";
-      // text halo for readability atop images
-      ctx.lineWidth = 4;
-      ctx.strokeStyle = "rgba(255,255,255,0.95)";
-      ctx.strokeText(p.band.label, p.cx, ly);
-      ctx.fillStyle = "#111827";
-      ctx.fillText(p.band.label, p.cx, ly);
-      ctx.restore();
+      const topBase = yCenter - h / 2;
+      const ly = topBase + li * (laneH + laneGap) + laneH / 2;
+      for (const p of placed) {
+        ctx.save();
+        ctx.lineWidth = 4;
+        ctx.strokeStyle = "rgba(255,255,255,0.95)";
+        ctx.strokeText(p.band.label, p.cx, ly);
+        ctx.fillStyle = "#111827";
+        ctx.fillText(p.band.label, p.cx, ly);
+        ctx.restore();
+      }
     }
   });
 }
@@ -396,6 +445,13 @@ function drawBands() {
 /* ======================== Render ======================== */
 function render() {
   resizeCanvasToDisplaySize();
+
+  // hard clear in device pixels to avoid ghosting
+  ctx.save();
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.restore();
+
   drawBackground();
   drawVisibleLightGradient();
   drawBands();
@@ -416,29 +472,70 @@ function findHoverBand(mouseX, mouseY) {
   if (!row || !enabled.has(row.key)) return null;
 
   const h = rowHeight();
+  const cfg = LANE_CFG[row.key];
+  const lanesUsed = cfg
+    ? Math.max(
+        1,
+        packLanes(
+          row.key,
+          bands.filter((b) => b.layer === row.key),
+        ),
+      )
+    : 1;
+  const laneGap = cfg ? cfg.laneGapPx || 0 : 0;
+  const laneH = cfg ? (h - laneGap * (lanesUsed - 1)) / lanesUsed : h;
+
   if (bestDy > h) return null;
 
-  const candidates = bands.filter(
-    (b) =>
-      b.layer === row.key &&
-      mouseX >= worldToX(b.fmin) &&
-      mouseX <= worldToX(b.fmax),
-  );
+  const topBase = rowY(bestRowIdx) - h / 2;
+  const relY = mouseY - topBase;
+  let approxLane = 0;
+  if (cfg) {
+    approxLane = Math.floor(relY / (laneH + laneGap));
+    approxLane = Math.max(0, Math.min(approxLane, lanesUsed - 1));
+  }
+
+  const candidates = bands.filter((b) => {
+    if (b.layer !== row.key) return false;
+    const xOK = mouseX >= worldToX(b.fmin) && mouseX <= worldToX(b.fmax);
+    if (!xOK) return false;
+    if (!cfg) return true;
+    return (b.__lane ?? 0) === approxLane;
+  });
   if (!candidates.length) return null;
+
   candidates.sort((a, b) => a.fmax - a.fmin - (b.fmax - b.fmin));
   return candidates[0];
 }
-function showTooltip(band, x, y) {
+
+// keep a small set to avoid spammy logs
+const _missingInfoLogged = new Set();
+
+function showTooltip(band) {
   tooltipEl.classList.remove("hidden");
-  const fmt = (v) => {
-    const p = Math.floor(log10(v));
-    const base = v / Math.pow(10, p);
-    return `${base.toFixed(3)}e${p} Hz`;
-  };
-  tooltipEl.innerHTML = `<b>${band.label}</b><br>${fmt(band.fmin)} – ${fmt(band.fmax)}<br><span style="opacity:.7">${band.layer}</span>`;
-  const rect = canvas.getBoundingClientRect();
-  tooltipEl.style.left = `${rect.left + x}px`;
-  tooltipEl.style.top = `${rect.top + y}px`;
+
+  let html = `
+    <div style="max-width:340px; white-space:normal; line-height:1.35;">
+      <b>${band.label}</b><br>
+      ${fmtSciHz(band.fmin)} – ${fmtSciHz(band.fmax)}<br>
+      <span style="opacity:.7">${band.layer}</span>
+  `;
+
+  if (band.img) {
+    html += `<br><img src="${band.img}" style="max-width:320px;max-height:180px;margin-top:6px;border-radius:6px;display:block;">`;
+  }
+
+  if (band.info && String(band.info).trim()) {
+    html += `<br><div style="margin-top:6px; font-size:0.9em;">${band.info}</div>`;
+  } else {
+    if (band && band.label && !_missingInfoLogged.has(band.label)) {
+      _missingInfoLogged.add(band.label);
+      console.warn(`[tooltip] Missing "info" for`, band.label, band);
+    }
+  }
+
+  html += `</div>`;
+  tooltipEl.innerHTML = html;
 }
 function hideTooltip() {
   tooltipEl.classList.add("hidden");
@@ -475,16 +572,22 @@ window.addEventListener("mousemove", (e) => {
   if (dragging) {
     offset = offsetAtDragStart + (e.clientX - dragStartX);
     render();
+    return;
   }
   const rect = canvas.getBoundingClientRect();
   const x = e.clientX - rect.left;
   const y = e.clientY - rect.top;
   const band = findHoverBand(x, y);
-  if (band) showTooltip(band, x, y);
-  else hideTooltip();
+  if (band) {
+    // debug: see whether info is present
+    console.log("hover band", band.label, band.info);
+    showTooltip(band);
+  } else {
+    hideTooltip();
+  }
 });
 
-// keyboard pan/zoom
+// keyboard pan/zoom (h/l pan, k/j zoom)
 window.addEventListener("keydown", (e) => {
   const panStepPx = Math.round(viewWidth() * 0.1);
   const zoomFactor = 1.15;
@@ -509,13 +612,14 @@ window.addEventListener("keydown", (e) => {
 /* ======================== Layer toggles ======================== */
 function initToggles() {
   const container = document.getElementById("layer-toggles");
+  if (!container) return; // optional UI
   container.innerHTML = "";
   ROWS.forEach((row) => {
     const wrap = document.createElement("label");
     wrap.className = "inline-flex items-center gap-2 text-sm";
     wrap.innerHTML = `
       <input type="checkbox" class="h-4 w-4 accent-black" ${enabled.has(row.key) ? "checked" : ""}>
-      <span class="font-medium" style="color:${COLORS[row.key]}">${row.key}</span>
+      <span class="font-medium" style="color:${COLORS[row.key] || "#111"}">${row.label}</span>
     `;
     container.appendChild(wrap);
     wrap.querySelector("input").addEventListener("change", (e) => {
@@ -531,7 +635,10 @@ async function loadData() {
   const validLayer = new Set(ROWS.map((r) => r.key));
   let json = null;
   try {
-    const res = await fetch("./spectrum.json", { cache: "no-cache" });
+    // cache-bust to avoid stale JSON during dev
+    const res = await fetch(`./spectrum.json?v=${Date.now()}`, {
+      cache: "no-cache",
+    });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     json = await res.json();
   } catch (err) {
@@ -539,34 +646,55 @@ async function loadData() {
     alert("Failed to load spectrum.json (using small fallback).");
     json = {
       bands: [
-        { layer: "ITU", label: "VLF", fmin: 3e3, fmax: 3e4, img: "" },
-        { layer: "NASA", label: "X-band", fmin: 8e9, fmax: 12e9, img: "" },
         {
-          layer: "Natural/Human",
-          label: "FM Radio",
+          layer: "ITU",
+          label: "VLF",
+          fmin: 3e3,
+          fmax: 3e4,
+          img: "",
+          info: "Very Low Frequency demo.",
+        },
+        {
+          layer: "Telescope",
+          label: "Hubble",
+          fmin: 1e14,
+          fmax: 3e15,
+          img: "",
+          info: "HST demo band.",
+        },
+        {
+          layer: "Natural",
+          label: "FM Radio (demo)",
           fmin: 88e6,
           fmax: 108e6,
           img: "",
+          info: "Demo natural (actually human-made).",
         },
       ],
     };
   }
 
   const raw = Array.isArray(json) ? json : json.bands || [];
+
+  // IMPORTANT: keep arbitrary extra fields like `info` by spreading `b`
   bands = raw
-    .map((b) => ({
-      layer: String(b.layer),
-      label: String(b.label || ""),
-      fmin: Number(b.fmin),
-      fmax: Number(b.fmax),
-      img: b.img ? String(b.img) : "", // <---- image url from JSON
-    }))
+    .map((b) => {
+      const layer = String(b.layer);
+      const label = String(b.label || "");
+      const fmin = Number(b.fmin);
+      const fmax = Number(b.fmax);
+      const img = b.img ? String(b.img) : "";
+      const info = b.info != null ? String(b.info) : ""; // preserve info if provided
+      return { ...b, layer, label, fmin, fmax, img, info };
+    })
     .filter(
       (b) =>
         validLayer.has(b.layer) &&
         isFinite(b.fmin) &&
         isFinite(b.fmax) &&
-        b.fmax > b.fmin,
+        // allow zero-width ranges (lines); renderer ensures min 1px width
+        b.fmax >= b.fmin &&
+        b.label.length > 0,
     );
 
   if (!bands.length) {

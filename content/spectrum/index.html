@@ -4,54 +4,71 @@
     <meta charset="utf-8" />
     <title>EM Spectrum Viewer</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!-- Tailwind CDN is optional; just used for quick layout/checkbox styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
       html,
       body {
+        background: url("wall.png") center center / cover no-repeat fixed;
         height: 100%;
+        margin: 0;
       }
       #canvas {
         touch-action: none;
         cursor: grab;
+        display: block;
+        margin: 0 auto;
       }
       #canvas.dragging {
         cursor: grabbing;
       }
       .tooltip {
-        position: absolute;
-        pointer-events: none;
+        position: relative;
+        transform: none;
         padding: 0.35rem 0.5rem;
         background: #111827;
-        color: white;
+        color: #fff;
         border-radius: 0.375rem;
         font-size: 0.875rem;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
-        white-space: nowrap;
-        transform: translate(10px, 10px);
+        white-space: normal;
+        max-width: 400px;
+      }
+      #layer-toggles {
+        display: none;
+      }
+      /* Ensure tooltip text can wrap and isn't clipped */
+      #tooltipEl {
+        max-width: 360px;
+        white-space: normal; /* critical if it was nowrap */
+        overflow: visible; /* avoid hidden clipping */
+      }
+      .tooltip img {
+        max-width: 100%;
+        height: auto;
       }
     </style>
   </head>
-  <body class="h-full bg-gray-50">
-    <div class="max-w-6xl mx-auto p-4 space-y-3">
+  <body class="h-full">
+    <div class="w-full p-4 space-y-3">
       <header class="flex flex-wrap items-center justify-between gap-3">
-        <h1 class="text-xl font-semibold">
-          Electromagnetic Spectrum (log scale)
+        <h1 class="text-xl font-semibold text-white drop-shadow">
+          Electromagnetic Spectrum
         </h1>
         <div id="layer-toggles" class="flex gap-4 items-center"></div>
       </header>
 
-      <div class="relative rounded-xl bg-white ring-1 ring-gray-200 shadow-sm">
-        <canvas
-          id="canvas"
-          width="1200"
-          height="680"
-          class="w-full h-[640px] rounded-xl"
-        ></canvas>
-        <div id="tooltip" class="tooltip hidden"></div>
+      <!-- Spectrum panel with 30% opacity and padding -->
+      <div
+        class="relative mx-auto w-[95vw] rounded-2xl bg-white/60 backdrop-blur p-3 ring-1 ring-white/40 shadow-lg"
+      >
+        <!-- Canvas fills container width and 50% viewport height -->
+        <canvas id="canvas" class="w-full h-[50vh] rounded-xl"></canvas>
       </div>
 
-      <footer class="text-xs text-gray-500">
+      <!-- Tooltip BELOW the stage -->
+      <div id="tooltip" class="tooltip hidden mt-2"></div>
+
+      <footer class="text-xs text-gray-200">
         Scroll to zoom (centered on cursor). Drag to pan. Data loads from
         <code>spectrum.json</code>.
       </footer>
