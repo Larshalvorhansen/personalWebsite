@@ -259,17 +259,17 @@
       </h2>
 
 <button
-  id="updates-button"
+  id="github-button"
   class="fixed bottom-5 right-5 z-50 px-4 py-2 text-black rounded-lg shadow transition-opacity duration-500"
   style="background-color: #38acfc;"
   onclick="
-    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-    const btn = document.getElementById('updates-button');
+    window.open('https://github.com/larshalvorhansen/lambdasim', '_blank');
+    const btn = document.getElementById('github-button');
     btn.style.opacity = '0';
     setTimeout(() => btn.style.display = 'none', 500);
   "
 >
-  Click to see the newest updates
+  Click to view the project on GitHub
 </button>
 
       <br /
