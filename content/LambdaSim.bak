@@ -115,19 +115,7 @@
         transform: rotate(180deg);
       }
     </style>
-  
-<script src="https://cdn.brevo.com/js/sdk-loader.js" async></script>
-<script>
-    // Version: 2.0
-    window.Brevo = window.Brevo || [];
-    Brevo.push([
-        "init",
-        {
-        client_key: "uej1tbfoc6wlx6kk5ev5over"
-        }
-    ]);
-</script>
-</head>
+  </head>
 
   <body class="bg-white text-gray-900">
     <!-- Sidebar (left untouched) -->

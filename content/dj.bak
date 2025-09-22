@@ -161,18 +161,6 @@
             box-shadow: 0 0 10px 15px rgba(255, 0, 225, 0.5);
         }
     </style>
-
-<script src="https://cdn.brevo.com/js/sdk-loader.js" async></script>
-<script>
-    // Version: 2.0
-    window.Brevo = window.Brevo || [];
-    Brevo.push([
-        "init",
-        {
-        client_key: "uej1tbfoc6wlx6kk5ev5over"
-        }
-    ]);
-</script>
 </head>
 
 <body id="top" class="bg-green-400 text-white font-sans">

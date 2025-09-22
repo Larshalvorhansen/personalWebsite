@@ -44,18 +44,6 @@
             }
         }
     </style>
-
-<script src="https://cdn.brevo.com/js/sdk-loader.js" async></script>
-<script>
-    // Version: 2.0
-    window.Brevo = window.Brevo || [];
-    Brevo.push([
-        "init",
-        {
-        client_key: "uej1tbfoc6wlx6kk5ev5over"
-        }
-    ]);
-</script>
 </head>
 <!--HER I Script LIGGER MALEN FOR HVER UKE. Bruk den for hver uke.-->
 <script>

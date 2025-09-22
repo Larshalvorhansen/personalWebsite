@@ -71,18 +71,6 @@
       opacity: 0.8; /* Slight transparency for effect */
     }
   </style>
-
-<script src="https://cdn.brevo.com/js/sdk-loader.js" async></script>
-<script>
-    // Version: 2.0
-    window.Brevo = window.Brevo || [];
-    Brevo.push([
-        "init",
-        {
-        client_key: "uej1tbfoc6wlx6kk5ev5over"
-        }
-    ]);
-</script>
 </head>
 
 <body class="bg-gray-900 text-white font-sans">
