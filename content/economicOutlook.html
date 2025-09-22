@@ -25,6 +25,18 @@ The goal is for this website to display economic outlooks that I, Lars Halvor, h
     />
     <link rel="manifest" href="/site.webmanifest" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <!--brevo stuff-->
+    <script src="https://cdn.brevo.com/js/sdk-loader.js" async></script>
+    <script>
+      // Version: 2.0
+      window.Brevo = window.Brevo || [];
+      Brevo.push([
+        "init",
+        {
+          client_key: "uej1tbfoc6wlx6kk5ev5over",
+        },
+      ]);
+    </script>
   </head>
 
   <body class="p-8 md:p-16 max-w-3xl mx-auto">
