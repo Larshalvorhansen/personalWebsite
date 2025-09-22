@@ -6,11 +6,10 @@ The goal is for this website to display economic outlooks that I, Lars Halvor, h
 <html lang="en">
   <style>
     * {
-      font-family: "Space Grotesk", sans-serif;
+      font-family: "Space Grotesk", sans-serif !important;
     }
-
     h1.title {
-      font-family: "Bentham", serif;
+      font-family: "Bentham", serif !important;
     }
   </style>
 
@@ -108,7 +107,7 @@ The goal is for this website to display economic outlooks that I, Lars Halvor, h
     </main>
 
     <!-- Newsletter Signup Section -->
-    <section class="mt-16 mb-8">
+    <section class="mt-16 mb-8 w-full">
       <div class="w-full bg-gray-50 rounded-lg p-6 border border-gray-200">
         <h3 class="text-xl font-bold text-gray-800 mb-4 text-center">
           Stay Updated
@@ -117,18 +116,22 @@ The goal is for this website to display economic outlooks that I, Lars Halvor, h
           Subscribe to get the latest economic insights and analysis delivered
           to your inbox.
         </p>
-
-        <!-- Full-width responsive iframe container -->
-        <div class="w-full overflow-hidden rounded-md shadow-sm">
+        <!-- Full-width iframe container -->
+        <div class="w-full">
           <iframe
             width="100%"
             height="305"
-            src="https://205e8466.sibforms.com/serve/MUIFAA0RPT1_PQnyE-MVzeN_sG269yRcpzoowWjUoPxFpjN5q22gCOUGazqg8xHSscW3NRiKzXJNurFopXSX_Lh2nNDOj5zu87g2So2o9s6b8YZuzGqpEBswsWD80f51WbWJUpTN0qKOGGiW8xoPxRxQRVBzsic_CB3pr5FtRZwB8tlsYSac4KHmInjAoVo1RmmCA9Qfwc883HDz"
+            src="https://205e8466.sibforms.com/serve/MUIFAFPTQOe5QbIA5UvcIUMVm3UPk9SXqNp_fs5xJ3tmeb0Kz8RqtZgFlZHI-MG0tx4iYPuUKyiOERTCnZl9Hr-eczr3X8yB9JygRNsAJvr-ojlQOxtjBO7-D6EXhZPQbv9eTnOq9mmH3WcKLfT2l8Uv4Yuq8T7wARuujcPICRkTBpwp5vPnwjkv2JMWHLhJNZ3ouEy_iWBA7rQh"
             frameborder="0"
             scrolling="auto"
             allowfullscreen
-            class="min-h-[305px] bg-white"
-            style="border: none"
+            style="
+              display: block;
+              margin-left: auto;
+              margin-right: auto;
+              width: 100%;
+              max-width: 100%;
+            "
           ></iframe>
         </div>
       </div>
