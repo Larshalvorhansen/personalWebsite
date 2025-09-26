@@ -110,7 +110,7 @@ The goal is for this website to display economic outlooks that I, Lars Halvor, h
       async function fetchBlogPosts() {
         try {
           const sheetId = "1cooW6kZlSKUgBjK4uPnv4cynbw3nM7NjwMjDHHFJ6mY";
-          const apiKey = "AIzaSyABuVJIWSJiUqk01nvpYF4QVzmgyZDCaGc"; <!--process.env.API_KEY;  Its ok to have api Key here since its public and read only-->
+          const apiKey = "AIzaSyABuVJIWSJiUqk01nvpYF4QVzmgyZDCaGc"; <!--public and read only so its ok!-->
           const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/EO2Response!A2:G?key=${apiKey}`;
 
           const response = await fetch(url);
