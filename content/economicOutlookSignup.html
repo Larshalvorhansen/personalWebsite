@@ -1,0 +1,102 @@
+
+<!--
+The goal is for this website to display economic outlooks that I, Lars Halvor, have placed in a private spreadsheet online. A great CRM system if i can get it to work.
+-->
+
+<!doctype html>
+<html lang="en">
+  <style>
+    * {
+      font-family: "Space Grotesk", sans-serif !important;
+    }
+    h1.title {
+      font-family: "Bentham", serif !important;
+    }
+  </style>
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Economic Outλook Signup</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="manifest" href="/site.webmanifest" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!--brevo stuff-->
+    <script src="https://cdn.brevo.com/js/sdk-loader.js" async></script>
+    <script>
+      // Version: 2.0
+      window.Brevo = window.Brevo || [];
+      Brevo.push([
+        "init",
+        {
+          client_key: "uej1tbfoc6wlx6kk5ev5over",
+        },
+      ]);
+    </script>
+  </head>
+
+  <body class="p-8 md:p-16 max-w-3xl mx-auto">
+    <!-- Header -->
+    <header class="mb-12">
+      <!-- Load Bentham font from Google Fonts -->
+      <link
+        href="https://fonts.googleapis.com/css2?family=Bentham&display=swap"
+        rel="stylesheet"
+      />
+
+      <!-- Tailwind HTML -->
+      <h1
+        class="title text-5xl md:text-7xl lg:text-9xl font-bold leading-tight tracking-tight uppercase font-bentham"
+      >
+        Economic Out
+        <a
+          href="https://halvorhansen.no/lambdasim"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline text-blue-500 lowercase align-baseline leading-none no-underline hover:text-blue-700 tracking-tighter mx-[-0.1em] font-bentham"
+        >
+          λ
+        </a>
+        ook signup
+      </h1>
+      <p class="mt-4 text-lg md:text-2xl text-gray-700">
+        Insights on the current state and future outlook of the world, from an
+        economic and geopolitical perspective.
+      </p>
+      <p class="mt-2 text-sm md:text-lg text-gray-500">
+        <!--<b
+          >As this website is only in its infancy weekly updates will start out
+          quite brief. Please also sprinkle some grains of salt when reading as
+          im only in my 2nd year of an economics bachelor.</b
+        ><br />-->
+        The reason I write this is to get some wheels turning and gradually
+        improve by engaging with the constant stream of reports, statistics, and
+        analysis being published all around.
+      </p>
+      <!--  <p class="mt-2 text-sm md:text-lg text-gray-500">
+      <b>Since week 5 this site has been down prioritized. However, I will pick this up again at week 19. Stay tuned!</b>
+    </p>-->
+    </header>
+
+
+  <!-- Newsletter Signup Section -->
+  <!-- Full-width iframe container -->
+  <iframe
+    width="540"
+    height="540"
+    src="https://205e8466.sibforms.com/serve/MUIFAENkeHNkEaGxjTOJr8a26weXlWYi7C_aY4BcGa4-Kz-tZEdA1zzEaubAz-3Zobkx5CkfViCxfhqKMtMAV1Wl0I_XniYTQ1J3m58_gGjQHoPEvMSrxwNvqa4-zhvB7cANeaY5PxSpWKnIbQmX9gTNXos-8ECQ3eq41vHEuR7YWU2OkmJrXYc8qs1ku9QYK3qUKXMimoIkFOtQ"
+    frameborder="0"
+    scrolling="auto"
+    allowfullscreen
+    style="
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 100%;
+    "
+  ></iframe>
+</html>
