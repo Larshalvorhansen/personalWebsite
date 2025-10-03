@@ -1,1 +1,7 @@
-Quality beats quantity. 
+Since I have told myself to always post weekly before Friday 18:18 Oslo time, and the post I have prepared this week is not ready for publishing yet, this is what I'm posting instead this week.
+
+No one knows the best strategy for saving personal wealth. Some invest in property, some strategies focus entirely on the global index, and what people recommend you do is often consciously or unconsciously based on what has been working in the long or short term past. Nowadays, for instance, saving in gold is popular. That is not surprising, as the value of gold is at an all-time high and has been soaring in correlation with rising global uncertainty and the uncertainty in the dollar, as well as a potential changing world order from USD to Chinese yuan down the road.
+
+With that caveat in mind, one investment strategy seems to be a good idea: the 25/25/25/25 portfolio meaning a quarter to stocks, bonds, gold, and cash. This was a brainchild of Harry Browne from the 1980s, but now comes an adittional twist. Incorporate the Warren Buffett indicator as well. If the Buffett indicator is above 100%, then for every half percent above 100%, decrease the stock allocation by a quarter percent and increase the gold allocation by one percent. Here are examples: for a Buffett indicator of 110%, the allocation would be 22.5% stocks, 25% bonds, 27.5% gold, and 25% cash; for 150%, the allocation would be 12.5% stocks, 25% bonds, 37.5% gold, and 25% cash; and for today's Buffett indicator of 217%, which means that today's markets are strongly overvalued, the allocation would be 0% stocks, 25% bonds, 50% gold, and 25% cash.
+
+Stay tuned for next weeks post on tuesday at 14:00 Oslo time! There will be a comprehensive PCA analysis.
