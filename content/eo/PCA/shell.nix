@@ -11,11 +11,12 @@ let
       jupyter
       ipykernel
     ]);
+
 in pkgs.mkShell {
   buildInputs = [ py pkgs.sqlite ];
 
   shellHook = ''
-        echo "--- Entering Nix Shell for Data Analysis Project ---"
+        echo "Entering Nix Shell for Data Analysis"
         echo "Python: $(python --version)"
         
         python - <<'PY'
