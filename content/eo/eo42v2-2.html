@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Personal Economic Outlook - PCA Analysis</title>
+  </head>
+  <body>
+    <h1>Personal Economic Outlook - PCA Analysis</h1>
+
+    <p>
+      Turns out doing a good PCA analysis was harder than I thought. So this
+      week I'll be writing a more personal version of the economic outlook.
+    </p>
+
+    <h2>Deadlines and Expectations</h2>
+
+    <p>
+      We all have, or at least speaking for myself, I often have unrealistic and
+      idealistic expectations for myself. And from experience I know that I
+      won't reach them 100%, but this is also fine because I know that getting
+      10% of the way to the moon is still a pretty good HEO (Highly Elliptical
+      Orbit) around earth.
+    </p>
+
+    <p>
+      There is always only one true way of knowing what will happen in the
+      future and that is simply by extrapolation, either in a detailed
+      <a href="https://en.wikipedia.org/wiki/Monte_Carlo_method"
+        >Monte Carlo simulation</a
+      >
+      or in real time by just simply waiting, obviously.
+    </p>
+
+    <h2>Prediction</h2>
+
+    <p>
+      Despite this, I predict that next week will be a good presentation of a
+      PCA analysis showing the explained variance and principal components of
+      the 500 biggest publicly listed Norwegian companies.
+    </p>
+
+    <p>
+      PCA is not a commonly known thing so I'll explain it here for readers next
+      week. It is really worth knowing about because it is a really good way to
+      make sense of high dimensional data.
+    </p>
+
+    <p>
+      "What do I know about high dimensional data? Nothing in my life is ever
+      more than 3-dimensional," you might be thinking for yourself at first.
+      However, let me give you an example of a highly dimensional dataset you
+      already know or have a feeling of many pieces of: The set of all world
+      countries and their corresponding attributes such as latitude, longitude,
+      GDP, population, climate, standard of living, employment rate, life
+      expectancy, and many more.
+    </p>
+
+    <p>In a table form it would look something like this:</p>
+
+    <table>
+      <tr>
+        <th>Country</th>
+        <th>Population (millions)</th>
+        <th>GDP per capita ($)</th>
+        <th>Employment Rate (%)</th>
+        <th>Life Expectancy (years)</th>
+      </tr>
+      <tr>
+        <td>USA</td>
+        <td>335</td>
+        <td>86,533</td>
+        <td>75.0</td>
+        <td>77</td>
+      </tr>
+      <tr>
+        <td>Norway</td>
+        <td>5.6</td>
+        <td>78,700</td>
+        <td>77.4</td>
+        <td>83</td>
+      </tr>
+      <tr>
+        <td>UK</td>
+        <td>68</td>
+        <td>48,900</td>
+        <td>75.0</td>
+        <td>81</td>
+      </tr>
+      <tr>
+        <td>South Africa</td>
+        <td>60</td>
+        <td>6,330</td>
+        <td>58.0</td>
+        <td>64</td>
+      </tr>
+      <tr>
+        <td>Lesotho</td>
+        <td>2.3</td>
+        <td>1,200</td>
+        <td>52.0</td>
+        <td>54</td>
+      </tr>
+      <tr>
+        <td>Costa Rica</td>
+        <td>5.2</td>
+        <td>12,500</td>
+        <td>62.0</td>
+        <td>78</td>
+      </tr>
+      <tr>
+        <td>Spain</td>
+        <td>48</td>
+        <td>30,500</td>
+        <td>67.0</td>
+        <td>84</td>
+      </tr>
+      <tr>
+        <td>Bhutan</td>
+        <td>0.8</td>
+        <td>3,400</td>
+        <td>65.0</td>
+        <td>72</td>
+      </tr>
+      <tr>
+        <td>Singapore</td>
+        <td>5.9</td>
+        <td>90,674</td>
+        <td>73.0</td>
+        <td>84</td>
+      </tr>
+    </table>
+
+    <p>
+      How would we plot these? We could do one plot of population on the x-axis
+      and GDP on the other, or maybe even make a 3D plot of population on x, GDP
+      on y, and climate on z. This way we can see if there are relationships
+      between these factors, such as the fact that high populations correlate
+      with GDP to a certain degree because we seem to have a row of countries in
+      a certain line.
+    </p>
+
+    <p>
+      However, what if we wanted to just look at all of them at once?
+      Unfortunately we can't. We would need an x-axis, y-axis, z-axis, and many
+      more axes. No one can comprehend so many dimensions at once. However, we
+      can project them using some clever linear algebra with regards to
+      eigenvectors and eigenvalues. You can read more if you are curious here.
+    </p>
+
+    <h2>Understanding PCA Through Projection</h2>
+
+    <p>
+      Anyhow, if you don't want to dive into the mathematics, you can think of
+      projecting 3 dimensions onto 2 dimensions like this: Imagine you have a
+      child's <a href="https://en.wikipedia.org/wiki/Orrery">orrery</a> toy (a
+      mechanical model of the solar system with planets that orbit around a
+      central sun). Then you have a lamp in the room that casts a shadow from
+      the 3D toy onto the wall. This is how we can think of projecting a higher
+      dimension (3 in this case) onto a 2-dimensional plane.
+    </p>
+
+    Ill have an image here
+    <p>
+      But remember, we can still choose where to place the lamp. So to make
+      things less arbitrary and more meaningful, for each dimension we reduce,
+      we choose the angle that maximizes the spread of the objects on the wall.
+      In this case with the orrery of the solar system, that would be somewhere
+      from the side where all the planets are on roughly the same plane.
+    </p>
+
+    <h2>Principal Components and Explained Variance</h2>
+
+    <p>
+      In PCA analysis, we create new axes called principal components (PC1, PC2,
+      PC3, etc.). PC1 is the direction that captures the most variance in the
+      data. PC2 captures the second most variance and is perpendicular to PC1,
+      and so on. The explained variance tells us how much of the total variation
+      in our data is captured by each principal component.
+    </p>
+
+    <p>
+      For example, if PC1 has 45% explained variance, it means that this single
+      axis captures 45% of all the variation in our multi-dimensional dataset.
+      If PC2 has 25% explained variance, then together PC1 and PC2 capture 70%
+      of the variation. This allows us to reduce many dimensions down to just 2
+      or 3 that we can actually visualize and understand, while still retaining
+      most of the important information.
+    </p>
+
+    <p>
+      Next week, I'll present the full PCA analysis of the 500 largest publicly
+      listed Norwegian companies, showing which financial metrics drive the most
+      variance in company performance and how companies cluster together in this
+      reduced dimensional space.
+    </p>
+  </body>
+</html>

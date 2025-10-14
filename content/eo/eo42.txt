@@ -1,0 +1,10 @@
+Status
+Norwegian top 500 listed compoanuies
+A look at what secotrs are biggest by employees from the top 500 publicly traded companies
+By revenue
+A pca analysis of companies n of employees and profits and year established
+
+Prediction
+Based on the ananlysis we se that ... explains most of the varance in the data so that means that ... is most affected by .... 
+In the future it is therefore not crazy to imagine that the outliers today will catch up an allign with the rest of the data. Thus company ... will probably end up being more similar to ... in the future. Atleast if we can assume that these are the biggest factors in the comnpany which migth ofcource not be the full pouicture.
+

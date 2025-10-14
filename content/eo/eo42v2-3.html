@@ -1,0 +1,529 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Economic Outlook Newsletter</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Bentham&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        font-family: "Space Grotesk", sans-serif;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        padding: 32px 24px;
+      }
+      .container2 {
+        display: flex;
+        flex-wrap: wrap;
+        background-color: #f9fafb;
+      }
+      .container2 .read-more {
+        min-width: 250px;
+        flex: 1;
+      }
+      .header {
+        margin-bottom: 48px;
+        text-align: left;
+      }
+      .title {
+        font-family: "Bentham", serif;
+        font-size: 48px;
+        font-weight: bold;
+        line-height: 1.1;
+        letter-spacing: -0.02em;
+        text-transform: uppercase;
+        color: #111827;
+        margin-bottom: 16px;
+      }
+      .lambda {
+        color: #3b82f6;
+        text-transform: lowercase;
+        text-decoration: none;
+        letter-spacing: -0.05em;
+      }
+      .lambda:hover {
+        color: #1d4ed8;
+      }
+      .subtitle {
+        font-size: 18px;
+        color: #374151;
+        margin-bottom: 8px;
+        line-height: 1.4;
+      }
+      .description {
+        font-size: 14px;
+        color: #6b7280;
+        line-height: 1.5;
+        margin-bottom: 24px;
+      }
+      .brand-link {
+        display: block;
+        padding: 16px;
+        background-color: #f3f4f6;
+        border: 1px solid #d1d5db;
+        border-radius: 8px;
+        text-decoration: none;
+        color: inherit;
+        transition: background-color 0.2s;
+      }
+      .brand-link:hover {
+        background-color: #e5e7eb;
+      }
+      .brand-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .brand-text {
+        font-size: 14px;
+        color: #1f2937;
+      }
+      .brand-name {
+        font-weight: 600;
+      }
+      .logo {
+        height: 48px;
+        width: auto;
+        margin-left: 16px;
+      }
+      .post {
+        padding: 32px 0;
+        border-top: 1px solid #d1d5db;
+      }
+      .post-title {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 8px;
+        color: #111827;
+      }
+      .post-date {
+        font-size: 14px;
+        color: #6b7280;
+        margin-bottom: 16px;
+        display: block;
+      }
+      .post-content {
+        margin-bottom: 16px;
+        line-height: 1.6;
+        color: #374151;
+      }
+      .post-content table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 16px 0;
+        font-size: 14px;
+      }
+      .post-content table th {
+        background-color: #f3f4f6;
+        padding: 12px;
+        text-align: left;
+        border: 1px solid #d1d5db;
+        font-weight: 600;
+        color: #111827;
+      }
+      .post-content table td {
+        padding: 10px 12px;
+        border: 1px solid #d1d5db;
+        color: #374151;
+      }
+      .post-content table tr:nth-child(even) {
+        background-color: #f9fafb;
+      }
+      .post-content a {
+        color: #3b82f6;
+        text-decoration: underline;
+      }
+      .post-content a:hover {
+        color: #1d4ed8;
+      }
+      .post-image {
+        width: 100%;
+        object-fit: contain;
+        border-radius: 6px;
+        margin-bottom: 8px;
+      }
+      .image-caption {
+        font-size: 14px;
+        font-style: italic;
+        color: #6b7280;
+        margin-bottom: 16px;
+      }
+      .sources {
+        font-size: 12px;
+        color: #6b7280;
+        line-height: 1.5;
+      }
+      .sources a {
+        color: #3b82f6;
+        text-decoration: underline;
+      }
+      .sources a:hover {
+        color: #1d4ed8;
+      }
+      .read-more {
+        margin-top: 32px;
+        padding: 24px;
+        background-color: #f9fafb;
+        border-radius: 8px;
+        text-align: center;
+      }
+      .read-more-link {
+        display: inline-block;
+        padding: 12px 24px;
+        background-color: #3b82f6;
+        color: white;
+        text-decoration: none;
+        border-radius: 6px;
+        font-weight: 600;
+        transition: background-color 0.2s;
+      }
+      .read-more-link:hover {
+        background-color: #1d4ed8;
+      }
+      .read-more-text {
+        margin-bottom: 16px;
+        color: #374151;
+      }
+      @media (max-width: 600px) {
+        .container {
+          padding: 24px 16px;
+        }
+        .title {
+          font-size: 36px;
+        }
+        .subtitle {
+          font-size: 16px;
+        }
+        .brand-content {
+          flex-direction: column;
+          text-align: center;
+        }
+        .logo {
+          margin-left: 0;
+          margin-top: 12px;
+        }
+        .container2 {
+          flex-direction: column;
+        }
+        .post-content table {
+          font-size: 12px;
+        }
+        .post-content table th,
+        .post-content table td {
+          padding: 8px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <h1 class="title">
+          Economic Out<a href="https://halvorhansen.no/lambdasim" class="lambda"
+            >λ</a
+          >ook Newsletter
+        </h1>
+        <p class="subtitle">
+          The current state & future outlook of topics regarding the world
+          economy.
+        </p>
+        <p class="description">
+          This is a newsletter I try to write weekly. For me it's a great way to
+          grow my career as a data scientist, academic, and as a developer. For
+          you it's hopefully useful!
+        </p>
+      </header>
+      <main>
+        <div class="post">
+          <h2 class="post-title">
+            Personal Economic Outlook - Understanding PCA Analysis
+          </h2>
+          <small class="post-date">14/10/2025 Week 42</small>
+          <div class="post-content">
+            <p>
+              Turns out doing a good PCA analysis was harder than I thought. So
+              this week I'll be writing a more personal version of the economic
+              outlook.
+            </p>
+            <br />
+
+            <h3
+              style="
+                font-size: 20px;
+                font-weight: 600;
+                margin-bottom: 12px;
+                color: #111827;
+              "
+            >
+              Deadlines and Expectations
+            </h3>
+            <p>
+              We all have, or at least speaking for myself, I often have
+              unrealistic and idealistic expectations for myself. And from
+              experience I know that I won't reach them 100%, but this is also
+              fine because I know that getting 10% of the way to the moon is
+              still a pretty good HEO (Highly Elliptical Orbit) around earth.
+            </p>
+            <br />
+            <p>
+              There is always only one true way of knowing what will happen in
+              the future and that is simply by extrapolation, either in a
+              detailed
+              <a href="https://en.wikipedia.org/wiki/Monte_Carlo_method"
+                >Monte Carlo simulation</a
+              >
+              or in real time by just simply waiting, obviously.
+            </p>
+            <br />
+
+            <h3
+              style="
+                font-size: 20px;
+                font-weight: 600;
+                margin-bottom: 12px;
+                color: #111827;
+              "
+            >
+              Prediction
+            </h3>
+            <p>
+              Despite this, I predict that next week will be a good presentation
+              of a PCA analysis showing the explained variance and principal
+              components of the 500 biggest publicly listed Norwegian companies.
+            </p>
+            <br />
+            <p>
+              PCA is not a commonly known thing so I'll explain it here for
+              readers next week. It is really worth knowing about because it is
+              a really good way to make sense of high dimensional data.
+            </p>
+            <br />
+            <p>
+              "What do I know about high dimensional data? Nothing in my life is
+              ever more than 3-dimensional," you might be thinking for yourself
+              at first. However, let me give you an example of a highly
+              dimensional dataset you already know or have a feeling of many
+              pieces of: The set of all world countries and their corresponding
+              attributes such as latitude, longitude, GDP, population, climate,
+              standard of living, employment rate, life expectancy, and many
+              more.
+            </p>
+            <br />
+            <p>In a table form it would look something like this:</p>
+            <br />
+
+            <table>
+              <tr>
+                <th>Country</th>
+                <th>Population (millions)</th>
+                <th>GDP per capita ($)</th>
+                <th>Employment Rate (%)</th>
+                <th>Life Expectancy (years)</th>
+              </tr>
+              <tr>
+                <td>USA</td>
+                <td>335</td>
+                <td>86,533</td>
+                <td>75.0</td>
+                <td>77</td>
+              </tr>
+              <tr>
+                <td>Norway</td>
+                <td>5.6</td>
+                <td>78,700</td>
+                <td>77.4</td>
+                <td>83</td>
+              </tr>
+              <tr>
+                <td>UK</td>
+                <td>68</td>
+                <td>48,900</td>
+                <td>75.0</td>
+                <td>81</td>
+              </tr>
+              <tr>
+                <td>South Africa</td>
+                <td>60</td>
+                <td>6,330</td>
+                <td>58.0</td>
+                <td>64</td>
+              </tr>
+              <tr>
+                <td>Lesotho</td>
+                <td>2.3</td>
+                <td>1,200</td>
+                <td>52.0</td>
+                <td>54</td>
+              </tr>
+              <tr>
+                <td>Costa Rica</td>
+                <td>5.2</td>
+                <td>12,500</td>
+                <td>62.0</td>
+                <td>78</td>
+              </tr>
+              <tr>
+                <td>Spain</td>
+                <td>48</td>
+                <td>30,500</td>
+                <td>67.0</td>
+                <td>84</td>
+              </tr>
+              <tr>
+                <td>Bhutan</td>
+                <td>0.8</td>
+                <td>3,400</td>
+                <td>65.0</td>
+                <td>72</td>
+              </tr>
+              <tr>
+                <td>Singapore</td>
+                <td>5.9</td>
+                <td>90,674</td>
+                <td>73.0</td>
+                <td>84</td>
+              </tr>
+            </table>
+            <br />
+
+            <p>
+              How would we plot these? We could do one plot of population on the
+              x-axis and GDP on the other, or maybe even make a 3D plot of
+              population on x, GDP on y, and climate on z. This way we can see
+              if there are relationships between these factors, such as the fact
+              that high populations correlate with GDP to a certain degree
+              because we seem to have a row of countries in a certain line.
+            </p>
+            <br />
+            <p>
+              However, what if we wanted to just look at all of them at once?
+              Unfortunately we can't. We would need an x-axis, y-axis, z-axis,
+              and many more axes. No one can comprehend so many dimensions at
+              once. However, we can project them using some clever linear
+              algebra with regards to eigenvectors and eigenvalues.
+            </p>
+            <br />
+
+            <h3
+              style="
+                font-size: 20px;
+                font-weight: 600;
+                margin-bottom: 12px;
+                color: #111827;
+              "
+            >
+              Understanding PCA Through Projection
+            </h3>
+            <p>
+              Anyhow, if you don't want to dive into the mathematics, you can
+              think of projecting 3 dimensions onto 2 dimensions like this:
+              Imagine you have a child's toy of a mechanical model of the solar
+              system hanging from the roof above the bed. Then you have a lamp
+              in the room that casts a shadow from the 3D toy onto the wall.
+              This is how we can think of projecting a higher dimension (3 in
+              this case) onto a 2-dimensional plane.
+            </p>
+            <br />
+            <img
+              src="https://halvorhansen.no/imageDB/pca-toy.png"
+              alt="PCA illustration"
+              class="post-image"
+            />
+            <br />
+            <p>
+              But remember, we can still choose where to place the lamp. So to
+              make things less arbitrary and more meaningful, for each dimension
+              we reduce, we choose the angle that maximizes the spread of the
+              objects on the wall. In this case with the orrery of the solar
+              system, that would be somewhere from the side where all the
+              planets are on roughly the same plane.
+            </p>
+            <br />
+
+            <h3
+              style="
+                font-size: 20px;
+                font-weight: 600;
+                margin-bottom: 12px;
+                color: #111827;
+              "
+            >
+              Principal Components and Explained Variance
+            </h3>
+            <p>
+              In PCA analysis, we create new axes called principal components
+              (PC1, PC2, PC3, etc.). PC1 is the direction that captures the most
+              variance in the data. PC2 captures the second most variance and is
+              perpendicular to PC1, and so on. The explained variance tells us
+              how much of the total variation in our data is captured by each
+              principal component.
+            </p>
+            <br />
+            <p>
+              For example, if PC1 has 45% explained variance, it means that this
+              single axis captures 45% of all the variation in our
+              multi-dimensional dataset. If PC2 has 25% explained variance, then
+              together PC1 and PC2 capture 70% of the variation. This allows us
+              to reduce many dimensions down to just 2 or 3 that we can actually
+              visualize and understand, while still retaining most of the
+              important information.
+            </p>
+            <br />
+            <p>
+              Next week, I'll present the full PCA analysis of the 500 largest
+              publicly listed Norwegian companies, showing which financial
+              metrics drive the most variance in company performance and how
+              companies cluster together in this reduced dimensional space.
+            </p>
+            <br />
+            <p>Stay tuned for next week's post on Tuesday!</p>
+          </div>
+        </div>
+        <div class="container2">
+          <div class="read-more">
+            <p class="read-more-text">Read all available articles here:</p>
+            <a
+              href="https://halvorhansen.no/economicoutlook"
+              class="read-more-link"
+            >
+              Visit the Economic Outlook
+            </a>
+          </div>
+          <div class="read-more">
+            <p class="read-more-text">Curious on what else I'm up to?:</p>
+            <a href="https://halvorhansen.no/" class="read-more-link">
+              Check out my online profile
+            </a>
+          </div>
+        </div>
+        <br />
+        <p class="description">
+          Thank you for subscribing! I hope you discovered something valuable
+          and thought-provoking in today's article. Your engagement means a
+          great deal to me as I work toward establishing myself as a
+          professional data scientist. If you found this content useful, I'd be
+          incredibly grateful if you could share it with others who might
+          benefit from data-driven economic insights.
+          <br />
+          <br />
+          Norwegian: <br />
+          Tusen takk for at du abonnerer! Jeg håper du fant noe verdifullt og
+          tankevekkende i dagens artikkel. Din deltakelse betyr mye for meg nå
+          som jeg er i prosessen mot å etablere meg profesjonellt. Hvis du fant
+          dette innholdet nyttig, ville jeg vært veldig takknemlig om du kan
+          dele det med andre som kan dra nytte av datadrevne økonomiske
+          artikler.
+        </p>
+      </main>
+    </div>
+  </body>
+</html>
