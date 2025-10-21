@@ -1,0 +1,142 @@
+<p>Understanding PCA Analysis</p>
+<br />
+
+<p>
+  Turns out doing a good PCA analysis was harder than I thought. So this week
+  I'll be writing a more personal version of the economic outlook.
+</p>
+<br />
+
+<p>Deadlines and Expectations</p>
+<br />
+
+<p>
+  We all have, or at least speaking for myself, I often have unrealistic and
+  idealistic expectations for myself. And from experience I know that I won't
+  reach them 100%, but this is also fine because I know that getting 10% of the
+  way to the moon is still a pretty good HEO (Highly Elliptical Orbit) around
+  earth.
+</p>
+<br />
+
+<p>
+  There is always only one true way of knowing what will happen in the future
+  and that is simply by extrapolation, either in a detailed Monte Carlo
+  simulation or in real time by just simply waiting, obviously.
+</p>
+<br />
+
+<p>A Brief Introduction to PCA</p>
+<br />
+
+<p>
+  Despite this, I predict that next week will be a good presentation of a
+  <a href="https://en.wikipedia.org/wiki/Principal_component_analysis">PCA</a>
+  analysis showing the explained variance and principal components of the 500
+  biggest publicly listed Norwegian companies.
+</p>
+<br />
+
+<p>
+  PCA is not a commonly known thing so I'll explain it here for readers next
+  week. It is really worth knowing about because it is a really good way to make
+  sense of high dimensional data.
+</p>
+<br />
+
+<p>
+  "What do I know about high dimensional data? Nothing in my life is ever more
+  than 3-dimensional," you might be thinking for yourself at first. However, let
+  me give you an example of a highly dimensional dataset you already know or
+  have a feeling of many pieces of: The set of all world countries and their
+  corresponding attributes such as latitude, longitude, GDP, population,
+  climate, standard of living, employment rate, life expectancy, and many more.
+</p>
+<br />
+
+<p>In a table form it would look something like this:</p>
+<br />
+<table
+  style="border-collapse: collapse; width: 100%; font-family: Arial, sans-serif"
+>
+  <tr style="background-color: #f2f2f2">
+    <th style="border: 1px solid #ccc; padding: 12px; text-align: left">
+      Country
+    </th>
+    <th style="border: 1px solid #ccc; padding: 12px; text-align: left">
+      Population (millions)
+    </th>
+    <th style="border: 1px solid #ccc; padding: 12px; text-align: left">
+      GDP per capita ($)
+    </th>
+    <th style="border: 1px solid #ccc; padding: 12px; text-align: left">
+      Employment Rate (%)
+    </th>
+    <th style="border: 1px solid #ccc; padding: 12px; text-align: left">
+      Life Expectancy (years)
+    </th>
+  </tr>
+  <tr>
+    <td style="border: 1px solid #ccc; padding: 10px">USA</td>
+    <td style="border: 1px solid #ccc; padding: 10px">345</td>
+    <td style="border: 1px solid #ccc; padding: 10px">89,680</td>
+    <td style="border: 1px solid #ccc; padding: 10px">73.2</td>
+    <td style="border: 1px solid #ccc; padding: 10px">77.5</td>
+  </tr>
+  <tr style="background-color: #f9f9f9">
+    <td style="border: 1px solid #ccc; padding: 10px">Norway</td>
+    <td style="border: 1px solid #ccc; padding: 10px">5.6</td>
+    <td style="border: 1px solid #ccc; padding: 10px">106,150</td>
+    <td style="border: 1px solid #ccc; padding: 10px">76.8</td>
+    <td style="border: 1px solid #ccc; padding: 10px">83.2</td>
+  </tr>
+  <tr>
+    <td style="border: 1px solid #ccc; padding: 10px">UK</td>
+    <td style="border: 1px solid #ccc; padding: 10px">68.5</td>
+    <td style="border: 1px solid #ccc; padding: 10px">51,070</td>
+    <td style="border: 1px solid #ccc; padding: 10px">75.6</td>
+    <td style="border: 1px solid #ccc; padding: 10px">81.7</td>
+  </tr>
+  <tr style="background-color: #f9f9f9">
+    <td style="border: 1px solid #ccc; padding: 10px">South Africa</td>
+    <td style="border: 1px solid #ccc; padding: 10px">61.5</td>
+    <td style="border: 1px solid #ccc; padding: 10px">6,780</td>
+    <td style="border: 1px solid #ccc; padding: 10px">43.1</td>
+    <td style="border: 1px solid #ccc; padding: 10px">65.7</td>
+  </tr>
+  <tr>
+    <td style="border: 1px solid #ccc; padding: 10px">Lesotho</td>
+    <td style="border: 1px solid #ccc; padding: 10px">2.3</td>
+    <td style="border: 1px solid #ccc; padding: 10px">1,180</td>
+    <td style="border: 1px solid #ccc; padding: 10px">49.5</td>
+    <td style="border: 1px solid #ccc; padding: 10px">54.9</td>
+  </tr>
+  <tr style="background-color: #f9f9f9">
+    <td style="border: 1px solid #ccc; padding: 10px">Costa Rica</td>
+    <td style="border: 1px solid #ccc; padding: 10px">5.3</td>
+    <td style="border: 1px solid #ccc; padding: 10px">16,110</td>
+    <td style="border: 1px solid #ccc; padding: 10px">60.2</td>
+    <td style="border: 1px solid #ccc; padding: 10px">80.3</td>
+  </tr>
+  <tr>
+    <td style="border: 1px solid #ccc; padding: 10px">Spain</td>
+    <td style="border: 1px solid #ccc; padding: 10px">48.6</td>
+    <td style="border: 1px solid #ccc; padding: 10px">42,050</td>
+    <td style="border: 1px solid #ccc; padding: 10px">64.8</td>
+    <td style="border: 1px solid #ccc; padding: 10px">83.9</td>
+  </tr>
+  <tr style="background-color: #f9f9f9">
+    <td style="border: 1px solid #ccc; padding: 10px">Bhutan</td>
+    <td style="border: 1px solid #ccc; padding: 10px">0.79</td>
+    <td style="border: 1px solid #ccc; padding: 10px">4,870</td>
+    <td style="border: 1px solid #ccc; padding: 10px">67.3</td>
+    <td style="border: 1px solid #ccc; padding: 10px">73.1</td>
+  </tr>
+  <tr>
+    <td style="border: 1px solid #ccc; padding: 10px">Singapore</td>
+    <td style="border: 1px solid #ccc; padding: 10px">5.9</td>
+    <td style="border: 1px solid #ccc; padding: 10px">113,340</td>
+    <td style="border: 1px solid #ccc; padding: 10px">79.1</td>
+    <td style="border: 1px solid #ccc; padding: 10px">84.3</td>
+  </tr>
+</table>
