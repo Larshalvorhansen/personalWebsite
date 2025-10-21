@@ -1,142 +1,53 @@
-<p>Understanding PCA Analysis</p>
 <br />
-
 <p>
-  Turns out doing a good PCA analysis was harder than I thought. So this week
-  I'll be writing a more personal version of the economic outlook.
+  To understand complex systems like the global economy, it’s helpful to
+  approach them from multiple perspectives. One can analyze economies from a
+  bottom-up perspective, starting with individual industries, or take a top-down
+  view, treating countries or even the entire world as single entities competing
+  and cooperating for resources. This week’s article adopts a global
+  perspective, exploring the most prominent industries across countries and U.S.
+  states.
 </p>
 <br />
-
-<p>Deadlines and Expectations</p>
-<br />
-
 <p>
-  We all have, or at least speaking for myself, I often have unrealistic and
-  idealistic expectations for myself. And from experience I know that I won't
-  reach them 100%, but this is also fine because I know that getting 10% of the
-  way to the moon is still a pretty good HEO (Highly Elliptical Orbit) around
-  earth.
+  The structure of global trade is well-documented by organizations like the
+  OECD. Their trade database provides a clear view of global economic flows [1].
+  However, imports and exports alone don’t tell the full story, as many products
+  and services are produced and consumed domestically within a country.
 </p>
-<br />
 
+<br />
 <p>
-  There is always only one true way of knowing what will happen in the future
-  and that is simply by extrapolation, either in a detailed Monte Carlo
-  simulation or in real time by just simply waiting, obviously.
+  According to a comprehensive study by OnDeck, manufacturing remains the
+  dominant industry in 52 of 96 major economies, based on LinkedIn data
+  analyzing over 82 million businesses [2]. Taiwan leads with 16.6% of its
+  companies in manufacturing, driven by its $150 billion semiconductor industry,
+  which produces 60% of the world’s chips. India follows closely, with 13.6% of
+  its companies in manufacturing, bolstered by its steel and automotive sectors,
+  aiming to increase manufacturing’s share of GDP to 25% by 2025.
 </p>
-<br />
 
-<p>A Brief Introduction to PCA</p>
 <br />
+<p>Map of top business industries by country</p>
 
+<br />
+<p>Map showing the most popular business industries in each country.</p>
+
+<br />
 <p>
-  Despite this, I predict that next week will be a good presentation of a
-  <a href="https://en.wikipedia.org/wiki/Principal_component_analysis">PCA</a>
-  analysis showing the explained variance and principal components of the 500
-  biggest publicly listed Norwegian companies.
+  What are the benefits of global trade? The classic theory of comparative
+  advantage suggests that countries specialize in producing goods and services
+  where they are most efficient, trading to mutual benefit. For instance,
+  Luxembourg generates 31% of its GDP from financial services, while Argentina
+  and other South American countries see rapid growth in advertising, with
+  Argentina’s ad market growing 116% in 2022 [2].
 </p>
-<br />
 
+<br />
 <p>
-  PCA is not a commonly known thing so I'll explain it here for readers next
-  week. It is really worth knowing about because it is a really good way to make
-  sense of high dimensional data.
+  Is globalization slowing? Interestingly, we are witnessing a counterintuitive
+  trend toward a less globalized world, driven by protectionism and supply chain
+  disruptions. A 2023 McKinsey report discusses how global trade faces
+  challenges from geopolitical tensions and regionalization efforts, potentially
+  reshaping economic dynamics [3].
 </p>
-<br />
-
-<p>
-  "What do I know about high dimensional data? Nothing in my life is ever more
-  than 3-dimensional," you might be thinking for yourself at first. However, let
-  me give you an example of a highly dimensional dataset you already know or
-  have a feeling of many pieces of: The set of all world countries and their
-  corresponding attributes such as latitude, longitude, GDP, population,
-  climate, standard of living, employment rate, life expectancy, and many more.
-</p>
-<br />
-
-<p>In a table form it would look something like this:</p>
-<br />
-<table
-  style="border-collapse: collapse; width: 100%; font-family: Arial, sans-serif"
->
-  <tr style="background-color: #f2f2f2">
-    <th style="border: 1px solid #ccc; padding: 12px; text-align: left">
-      Country
-    </th>
-    <th style="border: 1px solid #ccc; padding: 12px; text-align: left">
-      Population (millions)
-    </th>
-    <th style="border: 1px solid #ccc; padding: 12px; text-align: left">
-      GDP per capita ($)
-    </th>
-    <th style="border: 1px solid #ccc; padding: 12px; text-align: left">
-      Employment Rate (%)
-    </th>
-    <th style="border: 1px solid #ccc; padding: 12px; text-align: left">
-      Life Expectancy (years)
-    </th>
-  </tr>
-  <tr>
-    <td style="border: 1px solid #ccc; padding: 10px">USA</td>
-    <td style="border: 1px solid #ccc; padding: 10px">345</td>
-    <td style="border: 1px solid #ccc; padding: 10px">89,680</td>
-    <td style="border: 1px solid #ccc; padding: 10px">73.2</td>
-    <td style="border: 1px solid #ccc; padding: 10px">77.5</td>
-  </tr>
-  <tr style="background-color: #f9f9f9">
-    <td style="border: 1px solid #ccc; padding: 10px">Norway</td>
-    <td style="border: 1px solid #ccc; padding: 10px">5.6</td>
-    <td style="border: 1px solid #ccc; padding: 10px">106,150</td>
-    <td style="border: 1px solid #ccc; padding: 10px">76.8</td>
-    <td style="border: 1px solid #ccc; padding: 10px">83.2</td>
-  </tr>
-  <tr>
-    <td style="border: 1px solid #ccc; padding: 10px">UK</td>
-    <td style="border: 1px solid #ccc; padding: 10px">68.5</td>
-    <td style="border: 1px solid #ccc; padding: 10px">51,070</td>
-    <td style="border: 1px solid #ccc; padding: 10px">75.6</td>
-    <td style="border: 1px solid #ccc; padding: 10px">81.7</td>
-  </tr>
-  <tr style="background-color: #f9f9f9">
-    <td style="border: 1px solid #ccc; padding: 10px">South Africa</td>
-    <td style="border: 1px solid #ccc; padding: 10px">61.5</td>
-    <td style="border: 1px solid #ccc; padding: 10px">6,780</td>
-    <td style="border: 1px solid #ccc; padding: 10px">43.1</td>
-    <td style="border: 1px solid #ccc; padding: 10px">65.7</td>
-  </tr>
-  <tr>
-    <td style="border: 1px solid #ccc; padding: 10px">Lesotho</td>
-    <td style="border: 1px solid #ccc; padding: 10px">2.3</td>
-    <td style="border: 1px solid #ccc; padding: 10px">1,180</td>
-    <td style="border: 1px solid #ccc; padding: 10px">49.5</td>
-    <td style="border: 1px solid #ccc; padding: 10px">54.9</td>
-  </tr>
-  <tr style="background-color: #f9f9f9">
-    <td style="border: 1px solid #ccc; padding: 10px">Costa Rica</td>
-    <td style="border: 1px solid #ccc; padding: 10px">5.3</td>
-    <td style="border: 1px solid #ccc; padding: 10px">16,110</td>
-    <td style="border: 1px solid #ccc; padding: 10px">60.2</td>
-    <td style="border: 1px solid #ccc; padding: 10px">80.3</td>
-  </tr>
-  <tr>
-    <td style="border: 1px solid #ccc; padding: 10px">Spain</td>
-    <td style="border: 1px solid #ccc; padding: 10px">48.6</td>
-    <td style="border: 1px solid #ccc; padding: 10px">42,050</td>
-    <td style="border: 1px solid #ccc; padding: 10px">64.8</td>
-    <td style="border: 1px solid #ccc; padding: 10px">83.9</td>
-  </tr>
-  <tr style="background-color: #f9f9f9">
-    <td style="border: 1px solid #ccc; padding: 10px">Bhutan</td>
-    <td style="border: 1px solid #ccc; padding: 10px">0.79</td>
-    <td style="border: 1px solid #ccc; padding: 10px">4,870</td>
-    <td style="border: 1px solid #ccc; padding: 10px">67.3</td>
-    <td style="border: 1px solid #ccc; padding: 10px">73.1</td>
-  </tr>
-  <tr>
-    <td style="border: 1px solid #ccc; padding: 10px">Singapore</td>
-    <td style="border: 1px solid #ccc; padding: 10px">5.9</td>
-    <td style="border: 1px solid #ccc; padding: 10px">113,340</td>
-    <td style="border: 1px solid #ccc; padding: 10px">79.1</td>
-    <td style="border: 1px solid #ccc; padding: 10px">84.3</td>
-  </tr>
-</table>
