@@ -1,0 +1,103 @@
+A PCA analysis of Norways 500 largest companies in 2025
+
+This week will be an analysis report examining geographic, sectoral and financial features of Norway's top countries. In short, the analysis reveals that allmost all the variance (86%) is explained by only the first three 3 principal components, suggesting that Norwegian companies are quite similar and follow predictable patterns with the greatest factors being the type of economc sector(primary, secontary or tertiary næring), profitablity and thrirdly, company age. 
+
+The dataset consists of 495 Norwegian companies (After data cleaning) and 17 featyres have been analysed: 
+Financial metrics: revenue, assets, equity, profitability ratio, Return on assets, return on equity, profit margin, asset turnover
+Company key characteristics: age, employee count, profitablity status(yes or no)
+Geographic data: distance from Oslo
+Sector classification: primary, secondary, tertiary
+
+Preprosessing: 
+The missing data(27%) was filled inn by using the mean of existing data
+As with all other PCA's the 17 features were normalized to a number between 0 and 1(using min-max scaling)
+PCA was performed on this 17-dimentional normalized feature space.
+
+Key findings: 
+
+Scree plot
+qiqi that goes here as a href
+
+PC1: 45.3%
+PC2: 28.8%
+PC3: 11.7%
+PC1-3: 85.8%
+
+Interpretation: 
+Since the first three components(PC1-3) captured som much of the variance, It can be said that Large Norwegian companies tend to cluster into distinct groups that behave with similar characteristics. The dimentianlity reduction from 17 to 3 is highly efficient. Click here to interact with the data in these three first components.
+
+Indivitual interpretations of PC1-3
+qiqiqi Insert image of the pca loadings heatmap as href
+
+PC1 (45.3%!)Economic sector and profitablity divide:
+As we can read from the PCA loadings chart: 
+The three biggest factors for PCA1 was:
+is_profitable: +0.63
+sector_secondary_score: +0.46
+and
+sector_tertiary_score: -0.61
+
+So PC1 represens the big divide between profitable companies that are in the secondary sector(industry, construction, manifacturing) as a positive corelation qiqi? is this correct? qiqi and tertiary secotr companiues (services, finance, trade) as a large qiqi negative?  correct? qiqi corealtion. 
+
+So all in all the by far greatest indicator for what any of the other features of the company migth be like can be incicated? qiqi better prasign prlease qiqi is weather they operate in goods production (seconadty ) or services(tertiary) 
+
+PC2 28.8% Company maturity and establishment
+
+as we can se in the PCA loadings chart mentioned above the second largest component PC2, the age of the company plays a large role. 
+
+This can be seen from the company age being +.61
+Here however the tree components from PC1 are large in pc2 as well incicating that these factors really play a large role here.qiqi yes? qiqiqi.
+
+Since age is a large factor here we can weakly conclude?qiqi that older more established terdiary companies such as DNB and qiqqi who else? are noticably different from newer secondary sector firms such as ??? qiqi.
+
+
+PC3 11.7% Primary sectior and oslo
+After extracting the variance from PC1 and PC2 we get that the largest distinguisher is weather the company is in the primary sector and/or to what degree the company has its headquarter in Oslo. This makes sence as large companies tend to have their headquarters in the capital city which in this case ofcource is Oslo qiqi yes? qiqi.
+
+Another way of looking at PC3 is by thinking that resource extraction companies(proimary secor) offten are located far from Oslo as they are directly dependent on the location of their specific resource which for norway is most ofthen either ofshore oil platforms, costal wildfishing and fishfarming and hydroelectric power genertaion and utilization(Norsk Hydro). 
+
+As we can se the loadings heatmap reveal even more imprtant patterns allthough decreasing both in significanse and certanty as the PC number increases ofcource. 
+
+We can se that the financial size metrics cluster together(naturally):  total_assets, total_equity, most_recent_revenue, net_income all load similarly as they all are indicative of overall company size. 
+
+Profitablity metrics however are more independent (as seen from pc8): 
+roa(return on assets) and roe(return on equity) both capture the companies effciensy indipendent of their size.
+
+The biplot is usefull for ??qiqi getting an intuition for the corealation between both companies(represented as points) and the differetn factors(represented as arrows). If the angle between ttwo lines or points is low they are highliy coralted. the larger the angle the less corelated they are. At 90degrees they are totally uncorelated and higher than 90 degrees means there is an increadingly(with angle) negative corelation. 
+
+qiqiqi href and captuion text for the biplot qiqii
+
+In our particular biplot we see that profitabllity has a high correlattiohn with both sector type and with age of the company.
+
+As is visible from the plot, most large norwegian firms tend to cluster together representing similar characteristics across many dimentions. However this may have been largly impacted by the preprocessing that involved imputing missing data with the average from other firms. This could be better in the future by douing a more thourogh job on datacollection.  
+
+As we can see by the size differance of the arrows indicationg ??qiqi the different factors?qiqi pc1 really dominates. This is also obvious from the scree plot.(it has a steep and early cutoff) and its also visible form the explained variance plot that after somewhere between 2 and 3 pc's we have an explained variance of >80%.
+
+Insigths: 
+
+The economic sectors in norway are clearly distinct:
+Norways primary sector is qiqiqi. The main example here is ofcource equinor with a qiqi % share of the total primary secor evaluation. 
+The secondary secor varies widely in performance. some are quite sucessfull while others are struggling for example qiqiqi and qiqii
+In terms of numbers of companies the tertiary sector of services dominates. companies such as qiqiqi
+
+On profitablitiy:
+The age of the firm corelates positivly with profits. This is especially true for the service sector. Older comanies in the service sector such as qiqiq and qiqi have it much easyer than newcomers such as qiqiqi. This would be interesting to investigate further for finding out to what degree this is true and in that case why it is true in norway. 
+
+On the geographic influence:
+the primary secotor companies of norway are located urther from oslo than any other sector. This was not suprising as the primary sector is physically loced to the location of the natural resource. as discussed earlier.
+The other two sectors tend to be clustered around Oslo. (and possibly other large cities such as bergen, trondheim and stavanger, but distance from oslo was the only geographic parameter included in this particular PCA)
+
+Comany size and efficiency:
+the company metrics cloesly tied to size cluster together. This is makes sence but also migth indicate that norweigan comanies tend to follow a similar asset allocation structure. Upon speculation one mighth hypothisise that this has to to with strick taxation policies that insentivise companies to be highly stratecig and selective with asset allocation in order to minimize the relativly large tax burden.
+
+Summary of data used in this PCA:
+Number of companies analyzed: 495
+Features per company included: 17
+Explained variance by PC1-3: 85.8%
+Number of companies with somewhat incomplete financial data: 168(34%)
+
+In conclution:
+qiqiqi
+
+Interesting topics for furhter analysis mentioned:
+qiqiqi

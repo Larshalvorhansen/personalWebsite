@@ -1,0 +1,577 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Economic Outlook Newsletter</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Bentham&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        font-family: "Space Grotesk", sans-serif;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        padding: 32px 24px;
+      }
+      .container2 {
+        display: flex;
+        flex-wrap: wrap;
+        background-color: #f9fafb;
+      }
+      .container2 .read-more {
+        min-width: 250px;
+        flex: 1;
+      }
+      .header {
+        margin-bottom: 48px;
+        text-align: left;
+      }
+      .title {
+        font-family: "Bentham", serif;
+        font-size: 48px;
+        font-weight: bold;
+        line-height: 1.1;
+        letter-spacing: -0.02em;
+        text-transform: uppercase;
+        color: #111827;
+        margin-bottom: 16px;
+      }
+      .lambda {
+        color: #3b82f6;
+        text-transform: lowercase;
+        text-decoration: none;
+        letter-spacing: -0.05em;
+      }
+      .lambda:hover {
+        color: #1d4ed8;
+      }
+      .subtitle {
+        font-size: 18px;
+        color: #374151;
+        margin-bottom: 8px;
+        line-height: 1.4;
+      }
+      .description {
+        font-size: 14px;
+        color: #6b7280;
+        line-height: 1.5;
+        margin-bottom: 24px;
+      }
+      .brand-link {
+        display: block;
+        padding: 16px;
+        background-color: #f3f4f6;
+        border: 1px solid #d1d5db;
+        border-radius: 8px;
+        text-decoration: none;
+        color: inherit;
+        transition: background-color 0.2s;
+      }
+      .brand-link:hover {
+        background-color: #e5e7eb;
+      }
+      .brand-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .brand-text {
+        font-size: 14px;
+        color: #1f2937;
+      }
+      .brand-name {
+        font-weight: 600;
+      }
+      .logo {
+        height: 48px;
+        width: auto;
+        margin-left: 16px;
+      }
+      .post {
+        padding: 32px 0;
+        border-top: 1px solid #d1d5db;
+      }
+      .post-title {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 8px;
+        color: #111827;
+      }
+      .post-date {
+        font-size: 14px;
+        color: #6b7280;
+        margin-bottom: 16px;
+        display: block;
+      }
+      .post-content {
+        margin-bottom: 16px;
+        line-height: 1.6;
+        color: #374151;
+      }
+      .post-content table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 16px 0;
+        font-size: 14px;
+      }
+      .post-content table th {
+        background-color: #f3f4f6;
+        padding: 12px;
+        text-align: left;
+        border: 1px solid #d1d5db;
+        font-weight: 600;
+        color: #111827;
+      }
+      .post-content table td {
+        padding: 10px 12px;
+        border: 1px solid #d1d5db;
+        color: #374151;
+      }
+      .post-content table tr:nth-child(even) {
+        background-color: #f9fafb;
+      }
+      .post-content a {
+        color: #3b82f6;
+        text-decoration: underline;
+      }
+      .post-content a:hover {
+        color: #1d4ed8;
+      }
+      .post-image {
+        width: 100%;
+        object-fit: contain;
+        border-radius: 6px;
+        margin-bottom: 8px;
+      }
+      .image-caption {
+        font-size: 14px;
+        font-style: italic;
+        color: #6b7280;
+        margin-bottom: 16px;
+      }
+      .sources {
+        font-size: 12px;
+        color: #6b7280;
+        line-height: 1.5;
+      }
+      .sources a {
+        color: #3b82f6;
+        text-decoration: underline;
+      }
+      .sources a:hover {
+        color: #1d4ed8;
+      }
+      .read-more {
+        margin-top: 32px;
+        padding: 24px;
+        background-color: #f9fafb;
+        border-radius: 8px;
+        text-align: center;
+      }
+      .read-more-link {
+        display: inline-block;
+        padding: 12px 24px;
+        background-color: #3b82f6;
+        color: white;
+        text-decoration: none;
+        border-radius: 6px;
+        font-weight: 600;
+        transition: background-color 0.2s;
+      }
+      .read-more-link:hover {
+        background-color: #1d4ed8;
+      }
+      .read-more-text {
+        margin-bottom: 16px;
+        color: #374151;
+      }
+      @media (max-width: 600px) {
+        .container {
+          padding: 24px 16px;
+        }
+        .title {
+          font-size: 36px;
+        }
+        .subtitle {
+          font-size: 16px;
+        }
+        .brand-content {
+          flex-direction: column;
+          text-align: center;
+        }
+        .logo {
+          margin-left: 0;
+          margin-top: 12px;
+        }
+        .container2 {
+          flex-direction: column;
+        }
+        .post-content table {
+          font-size: 12px;
+        }
+        .post-content table th,
+        .post-content table td {
+          padding: 8px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <h1 class="title">
+          Economic Out<a href="https://halvorhansen.no/lambdasim" class="lambda"
+            >λ</a
+          >ook Newsletter
+        </h1>
+        <p class="subtitle">
+          The current state & future outlook of topics regarding the world
+          economy.
+        </p>
+        <p class="description">
+          This is a newsletter I try to write weekly. For me it's a great way to
+          grow my career as a data scientist, academic, and as a developer. For
+          you it's hopefully useful!
+        </p>
+      </header>
+      <main>
+        <div class="post">
+                   
+          <h2 class="post-title">         </h2>
+                   
+          <small class="post-date">23/10/2025 Week 43</small>          
+          <div class="post-content">
+                      qiqi the content goes here! Please keep the same style as
+            in this template qiqiqi 
+            <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing
+              elit, sed do               eiusmod tempor incididunt ut labore et
+              dolore magna aliqua.            
+            </p>
+                        <br />
+
+                       
+            <h3
+              style="
+                font-size: 20px;
+                font-weight: 600;
+                margin-bottom: 12px;
+                color: #111827;
+              "
+            >
+                            title title            
+            </h3>
+                       
+            <p>
+                            Ut enim ad minim veniam, quis nostrud exercitation
+              ullamco laboris               nisi ut aliquip ex ea commodo
+              consequat. Duis aute irure dolor in               reprehenderit in
+              voluptate velit esse cillum dolore eu fugiat nulla              
+              pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                            culpa qui officia deserunt mollit anim id est
+              laborum.            
+            </p>
+                        <br />
+                       
+            <p>
+                            Sed ut perspiciatis unde omnis iste natus error sit
+              voluptatem               accusantium              
+              <a href="https://en.wikipedia.org/wiki/Monte_Carlo_method"
+                >doloremque laudantium</a
+              >
+                            totam rem aperiam.            
+            </p>
+                        <br />
+
+                       
+            <h3
+              style="
+                font-size: 20px;
+                font-weight: 600;
+                margin-bottom: 12px;
+                color: #111827;
+              "
+            >
+                            title title            
+            </h3>
+                       
+            <p>
+                            Nemo enim ipsam voluptatem quia voluptas sit
+              aspernatur aut odit aut               fugit, sed quia consequuntur
+              magni dolores eos qui ratione               voluptatem
+                           
+              <a
+                href="https://en.wikipedia.org/wiki/Principal_component_analysis"
+                >sequi nesciunt</a
+              >.            
+            </p>
+                        <br />
+                       
+            <p>
+                            Neque porro quisquam est, qui dolorem ipsum quia
+              dolor sit amet,               consectetur, adipisci velit, sed
+              quia non numquam eius modi tempora               incidunt ut
+              labore et dolore magnam aliquam quaerat voluptatem.            
+            </p>
+                        <br />
+                       
+            <p>
+                            At vero eos et accusamus et iusto odio dignissimos
+              ducimus qui               blanditiis praesentium voluptatum
+              deleniti atque corrupti quos               dolores et quas
+              molestias excepturi sint occaecati cupiditate non              
+              provident, similique sunt in culpa qui officia deserunt mollitia
+                            animi, id est laborum et dolorum fuga.            
+            </p>
+                        <br />
+                       
+            <p>In a table form it would look something like this:</p>
+                        <br />
+
+                       
+            <table>
+                           
+              <tr>
+                               
+                <th>Country</th>
+                               
+                <th>Population (millions)</th>
+                               
+                <th>GDP per capita ($)</th>
+                               
+                <th>Employment Rate (%)</th>
+                               
+                <th>Life Expectancy (years)</th>
+                             
+              </tr>
+                           
+              <tr>
+                               
+                <td>blablabla</td>
+                               
+                <td>335</td>
+                               
+                <td>86,533</td>
+                               
+                <td>75.0</td>
+                               
+                <td>77</td>
+                             
+              </tr>
+                           
+              <tr>
+                               
+                <td>ballk</td>
+                               
+                <td>5.6</td>
+                               
+                <td>78,700</td>
+                               
+                <td>77.4</td>
+                               
+                <td>83</td>
+                             
+              </tr>
+                           
+              <tr>
+                               
+                <td>fdjakl</td>
+                               
+                <td>68</td>
+                               
+                <td>48,900</td>
+                               
+                <td>75.0</td>
+                               
+                <td>81</td>
+                             
+              </tr>
+                           
+              <tr>
+                               
+                <td>fjalskjfk</td>
+                               
+                <td>60</td>
+                               
+                <td>6,330</td>
+                               
+                <td>58.0</td>
+                               
+                <td>64</td>
+                             
+              </tr>
+                           
+              <tr>
+                               
+                <td>jklfjsalkjfk</td>
+                               
+                <td>2.3</td>
+                               
+                <td>1,200</td>
+                               
+                <td>52.0</td>
+                               
+                <td>54</td>
+                             
+              </tr>
+                           
+              <tr>
+                               
+                <td>fjsklajf</td>
+                               
+                <td>5.2</td>
+                               
+                <td>12,500</td>
+                               
+                <td>62.0</td>
+                               
+                <td>78</td>
+                             
+              </tr>
+                         
+            </table>
+                        <br />
+
+                       
+            <p>
+                            Eaque ipsa quae ab illo inventore veritatis et quasi
+              architecto               beatae vitae dicta sunt explicabo. Nemo
+              enim ipsam voluptatem quia               voluptas sit aspernatur
+              aut odit aut fugit, sed quia consequuntur               magni
+              dolores eos qui ratione voluptatem.            
+            </p>
+                        <br />
+                       
+            <p>
+                            Quis autem vel eum iure reprehenderit qui in ea
+              voluptate velit               esse quam nihil molestiae
+              consequatur, vel illum qui dolorem eum               fugiat quo
+              voluptas nulla pariatur? At vero eos et accusamus et              
+              iusto odio dignissimos ducimus qui              
+              <a href="https://en.wikipedia.org/wiki/Linear_algebra"
+                >blanditiis praesentium</a
+              >
+                            voluptatum deleniti atque              
+              <a
+                href="https://en.wikipedia.org/wiki/Eigenvalues_and_eigenvectors"
+                >corrupti quos dolores</a
+              >.            
+            </p>
+                        <br />
+
+                       
+            <h3
+              style="
+                font-size: 20px;
+                font-weight: 600;
+                margin-bottom: 12px;
+                color: #111827;
+              "
+            >
+              title title            
+            </h3>
+                       
+            <p>
+                            Sed ut perspiciatis unde omnis iste natus error sit
+              voluptatem               accusantium doloremque laudantium, totam
+              rem aperiam, eaque ipsa               quae ab illo inventore
+              veritatis et quasi architecto beatae vitae               dicta
+              sunt explicabo.            
+            </p>
+                        <br />
+                       
+            <img
+              src="https://halvorhansen.no/imageDB/pca-toy.png"
+              alt="PCA illustration"
+              class="post-image"
+            />
+                        <br />
+                       
+            <p>
+                            Voluptatem sequi nesciunt. Neque porro quisquam est,
+              qui dolorem               ipsum quia dolor sit amet, consectetur,
+              adipisci velit.            
+            </p>
+                        <br />
+
+                       
+            <p>
+                            Quis nostrum exercitationem ullam corporis suscipit
+              laboriosam, nisi               ut aliquid ex ea commodi
+              consequatur? Quis autem vel eum iure               reprehenderit
+              qui in ea voluptate velit esse quam nihil molestiae              
+              consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla
+                            pariatur.            
+            </p>
+                        <br />
+                       
+            <p>
+                            Minima veniam, quis nostrum exercitationem ullam
+              corporis suscipit               laboriosam, nisi ut aliquid ex ea
+              commodi consequatur?            
+            </p>
+                        <br />
+                     
+          </div>
+                 
+        </div>
+               
+        <div class="container2">
+                   
+          <div class="read-more">
+                       
+            <p class="read-more-text">Read all available articles here:</p>
+                       
+            <a
+              href="https://halvorhansen.no/economicoutlook"
+              class="read-more-link"
+            >
+                            Visit the Economic Outlook            
+            </a>
+                     
+          </div>
+                        Underanding PCA Through Projection          
+          <div class="read-more">
+                       
+            <p class="read-more-text">Curious on what else I'm up to?:</p>
+                       
+            <a href="https://halvorhansen.no/" class="read-more-link">
+                            Check out my online profile            
+            </a>
+                     
+          </div>
+                 
+        </div>
+                <br />
+               
+        <p class="description">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+          do           eiusmod tempor incididunt ut labore et dolore magna
+          aliqua. Ut enim ad           minim veniam, quis nostrud exercitation
+          ullamco laboris nisi ut           aliquip ex ea commodo consequat.
+                    <br />
+                    <br />
+                    Norwegian: <br />
+                    Tusen takk for at du abonnerer! Jeg håper du fant noe
+          verdifullt og           tankevekkende i dagens artikkel. Din
+          deltakelse betyr mye for meg nå           som jeg er i prosessen mot å
+          etablere meg profesjonellt. Hvis du fant           dette innholdet
+          nyttig, ville jeg vært veldig takknemlig om du kan           dele det
+          med andre som kan dra nytte av datadrevne økonomiske          
+          artikler.        
+        </p>
+             
+      </main>
+         
+    </div>
+     
+  </body>
+</html>
