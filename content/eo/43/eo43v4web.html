@@ -1,0 +1,201 @@
+<div class="container">
+  <header class="header">
+    <h1 class="title">
+      Economic Out<a href="https://halvorhansen.no/lambdasim" class="lambda"
+        >λ</a
+      >ook Newsletter
+    </h1>
+    <p class="subtitle">
+      The current state & future outlook of topics regarding the world economy.
+    </p>
+    <p class="description">
+      This is a newsletter I write weekly. For me it's a great way to enter my
+      career as a data scientist, academic, and as a developer. For you it's
+      hopefully useful!
+    </p>
+  </header>
+  <main>
+    <div class="post">
+      <h2 class="post-title">
+        A PCA Analysis of Norway's 500 Largest Companies in 2025
+      </h2>
+      <small class="post-date">Week 43</small>
+      <div class="post-content">
+        <p>
+          This report presents a principal component analysis (PCA) examining
+          the geographic, sectoral, and financial characteristics of Norway's
+          500 largest companies. In brief, the analysis reveals that nearly all
+          the variance (85.8%) is explained by just the first three principal
+          components (PC1, 2 and 3), indicating that large Norwegian firms are
+          highly similar and follow predictable patterns. The dominant drivers
+          explaining their differences are economic sector (primary, secondary,
+          or tertiary), profitability, and thirdly, the company age.
+        </p>
+        <br />
+        <p>
+          The dataset comprises 495 Norwegian companies (after data cleaning)
+          and 17 features: financial metrics (revenue, assets, equity,
+          profitability ratio, ROA, ROE, profit margin, asset turnover), company
+          characteristics (age, employee count, profitability status),
+          geographic data (distance from Oslo), and sector classification
+          (primary, secondary, tertiary). Missing data (34%) was imputed using
+          mean values, and all features were normalized to a [0,1] range using
+          min-max scaling before PCA was performed.
+        </p>
+        <br />
+        <img
+          src="https://halvorhansen.no/imageDB/43images/scree_plot.png"
+          alt="Scree and cumulative variance plot"
+          class="post-image"
+        />
+        <p class="image-caption">
+          Scree and cumulative variance plot showing PC1-3 explain 85.8% of
+          variance.
+        </p>
+        <br />
+        <p>
+          As visible in the scree plot, these three principal components explain
+          almost all of the variance: PC1 captures 45.3%, PC2 adds 28.8%, and
+          PC3 contributes 11.7%. Since the first three components capture so
+          much of the variance, large Norwegian companies cluster into distinct,
+          behaviorally similar groups. The dimensionality reduction from 17 to 3
+          dimensions is highly efficient, allowing for clear visualization in
+          three-dimensional space.
+          <a
+            href="https://halvorhansen.no/imagedb/43images/interactive_pc1-3.html"
+            target="_blank"
+          >
+            Feel free to view it here in this interactive plot!
+          </a>
+        </p>
+        <br />
+        <img
+          src="https://halvorhansen.no/imageDB/43images/pca_loadings_heatmap.png"
+          alt="PCA Loadings Heatmap"
+          class="post-image"
+        />
+        <p class="image-caption">
+          PCA Loadings Heatmap showing feature contributions to each principal
+          component.
+        </p>
+        <br />
+        <p>
+          <strong
+            >PC1 (45.3%): Economic Sector and Profitability Divide:</strong
+          >
+          From the PCA loadings chart, the three strongest contributors to PC1
+          are profitability (+0.63), secondary sector score (+0.46), and
+          tertiary sector score (-0.61). Thus, PC1 captures the major divide
+          between profitable secondary-sector firms (industry, construction,
+          manufacturing) on the positive side and tertiary-sector firms
+          (services, finance, trade) on the negative side. The single strongest
+          predictor of a company's other traits is whether it operates in goods
+          production (secondary) or services (tertiary).
+        </p>
+        <br />
+        <p>
+          <strong>PC2 (28.8%): Company Maturity and Establishment:</strong>
+          Company age impacts PC2 strongly at +0.61. The three sector indicators
+          from PC1 also remain influential, confirming their importance. Older,
+          established tertiary firms (such as DNB and Telenor) stand apart from
+          newer secondary-sector firms.
+        </p>
+        <br />
+        <p>
+          <strong>PC3 (11.7%): Primary Sector and Proximity to Oslo:</strong>
+          After PC1 and PC2 extract their variance, the remaining dominant
+          signal distinguishes primary-sector firms and headquarters distance
+          from Oslo. This aligns with intuition: large Norwegian companies
+          typically headquarter in the capital, while primary-sector firms
+          (resource extraction) are located far from Oslo, often offshore (oil
+          platforms), along the coast (wild fishing, aquaculture), or near
+          hydropower sites (e.g., Norsk Hydro).
+        </p>
+        <br />
+        <img
+          src="https://halvorhansen.no/imageDB/43images/biplot.png"
+          alt="PCA Biplot (PC1 vs PC2)"
+          class="post-image"
+        />
+        <p class="image-caption">
+          PCA Biplot (PC1 vs PC2). Arrow length reflects feature importance;
+          point clusters indicate company similarity.
+        </p>
+        <br />
+        <p>
+          The biplot is useful for visualizing correlations between companies
+          (points) and features (arrows). Small angles indicate high positive
+          correlation; approximately 90° means no correlation. In our biplot,
+          profitability correlates strongly with both sector type and company
+          age. Most large Norwegian firms cluster tightly, suggesting high
+          similarity across dimensions. However, imputing 34% missing data with
+          averages have most likely artificially tightened the clusters. Future
+          analyses would benefit from more complete data collection.
+        </p>
+        <br />
+        <p>
+          <strong>Key Insights:</strong> The primary sector is small but
+          dominated by Equinor (~70% of total primary-sector by market cap). The
+          secondary sector shows wide performance dispersion: successes like
+          Kongsberg Gruppen coexist with struggling players like REC Silicon.
+          The tertiary (services) sector dominates in company count, firms like
+          DNB and Telenor being in the lead. A firms age intrestingly correlates
+          positively with profits, especially in Norway's services sector.
+          Established players like Storebrand enjoy structural advantages over
+          newcomers.
+        </p>
+        <br />
+        <p>
+          Primary-sector firms are located farthest from Oslo, tied to resource
+          geography. Secondary and tertiary firms cluster around Oslo (and
+          secondarily Bergen, Trondheim, Stavanger), though only Oslo distance
+          was modeled here. Size metrics cluster tightly, suggesting that
+          Norwegian firms maybe follow similar asset allocation patterns,
+          possibly driven by strict taxation incentivizing efficient capital
+          use. But that is only speculation and would be interesting to
+          reserearch further in the future.
+        </p>
+        <br />
+        <p>
+          <strong>In conclusion:</strong> Norway's corporate landscape is
+          remarkably homogeneous along these three core axes: sector,
+          profitability, and age, with geography playing a fourth and intuitive
+          role. The extreme concentration of variance in just three components
+          could underscore the structural uniformity among Norway's largest
+          firms, that could be shaped by shared resource dependence (especially
+          on oil), a mature service industry, strict government regulation and a
+          natural clustering in financial metrics related to company size.
+        </p>
+        <br />
+        <p>
+          <strong>Interesting topics for further analysis:</strong>
+        </p>
+        <ul>
+          <li>
+            Causes of the link between company age and profitability in Norway's
+            tertiary sectors
+          </li>
+          <li>Impact of taxation on asset allocation homogeneity</li>
+          <li>
+            Inclusion of regional city distances (Bergen, Stavanger, etc.) in
+            future geographic models
+          </li>
+          <li>
+            Robustness checks using alternative imputation methods (e.g.,
+            <a
+              href="https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm"
+              target="_blank"
+              >KNN</a
+            >, iterative imputation)
+          </li>
+          <li>
+            Sector-specific PCA to uncover sub-patterns within secondary
+            heterogeneity
+          </li>
+        </ul>
+        <br />
+        <p>Stay tuned for next week's post!</p>
+      </div>
+    </div>
+  </main>
+</div>
