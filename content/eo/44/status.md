@@ -1,3 +1,7 @@
+# NOTAT TIL LARS HALOR! Ja du!
+
+G20 har nå vert, men du kan skrive denne 4-part series om G7 eller noe annet viktig internasjonalt møte som kommer snart.;)
+
 # Predicting the outcomes of this years G20 summit.
 
 This weeks article migth seem like an impossible feat.
