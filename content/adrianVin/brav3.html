@@ -1,0 +1,560 @@
+<!doctype html>
+<html lang="no">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Adrian Vin - Vinekspert & Sommelier</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&display=swap");
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --cream: #ebd4cb;
+        --rose: #da9f93;
+        --burgundy: #b6465f;
+        --dark-red: #890620;
+        --deep-wine: #2c0703;
+      }
+
+      body {
+        font-family: "Cormorant Garamond", serif;
+        background-color: var(--cream);
+        color: var(--deep-wine);
+        line-height: 1.6;
+      }
+
+      /* Navigation */
+      nav {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background-color: rgba(44, 7, 3, 0.95);
+        padding: 1.5rem 2rem;
+        z-index: 1000;
+        backdrop-filter: blur(10px);
+      }
+
+      nav ul {
+        list-style: none;
+        display: flex;
+        justify-content: center;
+        gap: 3rem;
+      }
+
+      nav a {
+        color: var(--cream);
+        text-decoration: none;
+        font-size: 1.1rem;
+        font-weight: 400;
+        letter-spacing: 1px;
+        transition: color 0.3s ease;
+      }
+
+      nav a:hover {
+        color: var(--rose);
+      }
+
+      /* Hero Section */
+      .hero {
+        /* Dimensions */
+        height: 100vh;
+        width: 100%;
+        max-width: none; /* <--- ADD THIS LINE to override the 1400px limit */
+        margin: 0;
+        padding: 2rem;
+
+        /* Flexbox Centering */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        /* Text Styling */
+        text-align: center;
+        color: var(--cream);
+
+        /* Background */
+        background: linear-gradient(
+          135deg,
+          var(--deep-wine) 0%,
+          var(--dark-red) 100%
+        );
+
+        position: relative;
+      }
+
+      .hero h1 {
+        font-size: 5rem; /* Large title */
+        font-weight: 300;
+        margin-bottom: 1rem;
+        letter-spacing: 3px;
+        line-height: 1.2; /* Prevents text overlap on smaller screens */
+      }
+
+      .hero .subtitle {
+        font-size: 1.8rem;
+        font-weight: 300;
+        color: var(--rose);
+        letter-spacing: 2px;
+      }
+
+      /* Section Styling */
+      section {
+        padding: 8rem 4rem;
+        max-width: 1400px;
+        margin: 0 auto;
+        width: 100%;
+      }
+
+      section h2 {
+        font-size: 3rem;
+        font-weight: 400;
+        margin-bottom: 3rem;
+        text-align: center;
+        color: var(--dark-red);
+        letter-spacing: 2px;
+      }
+
+      /* Services Grid */
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2.5rem;
+        margin-top: 3rem;
+      }
+
+      .service-card {
+        background-color: white;
+        padding: 2.5rem;
+        border-radius: 2px;
+        box-shadow: 0 4px 20px rgba(137, 6, 32, 0.1);
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+        border-top: 3px solid var(--burgundy);
+      }
+
+      .service-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 30px rgba(137, 6, 32, 0.15);
+      }
+
+      .service-card h3 {
+        font-size: 1.8rem;
+        color: var(--dark-red);
+        margin-bottom: 1rem;
+        font-weight: 500;
+      }
+
+      .service-card p {
+        font-size: 1.1rem;
+        color: var(--deep-wine);
+        margin-bottom: 1.5rem;
+        line-height: 1.7;
+      }
+
+      .service-card .price {
+        font-size: 1rem;
+        color: var(--burgundy);
+        font-weight: 400;
+        opacity: 0.7;
+      }
+
+      /* Wine Tasting Options */
+      .tasting-options {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1.5rem;
+        flex-wrap: wrap;
+      }
+
+      .tasting-option {
+        padding: 0.5rem 1.2rem;
+        background-color: var(--cream);
+        color: var(--deep-wine);
+        border: 1px solid var(--burgundy);
+        border-radius: 2px;
+        font-size: 0.95rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .tasting-option:hover {
+        background-color: var(--burgundy);
+        color: var(--cream);
+      }
+
+      /* Om Section */
+      .om-section {
+        background-color: var(--deep-wine);
+        color: var(--cream);
+        padding: 8rem 4rem;
+        width: 100%;
+        margin: 0;
+        max-width: none;
+      }
+
+      .om-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        gap: 4rem;
+      }
+
+      .om-content {
+        flex: 1;
+      }
+
+      .om-content h2 {
+        color: var(--cream);
+        text-align: left;
+        margin-bottom: 2rem;
+      }
+
+      .om-content p {
+        font-size: 1.2rem;
+        line-height: 1.8;
+        color: var(--rose);
+      }
+
+      .om-image {
+        flex: 0 0 300px;
+        height: 300px;
+        background-color: var(--burgundy);
+        border-radius: 2px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+        color: var(--cream);
+        opacity: 0.5;
+      }
+
+      /* Contact Section */
+      .contact-section {
+        background-color: white;
+      }
+
+      .contact-form {
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .form-group {
+        margin-bottom: 2rem;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-size: 1.1rem;
+        color: var(--dark-red);
+        font-weight: 500;
+      }
+
+      .form-group input,
+      .form-group textarea,
+      .form-group select {
+        width: 100%;
+        padding: 1rem;
+        border: 2px solid var(--rose);
+        border-radius: 2px;
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.1rem;
+        transition: border-color 0.3s ease;
+        background-color: var(--cream);
+      }
+
+      .form-group input:focus,
+      .form-group textarea:focus,
+      .form-group select:focus {
+        outline: none;
+        border-color: var(--burgundy);
+      }
+
+      .form-group textarea {
+        min-height: 150px;
+        resize: vertical;
+      }
+
+      .submit-btn {
+        background-color: var(--dark-red);
+        color: var(--cream);
+        padding: 1.2rem 3rem;
+        border: none;
+        border-radius: 2px;
+        font-size: 1.2rem;
+        font-family: "Cormorant Garamond", serif;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        letter-spacing: 1px;
+      }
+
+      .submit-btn:hover {
+        background-color: var(--burgundy);
+      }
+
+      /* Footer */
+      footer {
+        background-color: var(--deep-wine);
+        color: var(--cream);
+        padding: 4rem 2rem 2rem;
+        text-align: center;
+      }
+
+      .logo .logo img {
+        max-height: 30px; /* Adjust this number to fit your design */
+        width: auto; /* Keeps the aspect ratio correct */
+        display: block; /* Removes extra space below the image */
+      }
+
+      .contact-info {
+        font-size: 1.1rem;
+        line-height: 2;
+        color: var(--rose);
+      }
+
+      .contact-info a {
+        color: var(--rose);
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .contact-info a:hover {
+        color: var(--cream);
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        section {
+          padding: 4rem 1.5rem;
+        }
+
+        .hero h1 {
+          font-size: 3rem;
+        }
+
+        .hero .subtitle {
+          font-size: 1.3rem;
+        }
+
+        nav ul {
+          gap: 1.5rem;
+          flex-wrap: wrap;
+        }
+
+        nav a {
+          font-size: 1rem;
+        }
+
+        section h2 {
+          font-size: 2.2rem;
+        }
+
+        .om-section {
+          padding: 4rem 1.5rem;
+        }
+
+        .om-container {
+          flex-direction: column;
+        }
+
+        .om-image {
+          flex: 0 0 250px;
+          height: 250px;
+        }
+      }
+
+      /* Smooth scrolling */
+      html {
+        scroll-behavior: smooth;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li><a href="#hjem">Hjem</a></li>
+        <li><a href="#tjenester">Tjenester</a></li>
+        <li><a href="#om">Om</a></li>
+        <li><a href="#kontakt">Kontakt</a></li>
+      </ul>
+    </nav>
+
+    <section id="hjem" class="hero">
+      <h1>Adrian Vin</h1>
+      <p class="subtitle">Vinekspert & Sommelier</p>
+    </section>
+
+    <section id="tjenester">
+      <h2>Tjenester</h2>
+      <div class="services-grid">
+        <div class="service-card">
+          <h3>Vinsmaking</h3>
+          <p>
+            Profesjonelle vinsmakinger tilpasset både bedrifter og private
+            arrangementer. Oppdag vinens mangfold i en guidet reise gjennom
+            utvalgte viner.
+          </p>
+          <div class="tasting-options">
+            <span class="tasting-option">For bedrifter</span>
+            <span class="tasting-option">Private arrangementer</span>
+          </div>
+          <p class="price">Fra NOK 3 500,-</p>
+        </div>
+
+        <div class="service-card">
+          <h3>Vinliste-sammenstilling</h3>
+          <p>
+            Få en skreddersydd vinliste perfekt tilpasset din meny og anledning.
+            Jeg velger ut viner som harmonerer med rettene og skaper en
+            helhetlig opplevelse.
+          </p>
+          <p class="price">NOK 2 500,-</p>
+        </div>
+
+        <div class="service-card">
+          <h3>Privat Sommelier</h3>
+          <p>
+            Leie av personlig sommelier til ditt arrangement. Jeg sørger for at
+            vinene serveres riktig og deler min kunnskap med dine gjester
+            gjennom kvelden.
+          </p>
+          <p class="price">Fra NOK 5 000,-</p>
+        </div>
+
+        <div class="service-card">
+          <h3>Vinkonsultasjon</h3>
+          <p>
+            Faglig rådgivning om vinkjøp, vinlagring og vinvalg. Perfekt for deg
+            som ønsker å bygge din egen vinkjeller eller trenger ekspertise til
+            spesielle anledninger.
+          </p>
+          <p class="price">NOK 1 500,- / time</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="om" class="om-section">
+      <div class="om-container">
+        <div class="om-content">
+          <h2>Om Adrian</h2>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+          </p>
+          <br />
+          <p>
+            Duis aute irure dolor in reprehenderit in voluptate velit esse
+            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+            cupidatat non proident, sunt in culpa qui officia deserunt mollit
+            anim id est laborum.
+          </p>
+        </div>
+        <div class="om-image">[Profilbilde]</div>
+      </div>
+    </section>
+
+    <section id="kontakt" class="contact-section">
+      <h2>Kontakt</h2>
+      <p
+        style="
+          text-align: center;
+          font-size: 1.2rem;
+          margin-bottom: 3rem;
+          color: var(--burgundy);
+        "
+      >
+        Ta kontakt for en uforpliktende samtale om hvordan jeg kan hjelpe deg
+      </p>
+      <form class="contact-form">
+        <div class="form-group">
+          <label for="navn">Navn *</label>
+          <input type="text" id="navn" name="navn" required />
+        </div>
+
+        <div class="form-group">
+          <label for="email">E-post *</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+
+        <div class="form-group">
+          <label for="telefon">Telefon *</label>
+          <input type="tel" id="telefon" name="telefon" required />
+        </div>
+
+        <div class="form-group">
+          <label for="type">Type henvendelse *</label>
+          <select id="type" name="type" required>
+            <option value="">Velg...</option>
+            <option value="privat">Privat</option>
+            <option value="bedrift">Bedrift</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="tjeneste">Interessert i</label>
+          <select id="tjeneste" name="tjeneste">
+            <option value="">Velg tjeneste...</option>
+            <option value="vinsmaking">Vinsmaking</option>
+            <option value="vinliste">Vinliste-sammenstilling</option>
+            <option value="sommelier">Privat Sommelier</option>
+            <option value="konsultasjon">Vinkonsultasjon</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="melding">Melding</label>
+          <textarea
+            id="melding"
+            name="melding"
+            placeholder="Fortell meg litt om ditt arrangement eller behov..."
+          ></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn">Send henvendelse</button>
+      </form>
+    </section>
+
+    <footer>
+      <div class="logo-container">
+        <div class="logo">
+          <img src="logo2.png" alt="Adrian Vin Logo" />
+        </div>
+      </div>
+      <div class="contact-info">
+        <p>E-post: kontakt@adrianvin.no</p>
+        <p>Telefon: +47 XXX XX XXX</p>
+        <p>Trondheim, Norge</p>
+      </div>
+    </footer>
+
+    <script>
+      // Form submission handler
+      document
+        .querySelector(".contact-form")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          alert("Takk for din henvendelse! Jeg tar kontakt med deg snart.");
+          this.reset();
+        });
+
+      // Smooth scroll for navigation
+      document.querySelectorAll("nav a").forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const section = document.querySelector(this.getAttribute("href"));
+          section.scrollIntoView({ behavior: "smooth" });
+        });
+      });
+    </script>
+  </body>
+</html>

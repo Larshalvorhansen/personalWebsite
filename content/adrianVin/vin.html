@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="no">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vinekspert - Profesjonelle Sommeliertjenester</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Georgia", serif;
+        line-height: 1.6;
+        color: #2c2c2c;
+        background-color: #fafafa;
+      }
+
+      .header {
+        background: linear-gradient(135deg, #6b1f3e 0%, #8b2f4e 100%);
+        color: white;
+        padding: 2rem 1rem;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .header h1 {
+        font-size: 3rem;
+        font-weight: 300;
+        letter-spacing: 3px;
+        margin-bottom: 0.5rem;
+      }
+
+      .header p {
+        font-size: 1.2rem;
+        opacity: 0.95;
+        font-style: italic;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem 1rem;
+      }
+
+      .hero {
+        text-align: center;
+        padding: 4rem 1rem;
+        background:
+          linear-gradient(
+            to bottom,
+            rgba(255, 255, 255, 0.9),
+            rgba(255, 255, 255, 0.95)
+          ),
+          url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400"><path d="M0,200 Q300,150 600,200 T1200,200 L1200,400 L0,400 Z" fill="%23f5f0eb"/></svg>');
+        background-size: cover;
+      }
+
+      .hero h2 {
+        font-size: 2.5rem;
+        color: #6b1f3e;
+        margin-bottom: 1rem;
+        font-weight: 400;
+      }
+
+      .hero p {
+        font-size: 1.2rem;
+        color: #555;
+        max-width: 700px;
+        margin: 0 auto 2rem;
+      }
+
+      .cta-button {
+        display: inline-block;
+        padding: 1rem 2.5rem;
+        background: #6b1f3e;
+        color: white;
+        text-decoration: none;
+        border-radius: 50px;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(107, 31, 62, 0.3);
+      }
+
+      .cta-button:hover {
+        background: #8b2f4e;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(107, 31, 62, 0.4);
+      }
+
+      .services {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin: 4rem 0;
+      }
+
+      .service-card {
+        background: white;
+        padding: 2.5rem;
+        border-radius: 12px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+        border-top: 4px solid #6b1f3e;
+      }
+
+      .service-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+      }
+
+      .service-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        display: block;
+      }
+
+      .service-card h3 {
+        color: #6b1f3e;
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+        font-weight: 400;
+      }
+
+      .service-card p {
+        color: #666;
+        line-height: 1.8;
+      }
+
+      .about {
+        background: linear-gradient(135deg, #f5f0eb 0%, #faf8f5 100%);
+        padding: 4rem 2rem;
+        border-radius: 12px;
+        margin: 4rem 0;
+        text-align: center;
+      }
+
+      .about h2 {
+        color: #6b1f3e;
+        font-size: 2.5rem;
+        margin-bottom: 1.5rem;
+        font-weight: 400;
+      }
+
+      .about p {
+        color: #555;
+        font-size: 1.1rem;
+        max-width: 800px;
+        margin: 0 auto 1rem;
+        line-height: 1.8;
+      }
+
+      .benefits {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin: 4rem 0;
+        padding: 0 1rem;
+      }
+
+      .benefit-item {
+        text-align: center;
+        padding: 1.5rem;
+      }
+
+      .benefit-item .icon {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        display: block;
+      }
+
+      .benefit-item h4 {
+        color: #6b1f3e;
+        margin-bottom: 0.5rem;
+        font-size: 1.3rem;
+      }
+
+      .benefit-item p {
+        color: #666;
+      }
+
+      .contact {
+        background: white;
+        padding: 4rem 2rem;
+        border-radius: 12px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+        margin: 4rem 0;
+        text-align: center;
+      }
+
+      .contact h2 {
+        color: #6b1f3e;
+        font-size: 2.5rem;
+        margin-bottom: 1.5rem;
+        font-weight: 400;
+      }
+
+      .contact p {
+        font-size: 1.1rem;
+        color: #555;
+        margin-bottom: 2rem;
+      }
+
+      .contact-info {
+        display: flex;
+        justify-content: center;
+        gap: 3rem;
+        flex-wrap: wrap;
+        margin-top: 2rem;
+      }
+
+      .contact-item {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        font-size: 1.1rem;
+      }
+
+      .contact-item span {
+        font-size: 1.5rem;
+      }
+
+      .contact-item a {
+        color: #6b1f3e;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .contact-item a:hover {
+        color: #8b2f4e;
+      }
+
+      footer {
+        background: #2c2c2c;
+        color: white;
+        text-align: center;
+        padding: 2rem 1rem;
+        margin-top: 4rem;
+      }
+
+      footer p {
+        opacity: 0.8;
+      }
+
+      @media (max-width: 768px) {
+        .header h1 {
+          font-size: 2rem;
+        }
+
+        .hero h2 {
+          font-size: 1.8rem;
+        }
+
+        .services {
+          grid-template-columns: 1fr;
+        }
+
+        .contact-info {
+          flex-direction: column;
+          gap: 1.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <h1>🍷 VINEKSPERT</h1>
+      <p>Profesjonelle sommeliertjenester for enhver anledning</p>
+    </header>
+
+    <section class="hero">
+      <div class="container">
+        <h2>Din personlige vinekspert</h2>
+        <p>
+          Jeg tilbyr skreddersydde vinopplevelser for bedrifter og private
+          kunder. Med dyp kunnskap om vin og lidenskap for det perfekte
+          samspillet mellom mat og drikke, skaper jeg uforglemmelige øyeblikk.
+        </p>
+        <a href="#contact" class="cta-button">Kontakt meg i dag</a>
+      </div>
+    </section>
+
+    <div class="container">
+      <section class="services">
+        <div class="service-card">
+          <span class="service-icon">🏢</span>
+          <h3>Vinsmaking for bedrifter</h3>
+          <p>
+            Skap en unik og engasjerende opplevelse for dine ansatte eller
+            kunder. Jeg arrangerer profesjonelle vinsmakinger tilpasset deres
+            ønsker og budsjett. Perfekt for teambuilding, kundeeventer eller
+            julebord.
+          </p>
+        </div>
+
+        <div class="service-card">
+          <span class="service-icon">📋</span>
+          <h3>Skreddersydde vinlister</h3>
+          <p>
+            Trenger restauranten eller arrangementet ditt en nøye sammensatt
+            vinliste? Jeg lager vinlister som harmonerer perfekt med menyen din,
+            enten det er en intim middag eller et stort arrangement.
+          </p>
+        </div>
+
+        <div class="service-card">
+          <span class="service-icon">👤</span>
+          <h3>Private sommeliertjenester</h3>
+          <p>
+            Få din egen personlige sommelier til middagsselskap, jubileum eller
+            spesielle anledninger. Jeg hjelper med vinvalg, servering og deler
+            kunnskap om vinene gjennom kvelden.
+          </p>
+        </div>
+      </section>
+
+      <section class="about">
+        <h2>Hvorfor velge Vinekspert?</h2>
+        <p>
+          Med omfattende erfaring og sertifisering som sommelier, kombinerer jeg
+          faglig dyktighet med en genuin lidenskap for vin. Jeg holder meg
+          oppdatert på de nyeste trendene og har et bredt nettverk av
+          vinprodusenter og importører.
+        </p>
+        <p>
+          Min tilnærming er personlig og skreddersydd - ingen to arrangementer
+          er like. Jeg tar meg tid til å forstå dine preferanser, budsjett og
+          ønsker for å skape en opplevelse som overgår forventningene.
+        </p>
+      </section>
+
+      <section class="benefits">
+        <div class="benefit-item">
+          <span class="icon">🎯</span>
+          <h4>Skreddersydd</h4>
+          <p>Hver tjeneste tilpasses dine spesifikke ønsker og behov</p>
+        </div>
+
+        <div class="benefit-item">
+          <span class="icon">💎</span>
+          <h4>Profesjonelt</h4>
+          <p>Høy faglig kompetanse og mange års erfaring</p>
+        </div>
+
+        <div class="benefit-item">
+          <span class="icon">🤝</span>
+          <h4>Personlig service</h4>
+          <p>Tett oppfølging fra planlegging til gjennomføring</p>
+        </div>
+
+        <div class="benefit-item">
+          <span class="icon">🌟</span>
+          <h4>Uforglemmelig</h4>
+          <p>Skaper opplevelser som gjestene husker lenge</p>
+        </div>
+      </section>
+
+      <section class="contact" id="contact">
+        <h2>Ta kontakt</h2>
+        <p>
+          Klar for å skape en uforglemmelig vinopplevelse? Ta kontakt for en
+          uforpliktende prat om hvordan jeg kan hjelpe deg.
+        </p>
+
+        <div class="contact-info">
+          <div class="contact-item">
+            <span>📧</span>
+            <a href="mailto:post@vinekspert.no">post@vinekspert.no</a>
+          </div>
+          <div class="contact-item">
+            <span>📱</span>
+            <a href="tel:+4712345678">+47 123 45 678</a>
+          </div>
+        </div>
+
+        <p style="margin-top: 2rem; font-size: 0.95rem; color: #888">
+          Jeg betjener kunder i hele Norge og tilbyr fleksible løsninger for
+          alle typer arrangementer.
+        </p>
+      </section>
+    </div>
+
+    <footer>
+      <p>&copy; 2024 Vinekspert - Profesjonelle Sommeliertjenester</p>
+      <p style="margin-top: 0.5rem; font-size: 0.9rem">Org.nr: XXX XXX XXX</p>
+    </footer>
+  </body>
+</html>
