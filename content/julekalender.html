@@ -67,6 +67,17 @@
         box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
       }
 
+      .door.locked {
+        background: linear-gradient(135deg, #555 0%, #333 100%);
+        cursor: not-allowed;
+        opacity: 0.6;
+      }
+
+      .door.locked:hover {
+        transform: none;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      }
+
       .door-number {
         font-size: 3em;
         font-weight: bold;
@@ -74,8 +85,11 @@
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
       }
 
-      .door.opened {
-        background: linear-gradient(135deg, #2d5a3d 0%, #1a472a 100%);
+      .lock-icon {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 1.5em;
       }
 
       .modal {
@@ -126,6 +140,7 @@
         max-width: 100%;
         border-radius: 10px;
         margin: 15px 0;
+        display: block;
       }
 
       .close-btn {
@@ -144,81 +159,6 @@
       .close-btn:hover {
         background: #8b1428;
         transform: scale(1.05);
-      }
-
-      .edit-mode-btn {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        background: #ffd700;
-        color: #1a472a;
-        border: none;
-        padding: 15px 25px;
-        font-size: 1em;
-        font-weight: bold;
-        border-radius: 25px;
-        cursor: pointer;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        transition: all 0.3s ease;
-        z-index: 999;
-      }
-
-      .edit-mode-btn:hover {
-        transform: scale(1.1);
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-      }
-
-      .edit-form {
-        display: none;
-      }
-
-      .edit-form.active {
-        display: block;
-      }
-
-      .edit-form textarea {
-        width: 100%;
-        min-height: 200px;
-        padding: 15px;
-        border: 2px solid #ddd;
-        border-radius: 10px;
-        font-size: 1em;
-        font-family: inherit;
-        margin-bottom: 15px;
-        resize: vertical;
-      }
-
-      .edit-form input[type="text"],
-      .edit-form input[type="file"] {
-        width: 100%;
-        padding: 12px;
-        border: 2px solid #ddd;
-        border-radius: 10px;
-        font-size: 1em;
-        margin-bottom: 15px;
-      }
-
-      .edit-form label {
-        display: block;
-        margin-bottom: 8px;
-        font-weight: bold;
-        color: #1a472a;
-      }
-
-      .save-btn {
-        background: #2d5a3d;
-        color: white;
-        border: none;
-        padding: 12px 30px;
-        font-size: 1.1em;
-        border-radius: 25px;
-        cursor: pointer;
-        margin-right: 10px;
-        transition: all 0.3s ease;
-      }
-
-      .save-btn:hover {
-        background: #1a472a;
       }
 
       @media (max-width: 768px) {
@@ -242,219 +182,257 @@
       <h1>🎄 Julekalender 2025 🎄</h1>
       <p class="subtitle">Åpne en luke hver dag i desember!</p>
 
-      <div class="calendar-grid" id="calendar">
-        <!-- Lukene genereres med JavaScript -->
-      </div>
+      <div class="calendar-grid" id="calendar"></div>
     </div>
-
-    <button class="edit-mode-btn" onclick="toggleEditMode()">
-      ✏️ Rediger innhold
-    </button>
 
     <div class="modal" id="modal">
       <div class="modal-content">
         <div class="modal-header" id="modalHeader"></div>
         <div class="modal-body" id="modalBody"></div>
-        <div class="edit-form" id="editForm">
-          <label>Tittel (valgfri):</label>
-          <input
-            type="text"
-            id="editTitle"
-            placeholder="F.eks: Hjemmelaget pepperkaker"
-          />
-
-          <label>Innhold:</label>
-          <textarea
-            id="editContent"
-            placeholder="Skriv hva som helst her! Tips, oppskrifter, meldinger, eller last opp et bilde nedenfor..."
-          ></textarea>
-
-          <label>Bilde (valgfri):</label>
-          <input type="file" id="editImage" accept="image/*" />
-
-          <button class="save-btn" onclick="saveContent()">💾 Lagre</button>
-          <button class="close-btn" onclick="cancelEdit()">Avbryt</button>
-        </div>
-        <button class="close-btn" id="closeBtn" onclick="closeModal()">
-          Lukk
-        </button>
+        <button class="close-btn" onclick="closeModal()">Lukk</button>
       </div>
     </div>
 
     <script>
-      // Standard innhold for hver luke (kan endres!)
-      const defaultContent = {
-        1: {
-          title: "1. Desember 🎅",
-          content:
-            "Velkommen til julekalenderen! Trykk på 'Rediger innhold' nede til høyre for å fylle lukene med ditt eget innhold.",
-        },
-        2: {
-          title: "2. Desember ⭐",
-          content:
-            "Klikk 'Rediger innhold' for å legge til tekst, bilder eller hva som helst!",
-        },
-        3: { title: "3. Desember 🎁", content: "" },
-        4: { title: "4. Desember ❄️", content: "" },
-        5: { title: "5. Desember 🕯️", content: "" },
-        6: { title: "6. Desember 🎄", content: "" },
-        7: { title: "7. Desember ⛄", content: "" },
-        8: { title: "8. Desember 🔔", content: "" },
-        9: { title: "9. Desember 🌟", content: "" },
-        10: { title: "10. Desember 🎅", content: "" },
-        11: { title: "11. Desember 🦌", content: "" },
-        12: { title: "12. Desember 🎁", content: "" },
-        13: { title: "13. Desember ❄️", content: "" },
-        14: { title: "14. Desember 🕯️", content: "" },
-        15: { title: "15. Desember 🎄", content: "" },
-        16: { title: "16. Desember ⭐", content: "" },
-        17: { title: "17. Desember 🔔", content: "" },
-        18: { title: "18. Desember ⛄", content: "" },
-        19: { title: "19. Desember 🌟", content: "" },
-        20: { title: "20. Desember 🎅", content: "" },
-        21: { title: "21. Desember 🦌", content: "" },
-        22: { title: "22. Desember 🎁", content: "" },
-        23: { title: "23. Desember ❄️", content: "" },
-        24: { title: "24. Desember 🎄✨", content: "God jul!" },
-      };
+              // REDIGER HER: Legg inn innhold for hver luke
+              const doors = [
+                  // Luke 1
+                  {
+                      locked: true,  // false = kan åpnes, true = låst
+                      title: "1. Desember 🎅",
+                      content: "Velkommen til denne lille Larse-julekalenderen!\n
 
-      let contentData =
-        JSON.parse(localStorage.getItem("julekalenderContent")) ||
-        defaultContent;
-      let openedDoors = JSON.parse(localStorage.getItem("openedDoors")) || [];
-      let editMode = false;
-      let currentDoor = null;
+      Idag er luke 1! En er et litt rart men også kult tall. \n
 
-      // Generer kalender
-      function generateCalendar() {
-        const calendar = document.getElementById("calendar");
-        calendar.innerHTML = "";
+      Litt filosofisk kankjse? Det er liksom ingenting man kan gjøre med tallet 1. Men likevell finnes det overalt! \n
 
-        for (let i = 1; i <= 24; i++) {
-          const door = document.createElement("div");
-          door.className = "door";
-          if (openedDoors.includes(i)) {
-            door.classList.add("opened");
-          }
+      Uten 1 er det ikke 2 fordi 2 er satt sammen av 2 enere. \n
 
-          const number = document.createElement("div");
-          number.className = "door-number";
-          number.textContent = i;
+      Uten 1 er det ingenting...
+      ",
+                      image: "" // Legg til bildeurl her hvis du vil ha bilde
+                  },
+                  // Luke 2
+                  {
+                      locked: false,
+                      title: "2. Desember ⭐",
+                      content: "Husk å kose dere i dag!",
+                      image: ""
+                  },
+                  // Luke 3
+                  {
+                      locked: true,
+                      title: "3. Desember 🎁",
+                      content: "Dette er en hemmelig melding for 3. desember!",
+                      image: ""
+                  },
+                  // Luke 4
+                  {
+                      locked: true,
+                      title: "4. Desember ❄️",
+                      content: "",
+                      image: ""
+                  },
+                  // Luke 5
+                  {
+                      locked: true,
+                      title: "5. Desember 🕯️",
+                      content: "",
+                      image: ""
+                  },
+                  // Luke 6
+                  {
+                      locked: true,
+                      title: "6. Desember 🎄",
+                      content: "",
+                      image: ""
+                  },
+                  // Luke 7
+                  {
+                      locked: true,
+                      title: "7. Desember ⛄",
+                      content: "",
+                      image: ""
+                  },
+                  // Luke 8
+                  {
+                      locked: true,
+                      title: "8. Desember 🔔",
+                      content: "",
+                      image: ""
+                  },
+                  // Luke 9
+                  {
+                      locked: true,
+                      title: "9. Desember 🌟",
+                      content: "",
+                      image: ""
+                  },
+                  // Luke 10
+                  {
+                      locked: true,
+                      title: "10. Desember 🎅",
+                      content: "",
+                      image: ""
+                  },
+                  // Luke 11
+                  {
+                      locked: true,
+                      title: "11. Desember 🦌",
+                      content: "",
+                      image: ""
+                  },
+                  // Luke 12
+                  {
+                      locked: true,
+                      title: "12. Desember 🎁",
+                      content: "",
+                      image: ""
+                  },
+                  // Luke 13
+                  {
+                      locked: true,
+                      title: "13. Desember ❄️",
+                      content: "",
+                      image: ""
+                  },
+                  // Luke 14
+                  {
+                      locked: true,
+                      title: "14. Desember 🕯️",
+                      content: "",
+                      image: ""
+                  },
+                  // Luke 15
+                  {
+                      locked: true,
+                      title: "15. Desember 🎄",
+                      content: "",
+                      image: ""
+                  },
+                  // Luke 16
+                  {
+                      locked: true,
+                      title: "16. Desember ⭐",
+                      content: "",
+                      image: ""
+                  },
+                  // Luke 17
+                  {
+                      locked: true,
+                      title: "17. Desember 🔔",
+                      content: "",
+                      image: ""
+                  },
+                  // Luke 18
+                  {
+                      locked: true,
+                      title: "18. Desember ⛄",
+                      content: "",
+                      image: ""
+                  },
+                  // Luke 19
+                  {
+                      locked: true,
+                      title: "19. Desember 🌟",
+                      content: "",
+                      image: ""
+                  },
+                  // Luke 20
+                  {
+                      locked: true,
+                      title: "20. Desember 🎅",
+                      content: "",
+                      image: ""
+                  },
+                  // Luke 21
+                  {
+                      locked: true,
+                      title: "21. Desember 🦌",
+                      content: "",
+                      image: ""
+                  },
+                  // Luke 22
+                  {
+                      locked: true,
+                      title: "22. Desember 🎁",
+                      content: "",
+                      image: ""
+                  },
+                  // Luke 23
+                  {
+                      locked: true,
+                      title: "23. Desember ❄️",
+                      content: "",
+                      image: ""
+                  },
+                  // Luke 24
+                  {
+                      locked: true,
+                      title: "24. Desember 🎄✨",
+                      content: "God jul!",
+                      image: ""
+                  }
+              ];
 
-          door.appendChild(number);
-          door.onclick = () => openDoor(i);
-          calendar.appendChild(door);
-        }
-      }
+              // Generer kalenderen
+              function generateCalendar() {
+                  const calendar = document.getElementById('calendar');
+                  calendar.innerHTML = '';
 
-      function openDoor(day) {
-        currentDoor = day;
-        const modal = document.getElementById("modal");
-        const modalHeader = document.getElementById("modalHeader");
-        const modalBody = document.getElementById("modalBody");
-        const editForm = document.getElementById("editForm");
-        const closeBtn = document.getElementById("closeBtn");
+                  doors.forEach((door, index) => {
+                      const doorElement = document.createElement('div');
+                      doorElement.className = 'door' + (door.locked ? ' locked' : '');
 
-        if (editMode) {
-          // Vis redigeringsform
-          modalHeader.textContent = `Rediger luke ${day}`;
-          modalBody.style.display = "none";
-          editForm.classList.add("active");
-          closeBtn.style.display = "none";
+                      const number = document.createElement('div');
+                      number.className = 'door-number';
+                      number.textContent = index + 1;
 
-          const data = contentData[day] || {
-            title: `${day}. Desember`,
-            content: "",
-          };
-          document.getElementById("editTitle").value = data.title || "";
-          document.getElementById("editContent").value = data.content || "";
-        } else {
-          // Vis innhold
-          const data = contentData[day] || {
-            title: `${day}. Desember`,
-            content:
-              "Denne luken er tom! Bruk redigeringsmodus for å legge til innhold.",
-          };
-          modalHeader.textContent = data.title;
+                      doorElement.appendChild(number);
 
-          let bodyHTML = "";
-          if (data.image) {
-            bodyHTML += `<img src="${data.image}" alt="Bilde for dag ${day}">`;
-          }
-          bodyHTML += `<p>${data.content.replace(/\n/g, "<br>")}</p>`;
+                      if (door.locked) {
+                          const lock = document.createElement('div');
+                          lock.className = 'lock-icon';
+                          lock.textContent = '🔒';
+                          doorElement.appendChild(lock);
+                      }
 
-          modalBody.innerHTML = bodyHTML;
-          modalBody.style.display = "block";
-          editForm.classList.remove("active");
-          closeBtn.style.display = "block";
+                      if (!door.locked) {
+                          doorElement.onclick = () => openDoor(index);
+                      }
 
-          // Marker som åpnet
-          if (!openedDoors.includes(day)) {
-            openedDoors.push(day);
-            localStorage.setItem("openedDoors", JSON.stringify(openedDoors));
-            generateCalendar();
-          }
-        }
+                      calendar.appendChild(doorElement);
+                  });
+              }
 
-        modal.classList.add("active");
-      }
+              function openDoor(index) {
+                  const door = doors[index];
+                  if (door.locked) return;
 
-      function closeModal() {
-        document.getElementById("modal").classList.remove("active");
-        document.getElementById("editForm").classList.remove("active");
-      }
+                  const modal = document.getElementById('modal');
+                  const modalHeader = document.getElementById('modalHeader');
+                  const modalBody = document.getElementById('modalBody');
 
-      function toggleEditMode() {
-        editMode = !editMode;
-        const btn = document.querySelector(".edit-mode-btn");
-        btn.textContent = editMode
-          ? "👁️ Avslutt redigering"
-          : "✏️ Rediger innhold";
-        btn.style.background = editMode ? "#ff6b6b" : "#ffd700";
-      }
+                  modalHeader.textContent = door.title;
 
-      function saveContent() {
-        const title = document.getElementById("editTitle").value;
-        const content = document.getElementById("editContent").value;
-        const imageFile = document.getElementById("editImage").files[0];
+                  let bodyHTML = '';
+                  if (door.image) {
+                      bodyHTML += `<img src="${door.image}" alt="Bilde">`;
+                  }
+                  if (door.content) {
+                      bodyHTML += `<p>${door.content.replace(/\n/g, '<br>')}</p>`;
+                  }
 
-        if (imageFile) {
-          const reader = new FileReader();
-          reader.onload = function (e) {
-            contentData[currentDoor] = {
-              title: title || `${currentDoor}. Desember`,
-              content: content,
-              image: e.target.result,
-            };
-            localStorage.setItem(
-              "julekalenderContent",
-              JSON.stringify(contentData),
-            );
-            closeModal();
-            document.getElementById("editImage").value = "";
-          };
-          reader.readAsDataURL(imageFile);
-        } else {
-          contentData[currentDoor] = {
-            title: title || `${currentDoor}. Desember`,
-            content: content,
-            image: contentData[currentDoor]?.image,
-          };
-          localStorage.setItem(
-            "julekalenderContent",
-            JSON.stringify(contentData),
-          );
-          closeModal();
-        }
-      }
+                  modalBody.innerHTML = bodyHTML || '<p>Denne luken er tom!</p>';
+                  modal.classList.add('active');
+              }
 
-      function cancelEdit() {
-        closeModal();
-        document.getElementById("editImage").value = "";
-      }
+              function closeModal() {
+                  document.getElementById('modal').classList.remove('active');
+              }
 
-      // Start app
-      generateCalendar();
+              // Start
+              generateCalendar();
     </script>
   </body>
 </html>
