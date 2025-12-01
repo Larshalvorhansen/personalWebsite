@@ -156,6 +156,17 @@
         transition: all 0.3s ease;
       }
 
+      .header-image {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        object-fit: cover;
+        display: block;
+        margin: 0 auto 20px;
+        border: 4px solid #ffd700;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      }
+
       .close-btn:hover {
         background: #8b1428;
         transform: scale(1.05);
@@ -179,9 +190,9 @@
   </head>
   <body>
     <div class="container">
-      <h1>🎄 Julekalender 2025 🎄</h1>
-      <p class="subtitle">Åpne en luke hver dag i desember!</p>
-
+      <img src="Teo.jpg" alt="Julekalender" class="header-image" />
+      <h1>🎄 Teo og Larsemann sin juletallkalender 2025 🎄</h1>
+      <p class="subtitle">From ål of øss to ål åf ju. A verry merry Krismas!</p>
       <div class="calendar-grid" id="calendar"></div>
     </div>
 
@@ -198,7 +209,7 @@
       const doors = [
         // Luke 1
         {
-          locked: true, // false = kan åpnes, true = låst
+          locked: false, // false = kan åpnes, true = låst
           title: "1. Desember 🎅",
           content:
             "Velkommen til denne lille Larse-julekalenderen!\n Idag er luke 1! En er et litt rart men også kult tall. \n Litt filosofisk kankjse? Det er liksom ingenting man kan gjøre med tallet 1. Men likevell finnes det overalt! \n Uten 1 er det ikke 2 fordi 2 er satt sammen av 2 enere. \n Uten 1 er det ingenting...",
@@ -206,7 +217,7 @@
         },
         // Luke 2
         {
-          locked: false,
+          locked: true,
           title: "2. Desember ⭐",
           content: "Husk å kose dere i dag!",
           image: "",
