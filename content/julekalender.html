@@ -194,245 +194,237 @@
     </div>
 
     <script>
-              // REDIGER HER: Legg inn innhold for hver luke
-              const doors = [
-                  // Luke 1
-                  {
-                      locked: true,  // false = kan åpnes, true = låst
-                      title: "1. Desember 🎅",
-                      content: "Velkommen til denne lille Larse-julekalenderen!\n
+      // REDIGER HER: Legg inn innhold for hver luke
+      const doors = [
+        // Luke 1
+        {
+          locked: true, // false = kan åpnes, true = låst
+          title: "1. Desember 🎅",
+          content:
+            "Velkommen til denne lille Larse-julekalenderen!\n Idag er luke 1! En er et litt rart men også kult tall. \n Litt filosofisk kankjse? Det er liksom ingenting man kan gjøre med tallet 1. Men likevell finnes det overalt! \n Uten 1 er det ikke 2 fordi 2 er satt sammen av 2 enere. \n Uten 1 er det ingenting...",
+          image: "", // Legg til bildeurl her hvis du vil ha bilde
+        },
+        // Luke 2
+        {
+          locked: false,
+          title: "2. Desember ⭐",
+          content: "Husk å kose dere i dag!",
+          image: "",
+        },
+        // Luke 3
+        {
+          locked: true,
+          title: "3. Desember 🎁",
+          content: "Dette er en hemmelig melding for 3. desember!",
+          image: "",
+        },
+        // Luke 4
+        {
+          locked: true,
+          title: "4. Desember ❄️",
+          content: "",
+          image: "",
+        },
+        // Luke 5
+        {
+          locked: true,
+          title: "5. Desember 🕯️",
+          content: "",
+          image: "",
+        },
+        // Luke 6
+        {
+          locked: true,
+          title: "6. Desember 🎄",
+          content: "",
+          image: "",
+        },
+        // Luke 7
+        {
+          locked: true,
+          title: "7. Desember ⛄",
+          content: "",
+          image: "",
+        },
+        // Luke 8
+        {
+          locked: true,
+          title: "8. Desember 🔔",
+          content: "",
+          image: "",
+        },
+        // Luke 9
+        {
+          locked: true,
+          title: "9. Desember 🌟",
+          content: "",
+          image: "",
+        },
+        // Luke 10
+        {
+          locked: true,
+          title: "10. Desember 🎅",
+          content: "",
+          image: "",
+        },
+        // Luke 11
+        {
+          locked: true,
+          title: "11. Desember 🦌",
+          content: "",
+          image: "",
+        },
+        // Luke 12
+        {
+          locked: true,
+          title: "12. Desember 🎁",
+          content: "",
+          image: "",
+        },
+        // Luke 13
+        {
+          locked: true,
+          title: "13. Desember ❄️",
+          content: "",
+          image: "",
+        },
+        // Luke 14
+        {
+          locked: true,
+          title: "14. Desember 🕯️",
+          content: "",
+          image: "",
+        },
+        // Luke 15
+        {
+          locked: true,
+          title: "15. Desember 🎄",
+          content: "",
+          image: "",
+        },
+        // Luke 16
+        {
+          locked: true,
+          title: "16. Desember ⭐",
+          content: "",
+          image: "",
+        },
+        // Luke 17
+        {
+          locked: true,
+          title: "17. Desember 🔔",
+          content: "",
+          image: "",
+        },
+        // Luke 18
+        {
+          locked: true,
+          title: "18. Desember ⛄",
+          content: "",
+          image: "",
+        },
+        // Luke 19
+        {
+          locked: true,
+          title: "19. Desember 🌟",
+          content: "",
+          image: "",
+        },
+        // Luke 20
+        {
+          locked: true,
+          title: "20. Desember 🎅",
+          content: "",
+          image: "",
+        },
+        // Luke 21
+        {
+          locked: true,
+          title: "21. Desember 🦌",
+          content: "",
+          image: "",
+        },
+        // Luke 22
+        {
+          locked: true,
+          title: "22. Desember 🎁",
+          content: "",
+          image: "",
+        },
+        // Luke 23
+        {
+          locked: true,
+          title: "23. Desember ❄️",
+          content: "",
+          image: "",
+        },
+        // Luke 24
+        {
+          locked: true,
+          title: "24. Desember 🎄✨",
+          content: "God jul!",
+          image: "",
+        },
+      ];
 
-      Idag er luke 1! En er et litt rart men også kult tall. \n
+      // Generer kalenderen
+      function generateCalendar() {
+        const calendar = document.getElementById("calendar");
+        calendar.innerHTML = "";
 
-      Litt filosofisk kankjse? Det er liksom ingenting man kan gjøre med tallet 1. Men likevell finnes det overalt! \n
+        doors.forEach((door, index) => {
+          const doorElement = document.createElement("div");
+          doorElement.className = "door" + (door.locked ? " locked" : "");
 
-      Uten 1 er det ikke 2 fordi 2 er satt sammen av 2 enere. \n
+          const number = document.createElement("div");
+          number.className = "door-number";
+          number.textContent = index + 1;
 
-      Uten 1 er det ingenting...
-      ",
-                      image: "" // Legg til bildeurl her hvis du vil ha bilde
-                  },
-                  // Luke 2
-                  {
-                      locked: false,
-                      title: "2. Desember ⭐",
-                      content: "Husk å kose dere i dag!",
-                      image: ""
-                  },
-                  // Luke 3
-                  {
-                      locked: true,
-                      title: "3. Desember 🎁",
-                      content: "Dette er en hemmelig melding for 3. desember!",
-                      image: ""
-                  },
-                  // Luke 4
-                  {
-                      locked: true,
-                      title: "4. Desember ❄️",
-                      content: "",
-                      image: ""
-                  },
-                  // Luke 5
-                  {
-                      locked: true,
-                      title: "5. Desember 🕯️",
-                      content: "",
-                      image: ""
-                  },
-                  // Luke 6
-                  {
-                      locked: true,
-                      title: "6. Desember 🎄",
-                      content: "",
-                      image: ""
-                  },
-                  // Luke 7
-                  {
-                      locked: true,
-                      title: "7. Desember ⛄",
-                      content: "",
-                      image: ""
-                  },
-                  // Luke 8
-                  {
-                      locked: true,
-                      title: "8. Desember 🔔",
-                      content: "",
-                      image: ""
-                  },
-                  // Luke 9
-                  {
-                      locked: true,
-                      title: "9. Desember 🌟",
-                      content: "",
-                      image: ""
-                  },
-                  // Luke 10
-                  {
-                      locked: true,
-                      title: "10. Desember 🎅",
-                      content: "",
-                      image: ""
-                  },
-                  // Luke 11
-                  {
-                      locked: true,
-                      title: "11. Desember 🦌",
-                      content: "",
-                      image: ""
-                  },
-                  // Luke 12
-                  {
-                      locked: true,
-                      title: "12. Desember 🎁",
-                      content: "",
-                      image: ""
-                  },
-                  // Luke 13
-                  {
-                      locked: true,
-                      title: "13. Desember ❄️",
-                      content: "",
-                      image: ""
-                  },
-                  // Luke 14
-                  {
-                      locked: true,
-                      title: "14. Desember 🕯️",
-                      content: "",
-                      image: ""
-                  },
-                  // Luke 15
-                  {
-                      locked: true,
-                      title: "15. Desember 🎄",
-                      content: "",
-                      image: ""
-                  },
-                  // Luke 16
-                  {
-                      locked: true,
-                      title: "16. Desember ⭐",
-                      content: "",
-                      image: ""
-                  },
-                  // Luke 17
-                  {
-                      locked: true,
-                      title: "17. Desember 🔔",
-                      content: "",
-                      image: ""
-                  },
-                  // Luke 18
-                  {
-                      locked: true,
-                      title: "18. Desember ⛄",
-                      content: "",
-                      image: ""
-                  },
-                  // Luke 19
-                  {
-                      locked: true,
-                      title: "19. Desember 🌟",
-                      content: "",
-                      image: ""
-                  },
-                  // Luke 20
-                  {
-                      locked: true,
-                      title: "20. Desember 🎅",
-                      content: "",
-                      image: ""
-                  },
-                  // Luke 21
-                  {
-                      locked: true,
-                      title: "21. Desember 🦌",
-                      content: "",
-                      image: ""
-                  },
-                  // Luke 22
-                  {
-                      locked: true,
-                      title: "22. Desember 🎁",
-                      content: "",
-                      image: ""
-                  },
-                  // Luke 23
-                  {
-                      locked: true,
-                      title: "23. Desember ❄️",
-                      content: "",
-                      image: ""
-                  },
-                  // Luke 24
-                  {
-                      locked: true,
-                      title: "24. Desember 🎄✨",
-                      content: "God jul!",
-                      image: ""
-                  }
-              ];
+          doorElement.appendChild(number);
 
-              // Generer kalenderen
-              function generateCalendar() {
-                  const calendar = document.getElementById('calendar');
-                  calendar.innerHTML = '';
+          if (door.locked) {
+            const lock = document.createElement("div");
+            lock.className = "lock-icon";
+            lock.textContent = "🔒";
+            doorElement.appendChild(lock);
+          }
 
-                  doors.forEach((door, index) => {
-                      const doorElement = document.createElement('div');
-                      doorElement.className = 'door' + (door.locked ? ' locked' : '');
+          if (!door.locked) {
+            doorElement.onclick = () => openDoor(index);
+          }
 
-                      const number = document.createElement('div');
-                      number.className = 'door-number';
-                      number.textContent = index + 1;
+          calendar.appendChild(doorElement);
+        });
+      }
 
-                      doorElement.appendChild(number);
+      function openDoor(index) {
+        const door = doors[index];
+        if (door.locked) return;
 
-                      if (door.locked) {
-                          const lock = document.createElement('div');
-                          lock.className = 'lock-icon';
-                          lock.textContent = '🔒';
-                          doorElement.appendChild(lock);
-                      }
+        const modal = document.getElementById("modal");
+        const modalHeader = document.getElementById("modalHeader");
+        const modalBody = document.getElementById("modalBody");
 
-                      if (!door.locked) {
-                          doorElement.onclick = () => openDoor(index);
-                      }
+        modalHeader.textContent = door.title;
 
-                      calendar.appendChild(doorElement);
-                  });
-              }
+        let bodyHTML = "";
+        if (door.image) {
+          bodyHTML += `<img src="${door.image}" alt="Bilde">`;
+        }
+        if (door.content) {
+          bodyHTML += `<p>${door.content.replace(/\n/g, "<br>")}</p>`;
+        }
 
-              function openDoor(index) {
-                  const door = doors[index];
-                  if (door.locked) return;
+        modalBody.innerHTML = bodyHTML || "<p>Denne luken er tom!</p>";
+        modal.classList.add("active");
+      }
 
-                  const modal = document.getElementById('modal');
-                  const modalHeader = document.getElementById('modalHeader');
-                  const modalBody = document.getElementById('modalBody');
+      function closeModal() {
+        document.getElementById("modal").classList.remove("active");
+      }
 
-                  modalHeader.textContent = door.title;
-
-                  let bodyHTML = '';
-                  if (door.image) {
-                      bodyHTML += `<img src="${door.image}" alt="Bilde">`;
-                  }
-                  if (door.content) {
-                      bodyHTML += `<p>${door.content.replace(/\n/g, '<br>')}</p>`;
-                  }
-
-                  modalBody.innerHTML = bodyHTML || '<p>Denne luken er tom!</p>';
-                  modal.classList.add('active');
-              }
-
-              function closeModal() {
-                  document.getElementById('modal').classList.remove('active');
-              }
-
-              // Start
-              generateCalendar();
+      // Start
+      generateCalendar();
     </script>
   </body>
 </html>
