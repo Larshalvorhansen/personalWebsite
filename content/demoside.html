@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="no">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Paltoft Transport - Frakttjenester i Norge</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: #333;
+      }
+
+      header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 2rem 0;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .header-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        text-align: center;
+      }
+
+      .logo {
+        font-size: 2.5rem;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+      }
+
+      .org-number {
+        font-size: 1.1rem;
+        letter-spacing: 2px;
+        opacity: 0.9;
+      }
+
+      nav {
+        background: #fff;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      nav ul {
+        list-style: none;
+        display: flex;
+        justify-content: center;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      nav ul li {
+        margin: 0;
+      }
+
+      nav ul li a {
+        display: block;
+        padding: 1rem 2rem;
+        text-decoration: none;
+        color: #333;
+        font-weight: 500;
+        transition: all 0.3s;
+      }
+
+      nav ul li a:hover {
+        background: #667eea;
+        color: white;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 3rem 20px;
+      }
+
+      .hero {
+        background:
+          linear-gradient(rgba(102, 126, 234, 0.8), rgba(118, 75, 162, 0.8)),
+          url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23f0f0f0" width="1200" height="600"/></svg>');
+        background-size: cover;
+        background-position: center;
+        color: white;
+        text-align: center;
+        padding: 4rem 2rem;
+        margin-bottom: 3rem;
+      }
+
+      .hero h1 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .hero p {
+        font-size: 1.2rem;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .section {
+        margin-bottom: 4rem;
+      }
+
+      .section h2 {
+        color: #667eea;
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+        border-bottom: 3px solid #667eea;
+        padding-bottom: 0.5rem;
+      }
+
+      .services {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+
+      .service-card {
+        background: white;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s;
+      }
+
+      .service-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      }
+
+      .service-card h3 {
+        color: #667eea;
+        margin-bottom: 1rem;
+      }
+
+      .contact-form {
+        background: white;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        color: #555;
+      }
+
+      .form-group input,
+      .form-group textarea,
+      .form-group select {
+        width: 100%;
+        padding: 0.75rem;
+        border: 2px solid #ddd;
+        border-radius: 5px;
+        font-size: 1rem;
+        transition: border-color 0.3s;
+      }
+
+      .form-group input:focus,
+      .form-group textarea:focus,
+      .form-group select:focus {
+        outline: none;
+        border-color: #667eea;
+      }
+
+      .form-group textarea {
+        resize: vertical;
+        min-height: 120px;
+      }
+
+      .btn {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 1rem 2rem;
+        border: none;
+        border-radius: 5px;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: transform 0.3s;
+        width: 100%;
+      }
+
+      .btn:hover {
+        transform: scale(1.02);
+      }
+
+      .about-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+        align-items: center;
+      }
+
+      .about-image {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        height: 300px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 4rem;
+      }
+
+      footer {
+        background: #333;
+        color: white;
+        text-align: center;
+        padding: 2rem;
+        margin-top: 4rem;
+      }
+
+      .contact-info {
+        background: #f8f9fa;
+        padding: 2rem;
+        border-radius: 10px;
+        margin-bottom: 2rem;
+      }
+
+      .contact-info h3 {
+        color: #667eea;
+        margin-bottom: 1rem;
+      }
+
+      .contact-info p {
+        margin-bottom: 0.5rem;
+      }
+
+      @media (max-width: 768px) {
+        nav ul {
+          flex-direction: column;
+        }
+
+        .about-content {
+          grid-template-columns: 1fr;
+        }
+
+        .hero h1 {
+          font-size: 2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="header-content">
+        <div class="logo">PALTOFT TRANSPORT</div>
+        <div class="org-number">ORGNR. 929 348 222</div>
+      </div>
+    </header>
+
+    <nav>
+      <ul>
+        <li><a href="#hjem">Hjem</a></li>
+        <li><a href="#om">Om oss</a></li>
+        <li><a href="#kontakt">Kontakt</a></li>
+      </ul>
+    </nav>
+
+    <section id="hjem" class="hero">
+      <h1>Pålitelig transport over hele Norge</h1>
+      <p>
+        Vi tilbyr profesjonelle frakttjenester for både private og bedrifter.
+        Din vare er trygg hos oss.
+      </p>
+    </section>
+
+    <div class="container">
+      <section id="om" class="section">
+        <h2>Om Paltoft Transport</h2>
+        <div class="about-content">
+          <div>
+            <p style="margin-bottom: 1rem">
+              Paltoft Transport er et pålitelig transportfirma som har
+              spesialisert seg på frakt av varer over hele Norge. Vi tar oss av
+              alt fra småpakker til større sendinger med profesjonalitet og
+              omhu.
+            </p>
+
+            <p style="margin-bottom: 1rem">
+              Med lang erfaring i bransjen og moderne kjøretøy, sørger vi for at
+              dine varer kommer trygt frem til destinasjonen. Vi er stolte av
+              vår fleksibilitet og kundeservice.
+            </p>
+
+            <p><strong>Våre verdier:</strong></p>
+            <ul style="margin-left: 1.5rem; margin-top: 0.5rem">
+              <li>Pålitelighet</li>
+              <li>Punktlighet</li>
+              <li>Trygghet</li>
+              <li>Konkurransedyktige priser</li>
+            </ul>
+          </div>
+          <div class="about-image">🚚</div>
+        </div>
+      </section>
+
+      <section id="kontakt" class="section">
+        <h2>Kontakt oss</h2>
+
+        <div class="contact-info">
+          <h3>Kontaktinformasjon</h3>
+          <p><strong>📧 E-post:</strong> post@paltofttransport.no</p>
+          <p><strong>📞 Telefon:</strong> +47 XXX XX XXX</p>
+          <p><strong>📍 Besøksadresse:</strong> [Adresse]</p>
+          <p><strong>🏢 Organisasjonsnummer:</strong> 929 348 222</p>
+        </div>
+
+        <div class="contact-form">
+          <h3 style="margin-bottom: 1.5rem; color: #667eea">
+            Send oss en forespørsel
+          </h3>
+          <form>
+            <div class="form-group">
+              <label for="navn">Navn *</label>
+              <input type="text" id="navn" name="navn" required />
+            </div>
+
+            <div class="form-group">
+              <label for="telefon">Telefon *</label>
+              <input type="tel" id="telefon" name="telefon" required />
+            </div>
+
+            <div class="form-group">
+              <label for="epost">E-post *</label>
+              <input type="email" id="epost" name="epost" required />
+            </div>
+
+            <div class="form-group">
+              <label for="tjeneste">Type tjeneste</label>
+              <select id="tjeneste" name="tjeneste">
+                <option value="">Velg tjeneste</option>
+                <option value="privatfrakt">Privatfrakt</option>
+                <option value="bedriftsfrakt">Bedriftsfrakt</option>
+                <option value="ekspressfrakt">Ekspressfrakt</option>
+                <option value="annet">Annet</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="hentested">Hentested</label>
+              <input
+                type="text"
+                id="hentested"
+                name="hentested"
+                placeholder="Adresse hvor varene skal hentes"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="leveringssted">Leveringssted</label>
+              <input
+                type="text"
+                id="leveringssted"
+                name="leveringssted"
+                placeholder="Adresse hvor varene skal leveres"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="melding">Melding *</label>
+              <textarea
+                id="melding"
+                name="melding"
+                required
+                placeholder="Beskriv hva du ønsker å frakte, vekt/størrelse, ønsket dato osv."
+              ></textarea>
+            </div>
+
+            <button type="submit" class="btn">Send forespørsel</button>
+          </form>
+        </div>
+      </section>
+    </div>
+
+    <footer>
+      <p>&copy; 2025 Paltoft Transport - ORGNR. 929 348 222</p>
+      <p>Profesjonelle frakttjenester over hele Norge</p>
+    </footer>
+
+    <script>
+      // Smooth scrolling for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        });
+      });
+
+      // Form submission handler
+      document.querySelector("form").addEventListener("submit", function (e) {
+        e.preventDefault();
+        alert(
+          "Takk for din forespørsel! Vi vil kontakte deg så snart som mulig.",
+        );
+        this.reset();
+      });
+    </script>
+  </body>
+</html>
