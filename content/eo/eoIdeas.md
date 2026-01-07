@@ -76,3 +76,11 @@
 ### Week 46
 
 ### Week 47
+
+## 2026
+
+### Week 2
+
+AMB simulation of g7 summit
+
+### Week 3
