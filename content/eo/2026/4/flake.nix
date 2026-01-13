@@ -11,7 +11,8 @@
       let
         pkgs = nixpkgs.legacyPackages.${system};
 
-        pythonEnv = pkgs.python311.withPackages (ps: with ps; [ pandas numpy ]);
+        pythonEnv = pkgs.python311.withPackages
+          (ps: with ps; [ pandas numpy matplotlib ]);
       in {
         devShells.default = pkgs.mkShell {
           buildInputs = [ pythonEnv ];
