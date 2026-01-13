@@ -1,22 +1,24 @@
 Economic Outlook Week 3:
 
-Status:
+The Norwegian sovereign wealth fund is huge. It is bigger than any other government-owned pension fund. Not even in per capita terms... in absolute terms. The fund is brawdly invested in global markets and still owns more than 1% of Apple Inc., Alphabet, Meta, Nvidia, and the list goes on.
 
-The Norwegian sovereign wealth fund is huge. It is bigger than any other government-owned pension fund—not even in per capita terms... in absolute terms. The fund owns more than 1% of Apple Inc., Alphabet, Meta, Nvidia, etc.
+We all think about our pension at some point or another. Will it be enough? Is it safe now? No one knows for sure but by knowing a thing or two about risk can go a long way. 
 
-Risk Management
+And in Norway this sovergin wealth fund is often refered to as the governments pension fund. It is in some ways a whole countrys pension fund in the sence that its perpose is to provide financial security for the future.
 
-- Risk is the severity of something unwanted happening multiplied by the chance of that bad thing happening. (So eating a burger every day might have the same risk as playing Russian roulette at the age of 60, even though the Russian roulette only happens once.)
+So lets think a little bit about risk.
 
-- Normally in finance, risk is lowered by allocating into safer assets such as government bonds or treasuries.
+- Risk is defined as the severity of something unwanted happening multiplied by the chance of that bad thing happening(qiqi flip this: so chance first, then severity). (So eating a burger every day might have the same risk as playing Russian roulette at the age of 60, even though the Russian roulette only happens once.)
 
-- However, risk in investing decreases with longer time horizons. It also decreases with larger asset bases because liquidity scales differently—a massive fund can liquidate smaller percentages of its holdings while still accessing substantial absolute capital during a crisis, without destabilizing its overall position or suffering the market impact that forced selling would impose on a smaller investor.
+- In finance, risk is usually lowered by reallocating assets into safer products such as government bonds, stable currencies or other (qiqi please 2 or three things here along with bonds and currencies).
 
-The sovereign wealth fund has both of these advantages: a very long time horizon and a size so large compared to what is withdrawn (some 5% of annual profits) that its risk is very low.
+- In investing, risk also decreases the longer the time horizon. It also decreases with larger asset bases because liquidity scales differently. A massive fund can liquidate smaller percentages of its holdings while still accessing substantial absolute capital during a crisis, without destabilizing its overall position or suffering the market impact that forced selling would impose on a smaller investor.
 
-In other words, the fund is so robust that the largest risk it faces is not that it might someday run out or that the investments become so bad that the fund ceases to exist.
+The sovereign wealth fund has both of these advantages: a very long time horizon and a size so large compared to what is withdrawn (some 5% of annual profits) that its risk in the traditional sence very low.
 
-The biggest risk is rather an existential, systemic threat—a civilizational collapse scenario like nuclear war that would invalidate the entire framework within which the fund operates. This represents the fund's true Achilles' heel: not portfolio volatility, but the stability of the global order itself. If you consider the fiscal power of the fund, just a tenth of a percent allocation toward nuclear disarmament or similar existential risk mitigation would be the safest bet for a fund of this size to ensure its continued existence in the future.
+In other words, the fund is so robust that the largest risk it faces is not that it might someday run dry or that the investments become so bad or unlucky that the fund ceases to exist.
+
+The biggest risk is rather an existential, systemic threat. A partial civilizational collapse scenario like a nuclear war that would invalidate the entire framework within which the fund operates. This represents the fund's true Achilles' heel: not portfolio volatility, but the stability of the global order itself. If you consider the fiscal power of the fund, just a tenth of a percent allocation toward nuclear disarmament or (qiqi something in support of intennational law and stability) similar existential risk mitigation would be the safest bet for a fund of this size to ensure its continued existence in the future.
 
 Think of it this way:
 
