@@ -104,11 +104,13 @@
 
 ## 2026
 
-### Week 2
-
-- Planned: AMB simulation of G7 summit
-
 ### Week 3
 
-- TBD
+- NBIM and Titanic
+- Clickthrough rate:
+- Visit rate:
+
+### Week 4
+
+- Planned: AMB simulation of G7 summit
 ```
