@@ -1,23 +1,19 @@
 Status:
+This years G7 meeting, comically postponed from the 15th to the 17th of June by Macron as Trump dobble booked himself to a WWE wrestling match(Hard to beleave?). It is said to be quite exiting and important, especially as the relations between these 7 ww2-winning really are shaken up by some WWE fan.
 
-The Norwegian sovergin wealth fund is huge.
-It is bigger than any other government owed pention fund(Not even by per capita terms... in absolute terms)
-The fund ownes more than 1% of Apple inc, alphabet, meta, nvidia, etc, etc
+Woudnt it be fun to look into a crystal ball and try to predict how this extremely complext interacion of global politics, democratic governments, interesting personalities, assymetric information and external facotrs leading up to this event migth predict the outcome of this meeting.
 
-Risk management 
-- Risk is the severity of someting unwanted happeing multiplied with the chance of that bad thing happening. (So eating a burger every day migth have the same risk as doing a russian rulette at the age of 60 even though the russian rulette only happens once.)
-- Normaly in finance, risk is lowered by allocating into safer assets such as government bonds or treasuries?.
-- However, risk in investing is lower the longer the time horizon. It is also lower the larger the assets because in a crisis when one migth want to take money out of the stock market, a large fund could take out more money per percentage sold. (qiqi please reformulate to a more understandable explenation of that sentance.)
+As a fun exersice: lets do exactly that. Lets make an agent based simulation(qiqi insert wikipedia link on that and write [ABM]) from now on.
 
-The sovergin wealth fund has both of these: A very long time horizon, and a size so large compared to what is taken out(some 5% of the annual profits) that its risk is very low.
+last week of every month
+Jan - Announcement
+Feb - Aspect a of the meeting (Personal?)
+March - Aspect b of the meeting (Geopolitical)
+April - aspect c
+May - combining it all
+June - combining it all
+July - Evaluation
 
-In other words the fund is so strong that the largest risk it faces is not that it migth some day run out or that the investments become so bad that the fund ceases to exist.
+This will be a series of articles  
 
-The biggest risk is rather that a nuclear war or something similar would happen (qiqi a cataclismic event? An akilles heel?). If you consider the fiscal power of the fund, just a tenth of a percent allocation in nuclear dissarmnment or somehtning like that would be the safest bet for a fund of this size to keep existing in the future. 
-
-Think of it this way:
-
-A super rich casino player on the titanic migth get lost in a game of blackjack with a rational certanty that nomatter what he will be ok in the game. This, however is irelevant if the larger game compleatly collapses due to external factors.
-
-Or in other words: imagine a train company with one train that is so well built and with such large capacity that any train engineer can safely say "Yes this train has the ability to keep going without errors practically forever". That migth be besides the point if the track it is going on suddenly collapses. The train company migth be better off investing its diminishing return of train improvement with some safety checks of the track. 
-
+Prediction: 
