@@ -1,7 +1,7 @@
 Status:
-This years G7 meeting, comically postponed from the 15th to the 17th of June by Macron as Trump dobble booked himself to a WWE wrestling match(Hard to beleave?). It is said to be quite exiting and important, especially as the relations between these 7 ww2-winning really are shaken up by some WWE fan.
+This years G7 meeting, comically postponed from the 15th to the 17th of June by Macron as Trump dobble booked himself to a WWE wrestling match(Hard to beleave?). It is said to be quite exiting and important, especially as the relations between these 7 ww2-winning seem to be at a tipping point.
 
-Woudnt it be fun to look into a crystal ball and try to predict how this extremely complext interacion of global politics, democratic governments, interesting personalities, assymetric information and external facotrs leading up to this event migth predict the outcome of this meeting.
+Woudnt it be fun to look into a crystal ball too see how the extremely complex phenomenon that is global politics. Governments, personalities, soscietal happenings, assymetric information and external facotrs leading up to this event migth predict the outcome of this meeting.
 
 As a fun exersice: lets do exactly that. Lets make an agent based simulation(qiqi insert wikipedia link on that and write [ABM]) from now on.
 

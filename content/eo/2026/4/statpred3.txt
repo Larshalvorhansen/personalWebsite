@@ -1,0 +1,45 @@
+Status:
+
+This year's G7 meeting has been comically postponed from June 15th to the 17th by Macron after Trump double-booked himself for a WWE wrestling match (hard to believe, right?). It is said to be quite exciting and important, especially as mutually beneficial relations between these seven WW2-winning nations seem to be at a tipping point.
+
+Wouldn't it be fun to look into a crystal ball to see how the extremely complex phenomenon that is global politics might play out? Governments, personalities, societal trends, asymmetric information, natural disasters, technological shifts, and more are all factors that can have a large impact on the outcome of this meeting.
+
+As a fun exercise, let's attempt to create exactly that: a crystal ball. Let's use an agent-based model (ABM - https://en.wikipedia.org/wiki/Agent-based_model) together with prior information in order to simulate and thus predict the future outcome of the G7 meeting in June.
+
+This will be a series of articles published the last week of every month leading up to the meeting. We will make the ABM in three parts:
+
+January - This announcement
+
+February - Pert I - Interpersonal dynamics
+   - Historical relationships between countries and leaders
+   - Domestic political pressures each leader faces
+   - Social dynamics as a result of personality traits
+
+March - Part II - Geopolitical Tensions
+   - The NATO situation
+   - China-USA competition
+   - Russia-Ukraine war
+
+April - Part III - Economic Interests and Trade
+   - Formation vs fragmentation of trade blocs
+   - Energy security and transition policies
+   - Technology transfer and export controls
+   - Currency and financial system stability
+
+May - Combining it all
+
+June - Final prediction
+
+July - Evaluation
+
+Prediction:
+
+As of now, before we begin simulating anything, my gut feeling is that:
+
+1. The US pushes its zero-sum imperial politics despite strong opposition from the other six members of the G7
+
+2. France, Italy, Germany, the UK, and Canada push for larger economic collaboration in uncertain times amongst all G7 countries, possibly strengthening existing or establishing new free trade formations with an open invitation for the US to join
+
+3. Japan raises concerns over the China-Taiwan dispute
+
+Let's see if this simulation project produces a better prediction than gut feeling. In the worst case, it is worse and completely wrong, but still quite a valuable learning experience.
