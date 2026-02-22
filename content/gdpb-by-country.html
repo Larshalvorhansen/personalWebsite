@@ -1,0 +1,590 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>
+      Global GDP-B Rankings 2026: Welfare-Adjusted Digital Economy | Halvor
+      Hansen
+    </title>
+    <meta
+      name="description"
+      content="Explore the 2026 estimated global rankings for GDP-B. Discover how factoring in digital consumer surplus, AI, and free goods reshapes global wealth, inequality, and welfare per capita."
+    />
+    <meta
+      name="keywords"
+      content="GDP-B, GDP-B rankings, digital welfare, digital economy, consumer surplus, Erik Brynjolfsson, economic outlook, welfare-adjusted GDP, global economy 2026"
+    />
+    <meta name="author" content="Halvor Hansen" />
+    <link rel="canonical" href="https://halvorhansen.no/gdpb-rankings" />
+
+    <meta property="og:title" content="Global GDP-B Rankings 2026" />
+    <meta
+      property="og:description"
+      content="How digital consumer surplus and free tech goods reshape the wealth of nations."
+    />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://halvorhansen.no/gdpb-rankings" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --bg-color: #ffffff;
+        --text-color: #333333;
+        --text-light: #555555;
+        --accent-color: #4384f4; /* The blue lambda color from your screenshot */
+        --box-bg: #f5f5f5;
+        --border-color: #e0e0e0;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .container {
+        max-width: 900px;
+        width: 100%;
+        padding: 40px 20px;
+        box-sizing: border-box;
+      }
+
+      /* Typography */
+      h1 {
+        font-family: "Playfair Display", serif;
+        font-size: 4rem;
+        line-height: 1.1;
+        margin-bottom: 20px;
+        letter-spacing: -1px;
+        color: #000;
+      }
+
+      h2 {
+        font-family: "Inter", sans-serif;
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin-top: 50px;
+        margin-bottom: 20px;
+        border-bottom: 2px solid var(--border-color);
+        padding-bottom: 10px;
+      }
+
+      h3 {
+        font-family: "Inter", sans-serif;
+        font-size: 1.3rem;
+        font-weight: 600;
+        margin-top: 30px;
+      }
+
+      p {
+        font-size: 1.1rem;
+        color: var(--text-light);
+        margin-bottom: 20px;
+      }
+
+      /* Banner from screenshot */
+      .site-banner {
+        background-color: var(--box-bg);
+        border-radius: 8px;
+        padding: 20px 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 40px 0;
+        border: 1px solid var(--border-color);
+      }
+
+      .site-banner p {
+        margin: 0;
+        font-size: 1rem;
+        color: var(--text-color);
+      }
+
+      .site-banner .logo-hh {
+        font-weight: 800;
+        font-size: 1.5rem;
+        letter-spacing: -2px;
+      }
+
+      /* Table Styling */
+      .table-responsive {
+        overflow-x: auto;
+        margin: 30px 0;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.95rem;
+        text-align: left;
+      }
+
+      th,
+      td {
+        padding: 12px 15px;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      th {
+        background-color: var(--box-bg);
+        font-weight: 600;
+        color: #000;
+        white-space: nowrap;
+      }
+
+      tr:hover {
+        background-color: #fafafa;
+      }
+
+      .highlight-col {
+        font-weight: 700;
+        color: var(--accent-color);
+      }
+
+      ul {
+        font-size: 1.1rem;
+        color: var(--text-light);
+        padding-left: 20px;
+      }
+
+      li {
+        margin-bottom: 10px;
+      }
+
+      /* CTA / Footer Promo */
+      .cta-section {
+        background-color: #000;
+        color: #fff;
+        padding: 50px 30px;
+        border-radius: 12px;
+        text-align: center;
+        margin-top: 60px;
+        margin-bottom: 40px;
+      }
+
+      .cta-section h2 {
+        border: none;
+        color: #fff;
+        margin-top: 0;
+      }
+
+      .cta-section p {
+        color: #ddd;
+      }
+
+      .cta-button {
+        display: inline-block;
+        background-color: var(--accent-color);
+        color: #fff;
+        text-decoration: none;
+        padding: 15px 30px;
+        border-radius: 30px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        margin-top: 20px;
+        transition: background-color 0.3s ease;
+      }
+
+      .cta-button:hover {
+        background-color: #3367d6;
+      }
+
+      /* Mobile Adjustments */
+      @media (max-width: 600px) {
+        h1 {
+          font-size: 2.5rem;
+        }
+        .site-banner {
+          flex-direction: column;
+          text-align: center;
+          gap: 15px;
+        }
+        th,
+        td {
+          padding: 10px;
+          font-size: 0.85rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>GDP-B <span style="color: var(--accent-color)">RANKINGS</span></h1>
+        <p
+          style="
+            font-size: 1.4rem;
+            font-weight: 500;
+            color: #000;
+            line-height: 1.4;
+          "
+        >
+          Estimating the Welfare-Adjusted Wealth of Nations in 2026.
+        </p>
+        <p>
+          Traditional GDP ignores the massive value of zero-priced digital
+          goods—WhatsApp, Google Maps, Generative AI, and social media. Building
+          on the research framework of economists like Erik Brynjolfsson,
+          <strong>GDP-B</strong> estimates welfare by adding the consumer
+          surplus of these free digital tools to national accounts.
+        </p>
+      </header>
+
+      <div class="site-banner">
+        <p>This is a website from <strong>halvorhansen.no</strong></p>
+        <div class="logo-hh">HH</div>
+      </div>
+
+      <main>
+        <section id="methodology">
+          <h2>1. Explanation of Methodology</h2>
+          <p>
+            To construct this illustrative 2026 GDP-B ranking, we integrated
+            traditional macroeconomic data with the core tenets of GDP-B
+            research:
+          </p>
+          <ul>
+            <li>
+              <strong>Baseline Metric:</strong> IMF's 2025–2026 estimates for
+              GDP per capita based on Purchasing Power Parity (PPP), adjusting
+              for the local cost of living.
+            </li>
+            <li>
+              <strong>Base Digital Surplus:</strong> Based on
+              <i>The Digital Welfare of Nations</i>, a ~5.5% baseline multiplier
+              is used for digitally mature advanced economies.
+            </li>
+            <li>
+              <strong>The "Leapfrog" Effect:</strong> Lower-income nations
+              receive a proportionately larger relative boost (10–13%) because
+              zero-priced global digital tools substitute for paid services that
+              might otherwise be unaffordable.
+            </li>
+            <li>
+              <strong>Tech Leader & AI Premium:</strong> Countries with massive
+              digital ecosystems and rapid early adoption of Generative AI
+              (e.g., US, South Korea) receive a higher premium (7.5–10%).
+            </li>
+            <li>
+              <strong>Distortion Penalty:</strong> Nations whose GDP is inflated
+              by tax domiciles or fossil fuels (e.g., Ireland, Qatar) see a
+              lower relative percentage boost (3.5%).
+            </li>
+          </ul>
+        </section>
+
+        <section id="rankings">
+          <h2>2. Estimated GDP-B Welfare per Capita Ranking (~2026)</h2>
+          <div class="table-responsive">
+            <table>
+              <thead>
+                <tr>
+                  <th>Rank</th>
+                  <th>Country</th>
+                  <th>Trad. GDP pc (PPP)</th>
+                  <th>Est. GDP-B Boost</th>
+                  <th>GDP-B Adjusted</th>
+                  <th>Key Drivers / Notes</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>Singapore</td>
+                  <td>$161,500</td>
+                  <td>6.0%</td>
+                  <td class="highlight-col">$171,190</td>
+                  <td>Highly integrated "super-app" ecosystem.</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Luxembourg</td>
+                  <td>$155,300</td>
+                  <td>3.5%</td>
+                  <td class="highlight-col">$160,735</td>
+                  <td>Relative boost diluted by financial-sector GDP.</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>Qatar</td>
+                  <td>$131,400</td>
+                  <td>3.5%</td>
+                  <td class="highlight-col">$136,000</td>
+                  <td>High smartphone penetration, oil-skewed baseline.</td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>Ireland</td>
+                  <td>$129,100</td>
+                  <td>3.5%</td>
+                  <td class="highlight-col">$133,618</td>
+                  <td>Baseline distorted by corporate tax domiciles.</td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>Switzerland</td>
+                  <td>$100,000</td>
+                  <td>5.0%</td>
+                  <td class="highlight-col">$105,000</td>
+                  <td>Mature digital economy.</td>
+                </tr>
+                <tr>
+                  <td>6</td>
+                  <td>Brunei</td>
+                  <td>$97,400</td>
+                  <td>4.0%</td>
+                  <td class="highlight-col">$101,296</td>
+                  <td>Oil-driven baseline reduces relative impact.</td>
+                </tr>
+                <tr>
+                  <td>7</td>
+                  <td>United States</td>
+                  <td>$89,600</td>
+                  <td>7.7%</td>
+                  <td class="highlight-col">$96,499</td>
+                  <td>
+                    <strong>Leapfrogs Norway</strong> via massive Generative AI
+                    surplus.
+                  </td>
+                </tr>
+                <tr>
+                  <td>8</td>
+                  <td>Norway</td>
+                  <td>$91,800</td>
+                  <td>5.0%</td>
+                  <td class="highlight-col">$96,390</td>
+                  <td>Standard surplus relative to a high baseline.</td>
+                </tr>
+                <tr>
+                  <td>9</td>
+                  <td>Taiwan</td>
+                  <td>$88,500</td>
+                  <td>7.5%</td>
+                  <td class="highlight-col">$95,137</td>
+                  <td>
+                    <strong>Leapfrogs UAE</strong>. World-class hardware access.
+                  </td>
+                </tr>
+                <tr>
+                  <td>10</td>
+                  <td>UAE</td>
+                  <td>$89,500</td>
+                  <td>5.0%</td>
+                  <td class="highlight-col">$93,975</td>
+                  <td>High digital adoption offset by resource GDP.</td>
+                </tr>
+                <tr>
+                  <td>11</td>
+                  <td>Denmark</td>
+                  <td>$87,500</td>
+                  <td>5.5%</td>
+                  <td class="highlight-col">$92,312</td>
+                  <td>Highly digitized public and private sectors.</td>
+                </tr>
+                <tr>
+                  <td>12</td>
+                  <td>Hong Kong</td>
+                  <td>$81,600</td>
+                  <td>6.5%</td>
+                  <td class="highlight-col">$86,904</td>
+                  <td>
+                    Dense urban reliance on free digital efficiency tools.
+                  </td>
+                </tr>
+                <tr>
+                  <td>13</td>
+                  <td>Saudi Arabia</td>
+                  <td>$77,500</td>
+                  <td>5.0%</td>
+                  <td class="highlight-col">$81,375</td>
+                  <td>Massive growth in social media usage.</td>
+                </tr>
+                <tr>
+                  <td>14</td>
+                  <td>Germany</td>
+                  <td>$75,500</td>
+                  <td>5.5%</td>
+                  <td class="highlight-col">$79,652</td>
+                  <td>Baseline European digital surplus.</td>
+                </tr>
+                <tr>
+                  <td>15</td>
+                  <td>Sweden</td>
+                  <td>$75,200</td>
+                  <td>5.5%</td>
+                  <td class="highlight-col">$79,336</td>
+                  <td>Early adopter market; high fintech surplus.</td>
+                </tr>
+                <tr>
+                  <td>16</td>
+                  <td>Netherlands</td>
+                  <td>$73,200</td>
+                  <td>5.5%</td>
+                  <td class="highlight-col">$77,226</td>
+                  <td>
+                    High surplus for smartphone cameras noted in research.
+                  </td>
+                </tr>
+                <tr>
+                  <td>17</td>
+                  <td>Australia</td>
+                  <td>$70,800</td>
+                  <td>5.5%</td>
+                  <td class="highlight-col">$74,694</td>
+                  <td>High digital consumption, standard multiplier.</td>
+                </tr>
+                <tr>
+                  <td>18</td>
+                  <td>South Korea</td>
+                  <td>$67,500</td>
+                  <td>10.0%</td>
+                  <td class="highlight-col">$74,250</td>
+                  <td>
+                    <strong>Leapfrogs UK & Canada</strong>. Extreme mobile/AI
+                    penetration.
+                  </td>
+                </tr>
+                <tr>
+                  <td>19</td>
+                  <td>Canada</td>
+                  <td>$67,700</td>
+                  <td>5.5%</td>
+                  <td class="highlight-col">$71,423</td>
+                  <td>Standard advanced economy multiplier.</td>
+                </tr>
+                <tr>
+                  <td>20</td>
+                  <td>United Kingdom</td>
+                  <td>$65,200</td>
+                  <td>6.0%</td>
+                  <td class="highlight-col">$69,112</td>
+                  <td>High e-commerce and digital media consumption.</td>
+                </tr>
+                <tr>
+                  <td>21</td>
+                  <td>Czech Republic</td>
+                  <td>$62,300</td>
+                  <td>7.5%</td>
+                  <td class="highlight-col">$66,972</td>
+                  <td>
+                    Lower baseline allows larger proportional welfare boost.
+                  </td>
+                </tr>
+                <tr>
+                  <td>22</td>
+                  <td>Poland</td>
+                  <td>$58,500</td>
+                  <td>12.0%</td>
+                  <td class="highlight-col">$65,520</td>
+                  <td>
+                    <strong>Leapfrogs Spain & Slovenia</strong>. Classic digital
+                    leapfrog.
+                  </td>
+                </tr>
+                <tr>
+                  <td>23</td>
+                  <td>Slovenia</td>
+                  <td>$60,000</td>
+                  <td>8.0%</td>
+                  <td class="highlight-col">$64,800</td>
+                  <td>Strong broadband infrastructure.</td>
+                </tr>
+                <tr>
+                  <td>24</td>
+                  <td>Lithuania</td>
+                  <td>$59,900</td>
+                  <td>8.0%</td>
+                  <td class="highlight-col">$64,692</td>
+                  <td>
+                    Excellent internet speeds driving high consumer surplus.
+                  </td>
+                </tr>
+                <tr>
+                  <td>25</td>
+                  <td>Spain</td>
+                  <td>$58,300</td>
+                  <td>6.5%</td>
+                  <td class="highlight-col">$62,089</td>
+                  <td>High WhatsApp reliance adds notable surplus.</td>
+                </tr>
+                <tr>
+                  <td>26</td>
+                  <td>Romania</td>
+                  <td>$50,700</td>
+                  <td>13.0%</td>
+                  <td class="highlight-col">$57,291</td>
+                  <td>
+                    <strong>Leapfrogs Portugal</strong>. Gaining massive
+                    relative welfare.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="highlights">
+          <h2>3. Key Takeaways & Leapfrogs</h2>
+          <h3>The Tech Hub Disruptors</h3>
+          <p>
+            The <strong>United States (#7)</strong> successfully leapfrogs
+            Norway in GDP-B. As the epicenter of the Generative AI boom, AI
+            tools alongside foundational dominance in social media add massive
+            unmeasured consumer surplus annually.
+            <strong>Taiwan (#9)</strong> edges past the UAE due to highly
+            affordable, ubiquitous internet acting as an unmeasured income
+            boost.
+          </p>
+
+          <h3>The Emerging Market Leapfrogs</h3>
+          <p>
+            The most exciting dynamic in GDP-B is how it flattens global
+            inequality. <strong>South Korea</strong> overtakes Canada and the UK
+            due to intense digital culture. <strong>Poland</strong> overtakes
+            Spain, and <strong>Romania</strong> leapfrogs Portugal entirely.
+            Because their baseline GDPs are lower, free communication and
+            knowledge platforms act as a massive, free public good, replacing
+            paid services in resource-constrained budgets.
+          </p>
+        </section>
+
+        <section id="caveats">
+          <h2>4. Caveats & Limitations</h2>
+          <p>
+            This ranking is illustrative. True GDP-B requires massive,
+            incentive-compatible Willingness-to-Accept (WTA) surveys conducted
+            consistently across nations. Furthermore, consumer valuations of
+            digital goods fluctuate based on network effects, and GDP-B strictly
+            adds consumer "benefits" without subtracting negative externalities
+            like privacy loss or decreased mental health.
+          </p>
+        </section>
+
+        <section class="cta-section">
+          <h2>Want more global economic analysis?</h2>
+          <p>
+            Stay updated with insights on the current state and future outlook
+            of the world, from an economic and geopolitical perspective.
+          </p>
+          <a href="https://halvorhansen.no/economicoutlook" class="cta-button"
+            >Read the Economic Outlook</a
+          >
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
