@@ -6,7 +6,7 @@
 #align(center)[
   #text(size: 18pt, weight: "bold")[Jonathan Javier]
   #v(0.1em)
-  Trondheim , Norge | #link("mailto:jonathanwpconsulting@gmail.com")[LinkedIn] | 908 09 670 | #link("mailto:larshalvorhansen1@gmail.com")[larshalvorhansen1@gmail.com]
+  Oslo , Norge | #link("mailto:jonathanwpconsulting@gmail.com")[LinkedIn] | 908 09 670 | #link("mailto:larshalvorhansen1@gmail.com")[larshalvorhansen1@gmail.com]
 ]
 
 #v(0.3em)
