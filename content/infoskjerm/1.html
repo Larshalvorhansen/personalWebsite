@@ -104,11 +104,12 @@
       #quote {
         font-size: 1.85rem;
         font-style: italic;
-        color: #aaa;
+        color: #ccc;
         text-align: center;
         line-height: 1.45;
-        margin: 0.4em 0 0;
+        margin: 0.5em 0 0;
       }
+
       @media (max-height: 720px) {
         .main-content {
           margin-top: 215px;
@@ -268,8 +269,8 @@
       </div>
 
       <div class="quote-section">
-        <h2>Ukens quote</h2>
-        <div id="quote"></div>
+        <h2>Dagens quote</h2>
+        <div id="quote">Bedre med en iskaffe i hånden enn ti bak disken.</div>
       </div>
     </div>
 
@@ -306,7 +307,7 @@
       setInterval(updateClock, 1000);
       updateClock();
 
-      // Entur departures
+      // Entur departures (kept as is)
       const API_URL = "https://api.entur.io/journey-planner/v3/graphql";
       const JAKOB_KIRKE_ID = "NSR:StopPlace:6435";
       const NYBRUA_ID = "NSR:StopPlace:61989";
@@ -379,33 +380,6 @@
         fetchDepartures(JAKOB_KIRKE_ID, "jakob-bus", "Jakob kirke");
         fetchDepartures(NYBRUA_ID, "nybrua-trikk", "Nybrua");
       }, 10000);
-
-      // ==================== DAGENS QUOTE ====================
-      function loadDailyQuote() {
-        const quoteEl = document.getElementById("quote");
-
-        const quotes = [
-          {
-            text: "Bedre med en iskaffe i hånden enn ti bak disken.",
-          },
-          {
-            text: "Lars Halvor + skapdør er ikke lik sant...",
-          },
-          // Legg gjerne til flere quotes her
-        ];
-
-        // Velger quote basert på dagens dato (samme quote hele dagen)
-        const today = new Date().toISOString().slice(0, 10);
-        const index = parseInt(today.replace(/-/g, "")) % quotes.length;
-        const q = quotes[index];
-
-        quoteEl.innerHTML = `
-          <p style="margin: 0;">${q.text}</p>
-          ${q.author ? `<p style="margin: 0.6em 0 0; font-size: 0.85em; opacity: 0.75;">${q.author}</p>` : ""}
-        `;
-      }
-
-      loadDailyQuote();
     </script>
   </body>
 </html>
