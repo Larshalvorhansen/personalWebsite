@@ -17,48 +17,36 @@
         font-family:
           -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       }
-
       body {
         display: flex;
-        /* Move content to upper right after rotation */
-        align-items: flex-start; /* top */
-        justify-content: flex-end; /* right */
-
-        /* Rotate 90° counter-clockwise */
+        align-items: flex-start;
+        justify-content: flex-end;
         transform: rotate(-90deg);
         transform-origin: center center;
-
-        /* Swapped dimensions because of rotation */
         width: 100vh;
         height: 100vw;
       }
-
       .main-content {
-        /* Add some margin from the edges so it doesn't touch the border */
-        margin-top: 490px; /* distance from top (after rotation) */
-        margin-left: 490px; /* distance from right edge (after rotation) */
-
-        width: 780px; /* fixed comfortable width */
-        max-width: 92vw; /* safety on very small screens */
+        margin-top: 490px;
+        margin-left: 490px;
+        width: 780px;
+        max-width: 92vw;
         display: flex;
         flex-direction: column;
         align-items: center;
         padding-bottom: 40px;
         box-sizing: border-box;
       }
-
       .clock-container {
         position: relative;
         width: 380px;
         height: 380px;
         margin: 20px 0 35px 0;
       }
-
       .analog-clock {
         width: 100%;
         height: 100%;
       }
-
       .digital-time {
         position: absolute;
         top: 110%;
@@ -70,21 +58,18 @@
         color: #aaffff;
         text-shadow: 0 0 16px #00aaff88;
       }
-
       .section,
       .quote-section {
         width: 92%;
         max-width: 700px;
         margin: 18px 0;
       }
-
       h2 {
         font-size: 1.95rem;
         margin: 0.4em 0 0.6em;
         color: #88ddff;
         font-weight: 400;
       }
-
       .bus {
         font-size: 1.72rem;
         line-height: 1.55;
@@ -93,13 +78,11 @@
         align-items: center;
         gap: 1.3rem;
       }
-
       .bus .line {
         min-width: 3.8ch;
         font-weight: bold;
         color: #88ddff;
       }
-
       .bus .dest {
         flex: 1;
         color: #ddd;
@@ -107,29 +90,25 @@
         overflow: hidden;
         text-overflow: ellipsis;
       }
-
       .bus .time {
         min-width: 11ch;
         text-align: right;
         color: #ffdd88;
         font-weight: 500;
       }
-
       .bus .time.special {
         color: #ff7777;
         font-weight: bold;
         text-transform: uppercase;
       }
-
       #quote {
-        font-size: 1.9rem;
+        font-size: 1.85rem;
         font-style: italic;
         color: #aaa;
         text-align: center;
         line-height: 1.45;
+        margin: 0.4em 0 0;
       }
-
-      /* Optional: shrink a bit on very small heights */
       @media (max-height: 720px) {
         .main-content {
           margin-top: 215px;
@@ -289,7 +268,7 @@
       </div>
 
       <div class="quote-section">
-        <h2>Dagens quote</h2>
+        <h2>Ukens quote</h2>
         <div id="quote"></div>
       </div>
     </div>
@@ -345,6 +324,7 @@
       async function fetchDepartures(stopId, elementId, title) {
         const el = document.getElementById(elementId);
         el.innerHTML = `<p style="color:#888">Laster ${title}...</p>`;
+
         try {
           const res = await fetch(API_URL, {
             method: "POST",
@@ -356,11 +336,13 @@
           });
           const json = await res.json();
           const calls = json.data?.stopPlace?.estimatedCalls || [];
+
           let html = "";
           for (let call of calls) {
             if (!call.expectedDepartureTime) continue;
             const time = new Date(call.expectedDepartureTime);
             const diffMin = Math.round((time - new Date()) / 60000);
+
             let timestr =
               diffMin <= 0
                 ? "nå..."
@@ -383,6 +365,7 @@
 
             html += `<div class="bus"><span class="line">${line}</span><span class="dest">${dest}</span><span class="time${diffMin === 2 ? " special" : ""}">${timestr}</span></div>`;
           }
+
           el.innerHTML =
             html || `<p style="opacity:0.6">Ingen avganger neste time</p>`;
         } catch (e) {
@@ -392,16 +375,37 @@
 
       fetchDepartures(JAKOB_KIRKE_ID, "jakob-bus", "Jakob kirke");
       fetchDepartures(NYBRUA_ID, "nybrua-trikk", "Nybrua");
-
       setInterval(() => {
         fetchDepartures(JAKOB_KIRKE_ID, "jakob-bus", "Jakob kirke");
         fetchDepartures(NYBRUA_ID, "nybrua-trikk", "Nybrua");
       }, 10000);
+
+      // ==================== DAGENS QUOTE ====================
+      function loadDailyQuote() {
+        const quoteEl = document.getElementById("quote");
+
+        const quotes = [
+          {
+            text: "Bedre med en iskaffe i hånden enn ti bak disken.",
+          },
+          {
+            text: "Lars Halvor + skapdør er ikke lik sant...",
+          },
+          // Legg gjerne til flere quotes her
+        ];
+
+        // Velger quote basert på dagens dato (samme quote hele dagen)
+        const today = new Date().toISOString().slice(0, 10);
+        const index = parseInt(today.replace(/-/g, "")) % quotes.length;
+        const q = quotes[index];
+
+        quoteEl.innerHTML = `
+          <p style="margin: 0;">${q.text}</p>
+          ${q.author ? `<p style="margin: 0.6em 0 0; font-size: 0.85em; opacity: 0.75;">${q.author}</p>` : ""}
+        `;
+      }
+
+      loadDailyQuote();
     </script>
-    <!-- Dagens quote container -->
-    <div id="quote-container">
-      <p id="quote-text">Bedre med en iskaffe i hånden en ti bak disken.</p>
-      <p id="quote-author" style="font-size: 0.8em; opacity: 0.7"></p>
-    </div>
   </body>
 </html>
