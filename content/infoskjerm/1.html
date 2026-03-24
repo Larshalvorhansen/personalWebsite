@@ -398,21 +398,20 @@
         fetchDepartures(NYBRUA_ID, "nybrua-trikk", "Nybrua");
       }, 10000);
 
-      // Daily quote
-      async function dagensQuote() {
-        try {
-          const res = await fetch("quotes.txt");
-          const text = await res.text();
-          const lines = text.split("\n").filter((l) => l.trim());
-          const today = new Date().toDateString();
-          let seed = 0;
-          for (let c of today) seed += c.charCodeAt(0);
-          document.getElementById("quote").textContent =
-            lines[seed % lines.length]?.trim() || "–";
-        } catch {
-          document.getElementById("quote").textContent = "–";
-        }
+      // ==================== DAGENS QUOTE (now embedded) ====================
+      const quotes = [
+        "Bedre med en iskaffe i hånden en ti bak disken",
+        "Lars Halvor + skapdør er ikke = sant",
+      ];
+
+      function dagensQuote() {
+        const today = new Date().toDateString();
+        let seed = 0;
+        for (let char of today) seed += char.charCodeAt(0);
+        const index = seed % quotes.length;
+        document.getElementById("quote").textContent = quotes[index];
       }
+
       dagensQuote();
     </script>
   </body>
