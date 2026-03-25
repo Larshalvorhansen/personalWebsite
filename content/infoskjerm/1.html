@@ -1,32 +1,33 @@
 <!doctype html>
-<html>
+<html lang="en">
   <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Full Screen Rotated Test Pattern</title>
     <style>
-      body,
-      html {
+      html,
+      body {
         margin: 0;
         padding: 0;
-        width: 100%;
         height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: #000; /* Keeps the 'weird screen' vibe clean */
+        width: 100%;
+        background: black;
         overflow: hidden;
       }
 
       img {
-        /* Rotate -90 degrees (Counter-Clockwise) */
-        transform: rotate(0deg);
-
-        /* Maximize size while keeping aspect ratio */
-        max-width: 100vh;
-        max-height: 100vw;
-        object-fit: contain;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(0deg);
+        width: 100vw;
+        height: 100vh;
+        object-fit: cover; /* This forces it to fill the screen */
+        object-position: center;
       }
     </style>
   </head>
   <body>
-    <img src="test.png" alt="Rotated Artwork" />
+    <img src="test-pattern.png" alt="Test Pattern" />
   </body>
 </html>
