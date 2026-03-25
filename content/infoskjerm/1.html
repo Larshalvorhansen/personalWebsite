@@ -12,7 +12,7 @@
         height: 100%;
         width: 100%;
         overflow: hidden;
-        background: #0000ff; /* ← Dark gray background for the whole page */
+        background: #1a1a1a;
         color: #eee;
         font-family:
           -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -49,12 +49,7 @@
       }
 
       .debug .section {
-        background-color: rgba(
-          255,
-          220,
-          80,
-          0.25
-        ) !important; /* Yellow/Orange */
+        background-color: rgba(255, 220, 80, 0.25) !important; /* Yellow */
         opacity: 0.9 !important;
       }
 
@@ -69,33 +64,28 @@
       }
 
       .debug .bus {
-        background-color: rgba(
-          255,
-          200,
-          100,
-          0.3
-        ) !important; /* Light orange */
+        background-color: rgba(255, 200, 100, 0.3) !important;
         opacity: 0.9 !important;
       }
 
-      /* ==================== ORIGINAL STYLES ==================== */
+      /* ==================== MAIN LAYOUT ==================== */
       .main-content {
-        margin-top: 490px;
-        margin-left: 3000px;
-        width: 1400px;
-        max-width: 300vw;
+        width: 100%; /* Fill entire width */
+        height: 100%; /* Fill entire height */
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding-bottom: 0px;
+        justify-content: center; /* Centers everything vertically */
+        padding: 40px 20px; /* Some breathing room - adjust as needed */
         box-sizing: border-box;
+        gap: 30px; /* Space between sections */
       }
 
       .clock-container {
         position: relative;
         width: 380px;
         height: 380px;
-        margin: 20px 0 35px 0;
+        margin: 0; /* Removed old margins */
       }
 
       .analog-clock {
@@ -119,7 +109,7 @@
       .quote-section {
         width: 92%;
         max-width: 700px;
-        margin: 18px 0;
+        margin: 0; /* Let flex gap handle spacing */
       }
 
       h2 {
@@ -136,7 +126,7 @@
         display: flex;
         align-items: center;
         gap: 1.3rem;
-        padding: 8px 12px; /* increased a bit for better visibility */
+        padding: 8px 12px;
       }
 
       .bus .line {
@@ -169,25 +159,21 @@
         color: #ccc;
         text-align: center;
         line-height: 1.45;
-        margin: 0.5em 0 0;
       }
 
       @media (max-height: 720px) {
-        .main-content {
-          margin-top: 215px;
-          margin-left: 215px;
-        }
         .clock-container {
           width: 340px;
           height: 340px;
-          margin: 15px 0 25px 0;
+        }
+        .main-content {
+          padding: 20px 15px;
+          gap: 20px;
         }
       }
     </style>
   </head>
   <body class="debug">
-    <!-- Remove "debug" when you're done tweaking -->
-
     <div class="main-content">
       <div class="clock-container">
         <svg class="analog-clock" viewBox="0 0 200 200">
@@ -339,7 +325,7 @@
     </div>
 
     <script>
-      // Clock (unchanged)
+      // Clock
       function updateClock() {
         const now = new Date();
         const h = now.getHours(),
@@ -369,7 +355,7 @@
       setInterval(updateClock, 1000);
       updateClock();
 
-      // Entur departures (unchanged)
+      // Entur departures
       const API_URL = "https://api.entur.io/journey-planner/v3/graphql";
       const JAKOB_KIRKE_ID = "NSR:StopPlace:6435";
       const NYBRUA_ID = "NSR:StopPlace:61989";
