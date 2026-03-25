@@ -1,37 +1,313 @@
 <!doctype html>
-<html lang="en">
+<html lang="no">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Full Screen Rotated Test Pattern</title>
+    <title>Stue-skjerm – Vertikal</title>
     <style>
-      body,
-      html {
+      html,
+      body {
         margin: 0;
         padding: 0;
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+        background: #000000;
+        color: #eee;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      }
+
+      body {
+        /* Your existing rotation logic */
+        transform: rotate(-90deg) translateX(-100%);
+        transform-origin: top left;
+        width: 100vh;
+        height: 100vw;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      .main-content {
         width: 100vw;
         height: 100vh;
         display: flex;
-        justify-content: center;
+        flex-direction: column;
         align-items: center;
-        background-color: #000;
-        overflow: hidden;
+        justify-content: flex-start; /* Changed to start to allow scrolling/spacing control */
+        gap: 20px;
+        padding-bottom: 40px;
       }
 
-      img {
-        /* The Secret Sauce: Use the opposite viewport units */
-        /* This ensures the image 'fills' the space after the rotation */
-        width: 100vh;
-        height: 100vw;
+      /* --- NEW PAINTING STYLES --- */
+      .painting-container {
+        width: 100%;
+        height: 35vh; /* Adjust this percentage to make the painting taller/shorter */
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #111;
+      }
 
-        object-fit: cover; /* This ensures the painting fills the screen entirely */
-        transform: rotate(-90deg);
-        transform-origin: center;
-        flex-shrink: 0;
+      .painting-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Ensures it fills the 'Screen Edge' area like your test pattern */
+      }
+      /* --------------------------- */
+
+      .clock-container {
+        position: relative;
+        width: 320px; /* Slimmed slightly to fit with image */
+        height: 320px;
+        margin-top: 10px;
+      }
+
+      .analog-clock {
+        width: 100%;
+        height: 100%;
+      }
+
+      .digital-time {
+        font-size: 3.5rem;
+        font-weight: 300;
+        letter-spacing: 4px;
+        color: #aaffff;
+        text-shadow: 0 0 16px #00aaff88;
+        text-align: center;
+        margin-top: -15px;
+      }
+
+      .quote-section,
+      .section {
+        width: 92%;
+        max-width: 820px;
+      }
+
+      h2 {
+        font-size: 1.6rem;
+        margin: 0.3em 0 0.4em;
+        color: #88ddff;
+        font-weight: 400;
+      }
+
+      .bus {
+        font-size: 1.5rem;
+        line-height: 1.4;
+        display: flex;
+        align-items: center;
+        gap: 1.3rem;
+        padding: 4px 12px;
+      }
+
+      .bus .line {
+        min-width: 3.8ch;
+        font-weight: bold;
+        color: #88ddff;
+      }
+
+      .bus .dest {
+        flex: 1;
+        color: #ddd;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .bus .time {
+        min-width: 11ch;
+        text-align: right;
+        color: #ffdd88;
+        font-weight: 500;
+      }
+
+      #quote {
+        font-size: 1.6rem;
+        font-style: italic;
+        color: #ccc;
+        text-align: center;
+        line-height: 1.4;
       }
     </style>
   </head>
   <body>
-    <img src="test-pattern.png" alt="Test Pattern" />
+    <div class="main-content">
+      <div class="painting-container">
+        <img src="IMG_4052.png" alt="Painting" />
+      </div>
+
+      <div class="clock-container">
+        <svg class="analog-clock" viewBox="0 0 200 200">
+          <circle
+            cx="100"
+            cy="100"
+            r="98"
+            fill="none"
+            stroke="#222"
+            stroke-width="4"
+          />
+          <circle cx="100" cy="100" r="4" fill="#88ddff" />
+          <g stroke="#666" stroke-width="3">
+            <line
+              x1="100"
+              y1="10"
+              x2="100"
+              y2="22"
+              transform="rotate(0 100 100)"
+            />
+            <line
+              x1="100"
+              y1="10"
+              x2="100"
+              y2="22"
+              transform="rotate(90 100 100)"
+            />
+            <line
+              x1="100"
+              y1="10"
+              x2="100"
+              y2="22"
+              transform="rotate(180 100 100)"
+            />
+            <line
+              x1="100"
+              y1="10"
+              x2="100"
+              y2="22"
+              transform="rotate(270 100 100)"
+            />
+          </g>
+          <g id="hands">
+            <line
+              id="hour"
+              x1="100"
+              y1="100"
+              x2="100"
+              y2="60"
+              stroke="#ffffff"
+              stroke-width="6"
+              stroke-linecap="round"
+            />
+            <line
+              id="minute"
+              x1="100"
+              y1="100"
+              x2="100"
+              y2="35"
+              stroke="#ffffff"
+              stroke-width="6"
+              stroke-linecap="round"
+            />
+            <line
+              id="second"
+              x1="100"
+              y1="100"
+              x2="100"
+              y2="25"
+              stroke="#ff7777"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+          </g>
+        </svg>
+      </div>
+
+      <div class="digital-time" id="digital">00:00:00</div>
+
+      <div class="quote-section">
+        <h2>Ukens quote</h2>
+        <div id="quote">Bedre med en iskaffe i hånden enn ti bak disken.</div>
+      </div>
+
+      <div class="section">
+        <h2>Buss fra Jakob kirke</h2>
+        <div id="jakob-bus"></div>
+      </div>
+
+      <div class="section">
+        <h2>Trikk fra Nybrua</h2>
+        <div id="nybrua-trikk"></div>
+      </div>
+    </div>
+
+    <script>
+      function updateClock() {
+        const now = new Date();
+        const h = now.getHours(),
+          m = now.getMinutes(),
+          s = now.getSeconds();
+
+        document
+          .getElementById("hour")
+          .setAttribute(
+            "transform",
+            `rotate(${(h % 12) * 30 + m * 0.5} 100 100)`,
+          );
+        document
+          .getElementById("minute")
+          .setAttribute("transform", `rotate(${m * 6 + s * 0.1} 100 100)`);
+        document
+          .getElementById("second")
+          .setAttribute("transform", `rotate(${s * 6} 100 100)`);
+        document.getElementById("digital").textContent = now.toLocaleTimeString(
+          "no-NO",
+          { hour: "2-digit", minute: "2-digit", second: "2-digit" },
+        );
+      }
+
+      setInterval(updateClock, 1000);
+      updateClock();
+
+      const API_URL = "https://api.entur.io/journey-planner/v3/graphql";
+      const JAKOB_KIRKE_ID = "NSR:StopPlace:6435";
+      const NYBRUA_ID = "NSR:StopPlace:61989";
+      const query = `{ stopPlace(id: "STOP_ID") { estimatedCalls(numberOfDepartures: 5, timeRange: 3600) { expectedDepartureTime destinationDisplay { frontText } serviceJourney { journeyPattern { line { publicCode } } } } } }`;
+
+      async function fetchDepartures(stopId, elementId, title) {
+        const el = document.getElementById(elementId);
+        try {
+          const res = await fetch(API_URL, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "ET-Client-Name": "stue-skjerm-v2",
+            },
+            body: JSON.stringify({ query: query.replace("STOP_ID", stopId) }),
+          });
+          const json = await res.json();
+          const calls = json.data?.stopPlace?.estimatedCalls || [];
+          let html = "";
+          for (let call of calls) {
+            const time = new Date(call.expectedDepartureTime);
+            const diffMin = Math.round((time - new Date()) / 60000);
+            let timestr =
+              diffMin <= 0
+                ? "nå"
+                : diffMin < 60
+                  ? `${diffMin} min`
+                  : time.toLocaleTimeString("no-NO", {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    });
+            const line =
+              call.serviceJourney?.journeyPattern?.line?.publicCode || "–";
+            const dest = call.destinationDisplay?.frontText || "Ukjent";
+            html += `<div class="bus"><span class="line">${line}</span><span class="dest">${dest}</span><span class="time">${timestr}</span></div>`;
+          }
+          el.innerHTML = html || `<p style="opacity:0.6">Ingen avganger</p>`;
+        } catch (e) {
+          el.innerHTML = `<p>Feil...</p>`;
+        }
+      }
+
+      fetchDepartures(JAKOB_KIRKE_ID, "jakob-bus", "Jakob kirke");
+      fetchDepartures(NYBRUA_ID, "nybrua-trikk", "Nybrua");
+      setInterval(() => {
+        fetchDepartures(JAKOB_KIRKE_ID, "jakob-bus", "Jakob kirke");
+        fetchDepartures(NYBRUA_ID, "nybrua-trikk", "Nybrua");
+      }, 30000);
+    </script>
   </body>
 </html>
