@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Stue-skjerm – Vertikal (rotert & upper right) [DEBUG MODE]</title>
+    <title>Stue-skjerm – Vertikal (rotert & upper right) [DEBUG GRID]</title>
     <style>
       html,
       body {
@@ -25,15 +25,17 @@
       }
 
       :root {
-        --margin-top: 220px;
+        --margin-top: 280px; /* ← økt for å fikse topp-kutting */
         --margin-left: 10px;
       }
 
       .main-content {
-        width: 108%;
+        width: 102%;
         height: 100%;
         margin-top: var(--margin-top);
-        margin-left: calc(var(--margin-left) + 55px);
+        margin-left: calc(
+          var(--margin-left) + 25px
+        ); /* ← redusert for å fikse venstre-kutting */
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -127,14 +129,7 @@
         inset: 0;
         z-index: 9999;
         pointer-events: none;
-        opacity: 0.92;
-      }
-
-      @media (max-height: 1000px) {
-        .clock-container {
-          width: 340px;
-          height: 340px;
-        }
+        opacity: 0.25;
       }
     </style>
   </head>
@@ -288,7 +283,7 @@
       </div>
     </div>
 
-    <!-- DEBUG GRID – hundrevis av tall over hele skjermen -->
+    <!-- DEBUG GRID -->
     <canvas id="debug-grid"></canvas>
 
     <script>
@@ -320,7 +315,6 @@
           },
         );
       }
-
       setInterval(updateClock, 1000);
       updateClock();
 
@@ -332,7 +326,6 @@
       async function fetchDepartures(stopId, elementId, title) {
         const el = document.getElementById(elementId);
         el.innerHTML = `<p style="color:#888">Laster ${title}...</p>`;
-
         try {
           const res = await fetch(API_URL, {
             method: "POST",
@@ -342,17 +335,13 @@
             },
             body: JSON.stringify({ query: query.replace("STOP_ID", stopId) }),
           });
-
           const json = await res.json();
           const calls = json.data?.stopPlace?.estimatedCalls || [];
           let html = "";
-
           for (let call of calls) {
             if (!call.expectedDepartureTime) continue;
-
             const time = new Date(call.expectedDepartureTime);
             const diffMin = Math.round((time - new Date()) / 60000);
-
             let timestr =
               diffMin <= 0
                 ? "nå..."
@@ -368,14 +357,11 @@
                             hour: "2-digit",
                             minute: "2-digit",
                           });
-
             const line =
               call.serviceJourney?.journeyPattern?.line?.publicCode || "–";
             const dest = call.destinationDisplay?.frontText || "Ukjent";
-
             html += `<div class="bus"><span class="line">${line}</span><span class="dest">${dest}</span><span class="time${diffMin === 2 ? " special" : ""}">${timestr}</span></div>`;
           }
-
           el.innerHTML =
             html || `<p style="opacity:0.6">Ingen avganger neste time</p>`;
         } catch (e) {
@@ -385,26 +371,23 @@
 
       fetchDepartures(JAKOB_KIRKE_ID, "jakob-bus", "Jakob kirke");
       fetchDepartures(NYBRUA_ID, "nybrua-trikk", "Nybrua");
-
       setInterval(() => {
         fetchDepartures(JAKOB_KIRKE_ID, "jakob-bus", "Jakob kirke");
         fetchDepartures(NYBRUA_ID, "nybrua-trikk", "Nybrua");
       }, 10000);
 
-      // ==================== DEBUG GRID MED TALL ====================
+      // DEBUG GRID
       const canvas = document.getElementById("debug-grid");
       function drawDebugGrid() {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
         const ctx = canvas.getContext("2d");
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        ctx.strokeStyle = "rgba(0, 255, 255, 0.8)";
+        ctx.strokeStyle = "rgba(0, 255, 255, 0.4)";
         ctx.fillStyle = "#0ff";
         ctx.font = "bold 13px monospace";
         ctx.lineWidth = 1;
 
-        // Vertikale linjer + tall (hver 40px)
         for (let x = 0; x < canvas.width; x += 40) {
           ctx.beginPath();
           ctx.moveTo(x, 0);
@@ -412,8 +395,6 @@
           ctx.stroke();
           ctx.fillText(x.toString().padStart(4, "0"), x + 3, 18);
         }
-
-        // Horisontale linjer + tall (hver 40px)
         for (let y = 0; y < canvas.height; y += 40) {
           ctx.beginPath();
           ctx.moveTo(0, y);
@@ -422,7 +403,6 @@
           ctx.fillText(y.toString().padStart(4, "0"), 6, y + 15);
         }
 
-        // Ekstra store tall hver 200px for oversikt
         ctx.font = "bold 28px monospace";
         ctx.globalAlpha = 0.6;
         for (let x = 0; x < canvas.width; x += 200) {
@@ -432,7 +412,6 @@
         }
         ctx.globalAlpha = 1;
       }
-
       window.addEventListener("resize", drawDebugGrid);
       drawDebugGrid();
     </script>
