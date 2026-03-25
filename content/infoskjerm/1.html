@@ -20,13 +20,10 @@
       }
 
       /* 2. PIXEL-PERFECT ROTATION */
-      /* We set the width/height to exactly match the physical screen flip */
       body {
         position: absolute;
-        width: 100vh; /* The 'height' of your dashboard is the screen width */
-        height: 100vw; /* The 'width' of your dashboard is the screen height */
-
-        /* Anchor to bottom-left and rotate -90deg back into view */
+        width: 100vh;
+        height: 100vw;
         left: 0;
         top: 100vh;
         transform: rotate(-90deg);
@@ -39,15 +36,13 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: flex-start; /* Start from the very top */
-        padding: 0;
-        margin: 0;
+        justify-content: flex-start;
       }
 
-      /* 3. THE PAINTING (Zero-gap top) */
+      /* 3. THE PAINTING */
       .painting-container {
         width: 100%;
-        height: 40%; /* Increase this to 50% if you want the painting bigger */
+        height: 35%; /* Adjust this percentage to give more/less room to text */
         flex-shrink: 0;
         background: #000;
       }
@@ -61,9 +56,10 @@
 
       /* 4. DASHBOARD ELEMENTS */
       .clock-container {
-        width: 320px;
-        height: 320px;
-        margin-top: 20px;
+        width: 300px;
+        height: 300px;
+        margin-top: 15px;
+        text-align: center;
       }
 
       .analog-clock {
@@ -72,60 +68,69 @@
       }
 
       .digital-time {
-        font-size: 3.5rem;
+        font-size: 3.2rem;
         color: #aaffff;
         text-shadow: 0 0 15px #00aaff88;
         margin-top: -10px;
       }
 
-      .quote-section {
-        width: 90%;
-        text-align: center;
-        margin: 15px 0;
+      .quote-section,
+      .section {
+        width: 92%;
+        margin-top: 15px;
+      }
+
+      h2 {
+        font-size: 1.4rem;
+        color: #88ddff;
+        margin: 5px 0;
+        font-weight: 400;
+        border-bottom: 1px solid #222;
       }
 
       #quote {
         font-size: 1.6rem;
         font-style: italic;
         color: #ccc;
-      }
-
-      .transit-section {
-        width: 92%;
-      }
-      h2 {
-        font-size: 1.6rem;
-        color: #88ddff;
-        margin: 10px 0;
+        text-align: center;
       }
 
       .bus {
         display: flex;
-        font-size: 1.6rem;
-        padding: 8px 0;
-        border-bottom: 1px solid #222;
+        font-size: 1.5rem;
+        padding: 6px 0;
+        border-bottom: 1px solid #111;
+        align-items: center;
       }
       .line {
         font-weight: bold;
         color: #88ddff;
-        width: 60px;
+        width: 55px;
       }
       .dest {
         flex: 1;
         color: #ddd;
+        white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        white-space: nowrap;
       }
       .time {
         color: #ffdd88;
-        width: 110px;
+        width: 180px;
         text-align: right;
+      }
+      .special {
+        color: #ff7777;
+        font-weight: bold;
       }
     </style>
   </head>
   <body>
     <div class="main-content">
+      <div class="painting-container">
+        <img src="IMG_4052.png" alt="Painting" />
+      </div>
+
       <div class="clock-container">
         <svg class="analog-clock" viewBox="0 0 200 200">
           <circle
@@ -136,6 +141,92 @@
             stroke="#333"
             stroke-width="2"
           />
+          <g stroke="#555" stroke-width="3">
+            <line
+              x1="100"
+              y1="10"
+              x2="100"
+              y2="22"
+              transform="rotate(0 100 100)"
+            />
+            <line
+              x1="100"
+              y1="10"
+              x2="100"
+              y2="22"
+              transform="rotate(30 100 100)"
+            />
+            <line
+              x1="100"
+              y1="10"
+              x2="100"
+              y2="22"
+              transform="rotate(60 100 100)"
+            />
+            <line
+              x1="100"
+              y1="10"
+              x2="100"
+              y2="22"
+              transform="rotate(90 100 100)"
+            />
+            <line
+              x1="100"
+              y1="10"
+              x2="100"
+              y2="22"
+              transform="rotate(120 100 100)"
+            />
+            <line
+              x1="100"
+              y1="10"
+              x2="100"
+              y2="22"
+              transform="rotate(150 100 100)"
+            />
+            <line
+              x1="100"
+              y1="10"
+              x2="100"
+              y2="22"
+              transform="rotate(180 100 100)"
+            />
+            <line
+              x1="100"
+              y1="10"
+              x2="100"
+              y2="22"
+              transform="rotate(210 100 100)"
+            />
+            <line
+              x1="100"
+              y1="10"
+              x2="100"
+              y2="22"
+              transform="rotate(240 100 100)"
+            />
+            <line
+              x1="100"
+              y1="10"
+              x2="100"
+              y2="22"
+              transform="rotate(270 100 100)"
+            />
+            <line
+              x1="100"
+              y1="10"
+              x2="100"
+              y2="22"
+              transform="rotate(300 100 100)"
+            />
+            <line
+              x1="100"
+              y1="10"
+              x2="100"
+              y2="22"
+              transform="rotate(330 100 100)"
+            />
+          </g>
           <g id="hands">
             <line
               id="hour"
@@ -154,7 +245,7 @@
               x2="100"
               y2="35"
               stroke="#fff"
-              stroke-width="4"
+              stroke-width="6"
               stroke-linecap="round"
             />
             <line
@@ -165,19 +256,26 @@
               y2="25"
               stroke="#ff5555"
               stroke-width="2"
+              stroke-linecap="round"
             />
           </g>
+          <circle cx="100" cy="100" r="4" fill="#88ddff" />
         </svg>
+        <div class="digital-time" id="digital">00:00:00</div>
       </div>
 
-      <div class="digital-time" id="digital">00:00:00</div>
-
       <div class="quote-section">
+        <h2>Ukens quote</h2>
         <div id="quote">Bedre med en iskaffe i hånden enn ti bak disken.</div>
       </div>
 
-      <div class="transit-section">
-        <div id="departures"></div>
+      <div class="section">
+        <h2>Buss fra Jakob kirke</h2>
+        <div id="jakob-bus"></div>
+      </div>
+      <div class="section">
+        <h2>Trikk fra Nybrua</h2>
+        <div id="nybrua-trikk"></div>
       </div>
     </div>
 
@@ -208,46 +306,62 @@
       updateClock();
 
       const API_URL = "https://api.entur.io/journey-planner/v3/graphql";
-      const STOPS = ["NSR:StopPlace:6435", "NSR:StopPlace:61989"];
+      const JAKOB_KIRKE_ID = "NSR:StopPlace:6435";
+      const NYBRUA_ID = "NSR:StopPlace:61989";
+      const query = `{ stopPlace(id: "STOP_ID") { estimatedCalls(numberOfDepartures: 4, timeRange: 3600) { expectedDepartureTime destinationDisplay { frontText } serviceJourney { journeyPattern { line { publicCode } } } } } }`;
 
-      async function fetchAllTransit() {
-        const container = document.getElementById("departures");
-        let combinedHtml = "";
-        for (const stopId of STOPS) {
-          try {
-            const query = `{ stopPlace(id: "${stopId}") { estimatedCalls(numberOfDepartures: 3, timeRange: 3600) { expectedDepartureTime destinationDisplay { frontText } serviceJourney { journeyPattern { line { publicCode } } } } } }`;
-            const res = await fetch(API_URL, {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-                "ET-Client-Name": "stue-skjerm",
-              },
-              body: JSON.stringify({ query }),
-            });
-            const data = await res.json();
-            const calls = data.data.stopPlace.estimatedCalls;
-            calls.forEach((call) => {
-              const time = new Date(call.expectedDepartureTime);
-              const diffMin = Math.round((time - new Date()) / 60000);
-              let timestr =
-                diffMin <= 0
-                  ? "nå"
-                  : diffMin < 60
-                    ? `${diffMin} min`
-                    : time.toLocaleTimeString("no-NO", {
-                        hour: "2-digit",
-                        minute: "2-digit",
-                      });
-              combinedHtml += `<div class="bus"><span class="line">${call.serviceJourney.journeyPattern.line.publicCode}</span><span class="dest">${call.destinationDisplay.frontText}</span><span class="time">${timestr}</span></div>`;
-            });
-          } catch (e) {
-            console.log(e);
+      async function fetchDepartures(stopId, elementId, title) {
+        const el = document.getElementById(elementId);
+        try {
+          const res = await fetch(API_URL, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "ET-Client-Name": "stue-skjerm-v2",
+            },
+            body: JSON.stringify({ query: query.replace("STOP_ID", stopId) }),
+          });
+          const json = await res.json();
+          const calls = json.data?.stopPlace?.estimatedCalls || [];
+          let html = "";
+
+          for (let call of calls) {
+            const time = new Date(call.expectedDepartureTime);
+            const diffMin = Math.round((time - new Date()) / 60000);
+            let timestr =
+              diffMin <= 0
+                ? "nå..."
+                : diffMin === 1
+                  ? "Ikke prøv deg &emsp; 1 min"
+                  : diffMin === 2
+                    ? "Løp! &emsp; 2 min"
+                    : diffMin === 3
+                      ? "Goood tid &emsp; 3 min"
+                      : diffMin < 60
+                        ? `${diffMin} min`
+                        : time.toLocaleTimeString("no-NO", {
+                            hour: "2-digit",
+                            minute: "2-digit",
+                          });
+
+            const line =
+              call.serviceJourney?.journeyPattern?.line?.publicCode || "–";
+            const dest = call.destinationDisplay?.frontText || "Ukjent";
+            html += `<div class="bus"><span class="line">${line}</span><span class="dest">${dest}</span><span class="time${diffMin === 2 ? " special" : ""}">${timestr}</span></div>`;
           }
+          el.innerHTML = html || `<p style="opacity:0.6">Ingen avganger</p>`;
+        } catch (e) {
+          el.innerHTML = `<p style="color:#f55">Feil ved lasting</p>`;
         }
-        container.innerHTML = combinedHtml || "Ingen avganger";
       }
-      fetchAllTransit();
-      setInterval(fetchAllTransit, 30000);
+
+      const refreshAll = () => {
+        fetchDepartures(JAKOB_KIRKE_ID, "jakob-bus", "Jakob kirke");
+        fetchDepartures(NYBRUA_ID, "nybrua-trikk", "Nybrua");
+      };
+
+      refreshAll();
+      setInterval(refreshAll, 15000);
     </script>
   </body>
 </html>
