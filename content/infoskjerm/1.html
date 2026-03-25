@@ -33,7 +33,7 @@
         width: 100%;
         height: 100%;
         margin-top: var(--margin-top);
-        margin-left: calc(var(--margin-left) + 220px);
+        margin-left: calc(var(--margin-left) + 180px);
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -55,15 +55,13 @@
       }
 
       .digital-time {
-        position: absolute;
-        top: 115%;
-        left: 50%;
-        transform: translate(-50%, -50%);
         font-size: 3.8rem;
         font-weight: 300;
         letter-spacing: 4px;
         color: #aaffff;
         text-shadow: 0 0 16px #00aaff88;
+        text-align: center;
+        margin-top: -30px;
       }
 
       .section,
@@ -267,8 +265,10 @@
             />
           </g>
         </svg>
-        <div class="digital-time" id="digital">00:00:00</div>
       </div>
+
+      <div class="digital-time" id="digital">00:00:00</div>
+
       <div class="quote-section">
         <h2>Ukens quote</h2>
         <div id="quote">Bedre med en iskaffe i hånden enn ti bak disken.</div>
