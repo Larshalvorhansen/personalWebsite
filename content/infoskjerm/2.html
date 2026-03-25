@@ -17,23 +17,60 @@
         font-family:
           -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       }
+
       body {
+        /* display: flex;
+        align-items: flex-start;
+        justify-content: flex-end;*/
         transform: rotate(-90deg);
         transform-origin: center center;
         width: 100vh;
         height: 100vw;
       }
 
+      /* ==================== ADJUSTABLE MARGINS (after rotation) ==================== */
       :root {
-        --margin-top: 300px;
-        --margin-left: 10px;
+        --margin-top: 300px; /* ← Change this: space from the TOP edge after rotation */
+        --margin-left: 10px; /* ← Change this: space from the LEFT edge after rotation */
       }
 
+      /* ==================== DEBUG MODE ==================== 
+      .debug * {
+        outline: 2px solid rgba(255, 255, 255, 0.5) !important;
+      }
+
+      .debug .main-content {
+        background-color: rgba(255, 80, 80, 0.25) !important;
+        opacity: 0.9 !important;
+      }
+
+      .debug .clock-container {
+        background-color: rgba(80, 180, 255, 0.25) !important;
+      }
+      .debug .quote-section {
+        background-color: rgba(80, 255, 120, 0.25) !important;
+      }
+      .debug .section {
+        background-color: rgba(255, 220, 80, 0.25) !important;
+      }
+      .debug #jakob-bus {
+        background-color: rgba(255, 100, 255, 0.25) !important;
+      }
+      .debug #nybrua-trikk {
+        background-color: rgba(100, 255, 255, 0.25) !important;
+      }
+      .debug .bus {
+        background-color: rgba(255, 200, 100, 0.3) !important;
+      }
+
+      /* ==================== MAIN LAYOUT ==================== */
       .main-content {
-        width: 110%;
-        height: 100%;
+        width: 100%; /* left + right margin */
+        height: 100%; /* top + bottom margin */
+
         margin-top: var(--margin-top);
-        margin-left: calc(var(--margin-left) + 100px);
+        margin-left: var(--margin-left);
+
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -93,7 +130,6 @@
         font-weight: bold;
         color: #88ddff;
       }
-
       .bus .dest {
         flex: 1;
         color: #ddd;
@@ -101,14 +137,12 @@
         overflow: hidden;
         text-overflow: ellipsis;
       }
-
       .bus .time {
         min-width: 11ch;
         text-align: right;
         color: #ffdd88;
         font-weight: 500;
       }
-
       .bus .time.special {
         color: #ff7777;
         font-weight: bold;
@@ -269,14 +303,17 @@
         </svg>
         <div class="digital-time" id="digital">00:00:00</div>
       </div>
+
       <div class="quote-section">
         <h2>Ukens quote</h2>
         <div id="quote">Bedre med en iskaffe i hånden enn ti bak disken.</div>
       </div>
+
       <div class="section">
         <h2>Buss fra Jakob kirke</h2>
         <div id="jakob-bus"></div>
       </div>
+
       <div class="section">
         <h2>Trikk fra Nybrua</h2>
         <div id="nybrua-trikk"></div>
@@ -284,12 +321,12 @@
     </div>
 
     <script>
+      // Clock
       function updateClock() {
         const now = new Date();
         const h = now.getHours(),
           m = now.getMinutes(),
           s = now.getSeconds();
-
         document
           .getElementById("hour")
           .setAttribute(
@@ -302,7 +339,6 @@
         document
           .getElementById("second")
           .setAttribute("transform", `rotate(${s * 6} 100 100)`);
-
         document.getElementById("digital").textContent = now.toLocaleTimeString(
           "no-NO",
           {
@@ -312,10 +348,10 @@
           },
         );
       }
-
       setInterval(updateClock, 1000);
       updateClock();
 
+      // Entur departures (unchanged)
       const API_URL = "https://api.entur.io/journey-planner/v3/graphql";
       const JAKOB_KIRKE_ID = "NSR:StopPlace:6435";
       const NYBRUA_ID = "NSR:StopPlace:61989";
@@ -324,7 +360,6 @@
       async function fetchDepartures(stopId, elementId, title) {
         const el = document.getElementById(elementId);
         el.innerHTML = `<p style="color:#888">Laster ${title}...</p>`;
-
         try {
           const res = await fetch(API_URL, {
             method: "POST",
@@ -334,17 +369,13 @@
             },
             body: JSON.stringify({ query: query.replace("STOP_ID", stopId) }),
           });
-
           const json = await res.json();
           const calls = json.data?.stopPlace?.estimatedCalls || [];
           let html = "";
-
           for (let call of calls) {
             if (!call.expectedDepartureTime) continue;
-
             const time = new Date(call.expectedDepartureTime);
             const diffMin = Math.round((time - new Date()) / 60000);
-
             let timestr =
               diffMin <= 0
                 ? "nå..."
@@ -364,10 +395,8 @@
             const line =
               call.serviceJourney?.journeyPattern?.line?.publicCode || "–";
             const dest = call.destinationDisplay?.frontText || "Ukjent";
-
             html += `<div class="bus"><span class="line">${line}</span><span class="dest">${dest}</span><span class="time${diffMin === 2 ? " special" : ""}">${timestr}</span></div>`;
           }
-
           el.innerHTML =
             html || `<p style="opacity:0.6">Ingen avganger neste time</p>`;
         } catch (e) {
@@ -377,7 +406,6 @@
 
       fetchDepartures(JAKOB_KIRKE_ID, "jakob-bus", "Jakob kirke");
       fetchDepartures(NYBRUA_ID, "nybrua-trikk", "Nybrua");
-
       setInterval(() => {
         fetchDepartures(JAKOB_KIRKE_ID, "jakob-bus", "Jakob kirke");
         fetchDepartures(NYBRUA_ID, "nybrua-trikk", "Nybrua");
