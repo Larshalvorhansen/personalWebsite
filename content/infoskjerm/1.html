@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Stue-skjerm – Vertikal (rotert & upper right)</title>
+    <title>Stue-skjerm – Vertikal (rotert & upper right) [DEBUG MODE]</title>
     <style>
       html,
       body {
@@ -25,15 +25,15 @@
       }
 
       :root {
-        --margin-top: 260px;
+        --margin-top: 220px;
         --margin-left: 10px;
       }
 
       .main-content {
-        width: 105%;
+        width: 108%;
         height: 100%;
         margin-top: var(--margin-top);
-        margin-left: calc(var(--margin-left) + 75px);
+        margin-left: calc(var(--margin-left) + 55px);
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -121,14 +121,19 @@
         line-height: 1.45;
       }
 
+      /* ==================== DEBUG GRID ==================== */
+      #debug-grid {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        pointer-events: none;
+        opacity: 0.22;
+      }
+
       @media (max-height: 1000px) {
         .clock-container {
           width: 340px;
           height: 340px;
-        }
-        .main-content {
-          padding: 25px 15px;
-          gap: 25px;
         }
       }
     </style>
@@ -283,6 +288,9 @@
       </div>
     </div>
 
+    <!-- DEBUG GRID – hundrevis av tall over hele skjermen -->
+    <canvas id="debug-grid"></canvas>
+
     <script>
       function updateClock() {
         const now = new Date();
@@ -382,6 +390,51 @@
         fetchDepartures(JAKOB_KIRKE_ID, "jakob-bus", "Jakob kirke");
         fetchDepartures(NYBRUA_ID, "nybrua-trikk", "Nybrua");
       }, 10000);
+
+      // ==================== DEBUG GRID MED TALL ====================
+      const canvas = document.getElementById("debug-grid");
+      function drawDebugGrid() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        const ctx = canvas.getContext("2d");
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        ctx.strokeStyle = "rgba(0, 255, 255, 0.4)";
+        ctx.fillStyle = "#0ff";
+        ctx.font = "bold 13px monospace";
+        ctx.lineWidth = 1;
+
+        // Vertikale linjer + tall (hver 40px)
+        for (let x = 0; x < canvas.width; x += 40) {
+          ctx.beginPath();
+          ctx.moveTo(x, 0);
+          ctx.lineTo(x, canvas.height);
+          ctx.stroke();
+          ctx.fillText(x.toString().padStart(4, "0"), x + 3, 18);
+        }
+
+        // Horisontale linjer + tall (hver 40px)
+        for (let y = 0; y < canvas.height; y += 40) {
+          ctx.beginPath();
+          ctx.moveTo(0, y);
+          ctx.lineTo(canvas.width, y);
+          ctx.stroke();
+          ctx.fillText(y.toString().padStart(4, "0"), 6, y + 15);
+        }
+
+        // Ekstra store tall hver 200px for oversikt
+        ctx.font = "bold 28px monospace";
+        ctx.globalAlpha = 0.6;
+        for (let x = 0; x < canvas.width; x += 200) {
+          for (let y = 0; y < canvas.height; y += 200) {
+            ctx.fillText(x + "," + y, x + 8, y + 35);
+          }
+        }
+        ctx.globalAlpha = 1;
+      }
+
+      window.addEventListener("resize", drawDebugGrid);
+      drawDebugGrid();
     </script>
   </body>
 </html>
