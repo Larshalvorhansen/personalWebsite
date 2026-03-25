@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Stue-skjerm – Vertikal</title>
     <style>
-      /* 1. RESET & LOCK VIEWPORT */
+      /* 1. LOCK THE VIEWPORT */
       html,
       body {
         margin: 0;
@@ -19,16 +19,18 @@
           -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       }
 
-      /* 2. THE ROTATION MAGIC */
-      /* We move the 'top' to the bottom of the screen, then rotate it UP into view */
+      /* 2. PIXEL-PERFECT ROTATION */
+      /* We set the width/height to exactly match the physical screen flip */
       body {
         position: absolute;
-        top: 100%;
+        width: 100vh; /* The 'height' of your dashboard is the screen width */
+        height: 100vw; /* The 'width' of your dashboard is the screen height */
+
+        /* Anchor to bottom-left and rotate -90deg back into view */
         left: 0;
-        width: 100vh; /* Content width = Screen height */
-        height: 100vw; /* Content height = Screen width */
+        top: 100vh;
         transform: rotate(-90deg);
-        transform-origin: top left;
+        transform-origin: 0 0;
       }
 
       .main-content {
@@ -37,31 +39,31 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: flex-start;
+        justify-content: flex-start; /* Start from the very top */
+        padding: 0;
+        margin: 0;
       }
 
-      /* 3. THE PAINTING (Top Section) */
+      /* 3. THE PAINTING (Zero-gap top) */
       .painting-container {
         width: 100%;
-        height: 38%; /* Adjust this to make image larger/smaller */
+        height: 40%; /* Increase this to 50% if you want the painting bigger */
         flex-shrink: 0;
-        background: #111;
-        overflow: hidden;
+        background: #000;
       }
 
       .painting-container img {
         width: 100%;
         height: 100%;
-        object-fit: cover; /* Fills the area completely */
+        object-fit: cover;
         display: block;
       }
 
-      /* 4. CLOCK & TEXT STYLES */
+      /* 4. DASHBOARD ELEMENTS */
       .clock-container {
-        width: 280px;
-        height: 280px;
-        margin-top: 15px;
-        position: relative;
+        width: 320px;
+        height: 320px;
+        margin-top: 20px;
       }
 
       .analog-clock {
@@ -70,76 +72,62 @@
       }
 
       .digital-time {
-        font-size: 3.2rem;
-        font-weight: 300;
-        letter-spacing: 4px;
+        font-size: 3.5rem;
         color: #aaffff;
         text-shadow: 0 0 15px #00aaff88;
         margin-top: -10px;
-        margin-bottom: 10px;
       }
 
       .quote-section {
         width: 90%;
         text-align: center;
-        margin-bottom: 15px;
+        margin: 15px 0;
       }
 
       #quote {
-        font-size: 1.5rem;
+        font-size: 1.6rem;
         font-style: italic;
         color: #ccc;
-        line-height: 1.4;
       }
 
       .transit-section {
-        width: 90%;
-        max-width: 800px;
+        width: 92%;
       }
-
       h2 {
-        font-size: 1.4rem;
+        font-size: 1.6rem;
         color: #88ddff;
-        margin: 10px 0 5px 0;
-        font-weight: 400;
-        border-bottom: 1px solid #333;
+        margin: 10px 0;
       }
 
       .bus {
         display: flex;
-        font-size: 1.5rem;
-        padding: 6px 0;
-        align-items: center;
+        font-size: 1.6rem;
+        padding: 8px 0;
+        border-bottom: 1px solid #222;
       }
-
       .line {
         font-weight: bold;
         color: #88ddff;
-        min-width: 50px;
+        width: 60px;
       }
       .dest {
         flex: 1;
         color: #ddd;
-        white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+        white-space: nowrap;
       }
       .time {
         color: #ffdd88;
-        min-width: 100px;
+        width: 110px;
         text-align: right;
-        font-weight: 500;
-      }
-      .special {
-        color: #ff7777;
-        font-weight: bold;
       }
     </style>
   </head>
   <body>
     <div class="main-content">
       <div class="painting-container">
-        <img src="IMG_4052.png" alt="Artwork" />
+        <img src="IMG_4052.png" alt="Painting" />
       </div>
 
       <div class="clock-container">
@@ -149,8 +137,8 @@
             cy="100"
             r="98"
             fill="none"
-            stroke="#222"
-            stroke-width="3"
+            stroke="#333"
+            stroke-width="2"
           />
           <g id="hands">
             <line
@@ -181,10 +169,8 @@
               y2="25"
               stroke="#ff5555"
               stroke-width="2"
-              stroke-linecap="round"
             />
           </g>
-          <circle cx="100" cy="100" r="3" fill="#88ddff" />
         </svg>
       </div>
 
@@ -195,19 +181,16 @@
       </div>
 
       <div class="transit-section">
-        <h2>Jakob kirke & Nybrua</h2>
         <div id="departures"></div>
       </div>
     </div>
 
     <script>
-      // --- CLOCK LOGIC ---
       function updateClock() {
         const now = new Date();
         const h = now.getHours(),
           m = now.getMinutes(),
           s = now.getSeconds();
-
         document
           .getElementById("hour")
           .setAttribute(
@@ -220,41 +203,33 @@
         document
           .getElementById("second")
           .setAttribute("transform", `rotate(${s * 6} 100 100)`);
-
         document.getElementById("digital").textContent = now.toLocaleTimeString(
           "no-NO",
-          {
-            hour: "2-digit",
-            minute: "2-digit",
-            second: "2-digit",
-          },
+          { hour: "2-digit", minute: "2-digit", second: "2-digit" },
         );
       }
       setInterval(updateClock, 1000);
       updateClock();
 
-      // --- TRANSIT LOGIC ---
       const API_URL = "https://api.entur.io/journey-planner/v3/graphql";
-      const STOPS = ["NSR:StopPlace:6435", "NSR:StopPlace:61989"]; // Jakob & Nybrua
+      const STOPS = ["NSR:StopPlace:6435", "NSR:StopPlace:61989"];
 
       async function fetchAllTransit() {
         const container = document.getElementById("departures");
         let combinedHtml = "";
-
         for (const stopId of STOPS) {
           try {
-            const query = `{ stopPlace(id: "${stopId}") { estimatedCalls(numberOfDepartures: 4, timeRange: 3600) { expectedDepartureTime destinationDisplay { frontText } serviceJourney { journeyPattern { line { publicCode } } } } } }`;
+            const query = `{ stopPlace(id: "${stopId}") { estimatedCalls(numberOfDepartures: 3, timeRange: 3600) { expectedDepartureTime destinationDisplay { frontText } serviceJourney { journeyPattern { line { publicCode } } } } } }`;
             const res = await fetch(API_URL, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
-                "ET-Client-Name": "stue-skjerm-v2",
+                "ET-Client-Name": "stue-skjerm",
               },
               body: JSON.stringify({ query }),
             });
             const data = await res.json();
             const calls = data.data.stopPlace.estimatedCalls;
-
             calls.forEach((call) => {
               const time = new Date(call.expectedDepartureTime);
               const diffMin = Math.round((time - new Date()) / 60000);
@@ -267,24 +242,16 @@
                         hour: "2-digit",
                         minute: "2-digit",
                       });
-              const isSpecial = diffMin === 2;
-
-              combinedHtml += `
-                            <div class="bus">
-                                <span class="line">${call.serviceJourney.journeyPattern.line.publicCode}</span>
-                                <span class="dest">${call.destinationDisplay.frontText}</span>
-                                <span class="time ${isSpecial ? "special" : ""}">${isSpecial ? "LØP! " + timestr : timestr}</span>
-                            </div>`;
+              combinedHtml += `<div class="bus"><span class="line">${call.serviceJourney.journeyPattern.line.publicCode}</span><span class="dest">${call.destinationDisplay.frontText}</span><span class="time">${timestr}</span></div>`;
             });
           } catch (e) {
-            console.error(e);
+            console.log(e);
           }
         }
-        container.innerHTML = combinedHtml || "Ingen avganger nå.";
+        container.innerHTML = combinedHtml || "Ingen avganger";
       }
-
       fetchAllTransit();
-      setInterval(fetchAllTransit, 30000); // Update every 30s
+      setInterval(fetchAllTransit, 30000);
     </script>
   </body>
 </html>
