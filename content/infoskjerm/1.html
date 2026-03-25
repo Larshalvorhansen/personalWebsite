@@ -5,25 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Full Screen Rotated Test Pattern</title>
     <style>
-      html,
-      body {
+      body,
+      html {
         margin: 0;
         padding: 0;
-        height: 100%;
-        width: 100%;
-        background: black;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #000;
         overflow: hidden;
       }
 
       img {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%) rotate(0deg);
-        width: 100vw;
-        height: 100vh;
-        object-fit: cover; /* This forces it to fill the screen */
-        object-position: center;
+        /* The Secret Sauce: Use the opposite viewport units */
+        /* This ensures the image 'fills' the space after the rotation */
+        width: 100vh;
+        height: 100vw;
+
+        object-fit: cover; /* This ensures the painting fills the screen entirely */
+        transform: rotate(-90deg);
+        transform-origin: center;
+        flex-shrink: 0;
       }
     </style>
   </head>
