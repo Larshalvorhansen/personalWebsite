@@ -1,31 +1,32 @@
 <!doctype html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Centered Rotated Test Pattern</title>
     <style>
-      body {
+      body,
+      html {
         margin: 0;
         padding: 0;
-        height: 100vh;
-        background: black;
+        width: 100%;
+        height: 100%;
         display: flex;
-        align-items: center;
         justify-content: center;
+        align-items: center;
+        background-color: #000; /* Keeps the 'weird screen' vibe clean */
         overflow: hidden;
       }
 
-      .rotated {
-        transform: rotate(-180deg);
-        max-width: 100vh; /* Important for rotation */
+      img {
+        /* Rotate -90 degrees (Counter-Clockwise) */
+        transform: rotate(-90deg);
+
+        /* Maximize size while keeping aspect ratio */
+        max-width: 100vh;
         max-height: 100vw;
-        width: auto;
-        height: auto;
+        object-fit: contain;
       }
     </style>
   </head>
   <body>
-    <img src="test.png" class="rotated" alt="Test Pattern" />
+    <img src="test.png" alt="Rotated Artwork" />
   </body>
 </html>
