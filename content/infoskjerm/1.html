@@ -39,21 +39,6 @@
         justify-content: flex-start;
       }
 
-      /* 3. THE PAINTING */
-      .painting-container {
-        width: 100%;
-        height: 35%; /* Adjust this percentage to give more/less room to text */
-        flex-shrink: 0;
-        background: #000;
-      }
-
-      .painting-container img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-      }
-
       /* 4. DASHBOARD ELEMENTS */
       .clock-container {
         width: 400px;
@@ -95,29 +80,40 @@
         text-align: center;
       }
 
+      /* 3-COLUMN TABLE LAYOUT */
       .bus {
         display: flex;
         font-size: 1.5rem;
-        padding: 6px 0;
+        padding: 8px 0;
         border-bottom: 1px solid #111;
         align-items: center;
       }
       .line {
         font-weight: bold;
         color: #88ddff;
-        width: 55px;
+        width: 60px; /* Column 1 */
+        flex-shrink: 0;
       }
       .dest {
-        flex: 1;
+        flex: 1; /* Column 2 - takes remaining space */
         color: #ddd;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+        padding-right: 10px;
+      }
+      .status {
+        width: 160px; /* Column 3 (The Message) */
+        color: #aaaaaa;
+        font-style: italic;
+        text-align: right;
+        font-size: 1.3rem;
       }
       .time {
         color: #ffdd88;
-        width: 180px;
+        width: 90px; /* Column 4 (The Minutes) */
         text-align: right;
+        font-weight: bold;
       }
       .special {
         color: #ff7777;
@@ -324,26 +320,44 @@
           for (let call of calls) {
             const time = new Date(call.expectedDepartureTime);
             const diffMin = Math.round((time - new Date()) / 60000);
-            let timestr =
-              diffMin <= 0
-                ? "nå..."
-                : diffMin === 1
-                  ? "Ikke prøv deg &emsp; 1 min"
-                  : diffMin === 2
-                    ? "Løp! &emsp; 2 min"
-                    : diffMin === 3
-                      ? "Goood tid &emsp; 3 min"
-                      : diffMin < 60
-                        ? `${diffMin} min`
-                        : time.toLocaleTimeString("no-NO", {
-                            hour: "2-digit",
-                            minute: "2-digit",
-                          });
+
+            let statusStr = "";
+            let timeStr = "";
+
+            if (diffMin <= 0) {
+              statusStr = "";
+              timeStr = "nå...";
+            } else if (diffMin === 1) {
+              statusStr = "Ikke prøv deg";
+              timeStr = "1 min";
+            } else if (diffMin === 2) {
+              statusStr = "Løp!";
+              timeStr = "2 min";
+            } else if (diffMin === 3) {
+              statusStr = "Goood tid";
+              timeStr = "3 min";
+            } else if (diffMin < 60) {
+              statusStr = "";
+              timeStr = `${diffMin} min`;
+            } else {
+              statusStr = "";
+              timeStr = time.toLocaleTimeString("no-NO", {
+                hour: "2-digit",
+                minute: "2-digit",
+              });
+            }
 
             const line =
               call.serviceJourney?.journeyPattern?.line?.publicCode || "–";
             const dest = call.destinationDisplay?.frontText || "Ukjent";
-            html += `<div class="bus"><span class="line">${line}</span><span class="dest">${dest}</span><span class="time${diffMin === 2 ? " special" : ""}">${timestr}</span></div>`;
+
+            html += `
+              <div class="bus">
+                <span class="line">${line}</span>
+                <span class="dest">${dest}</span>
+                <span class="status">${statusStr}</span>
+                <span class="time ${diffMin === 2 ? "special" : ""}">${timeStr}</span>
+              </div>`;
           }
           el.innerHTML = html || `<p style="opacity:0.6">Ingen avganger</p>`;
         } catch (e) {
