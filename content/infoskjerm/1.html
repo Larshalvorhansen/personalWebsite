@@ -28,64 +28,62 @@
         height: 100vw;
       }
 
+      /* ==================== ADJUSTABLE MARGINS (after rotation) ==================== */
+      :root {
+        --margin-top: 80px; /* ← Change this: space from the TOP edge after rotation */
+        --margin-left: 120px; /* ← Change this: space from the LEFT edge after rotation */
+      }
+
       /* ==================== DEBUG MODE ==================== */
       .debug * {
         outline: 2px solid rgba(255, 255, 255, 0.5) !important;
       }
 
       .debug .main-content {
-        background-color: rgba(255, 80, 80, 0.25) !important; /* Red */
+        background-color: rgba(255, 80, 80, 0.25) !important; /* Red box */
         opacity: 0.9 !important;
       }
 
       .debug .clock-container {
-        background-color: rgba(80, 180, 255, 0.25) !important; /* Blue */
-        opacity: 0.9 !important;
+        background-color: rgba(80, 180, 255, 0.25) !important;
       }
-
       .debug .quote-section {
-        background-color: rgba(80, 255, 120, 0.25) !important; /* Green */
-        opacity: 0.9 !important;
+        background-color: rgba(80, 255, 120, 0.25) !important;
       }
-
       .debug .section {
-        background-color: rgba(255, 220, 80, 0.25) !important; /* Yellow */
-        opacity: 0.9 !important;
+        background-color: rgba(255, 220, 80, 0.25) !important;
       }
-
       .debug #jakob-bus {
-        background-color: rgba(255, 100, 255, 0.25) !important; /* Magenta */
-        opacity: 0.9 !important;
+        background-color: rgba(255, 100, 255, 0.25) !important;
       }
-
       .debug #nybrua-trikk {
-        background-color: rgba(100, 255, 255, 0.25) !important; /* Cyan */
-        opacity: 0.9 !important;
+        background-color: rgba(100, 255, 255, 0.25) !important;
       }
-
       .debug .bus {
         background-color: rgba(255, 200, 100, 0.3) !important;
-        opacity: 0.9 !important;
       }
 
       /* ==================== MAIN LAYOUT ==================== */
       .main-content {
-        width: 100%; /* Fill entire width */
-        height: 100%; /* Fill entire height */
+        width: calc(100% - var(--margin-left) * 2); /* left + right margin */
+        height: calc(100% - var(--margin-top) * 2); /* top + bottom margin */
+
+        margin-top: var(--margin-top);
+        margin-left: var(--margin-left);
+
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center; /* Centers everything vertically */
-        padding: 40px 20px; /* Some breathing room - adjust as needed */
+        justify-content: center;
+        padding: 40px 25px;
         box-sizing: border-box;
-        gap: 30px; /* Space between sections */
+        gap: 35px;
       }
 
       .clock-container {
         position: relative;
         width: 380px;
         height: 380px;
-        margin: 0; /* Removed old margins */
       }
 
       .analog-clock {
@@ -109,7 +107,6 @@
       .quote-section {
         width: 92%;
         max-width: 700px;
-        margin: 0; /* Let flex gap handle spacing */
       }
 
       h2 {
@@ -122,7 +119,6 @@
       .bus {
         font-size: 1.72rem;
         line-height: 1.55;
-        margin: 0.45em 0;
         display: flex;
         align-items: center;
         gap: 1.3rem;
@@ -167,8 +163,8 @@
           height: 340px;
         }
         .main-content {
-          padding: 20px 15px;
-          gap: 20px;
+          padding: 25px 15px;
+          gap: 25px;
         }
       }
     </style>
@@ -355,19 +351,11 @@
       setInterval(updateClock, 1000);
       updateClock();
 
-      // Entur departures
+      // Entur departures (unchanged)
       const API_URL = "https://api.entur.io/journey-planner/v3/graphql";
       const JAKOB_KIRKE_ID = "NSR:StopPlace:6435";
       const NYBRUA_ID = "NSR:StopPlace:61989";
-      const query = `{
-        stopPlace(id: "STOP_ID") {
-          estimatedCalls(numberOfDepartures: 8, timeRange: 3600) {
-            expectedDepartureTime
-            destinationDisplay { frontText }
-            serviceJourney { journeyPattern { line { publicCode } } }
-          }
-        }
-      }`;
+      const query = `{ stopPlace(id: "STOP_ID") { estimatedCalls(numberOfDepartures: 8, timeRange: 3600) { expectedDepartureTime destinationDisplay { frontText } serviceJourney { journeyPattern { line { publicCode } } } } } }`;
 
       async function fetchDepartures(stopId, elementId, title) {
         const el = document.getElementById(elementId);
