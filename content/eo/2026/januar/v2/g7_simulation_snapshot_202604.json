@@ -1,0 +1,79 @@
+{
+  "simulation_name": "G7 Crystal Ball Simulation",
+  "version": "0.1.0-January",
+  "timestamp": "2026-04-11T15:30:47.083096",
+  "phase": "Announcement",
+  "g7_leaders": {
+    "USA": {
+      "leader": "Donald Trump",
+      "country": "United States",
+      "personality_traits": [
+        "dominant",
+        "transactional",
+        "unpredictable",
+        "America First"
+      ],
+      "domestic_pressure": "high",
+      "key_interests": ["trade deals", "energy dominance", "China containment"]
+    },
+    "Canada": {
+      "leader": "Mark Carney",
+      "country": "Canada",
+      "personality_traits": ["pragmatic", "diplomatic", "multilateralist"],
+      "domestic_pressure": "medium",
+      "key_interests": ["energy exports", "US relations", "climate policy"]
+    },
+    "France": {
+      "leader": "Emmanuel Macron",
+      "country": "France",
+      "personality_traits": ["ambitious", "visionary", "centralist", "showman"],
+      "domestic_pressure": "very_high",
+      "key_interests": [
+        "EU strategic autonomy",
+        "global influence",
+        "climate leadership"
+      ]
+    },
+    "Germany": {
+      "leader": "Friedrich Merz",
+      "country": "Germany",
+      "personality_traits": ["pragmatic", "pro-business", "atlanticist"],
+      "domestic_pressure": "high",
+      "key_interests": [
+        "export economy",
+        "energy security",
+        "NATO strengthening"
+      ]
+    },
+    "Italy": {
+      "leader": "Giorgia Meloni",
+      "country": "Italy",
+      "personality_traits": ["strong", "nationalist", "pragmatic populist"],
+      "domestic_pressure": "medium",
+      "key_interests": [
+        "migration control",
+        "Mediterranean influence",
+        "fiscal stability"
+      ]
+    },
+    "Japan": {
+      "leader": "Shigeru Ishiba",
+      "country": "Japan",
+      "personality_traits": ["defensive", "diplomatic", "security-focused"],
+      "domestic_pressure": "medium",
+      "key_interests": ["China containment", "US alliance", "tech leadership"]
+    },
+    "UK": {
+      "leader": "Keir Starmer",
+      "country": "United Kingdom",
+      "personality_traits": ["cautious", "technocratic", "pro-Atlantic"],
+      "domestic_pressure": "high",
+      "key_interests": [
+        "trade post-Brexit",
+        "security cooperation",
+        "US special relationship"
+      ]
+    }
+  },
+  "notes": "January foundation - basic agents created. Interpersonal, geopolitical, and economic layers will be added in subsequent months."
+}

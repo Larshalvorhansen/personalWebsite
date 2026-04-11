@@ -8,7 +8,7 @@
 #align(center)[
   #text(size: 18pt, weight: "bold")[Lars Halvor Hansen]
   #v(0.05em)
-Trondheim, Norge | #link("https://www.linkedin.com/in/lars-halvor-hansen/")[LinkedIn] | 908 09 670 | #link("mailto:larshalvorhansen1@gmail.com")[larshalvorhansen1\@gmail.com]
+Oslo, Norge | #link("https://www.linkedin.com/in/lars-halvor-hansen/")[LinkedIn] | 908 09 670 | #link("mailto:larshalvorhansen1@gmail.com")[larshalvorhansen1\@gmail.com]
 ]
 
 #v(0.2em)
