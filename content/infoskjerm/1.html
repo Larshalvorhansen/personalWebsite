@@ -248,9 +248,7 @@
       </div>
       <div class="quote-section">
         <h2>Ukens ord</h2>
-        <div id="quote">
-          Smudibåul
-        </div>
+        <div id="quote">Smudibåul</div>
       </div>
       <!-- Gamle quotes: Den som venter på noe godt venter fortsatt ikke forgjeves.
       Bedre med en iskaffe i hånden enn ti bak disken. # Finnes
@@ -264,32 +262,54 @@ det noe bedre enn egg? # Mitt alt # Elsker deg også!<3 -->
         <h2>Trikk fra Nybrua</h2>
         <div id="nybrua-trikk"></div>
       </div>
-    </div>
-    <!-- WEATHER BLOCK - Place this directly below the trikk og buss section -->
-<div class="weather-block" style="margin-top: 2rem; padding: 1.5rem; background: #f8f9fa; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); text-align: center;">
-    
-    <h3 style="margin: 0 0 1rem 0; color: #1e3a8a; font-family: system-ui, -apple-system, sans-serif;">
-        🌤️ Vær i Trondheim (eller din plass)
-    </h3>
-    
-    <!-- Yr Meteogram widget (replace location ID if needed) -->
-    <iframe 
-        src="https://www.yr.no/nb/innhold/1-72837/meteogram.svg" 
-        width="100%" 
-        height="380" 
-        frameborder="0" 
-        scrolling="no"
-        style="border: 1px solid #ddd; border-radius: 8px; max-width: 100%;"
-        title="Yr værprognose">
-    </iframe>
-    
-    <p style="margin-top: 0.75rem; font-size: 0.9rem; color: #555;">
-        <a href="https://www.yr.no/nb/v%C3%A6r/1-72837" target="_blank" style="color: #1e88e5; text-decoration: none;">
-            Se full prognose på Yr.no →
-        </a>
-    </p>
-</div>
+      <!-- WEATHER BLOCK - Place this directly below the trikk og buss section -->
+      <div
+        class="weather-block"
+        style="
+          margin-top: 2rem;
+          padding: 1.5rem;
+          background: #f8f9fa;
+          border-radius: 12px;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+          text-align: center;
+        "
+      >
+        <h3
+          style="
+            margin: 0 0 1rem 0;
+            color: #1e3a8a;
+            font-family:
+              system-ui,
+              -apple-system,
+              sans-serif;
+          "
+        >
+          🌤️ Vær i Trondheim (eller din plass)
+        </h3>
 
+        <!-- Yr Meteogram widget (replace location ID if needed) -->
+        <iframe
+          src="https://www.yr.no/nb/innhold/1-72837/meteogram.svg"
+          width="100%"
+          height="380"
+          frameborder="0"
+          scrolling="no"
+          style="border: 1px solid #ddd; border-radius: 8px; max-width: 100%"
+          title="Yr værprognose"
+        >
+        </iframe>
+
+        <p style="margin-top: 0.75rem; font-size: 0.9rem; color: #555">
+          <a
+            href="https://www.yr.no/nb/v%C3%A6r/1-72837"
+            target="_blank"
+            style="color: #1e88e5; text-decoration: none"
+          >
+            Se full prognose på Yr.no →
+          </a>
+        </p>
+      </div>
+    </div>
     <script>
       function updateClock() {
         const now = new Date();
