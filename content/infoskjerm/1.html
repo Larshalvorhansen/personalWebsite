@@ -1,3 +1,4 @@
+```html
 <!doctype html>
 <html lang="no">
   <head>
@@ -20,7 +21,6 @@
         font-family:
           -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       }
-
       /* 2. PIXEL-PERFECT ROTATION */
       body {
         position: absolute;
@@ -31,7 +31,6 @@
         transform: rotate(-90deg);
         transform-origin: 0 0;
       }
-
       .main-content {
         width: 100%;
         height: 100%;
@@ -40,32 +39,12 @@
         align-items: center;
         justify-content: flex-start;
       }
-
       /* 4. DASHBOARD ELEMENTS */
-      .clock-container {
-        width: 400px;
-        height: 400px;
-        margin-top: 15px;
-        text-align: center;
-      }
-
-      .analog-clock {
-        width: 100%;
-        height: 100%;
-      }
-
-      .digital-time {
-        font-size: 5rem;
-        color: #aaffff;
-        margin-top: -10px;
-      }
-
       .quote-section,
       .section {
         width: 92%;
         margin-top: 75px;
       }
-
       h2 {
         font-size: 3rem;
         color: #88ddff;
@@ -73,14 +52,12 @@
         font-weight: 400;
         border-bottom: 1px solid #222;
       }
-
       #quote {
         font-size: 2rem;
         font-style: italic;
         color: #ccc;
         text-align: center;
       }
-
       /* 3-COLUMN TABLE LAYOUT */
       .bus {
         display: flex;
@@ -118,133 +95,97 @@
         color: #ff7777;
         font-weight: bold;
       }
+
+      /* SUPERIOR WORLD CLOCK STYLES (replaces old clock-container + analog-clock) */
+      .clock-container {
+        position: relative;
+        width: 520px;
+        height: 520px;
+        margin-top: 15px;
+      }
+      svg {
+        width: 100%;
+        height: 100%;
+      }
+      .city-label {
+        font-size: 13px;
+        font-weight: 600;
+        text-anchor: middle;
+        dominant-baseline: middle;
+        pointer-events: none;
+        fill: #e5e5e5;
+      }
+      .time-label {
+        font-size: 11px;
+        font-weight: 400;
+        text-anchor: middle;
+        dominant-baseline: middle;
+        pointer-events: none;
+        fill: #aaaaaa;
+      }
+      .hand {
+        transition: transform 0.05s linear;
+      }
     </style>
   </head>
   <body>
     <div class="main-content">
+      <!-- SUPERIOR CLOCK SECTION – replaced here -->
       <div class="clock-container">
-        <svg class="analog-clock" viewBox="0 0 200 200">
-          <g stroke="#555" stroke-width="3">
-            <line
-              x1="100"
-              y1="10"
-              x2="100"
-              y2="22"
-              transform="rotate(0 100 100)"
-            />
-            <line
-              x1="100"
-              y1="10"
-              x2="100"
-              y2="22"
-              transform="rotate(30 100 100)"
-            />
-            <line
-              x1="100"
-              y1="10"
-              x2="100"
-              y2="22"
-              transform="rotate(60 100 100)"
-            />
-            <line
-              x1="100"
-              y1="10"
-              x2="100"
-              y2="22"
-              transform="rotate(90 100 100)"
-            />
-            <line
-              x1="100"
-              y1="10"
-              x2="100"
-              y2="22"
-              transform="rotate(120 100 100)"
-            />
-            <line
-              x1="100"
-              y1="10"
-              x2="100"
-              y2="22"
-              transform="rotate(150 100 100)"
-            />
-            <line
-              x1="100"
-              y1="10"
-              x2="100"
-              y2="22"
-              transform="rotate(180 100 100)"
-            />
-            <line
-              x1="100"
-              y1="10"
-              x2="100"
-              y2="22"
-              transform="rotate(210 100 100)"
-            />
-            <line
-              x1="100"
-              y1="10"
-              x2="100"
-              y2="22"
-              transform="rotate(240 100 100)"
-            />
-            <line
-              x1="100"
-              y1="10"
-              x2="100"
-              y2="22"
-              transform="rotate(270 100 100)"
-            />
-            <line
-              x1="100"
-              y1="10"
-              x2="100"
-              y2="22"
-              transform="rotate(300 100 100)"
-            />
-            <line
-              x1="100"
-              y1="10"
-              x2="100"
-              y2="22"
-              transform="rotate(330 100 100)"
-            />
-          </g>
-          <g id="hands">
-            <line
-              id="second"
-              x1="100"
-              y1="100"
-              x2="100"
-              y2="25"
-              stroke="#ff5555"
-              stroke-width="2"
-              stroke-linecap="round"
-            />
-            <line
-              id="hour"
-              x1="100"
-              y1="100"
-              x2="100"
-              y2="60"
-              stroke="#fff"
-              stroke-width="6"
-              stroke-linecap="round"
-            />
-            <line
-              id="minute"
-              x1="100"
-              y1="100"
-              x2="100"
-              y2="35"
-              stroke="#fff"
-              stroke-width="6"
-              stroke-linecap="round"
-            />
-          </g>
+        <svg
+          id="worldClock"
+          width="720"
+          height="720"
+          viewBox="0 0 800 800"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <!-- Clock face -->
+          <circle
+            cx="400"
+            cy="400"
+            r="290"
+            fill="#0f0f0f"
+            stroke="#555555"
+            stroke-width="18"
+          />
+          <!-- Hour marks (large ticks every 5 minutes) -->
+          <g id="hourMarks"></g>
+          <!-- Minute ticks (small ticks) -->
+          <g id="minuteTicks"></g>
+          <!-- City labels -->
+          <g id="cityLabels"></g>
+          <polygon
+            id="hourHand"
+            class="hand"
+            points="393,420 407,420 402,260 398,260"
+            fill="#eeeeee"
+            stroke="#eeeeee"
+            stroke-width="4"
+            stroke-linejoin="round"
+          />
+          <polygon
+            id="minuteHand"
+            class="hand"
+            points="395,420 405,420 401,138 399,138"
+            fill="#dddddd"
+            stroke="#dddddd"
+            stroke-width="3"
+            stroke-linejoin="round"
+          />
+          <polygon
+            id="secondHand"
+            class="hand"
+            points="398,440 402,440 400.5,120 399.5,120"
+            fill="#ff6666"
+            stroke="#ff6666"
+            stroke-width="1"
+            stroke-linejoin="round"
+          />
+          <!-- Center dot -->
+          <circle cx="400" cy="400" r="4" fill="#ff6666" />
         </svg>
-        <div class="digital-time" id="digital">00:00:00</div>
       </div>
+
       <div class="quote-section">
         <h2>Ukens ord</h2>
         <div id="quote">
@@ -258,10 +199,9 @@ Smudibåul
 Den som venter på noe godt venter fortsatt ikke forgjeves.
 Bedre med en iskaffe i hånden enn ti bak disken.
 Finnes det noe bedre enn egg?
-Mitt alt 
-Elsker deg også!<3 
+Mitt alt
+Elsker deg også!<3
 -->
-
       <div class="section">
         <h2>Buss fra Jakob kirke</h2>
         <div id="jakob-bus"></div>
@@ -283,37 +223,150 @@ Elsker deg også!<3
         />
       </div>
     </div>
+
     <script>
+      /* SUPERIOR WORLD CLOCK JAVASCRIPT (local time, smooth animation, city labels) */
+      const cities = [
+        { name: "BAKER", offset: -12 },
+        { name: "HONOLULU", offset: -10 },
+        { name: "ANCHORAGE", offset: -9 },
+        { name: "LOS ANGELES", offset: -8 },
+        { name: "DENVER", offset: -7 },
+        { name: "CHICAGO", offset: -6 },
+        { name: "NEW YORK", offset: -5 },
+        { name: "CARACAS", offset: -4 },
+        { name: "RIO", offset: -3 },
+        { name: "AZORES", offset: -1 },
+        { name: "LONDON", offset: 0 },
+        { name: "BERLIN", offset: 1 },
+        { name: "CAIRO", offset: 2 },
+        { name: "MOSCOW", offset: 3 },
+        { name: "DUBAI", offset: 4 },
+        { name: "KARACHI", offset: 5 },
+        { name: "DHAKA", offset: 6 },
+        { name: "BANGKOK", offset: 7 },
+        { name: "BEIJING", offset: 8 },
+        { name: "TOKYO", offset: 9 },
+        { name: "SYDNEY", offset: 10 },
+        { name: "AUCKLAND", offset: 12 },
+        { name: "FIJI", offset: 13 },
+        { name: "MIDWAY", offset: -11 },
+      ];
+
+      const svg = document.getElementById("worldClock");
+      const cityGroup = document.getElementById("cityLabels");
+      const hourMarksGroup = document.getElementById("hourMarks");
+      const minuteTicksGroup = document.getElementById("minuteTicks");
+      const centerX = 400;
+      const centerY = 400;
+      const radius = 290;
+
+      // Large hour marks (every 30°)
+      for (let i = 0; i < 12; i++) {
+        const angle = (i * 30 * Math.PI) / 180;
+        const x1 = centerX + Math.cos(angle) * (radius - 35);
+        const y1 = centerY + Math.sin(angle) * (radius - 35);
+        const x2 = centerX + Math.cos(angle) * (radius - 8);
+        const y2 = centerY + Math.sin(angle) * (radius - 8);
+        const line = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "line",
+        );
+        line.setAttribute("x1", x1);
+        line.setAttribute("y1", y1);
+        line.setAttribute("x2", x2);
+        line.setAttribute("y2", y2);
+        line.setAttribute("stroke", "#555555");
+        line.setAttribute("stroke-width", "5");
+        hourMarksGroup.appendChild(line);
+      }
+
+      // Small minute ticks (every 6° except every 30°)
+      for (let i = 0; i < 60; i++) {
+        if (i % 5 === 0) continue; // skip positions where hour marks are
+        const angle = (i * 6 * Math.PI) / 180;
+        const x1 = centerX + Math.cos(angle) * (radius - 22);
+        const y1 = centerY + Math.sin(angle) * (radius - 22);
+        const x2 = centerX + Math.cos(angle) * (radius - 8);
+        const y2 = centerY + Math.sin(angle) * (radius - 8);
+        const line = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "line",
+        );
+        line.setAttribute("x1", x1);
+        line.setAttribute("y1", y1);
+        line.setAttribute("x2", x2);
+        line.setAttribute("y2", y2);
+        line.setAttribute("stroke", "#555555");
+        line.setAttribute("stroke-width", "2");
+        minuteTicksGroup.appendChild(line);
+      }
+
+      // City labels (placed around the dial)
+      cities.forEach((city, index) => {
+        const angleDeg = index * 15 - 90;
+        const angle = (angleDeg * Math.PI) / 180;
+        const isFar = index % 2 === 0;
+        const distance = isFar ? radius + 58 : radius + 42;
+        const x = centerX + Math.cos(angle) * distance;
+        const y = centerY + Math.sin(angle) * distance;
+
+        // City name
+        const text = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "text",
+        );
+        text.setAttribute("x", x);
+        text.setAttribute("y", y);
+        text.setAttribute("class", `city-label ${isFar ? "far" : ""}`);
+        text.textContent = city.name;
+        cityGroup.appendChild(text);
+
+        // Offset
+        const offsetY = y + 17;
+        const offsetText = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "text",
+        );
+        offsetText.setAttribute("x", x);
+        offsetText.setAttribute("y", offsetY);
+        offsetText.setAttribute("class", "time-label");
+        offsetText.textContent =
+          city.offset >= 0 ? `+${city.offset}` : city.offset;
+        cityGroup.appendChild(offsetText);
+      });
+
+      // Clock update – local time (Bergen/Norway) with smooth requestAnimationFrame
       function updateClock() {
         const now = new Date();
-        const h = now.getHours(),
-          m = now.getMinutes(),
-          s = now.getSeconds();
+        const hours = now.getHours();
+        const minutes = now.getMinutes();
+        const seconds = now.getSeconds();
+        const milliseconds = now.getMilliseconds();
+
+        const hourDeg = (hours % 12) * 30 + minutes * 0.5 + seconds * 0.008333;
+        const minuteDeg = minutes * 6 + seconds * 0.1 + milliseconds * 0.000166;
+        const secondDeg = seconds * 6 + milliseconds * 0.006;
+
         document
-          .getElementById("hour")
-          .setAttribute(
-            "transform",
-            `rotate(${(h % 12) * 30 + m * 0.5} 100 100)`,
-          );
+          .getElementById("hourHand")
+          .setAttribute("transform", `rotate(${hourDeg} 400 400)`);
         document
-          .getElementById("minute")
-          .setAttribute("transform", `rotate(${m * 6 + s * 0.1} 100 100)`);
+          .getElementById("minuteHand")
+          .setAttribute("transform", `rotate(${minuteDeg} 400 400)`);
         document
-          .getElementById("second")
-          .setAttribute("transform", `rotate(${s * 6} 100 100)`);
-        document.getElementById("digital").textContent = now.toLocaleTimeString(
-          "no-NO",
-          { hour: "2-digit", minute: "2-digit", second: "2-digit" },
-        );
+          .getElementById("secondHand")
+          .setAttribute("transform", `rotate(${secondDeg} 400 400)`);
+
+        requestAnimationFrame(updateClock);
       }
-      setInterval(updateClock, 1000);
       updateClock();
 
+      /* ORIGINAL BUS/TRAM CODE (unchanged) */
       const API_URL = "https://api.entur.io/journey-planner/v3/graphql";
       const JAKOB_KIRKE_ID = "NSR:StopPlace:6435";
       const NYBRUA_ID = "NSR:StopPlace:61989";
       const query = `{ stopPlace(id: "STOP_ID") { estimatedCalls(numberOfDepartures: 4, timeRange: 3600) { expectedDepartureTime destinationDisplay { frontText } serviceJourney { journeyPattern { line { publicCode } } } } } }`;
-
       async function fetchDepartures(stopId, elementId, title) {
         const el = document.getElementById(elementId);
         try {
@@ -328,14 +381,11 @@ Elsker deg også!<3
           const json = await res.json();
           const calls = json.data?.stopPlace?.estimatedCalls || [];
           let html = "";
-
           for (let call of calls) {
             const time = new Date(call.expectedDepartureTime);
             const diffMin = Math.round((time - new Date()) / 60000);
-
             let statusStr = "";
             let timeStr = "";
-
             if (diffMin <= 0) {
               statusStr = "";
               timeStr = "nå...";
@@ -358,11 +408,9 @@ Elsker deg også!<3
                 minute: "2-digit",
               });
             }
-
             const line =
               call.serviceJourney?.journeyPattern?.line?.publicCode || "–";
             const dest = call.destinationDisplay?.frontText || "Ukjent";
-
             html += `
               <div class="bus">
                 <span class="line">${line}</span>
@@ -376,14 +424,13 @@ Elsker deg også!<3
           el.innerHTML = `<p style="color:#f55">Feil ved lasting</p>`;
         }
       }
-
       const refreshAll = () => {
         fetchDepartures(JAKOB_KIRKE_ID, "jakob-bus", "Jakob kirke");
         fetchDepartures(NYBRUA_ID, "nybrua-trikk", "Nybrua");
       };
-
       refreshAll();
       setInterval(refreshAll, 15000);
     </script>
   </body>
 </html>
+```
