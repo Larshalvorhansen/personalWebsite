@@ -48,33 +48,36 @@
         gap: 50px;
       }
 
-      /* Digital Clock - Bigger */
+      /* Digital Clock */
       .digital-clock {
-        background: #000000;
-        padding: 20px 20px;
-        min-width: 300px;
+        background: #111;
+        border: 3px solid #333;
+        border-radius: 20px;
+        padding: 25px 40px;
+        min-width: 420px;
         text-align: center;
+        box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
       }
       .digital-time {
-        font-size: 6rem;
+        font-size: 6.8rem;
         font-weight: 300;
         letter-spacing: 6px;
-        color: #ffffff;
+        color: #88ddff;
         line-height: 1;
-
+      }
       .digital-date {
-        font-size: 3rem;
-        color: #ffffff;
-        margin-top: 12px;
+        font-size: 2.4rem;
+        color: #ccc;
+        margin-top: 10px;
       }
       .digital-week {
-        font-size: 3rem;
-        color: #ffffff;
+        font-size: 2rem;
+        color: #77cc99;
         margin-top: 6px;
         font-weight: 500;
       }
 
-      /* Analog Clock - Bigger */
+      /* Analog Clock */
       .clock-container {
         position: relative;
         width: 600px;
@@ -86,7 +89,7 @@
         height: 100%;
       }
 
-      /* Rest of styles unchanged */
+      /* Rest of your styles */
       .quote-section,
       .section {
         width: 92%;
@@ -148,16 +151,15 @@
   </head>
   <body>
     <div class="main-content">
-      <!-- === CLOCKS ROW === -->
       <div class="clocks-row">
-        <!-- Digital Clock (Left) -->
+        <!-- Digital Clock -->
         <div class="digital-clock">
           <div class="digital-time" id="digitalTime">00:00</div>
           <div class="digital-date" id="digitalDate"></div>
           <div class="digital-week" id="digitalWeek"></div>
         </div>
 
-        <!-- Analog Clock (Right) -->
+        <!-- Analog Clock -->
         <div class="clock-container">
           <svg
             id="worldClock"
@@ -210,7 +212,7 @@
         </div>
       </div>
 
-      <!-- Rest unchanged -->
+      <!-- Rest of your content -->
       <div class="quote-section">
         <h2>Ukens ord</h2>
         <div id="quote">
@@ -243,7 +245,7 @@
     </div>
 
     <script>
-      /* ==================== DIGITAL CLOCK + WEEK NUMBER ==================== */
+      /* Digital Clock + Week */
       function getISOWeek(date) {
         const d = new Date(
           Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()),
@@ -255,7 +257,6 @@
 
       function updateDigitalClock() {
         const now = new Date();
-
         const timeStr = now.toLocaleTimeString("no-NO", {
           hour: "2-digit",
           minute: "2-digit",
@@ -272,13 +273,12 @@
         document.getElementById("digitalWeek").textContent =
           `Uke ${getISOWeek(now)}`;
       }
-
       setInterval(updateDigitalClock, 1000);
       updateDigitalClock();
 
-      /* ==================== ANALOG CLOCK (bigger) ==================== */
+      /* Analog Clock */
       const cities = [
-        { name: "BAKER", offset: -12 },
+        /* your city list */ { name: "BAKER", offset: -12 },
         { name: "HONOLULU", offset: -10 },
         { name: "ANCHORAGE", offset: -9 },
         { name: "LOS ANGELES", offset: -8 },
@@ -312,8 +312,9 @@
       const hourMarksGroup = document.getElementById("hourMarks");
       const minuteTicksGroup = document.getElementById("minuteTicks");
 
-      // Hour marks
+      // Hour marks, minute ticks, cities... (same as before)
       for (let i = 0; i < 12; i++) {
+        /* hour marks code */
         const angle = (i * 30 * Math.PI) / 180;
         const x1 = centerX + Math.cos(angle) * (radius - 35);
         const y1 = centerY + Math.sin(angle) * (radius - 35);
@@ -332,7 +333,6 @@
         hourMarksGroup.appendChild(line);
       }
 
-      // Minute ticks
       for (let i = 0; i < 60; i++) {
         if (i % 5 === 0) continue;
         const angle = (i * 6 * Math.PI) / 180;
@@ -348,12 +348,11 @@
         line.setAttribute("y1", y1);
         line.setAttribute("x2", x2);
         line.setAttribute("y2", y2);
-        line.setAttribute("stroke", "#ffffff");
+        line.setAttribute("stroke", "#555555");
         line.setAttribute("stroke-width", "2");
         minuteTicksGroup.appendChild(line);
       }
 
-      // City labels
       cities.forEach((city, index) => {
         const angleDeg = index * 15 - 90;
         const angle = (angleDeg * Math.PI) / 180;
@@ -386,11 +385,10 @@
 
       function updateAnalogClock() {
         const now = new Date();
-        const h = now.getHours();
-        const m = now.getMinutes();
-        const s = now.getSeconds();
-        const ms = now.getMilliseconds();
-
+        const h = now.getHours(),
+          m = now.getMinutes(),
+          s = now.getSeconds(),
+          ms = now.getMilliseconds();
         const hourDeg = (h % 12) * 30 + m * 0.5 + s * 0.008333;
         const minDeg = m * 6 + s * 0.1 + ms * 0.000166;
         const secDeg = s * 6 + ms * 0.006;
@@ -404,19 +402,17 @@
         document
           .getElementById("secondHand")
           .setAttribute("transform", `rotate(${secDeg} 400 400)`);
-
         requestAnimationFrame(updateAnalogClock);
       }
       updateAnalogClock();
 
-      /* Bus & Tram code remains unchanged */
+      /* Bus/Tram code (unchanged) */
       const API_URL = "https://api.entur.io/journey-planner/v3/graphql";
       const JAKOB_KIRKE_ID = "NSR:StopPlace:6435";
       const NYBRUA_ID = "NSR:StopPlace:61989";
       const query = `{ stopPlace(id: "STOP_ID") { estimatedCalls(numberOfDepartures: 4, timeRange: 3600) { expectedDepartureTime destinationDisplay { frontText } serviceJourney { journeyPattern { line { publicCode } } } } } }`;
 
       async function fetchDepartures(stopId, elementId) {
-        // ... (your original bus function - unchanged)
         const el = document.getElementById(elementId);
         try {
           const res = await fetch(API_URL, {
