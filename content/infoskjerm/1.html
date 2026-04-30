@@ -1,0 +1,479 @@
+<!doctype html>
+<html lang="no">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="refresh" content="60" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stue-skjerm – Vertikal</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        width: 100vw;
+        height: 100vh;
+        background: #000;
+        color: #eee;
+        overflow: hidden;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      }
+      body {
+        position: absolute;
+        width: 100vh;
+        height: 100vw;
+        left: 0;
+        top: 100vh;
+        transform: rotate(-90deg);
+        transform-origin: 0 0;
+      }
+
+      .main-content {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+      }
+
+      /* === CLOCKS ROW === */
+      .clocks-row {
+        display: flex;
+        width: 97%;
+        max-width: 1500px;
+        margin-top: 5px;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+      }
+
+      /* Digital Clock */
+      .digital-clock {
+        background: #000000;
+        border-radius: 10px;
+        padding: 10px 10px;
+        min-width: 450px;
+        text-align: center;
+        box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
+      }
+      .digital-time {
+        font-size: 6.8rem;
+        font-weight: 300;
+        letter-spacing: 6px;
+        color: #ffffff;
+        line-height: 1;
+      }
+      .digital-date {
+        font-size: 3rem;
+        color: #ffffff;
+        margin-top: 10px;
+      }
+      .digital-week {
+        font-size: 3rem;
+        color: #ffffff;
+        margin-top: 3px;
+        font-weight: 500;
+      }
+
+      /* Analog Clock */
+      .clock-container {
+        position: relative;
+        width: 600px;
+        height: 400px;
+        flex-shrink: 0;
+      }
+      svg {
+        width: 100%;
+        height: 100%;
+      }
+
+      /* Rest of your styles */
+      .quote-section,
+      .section {
+        width: 92%;
+        margin-top: 50px;
+      }
+      h2 {
+        font-size: 3rem;
+        color: #88ddff;
+        margin: 5px 0;
+        font-weight: 400;
+        border-bottom: 1px solid #222;
+      }
+      #quote {
+        font-size: 2rem;
+        font-style: italic;
+        color: #ccc;
+        text-align: center;
+      }
+      .bus {
+        display: flex;
+        font-size: 2rem;
+        padding: 5px 0;
+        border-bottom: 1px solid #111;
+        align-items: center;
+      }
+      .line {
+        font-weight: bold;
+        color: #88ddff;
+        width: 80px;
+        flex-shrink: 0;
+      }
+      .dest {
+        flex: 1;
+        color: #ddd;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding-right: 10px;
+      }
+      .status {
+        width: 250px;
+        text-align: right;
+        font-size: 2rem;
+      }
+      .time {
+        color: #ffdd88;
+        width: 150px;
+        text-align: right;
+        font-weight: bold;
+      }
+      .special {
+        color: #ff7777;
+        font-weight: bold;
+      }
+      .hand {
+        transition: transform 0.05s linear;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main-content">
+      <div class="clocks-row">
+        <!-- Digital Clock -->
+        <div class="digital-clock">
+          <div class="digital-time" id="digitalTime">00:00</div>
+          <div class="digital-date" id="digitalDate"></div>
+          <div class="digital-week" id="digitalWeek"></div>
+        </div>
+
+        <!-- Analog Clock -->
+        <div class="clock-container">
+          <svg
+            id="worldClock"
+            width="800"
+            height="800"
+            viewBox="0 0 800 800"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <circle
+              cx="400"
+              cy="400"
+              r="290"
+              fill="#000000"
+              stroke="#000000"
+              stroke-width="18"
+            />
+            <g id="hourMarks"></g>
+            <g id="minuteTicks"></g>
+            <g id="cityLabels"></g>
+
+            <polygon
+              id="hourHand"
+              class="hand"
+              points="393,420 407,420 402,260 398,260"
+              fill="#eeeeee"
+              stroke="#eeeeee"
+              stroke-width="4"
+              stroke-linejoin="round"
+            />
+            <polygon
+              id="minuteHand"
+              class="hand"
+              points="395,420 405,420 401,138 399,138"
+              fill="#dddddd"
+              stroke="#dddddd"
+              stroke-width="3"
+              stroke-linejoin="round"
+            />
+            <polygon
+              id="secondHand"
+              class="hand"
+              points="398,440 402,440 400.5,120 399.5,120"
+              fill="#ff6666"
+              stroke="#ff6666"
+              stroke-width="1"
+              stroke-linejoin="round"
+            />
+            <circle cx="400" cy="400" r="4" fill="#ff6666" />
+          </svg>
+        </div>
+      </div>
+
+      <!-- Rest of your content
+       Slik oppretter Jeg Min pakt med dere: Aldri mer skal alt kjøtt bli
+          utslettet ved en vannflom. Aldri mer skal en vannflom ødelegge
+          jorden... Bergen er et unntak. 
+          Den sjampoen er verdt mer enn deg...
+          You have the rigth to be free to be strong!<br>
+          -Emma Watson
+          -->
+      <div class="quote-section">
+        <h2>Ukens ord</h2>
+        <div id="quote">Jeg skal aldri slippe deg</div>
+      </div>
+
+      <div class="section">
+        <h2>Buss fra Jakob kirke</h2>
+        <div id="jakob-bus"></div>
+      </div>
+      <div class="section">
+        <h2>Trikk fra Nybrua</h2>
+        <div id="nybrua-trikk"></div>
+      </div>
+
+      <div style="margin-top: 2.5rem; width: 100%">
+        <img
+          src="https://www.yr.no/nb/innhold/1-72837/meteogram.svg?mode=dark"
+          width="100%"
+          style="
+            display: block;
+            filter: brightness(1.08) contrast(1.12) saturate(0.95);
+          "
+          alt="Været"
+        />
+      </div>
+    </div>
+
+    <script>
+      /* Digital Clock + Week */
+      function getISOWeek(date) {
+        const d = new Date(
+          Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()),
+        );
+        d.setUTCDate(d.getUTCDate() + 3 - ((d.getUTCDay() + 6) % 7));
+        const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+        return Math.ceil(((d - yearStart) / 86400000 + 1) / 7);
+      }
+
+      function updateDigitalClock() {
+        const now = new Date();
+        const timeStr = now.toLocaleTimeString("no-NO", {
+          hour: "Halv",
+          minute: "Sju!",
+        });
+        const dateStr = now.toLocaleDateString("no-NO", {
+          weekday: "long",
+          day: "numeric",
+          month: "long",
+        });
+
+        document.getElementById("digitalTime").textContent = timeStr;
+        document.getElementById("digitalDate").textContent =
+          dateStr.charAt(0).toUpperCase() + dateStr.slice(1);
+        document.getElementById("digitalWeek").textContent =
+          `Uke ${getISOWeek(now)}`;
+      }
+      setInterval(updateDigitalClock, 1000);
+      updateDigitalClock();
+
+      /* Analog Clock */
+      const cities = [
+        /* your city list */ { name: "BAKER", offset: -12 },
+        { name: "HONOLULU", offset: -10 },
+        { name: "ANCHORAGE", offset: -9 },
+        { name: "LOS ANGELES", offset: -8 },
+        { name: "DENVER", offset: -7 },
+        { name: "CHICAGO", offset: -6 },
+        { name: "NEW YORK", offset: -5 },
+        { name: "CARACAS", offset: -4 },
+        { name: "RIO", offset: -3 },
+        { name: "AZORES", offset: -1 },
+        { name: "LONDON", offset: 0 },
+        { name: "BERLIN", offset: 1 },
+        { name: "CAIRO", offset: 2 },
+        { name: "MOSCOW", offset: 3 },
+        { name: "DUBAI", offset: 4 },
+        { name: "KARACHI", offset: 5 },
+        { name: "DHAKA", offset: 6 },
+        { name: "BANGKOK", offset: 7 },
+        { name: "BEIJING", offset: 8 },
+        { name: "TOKYO", offset: 9 },
+        { name: "SYDNEY", offset: 10 },
+        { name: "AUCKLAND", offset: 12 },
+        { name: "FIJI", offset: 13 },
+        { name: "MIDWAY", offset: -11 },
+      ];
+
+      const centerX = 400,
+        centerY = 400,
+        radius = 290;
+      const svg = document.getElementById("worldClock");
+      const cityGroup = document.getElementById("cityLabels");
+      const hourMarksGroup = document.getElementById("hourMarks");
+      const minuteTicksGroup = document.getElementById("minuteTicks");
+
+      // Hour marks, minute ticks, cities... (same as before)
+      for (let i = 0; i < 12; i++) {
+        /* hour marks code */
+        const angle = (i * 30 * Math.PI) / 180;
+        const x1 = centerX + Math.cos(angle) * (radius - 35);
+        const y1 = centerY + Math.sin(angle) * (radius - 35);
+        const x2 = centerX + Math.cos(angle) * (radius - 8);
+        const y2 = centerY + Math.sin(angle) * (radius - 8);
+        const line = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "line",
+        );
+        line.setAttribute("x1", x1);
+        line.setAttribute("y1", y1);
+        line.setAttribute("x2", x2);
+        line.setAttribute("y2", y2);
+        line.setAttribute("stroke", "#ffffff");
+        line.setAttribute("stroke-width", "5");
+        hourMarksGroup.appendChild(line);
+      }
+
+      for (let i = 0; i < 60; i++) {
+        if (i % 5 === 0) continue;
+        const angle = (i * 6 * Math.PI) / 180;
+        const x1 = centerX + Math.cos(angle) * (radius - 22);
+        const y1 = centerY + Math.sin(angle) * (radius - 22);
+        const x2 = centerX + Math.cos(angle) * (radius - 8);
+        const y2 = centerY + Math.sin(angle) * (radius - 8);
+        const line = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "line",
+        );
+        line.setAttribute("x1", x1);
+        line.setAttribute("y1", y1);
+        line.setAttribute("x2", x2);
+        line.setAttribute("y2", y2);
+        line.setAttribute("stroke", "#555555");
+        line.setAttribute("stroke-width", "2");
+        minuteTicksGroup.appendChild(line);
+      }
+
+      cities.forEach((city, index) => {
+        const angleDeg = index * 15 - 90;
+        const angle = (angleDeg * Math.PI) / 180;
+        const isFar = index % 2 === 0;
+        const distance = isFar ? radius + 58 : radius + 42;
+        const x = centerX + Math.cos(angle) * distance;
+        const y = centerY + Math.sin(angle) * distance;
+
+        const text = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "text",
+        );
+        text.setAttribute("x", x);
+        text.setAttribute("y", y);
+        text.setAttribute("class", "city-label");
+        text.textContent = city.name;
+        cityGroup.appendChild(text);
+
+        const offsetText = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "text",
+        );
+        offsetText.setAttribute("x", x);
+        offsetText.setAttribute("y", y + 17);
+        offsetText.setAttribute("class", "time-label");
+        offsetText.textContent =
+          city.offset >= 0 ? `+${city.offset}` : city.offset;
+        cityGroup.appendChild(offsetText);
+      });
+
+      function updateAnalogClock() {
+        const now = new Date();
+        const h = now.getHours(),
+          m = now.getMinutes(),
+          s = now.getSeconds(),
+          ms = now.getMilliseconds();
+        const hourDeg = (h % 12) * 30 + m * 0.5 + s * 0.008333;
+        const minDeg = m * 6 + s * 0.1 + ms * 0.000166;
+        const secDeg = s * 6 + ms * 0.006;
+
+        document
+          .getElementById("hourHand")
+          .setAttribute("transform", `rotate(${hourDeg} 400 400)`);
+        document
+          .getElementById("minuteHand")
+          .setAttribute("transform", `rotate(${minDeg} 400 400)`);
+        document
+          .getElementById("secondHand")
+          .setAttribute("transform", `rotate(${secDeg} 400 400)`);
+        requestAnimationFrame(updateAnalogClock);
+      }
+      updateAnalogClock();
+
+      /* Bus/Tram code (unchanged) */
+      const API_URL = "https://api.entur.io/journey-planner/v3/graphql";
+      const JAKOB_KIRKE_ID = "NSR:StopPlace:6435";
+      const NYBRUA_ID = "NSR:StopPlace:61989";
+      const query = `{ stopPlace(id: "STOP_ID") { estimatedCalls(numberOfDepartures: 4, timeRange: 3600) { expectedDepartureTime destinationDisplay { frontText } serviceJourney { journeyPattern { line { publicCode } } } } } }`;
+
+      async function fetchDepartures(stopId, elementId) {
+        const el = document.getElementById(elementId);
+        try {
+          const res = await fetch(API_URL, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "ET-Client-Name": "stue-skjerm-v2",
+            },
+            body: JSON.stringify({ query: query.replace("STOP_ID", stopId) }),
+          });
+          const json = await res.json();
+          const calls = json.data?.stopPlace?.estimatedCalls || [];
+          let html = "";
+          for (let call of calls) {
+            const time = new Date(call.expectedDepartureTime);
+            const diffMin = Math.round((time - new Date()) / 60000);
+            let statusStr = "",
+              timeStr = "";
+
+            if (diffMin <= 0) timeStr = "nå...";
+            else if (diffMin === 1) {
+              statusStr = "Ikke prøv deg";
+              timeStr = "1 min";
+            } else if (diffMin === 2) {
+              statusStr = "Løp!";
+              timeStr = "2 min";
+            } else if (diffMin === 3) {
+              statusStr = "Goood tid";
+              timeStr = "3 min";
+            } else if (diffMin < 60) timeStr = `${diffMin} min`;
+            else
+              timeStr = time.toLocaleTimeString("no-NO", {
+                hour: "2-digit",
+                minute: "2-digit",
+              });
+
+            const line =
+              call.serviceJourney?.journeyPattern?.line?.publicCode || "–";
+            const dest = call.destinationDisplay?.frontText || "Ukjent";
+
+            html += `<div class="bus">
+              <span class="line">${line}</span>
+              <span class="dest">${dest}</span>
+              <span class="status">${statusStr}</span>
+              <span class="time ${diffMin === 2 ? "special" : ""}">${timeStr}</span>
+            </div>`;
+          }
+          el.innerHTML = html || `<p style="opacity:0.6">Ingen avganger</p>`;
+        } catch (e) {
+          el.innerHTML = `<p style="color:#f55">Feil ved lasting</p>`;
+        }
+      }
+
+      const refreshAll = () => {
+        fetchDepartures(JAKOB_KIRKE_ID, "jakob-bus");
+        fetchDepartures(NYBRUA_ID, "nybrua-trikk");
+      };
+      refreshAll();
+      setInterval(refreshAll, 15000);
+    </script>
+  </body>
+</html>
