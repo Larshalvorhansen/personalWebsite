@@ -156,6 +156,8 @@
           <div class="digital-time" id="digitalTime">00:00</div>
           <div class="digital-date" id="digitalDate"></div>
           <div class="digital-week" id="digitalWeek"></div>
+          <!-- New Countdown Line -->
+          <div class="digital-week" id="countdown"></div>
         </div>
 
         <!-- Analog Clock -->
@@ -413,7 +415,43 @@
       const JAKOB_KIRKE_ID = "NSR:StopPlace:6435";
       const NYBRUA_ID = "NSR:StopPlace:61989";
       const query = `{ stopPlace(id: "STOP_ID") { estimatedCalls(numberOfDepartures: 4, timeRange: 3600) { expectedDepartureTime destinationDisplay { frontText } serviceJourney { journeyPattern { line { publicCode } } } } } }`;
+      function updateDigitalClock() {
+        const now = new Date();
 
+        // --- Countdown Logic ---
+        const targetDate = new Date("2026-06-20"); // <--- Set your date here (YYYY-MM-DD)
+        const diffInMs = targetDate - now;
+        const diffInDays = Math.ceil(diffInMs / (1000 * 60 * 60 * 24));
+
+        let countdownText = "";
+        if (diffInDays > 0) {
+          countdownText = `${diffInDays} dager til vi ses`;
+        } else if (diffInDays === 0) {
+          countdownText = "Vi ses i dag!";
+        } else {
+          countdownText = "Endelig sammen!";
+        }
+        // -----------------------
+
+        const timeStr = now.toLocaleTimeString("no-NO", {
+          hour: "2-digit",
+          minute: "2-digit",
+        });
+        const dateStr = now.toLocaleDateString("no-NO", {
+          weekday: "long",
+          day: "numeric",
+          month: "long",
+        });
+
+        document.getElementById("digitalTime").textContent = timeStr;
+        document.getElementById("digitalDate").textContent =
+          dateStr.charAt(0).toUpperCase() + dateStr.slice(1);
+        document.getElementById("digitalWeek").textContent =
+          `Uke ${getISOWeek(now)}`;
+
+        // Update the countdown element
+        document.getElementById("countdown").textContent = countdownText;
+      }
       async function fetchDepartures(stopId, elementId) {
         const el = document.getElementById(elementId);
         try {
