@@ -1,5 +1,6 @@
 .netlify/
 **/.DS_Store
+.DS_Store
 .env
 *.py
 .venv
