@@ -1,0 +1,672 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Knight sandbox</title>
+    <style>
+      body {
+        display: flex;
+        margin: 0;
+        height: 100vh;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #222;
+        color: #333;
+      }
+
+      #sidebar {
+        width: 400px;
+        background: #f4f4f9;
+        padding: 20px;
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
+        overflow-y: auto;
+        z-index: 10;
+      }
+
+      #main {
+        flex: 1;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        background-color: #111;
+      }
+
+      #canvas_container {
+        width: 800px;
+        height: 800px;
+        background: #fff;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+        cursor: grab;
+        overflow: hidden;
+      }
+
+      #canvas_container:active {
+        cursor: grabbing;
+      }
+
+      h1,
+      h2,
+      h3 {
+        margin-top: 0;
+        color: #111;
+      }
+      hr {
+        border: 1px solid #ddd;
+        margin: 20px 0;
+      }
+
+      .control-group {
+        margin-bottom: 15px;
+      }
+
+      button {
+        padding: 8px 16px;
+        background: #0066cc;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: bold;
+      }
+      button:hover {
+        background: #005bb5;
+      }
+      button.secondary {
+        background: #6c757d;
+      }
+      button.secondary:hover {
+        background: #5a6268;
+      }
+      button.danger {
+        background: #cc0000;
+      }
+      button.danger:hover {
+        background: #b30000;
+      }
+
+      .player-card {
+        background: white;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        padding: 15px;
+        margin-bottom: 15px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+      }
+
+      .player-header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 10px;
+      }
+
+      .player-header input[type="text"] {
+        flex: 1;
+        font-weight: bold;
+        padding: 4px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-family: monospace;
+      }
+
+      .player-header input[type="color"] {
+        padding: 0;
+        border: none;
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+        background: none;
+      }
+
+      .rule-grid {
+        display: grid;
+        grid-template-columns: repeat(11, 20px);
+        gap: 1px;
+        background: #ccc;
+        width: fit-content;
+        margin: 0 auto;
+        border: 1px solid #999;
+      }
+
+      .rule-cell {
+        width: 20px;
+        height: 20px;
+        background: white;
+        cursor: pointer;
+      }
+
+      .rule-cell:hover {
+        background: #eee;
+      }
+      .rule-cell.active {
+        background: #555;
+      }
+      .rule-cell.center {
+        border-radius: 50%;
+        border: 2px solid #000;
+        box-sizing: border-box;
+        cursor: default;
+      }
+
+      table.matrix {
+        border-collapse: collapse;
+        width: 100%;
+        background: white;
+      }
+
+      table.matrix th,
+      table.matrix td {
+        border: 1px solid #ccc;
+        padding: 6px;
+        text-align: center;
+        font-size: 0.9em;
+      }
+
+      .hint {
+        font-size: 0.85em;
+        color: #666;
+        margin-bottom: 10px;
+      }
+
+      #ui-overlay {
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+        color: rgba(255, 255, 255, 0.7);
+        pointer-events: none;
+        font-size: 14px;
+      }
+
+      .about-section {
+        background: #eef2f7;
+        padding: 15px;
+        border-radius: 6px;
+        border: 1px solid #d1d9e6;
+        font-size: 0.9em;
+        line-height: 1.4;
+        color: #444;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="sidebar">
+      <h1>Knight Sandbox</h1>
+
+      <div class="control-group">
+        <label>Grid Size: <span id="n_val">50</span></label
+        ><label> (> 1000 might load for a long time)</label><br />
+        <input
+          type="range"
+          id="n_slider"
+          min="5"
+          max="2048"
+          value="50"
+          style="width: 100%"
+        />
+      </div>
+
+      <div class="control-group">
+        <button id="btn_generate">Generate Board</button>
+        <button id="btn_clear" class="danger" style="margin-left: 5px">
+          Clear
+        </button>
+        <button id="btn_download" class="secondary" style="margin-left: 5px">
+          Download PNG
+        </button>
+      </div>
+
+      <hr />
+      <h2>Avoidance Matrix</h2>
+      <p class="hint">Check shared attack constraints.</p>
+      <table class="matrix" id="matrix_table"></table>
+
+      <hr />
+
+      <h2>Players & Rules</h2>
+      <div id="players_container"></div>
+      <button id="btn_add_player">+ Add Player</button>
+
+      <hr />
+
+      <div class="about-section">
+        <h3>About</h3>
+        <p>
+          This website is inspired by
+          <a
+            href="https://www.numberphile.com/videos/red-black-knights"
+            target="_blank"
+            rel="noopener"
+            >Numberphile’s video on the Knight's Spiral</a
+          >
+        </p>
+
+        <p>
+          The concept is explained beautifully by
+          <a
+            href="https://en.wikipedia.org/wiki/Neil_Sloane"
+            target="_blank"
+            rel="noopener"
+            >Neil Sloane</a
+          >
+          and is mentioned in his
+          <a href="https://oeis.org/A395357" target="_blank" rel="noopener"
+            >Online Encyclopedia of Integer Sequences</a
+          >.
+        </p>
+
+        <p>
+          Thanks to
+          <a
+            href="https://www.bradyharanblog.com/"
+            target="_blank"
+            rel="noopener"
+            >Brady Haran</a
+          >
+          for bringing so much joy to this otherwise chaotic world.
+        </p>
+
+        <p>
+          If you are curious about me, the co-creator of this website (together
+          with Gemini) please visit
+          <a href="https://halvorhansen.no" target="_blank" rel="noopener"
+            >halvorhansen.no</a
+          >.
+        </p>
+      </div>
+    </div>
+
+    <div id="main">
+      <div id="canvas_container">
+        <canvas id="board" width="800" height="800"></canvas>
+      </div>
+      <div id="ui-overlay">Scroll to Zoom • Click & Drag to Pan</div>
+    </div>
+
+    <script>
+      // --- Core State ---
+      let currentN = 50;
+      let players = [
+        { name: "#000000", rules: getKnightRules() },
+        { name: "#ff0000", rules: getKnightRules() },
+      ];
+      let avoidMatrix = [
+        [false, true],
+        [true, false],
+      ];
+      let pieces = [];
+      let spiralArr = [];
+
+      // --- DOM Elements ---
+      const nSlider = document.getElementById("n_slider");
+      const nVal = document.getElementById("n_val");
+      const btnGenerate = document.getElementById("btn_generate");
+      const btnDownload = document.getElementById("btn_download");
+      const btnClear = document.getElementById("btn_clear");
+      const btnAddPlayer = document.getElementById("btn_add_player");
+      const canvas = document.getElementById("board");
+      const ctx = canvas.getContext("2d");
+
+      // --- Camera & Viewport ---
+      let scale = 1;
+      let offsetX = canvas.width / 2;
+      let offsetY = canvas.height / 2;
+      let isDragging = false;
+      let lastX, lastY;
+
+      // --- Helpers ---
+      function getRandomHex() {
+        return (
+          "#" +
+          Math.floor(Math.random() * 16777215)
+            .toString(16)
+            .padStart(6, "0")
+        );
+      }
+
+      function getKnightRules() {
+        let r = new Array(121).fill(false);
+        const knightOffsets = [
+          [-2, -1],
+          [-2, 1],
+          [-1, -2],
+          [-1, 2],
+          [1, -2],
+          [1, 2],
+          [2, -1],
+          [2, 1],
+        ];
+        for (let off of knightOffsets) {
+          let cx = 5 + off[0];
+          let cy = 5 + off[1];
+          r[cy * 11 + cx] = true;
+        }
+        return r;
+      }
+
+      function initSpiral(maxIndex) {
+        spiralArr = [];
+        let x = 0,
+          y = 0,
+          dx = 1,
+          dy = 0,
+          length = 1,
+          passed = 0;
+        for (let i = 0; i < maxIndex; i++) {
+          spiralArr.push({ x, y });
+          x += dx;
+          y += dy;
+          passed++;
+          if (passed === length) {
+            passed = 0;
+            let temp = dx;
+            dx = -dy;
+            dy = temp;
+            if (dy === 0) length++;
+          }
+        }
+      }
+
+      // --- UI Rendering ---
+      function renderMatrix() {
+        const table = document.getElementById("matrix_table");
+        table.innerHTML = "";
+        let tr = document.createElement("tr");
+        tr.appendChild(document.createElement("th"));
+        players.forEach((p, i) => {
+          let th = document.createElement("th");
+          th.textContent = p.name;
+          th.style.color = p.name;
+          tr.appendChild(th);
+        });
+        table.appendChild(tr);
+
+        players.forEach((p, i) => {
+          let row = document.createElement("tr");
+          let th = document.createElement("th");
+          th.textContent = p.name;
+          th.style.color = p.name;
+          row.appendChild(th);
+          players.forEach((p2, j) => {
+            let td = document.createElement("td");
+            let cb = document.createElement("input");
+            cb.type = "checkbox";
+            cb.checked = avoidMatrix[i][j];
+            cb.onchange = () => {
+              avoidMatrix[i][j] = cb.checked;
+              avoidMatrix[j][i] = cb.checked;
+              renderMatrix();
+            };
+            td.appendChild(cb);
+            row.appendChild(td);
+          });
+          table.appendChild(row);
+        });
+      }
+
+      function renderPlayers() {
+        const cont = document.getElementById("players_container");
+        cont.innerHTML = "";
+        players.forEach((p, i) => {
+          let div = document.createElement("div");
+          div.className = "player-card";
+          let header = document.createElement("div");
+          header.className = "player-header";
+
+          let colorInput = document.createElement("input");
+          colorInput.type = "color";
+          colorInput.value = p.name;
+          let textInput = document.createElement("input");
+          textInput.type = "text";
+          textInput.value = p.name;
+
+          const updateColor = (val) => {
+            p.name = val;
+            renderMatrix();
+            renderPlayers();
+            draw();
+          };
+          colorInput.oninput = (e) => updateColor(e.target.value);
+          textInput.onchange = (e) => updateColor(e.target.value);
+
+          let btnDel = document.createElement("button");
+          btnDel.className = "danger";
+          btnDel.textContent = "X";
+          btnDel.onclick = () => removePlayer(i);
+
+          header.appendChild(colorInput);
+          header.appendChild(textInput);
+          header.appendChild(btnDel);
+          div.appendChild(header);
+
+          let grid = document.createElement("div");
+          grid.className = "rule-grid";
+          for (let r = 0; r < 11; r++) {
+            for (let c = 0; c < 11; c++) {
+              let cell = document.createElement("div");
+              cell.className = "rule-cell";
+              let idx = r * 11 + c;
+              if (r === 5 && c === 5) {
+                cell.classList.add("center");
+                cell.style.backgroundColor = p.name;
+              } else {
+                if (p.rules[idx]) cell.classList.add("active");
+                cell.onclick = () => {
+                  p.rules[idx] = !p.rules[idx];
+                  cell.classList.toggle("active");
+                };
+              }
+              grid.appendChild(cell);
+            }
+          }
+          div.appendChild(grid);
+          cont.appendChild(div);
+        });
+      }
+
+      function addPlayer() {
+        const newColor = getRandomHex();
+        players.push({ name: newColor, rules: getKnightRules() });
+        avoidMatrix.forEach((row) => row.push(false));
+        avoidMatrix.push(new Array(players.length).fill(false));
+        renderMatrix();
+        renderPlayers();
+      }
+
+      function removePlayer(idx) {
+        players.splice(idx, 1);
+        avoidMatrix.splice(idx, 1);
+        avoidMatrix.forEach((row) => row.splice(idx, 1));
+        renderMatrix();
+        renderPlayers();
+      }
+
+      function generate() {
+        currentN = parseInt(nSlider.value);
+        const numPlayers = players.length;
+        if (numPlayers === 0) {
+          pieces = [];
+          draw();
+          return;
+        }
+
+        const max_turns = currentN * currentN;
+        const max_spiral = Math.max(max_turns * 4, 1000000);
+        if (spiralArr.length < max_spiral) initSpiral(max_spiral);
+
+        pieces = [];
+        let occupied = new Map();
+        let board2D = new Map();
+        let parsedRules = players.map((p) => {
+          let r = [];
+          for (let i = 0; i < 121; i++) {
+            if (p.rules[i])
+              r.push({ dx: (i % 11) - 5, dy: Math.floor(i / 11) - 5 });
+          }
+          return r;
+        });
+
+        let next_search_index = new Array(numPlayers).fill(0);
+        for (let turn = 0; turn < max_turns; turn++) {
+          let P = turn % numPlayers,
+            S = next_search_index[P],
+            placed = false;
+          while (S < max_spiral) {
+            if (!occupied.has(S)) {
+              let coord = spiralArr[S],
+                attacked = false;
+              for (let Q = 0; Q < numPlayers; Q++) {
+                if (avoidMatrix[P][Q]) {
+                  for (let r of parsedRules[Q]) {
+                    if (
+                      board2D.get(`${coord.x - r.dx},${coord.y - r.dy}`) === Q
+                    ) {
+                      attacked = true;
+                      break;
+                    }
+                  }
+                  if (attacked) break;
+                }
+              }
+              if (!attacked) {
+                occupied.set(S, P);
+                board2D.set(`${coord.x},${coord.y}`, P);
+                pieces.push({ x: coord.x, y: coord.y, player: P });
+                next_search_index[P] = S + 1;
+                placed = true;
+                break;
+              }
+            }
+            S++;
+          }
+          if (!placed) break;
+        }
+        scale = 1;
+        offsetX = canvas.width / 2;
+        offsetY = canvas.height / 2;
+        draw();
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "#f8f8f8";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.save();
+        ctx.translate(offsetX, offsetY);
+        ctx.scale(scale, scale);
+        const cellSize = canvas.width / currentN;
+        for (let p of pieces) {
+          ctx.fillStyle = players[p.player].name;
+          ctx.fillRect(
+            p.x * cellSize - cellSize / 2,
+            p.y * cellSize - cellSize / 2,
+            cellSize + 0.5 / scale,
+            cellSize + 0.5 / scale,
+          );
+        }
+        ctx.restore();
+      }
+
+      function downloadImage() {
+        // 1. Create offscreen canvas
+        const downloadCanvas = document.createElement("canvas");
+        downloadCanvas.width = canvas.width;
+        downloadCanvas.height = canvas.height;
+        const dctx = downloadCanvas.getContext("2d");
+
+        // 2. Copy current visual
+        dctx.drawImage(canvas, 0, 0);
+
+        // 3. Setup Watermark text properties
+        const text = "halvorhansen.no/knightsandbox";
+        const fontSize = 8;
+        dctx.font = `${fontSize}px monospace`;
+        dctx.textAlign = "right";
+        dctx.textBaseline = "bottom";
+
+        // 4. Measure for background box
+        const metrics = dctx.measureText(text);
+        const textWidth = metrics.width;
+        const textHeight = metrics.actualBoundingBoxAscent || fontSize;
+        const padding = 3;
+        const margin = 7;
+
+        const x = downloadCanvas.width - margin;
+        const y = downloadCanvas.height - margin;
+
+        // 5. Draw background box
+        dctx.fillStyle = "rgba(255, 255, 255, 0.25)";
+        dctx.fillRect(
+          x - textWidth - padding,
+          y - textHeight - padding,
+          textWidth + padding * 2,
+          textHeight + padding * 2,
+        );
+
+        // 6. Draw text
+        dctx.fillStyle = "rgba(0, 0, 0, 0.65)";
+        dctx.fillText(text, x, y);
+
+        // 7. Generate filename
+        const matrixCode = avoidMatrix
+          .map((row) => row.map((v) => (v ? 1 : 0)).join(""))
+          .join("-");
+        const filename = `knightsandbox_n${currentN}_m${matrixCode}.png`;
+
+        // 8. Trigger download
+        const link = document.createElement("a");
+        link.download = filename;
+        link.href = downloadCanvas.toDataURL("image/png");
+        link.click();
+      }
+      // --- Event Listeners ---
+      canvas.addEventListener("wheel", (e) => {
+        e.preventDefault();
+        const zoomSpeed = 0.15;
+        let newScale = scale * (e.deltaY < 0 ? 1 + zoomSpeed : 1 - zoomSpeed);
+        newScale = Math.max(0.1, Math.min(newScale, 100));
+        const rect = canvas.getBoundingClientRect();
+        const mx = e.clientX - rect.left,
+          my = e.clientY - rect.top;
+        const worldX = (mx - offsetX) / scale,
+          worldY = (my - offsetY) / scale;
+        scale = newScale;
+        offsetX = mx - worldX * scale;
+        offsetY = my - worldY * scale;
+        draw();
+      });
+
+      canvas.addEventListener("mousedown", (e) => {
+        isDragging = true;
+        lastX = e.clientX;
+        lastY = e.clientY;
+      });
+      window.addEventListener("mousemove", (e) => {
+        if (!isDragging) return;
+        offsetX += e.clientX - lastX;
+        offsetY += e.clientY - lastY;
+        lastX = e.clientX;
+        lastY = e.clientY;
+        draw();
+      });
+      window.addEventListener("mouseup", () => (isDragging = false));
+
+      nSlider.addEventListener("input", (e) => {
+        nVal.textContent = e.target.value;
+      });
+      btnGenerate.addEventListener("click", generate);
+      btnDownload.addEventListener("click", downloadImage);
+      btnClear.addEventListener("click", () => {
+        pieces = [];
+        draw();
+      });
+      btnAddPlayer.addEventListener("click", addPlayer);
+
+      initSpiral(1000000);
+      renderMatrix();
+      renderPlayers();
+      generate();
+    </script>
+  </body>
+</html>
