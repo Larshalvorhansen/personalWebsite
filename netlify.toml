@@ -9,3 +9,9 @@
   to = "/blogg"
   status = 301
   force = true
+
+[[redirects]]
+  from = "/about"
+  to = "/"
+  statys = 301
+  force = true
