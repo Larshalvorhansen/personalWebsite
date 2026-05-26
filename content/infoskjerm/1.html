@@ -440,13 +440,13 @@
         const now = new Date();
 
         // --- Countdown Logic ---
-        const targetDate = new Date("2026-05-23"); // <--- Set your date here (YYYY-MM-DD)
+        const targetDate = new Date("2027-06-24"); // <--- Set your date here (YYYY-MM-DD)
         const diffInMs = targetDate - now;
         const diffInDays = Math.ceil(diffInMs / (1000 * 60 * 60 * 24));
 
         let countdownText = "";
         if (diffInDays > 0) {
-          countdownText = `${diffInDays} dager til vi ses`;
+          countdownText = `${diffInDays} dager til vi gifter oss!`;
         } else if (diffInDays === 0) {
           countdownText = "Vi ses i dag!";
         } else {
