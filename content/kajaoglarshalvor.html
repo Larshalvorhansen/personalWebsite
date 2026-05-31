@@ -9,31 +9,28 @@
         margin: 0;
         height: 100vh;
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
         background: #0f0f0f;
         font-family: Arial, sans-serif;
+        color: white;
+        overflow: hidden;
       }
 
-      .container {
-        text-align: center;
-      }
-
-      /* Flip Card */
       .flip-card {
         perspective: 1000px;
-        width: 80%;
-        max-width: 900px;
-        margin: 0 auto;
+        width: 90vw;
+        height: 80vh; /* Leaves room for the text text below */
+        cursor: pointer;
       }
 
       .flip-card-inner {
         position: relative;
         width: 100%;
-        padding-top: 66.67%; /* 3:2 aspect ratio */
-        transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        height: 100%;
+        transition: transform 0.6s;
         transform-style: preserve-3d;
-        cursor: pointer;
       }
 
       .flip-card.flipped .flip-card-inner {
@@ -43,60 +40,47 @@
       .flip-card-front,
       .flip-card-back {
         position: absolute;
-        top: 0;
-        left: 0;
         width: 100%;
         height: 100%;
-        border-radius: 16px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
         backface-visibility: hidden;
-        overflow: hidden;
-      }
-
-      .flip-card-front {
-        background: #000;
       }
 
       .flip-card-back {
         transform: rotateY(180deg);
-        background: #000;
       }
 
       img {
         width: 100%;
         height: 100%;
-        object-fit: cover;
+        /* 'contain' keeps the original image ratio without cropping it */
+        object-fit: contain;
+        filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.6));
       }
 
       .info {
-        color: white;
-        margin-top: 25px;
+        margin-top: 20px;
         font-size: 1.1em;
+        text-align: center;
       }
     </style>
   </head>
   <body>
-    <div class="container">
-      <div class="flip-card" id="flipCard">
-        <div class="flip-card-inner">
-          <!-- Front Image -->
-          <div class="flip-card-front">
-            <img src="denne315.jpg" alt="Vi gifter oss 24.juli 2027!" />
-          </div>
+    <div class="flip-card" id="flipCard">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <img src="denne315.jpg" alt="Vi gifter oss 24.juli 2027!" />
+        </div>
 
-          <!-- Back Image -->
-          <div class="flip-card-back">
-            <img src="denne314.jpg" alt="Vi gifter oss 24.juli 2027!" />
-          </div>
+        <div class="flip-card-back">
+          <img src="denne314.jpg" alt="Vi gifter oss 24.juli 2027!" />
         </div>
       </div>
-
-      <p class="info">Klikk på bildet for å snu det!</p>
     </div>
+
+    <p class="info">Klikk på bildet for å snu det</p>
 
     <script>
       const flipCard = document.getElementById("flipCard");
-
       flipCard.addEventListener("click", () => {
         flipCard.classList.toggle("flipped");
       });
