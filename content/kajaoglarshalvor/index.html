@@ -11,6 +11,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bryllup 2027</title>
     <style>
+      /* --- Fargepalett (CSS-variabler) --- */
+      :root {
+        --petal-frost: #ffd6ffff;
+        --mauve: #e7c6ffff;
+        --mauve-2: #c8b6ffff;
+        --periwinkle: #b8c0ffff;
+        --periwinkle-2: #bbd0ffff;
+
+        /* Tekstfarger for god kontrast på lyse pasteller */
+        --text-dark: #3a3250;
+        --text-muted: #5e5470;
+
+        /* Gradient til navigasjon */
+        --nav-gradient: linear-gradient(
+          135deg,
+          #ffd6ffff,
+          #e7c6ffff,
+          #c8b6ffff,
+          #b8c0ffff,
+          #bbd0ffff
+        );
+      }
+
       /* --- Base Setup --- */
       * {
         box-sizing: border-box;
@@ -25,18 +48,20 @@
         display: flex;
         flex-direction: column;
         min-height: 100vh;
-        background-color: #f4f4f4;
+        background-color: var(--petal-frost);
+        color: var(--text-dark);
       }
 
       /* --- Navigation Menu --- */
       nav {
-        background-color: #222;
+        background: var(--nav-gradient);
         display: flex;
         flex-direction: row;
         width: 100%;
         z-index: 10;
         overflow-x: auto; /* Enables swiping if text overflows on narrow screens */
         scrollbar-width: none; /* Hides scrollbar on Firefox */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
       }
 
       nav::-webkit-scrollbar {
@@ -49,7 +74,7 @@
         padding: 15px 10px;
         background: none;
         border: none;
-        color: #ccc;
+        color: var(--text-muted);
         font-size: 14px;
         cursor: pointer;
         transition:
@@ -61,8 +86,8 @@
 
       nav button:hover,
       nav button.active {
-        background-color: #333;
-        color: white;
+        background-color: rgba(255, 255, 255, 0.4);
+        color: var(--text-dark);
         font-weight: bold;
       }
 
@@ -71,7 +96,7 @@
         flex: 1;
         display: flex;
         flex-direction: column;
-        background-color: #f4f4f4;
+        background-color: var(--periwinkle-2);
       }
 
       .page-section {
@@ -79,7 +104,6 @@
         flex: 1;
         width: 100%;
         height: 100%;
-
         text-align: center;
       }
 
@@ -97,16 +121,26 @@
       }
 
       .standard-padding {
-        padding: 30px 20px;
-        color: #333;
+        padding: 40px 20px;
+        color: var(--text-dark);
         max-width: 800px;
         width: 100%;
-        margin: 0 auto;
+        margin: 40px auto;
+        background-color: rgba(255, 255, 255, 0.6);
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
       }
 
       .standard-padding h2 {
-        margin-bottom: 15px;
-        color: #222;
+        margin-bottom: 25px;
+        color: var(--text-dark);
+        letter-spacing: 1px;
+      }
+
+      .standard-padding p {
+        margin-bottom: 8px;
+        font-size: 1.1rem;
+        line-height: 1.5;
       }
 
       /* --- Desktop Responsive Layout --- */
@@ -120,21 +154,21 @@
           width: 240px;
           height: 100vh;
           overflow-x: visible;
+          box-shadow: 4px 0 15px rgba(0, 0, 0, 0.05);
         }
 
         nav button {
           flex: none;
           width: 100%;
           text-align: left;
-          padding: 20px;
+          padding: 25px 20px;
           font-size: 16px;
-          border-bottom: 1px solid #333;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.3);
         }
       }
     </style>
   </head>
   <body>
-    <!-- Navigation Buttons -->
     <nav>
       <button class="nav-btn active" onclick="showPage('save-the-date', this)">
         Save <br />
@@ -152,9 +186,7 @@
       </button>
     </nav>
 
-    <!-- Content Sections -->
     <main>
-      <!-- Section 1: Save the Date (Embedded File) -->
       <div id="save-the-date" class="page-section active">
         <iframe
           src="page-a.html"
@@ -163,7 +195,6 @@
         ></iframe>
       </div>
 
-      <!-- Section 2: Invitasjon -->
       <div id="invitasjon" class="page-section">
         <div class="standard-padding">
           <h2>Invitasjon</h2>
@@ -171,7 +202,6 @@
         </div>
       </div>
 
-      <!-- Section 3: Praktisk -->
       <div id="praktisk" class="page-section">
         <div class="standard-padding">
           <h2>Praktisk info</h2>
@@ -179,25 +209,23 @@
         </div>
       </div>
 
-      <!-- Section 4: Ofte stilte spørsmål -->
       <div id="faq" class="page-section">
         <div class="standard-padding">
           <h2>Ofte stilte spørsmål</h2>
-          <p>Er håret til Lars Halvor ekte?</p>
+          <p><strong>Er håret til Lars Halvor ekte?</strong></p>
           <p>Svar: Ja</p>
           <br />
-          <p>Er Risøya en øy?</p>
+          <p><strong>Er Risøya en øy?</strong></p>
           <p>Svar: Ja</p>
           <br />
-          <p>Er Kaja faktisk fra Bergen</p>
+          <p><strong>Er Kaja faktisk fra Bergen?</strong></p>
           <p>Svar: E vann vått?</p>
           <br />
-          <p>Hvem er best av Brann og Bodøglimt?</p>
+          <p><strong>Hvem er best av Brann og Bodøglimt?</strong></p>
           <p>Svar: Brann🤞</p>
         </div>
       </div>
 
-      <!-- Section 5: Kontakt -->
       <div id="kontakt" class="page-section">
         <div class="standard-padding">
           <h2>Kontakt</h2>
