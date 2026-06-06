@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bryllup 2027</title>
     <style>
-      /* --- Fargepalett (CSS-variabler) --- */
+      /* --- Palette Custom Properties --- */
       :root {
         --petal-frost: #ffd6ffff;
         --mauve: #e7c6ffff;
@@ -19,19 +19,9 @@
         --periwinkle: #b8c0ffff;
         --periwinkle-2: #bbd0ffff;
 
-        /* Tekstfarger for god kontrast på lyse pasteller */
-        --text-dark: #3a3250;
-        --text-muted: #5e5470;
-
-        /* Gradient til navigasjon */
-        --nav-gradient: linear-gradient(
-          135deg,
-          #ffd6ffff,
-          #e7c6ffff,
-          #c8b6ffff,
-          #b8c0ffff,
-          #bbd0ffff
-        );
+        /* Contrast text colors for optimal readability over light pastels */
+        --text-main: #5c5370;
+        --text-header: #4b3869;
       }
 
       /* --- Base Setup --- */
@@ -49,19 +39,19 @@
         flex-direction: column;
         min-height: 100vh;
         background-color: var(--petal-frost);
-        color: var(--text-dark);
+        color: var(--text-main);
       }
 
       /* --- Navigation Menu --- */
       nav {
-        background: var(--nav-gradient);
+        background-color: var(--periwinkle-2);
         display: flex;
         flex-direction: row;
         width: 100%;
         z-index: 10;
         overflow-x: auto; /* Enables swiping if text overflows on narrow screens */
         scrollbar-width: none; /* Hides scrollbar on Firefox */
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        border-bottom: 2px solid var(--periwinkle);
       }
 
       nav::-webkit-scrollbar {
@@ -74,7 +64,7 @@
         padding: 15px 10px;
         background: none;
         border: none;
-        color: var(--text-muted);
+        color: var(--text-main);
         font-size: 14px;
         cursor: pointer;
         transition:
@@ -86,8 +76,8 @@
 
       nav button:hover,
       nav button.active {
-        background-color: rgba(255, 255, 255, 0.4);
-        color: var(--text-dark);
+        background-color: var(--mauve-2);
+        color: var(--text-header);
         font-weight: bold;
       }
 
@@ -96,7 +86,7 @@
         flex: 1;
         display: flex;
         flex-direction: column;
-        background-color: var(--periwinkle-2);
+        background-color: var(--petal-frost);
       }
 
       .page-section {
@@ -117,30 +107,28 @@
         width: 100%;
         flex: 1;
         border: none;
-        background: #0f0f0f;
+        background: var(--mauve);
       }
 
       .standard-padding {
         padding: 40px 20px;
-        color: var(--text-dark);
+        color: var(--text-main);
         max-width: 800px;
         width: 100%;
-        margin: 40px auto;
-        background-color: rgba(255, 255, 255, 0.6);
-        border-radius: 12px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+        margin: 0 auto;
+        line-height: 1.6;
       }
 
       .standard-padding h2 {
         margin-bottom: 25px;
-        color: var(--text-dark);
+        color: var(--text-header);
+        font-size: 2rem;
         letter-spacing: 1px;
       }
 
       .standard-padding p {
         margin-bottom: 8px;
         font-size: 1.1rem;
-        line-height: 1.5;
       }
 
       /* --- Desktop Responsive Layout --- */
@@ -154,7 +142,8 @@
           width: 240px;
           height: 100vh;
           overflow-x: visible;
-          box-shadow: 4px 0 15px rgba(0, 0, 0, 0.05);
+          border-bottom: none;
+          border-right: 2px solid var(--periwinkle);
         }
 
         nav button {
@@ -163,7 +152,7 @@
           text-align: left;
           padding: 25px 20px;
           font-size: 16px;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+          border-bottom: 1px solid var(--periwinkle);
         }
       }
     </style>
@@ -212,17 +201,17 @@
       <div id="faq" class="page-section">
         <div class="standard-padding">
           <h2>Ofte stilte spørsmål</h2>
-          <p><strong>Er håret til Lars Halvor ekte?</strong></p>
-          <p>Svar: Ja</p>
+          <p>Er håret til Lars Halvor ekte?</p>
+          <p><strong>Svar:</strong> Ja</p>
           <br />
-          <p><strong>Er Risøya en øy?</strong></p>
-          <p>Svar: Ja</p>
+          <p>Er Risøya en øy?</p>
+          <p><strong>Svar:</strong> Ja</p>
           <br />
-          <p><strong>Er Kaja faktisk fra Bergen?</strong></p>
-          <p>Svar: E vann vått?</p>
+          <p>Er Kaja faktisk fra Bergen</p>
+          <p><strong>Svar:</strong> E vann vått?</p>
           <br />
-          <p><strong>Hvem er best av Brann og Bodøglimt?</strong></p>
-          <p>Svar: Brann🤞</p>
+          <p>Hvem er best av Brann og Bodøglimt?</p>
+          <p><strong>Svar:</strong> Brann🤞</p>
         </div>
       </div>
 
