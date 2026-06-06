@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="no">
+  <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Limelight&display=swap"
+      rel="stylesheet"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bryllup 2027</title>
+    <style>
+      /* --- Base Setup --- */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: "Limelight", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+      }
+
+      body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        background-color: #f4f4f4;
+      }
+
+      /* --- Navigation Menu --- */
+      nav {
+        background-color: #222;
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        z-index: 10;
+        overflow-x: auto; /* Enables swiping if text overflows on narrow screens */
+        scrollbar-width: none; /* Hides scrollbar on Firefox */
+      }
+
+      nav::-webkit-scrollbar {
+        display: none; /* Hides scrollbar on Chrome/Safari */
+      }
+
+      nav button {
+        flex: 1;
+        min-width: 100px;
+        padding: 15px 10px;
+        background: none;
+        border: none;
+        color: #ccc;
+        font-size: 14px;
+        cursor: pointer;
+        transition:
+          background 0.3s,
+          color 0.3s;
+        white-space: nowrap;
+        text-align: center;
+      }
+
+      nav button:hover,
+      nav button.active {
+        background-color: #333;
+        color: white;
+        font-weight: bold;
+      }
+
+      /* --- Content Area --- */
+      main {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        background-color: #f4f4f4;
+      }
+
+      .page-section {
+        display: none;
+        flex: 1;
+        width: 100%;
+        height: 100%;
+      }
+
+      .page-section.active {
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* Full bleed structure for embedded components */
+      .embed-frame {
+        width: 100%;
+        flex: 1;
+        border: none;
+        background: #0f0f0f;
+      }
+
+      .standard-padding {
+        padding: 30px 20px;
+        color: #333;
+        max-width: 800px;
+        width: 100%;
+        margin: 0 auto;
+      }
+
+      .standard-padding h2 {
+        margin-bottom: 15px;
+        color: #222;
+      }
+
+      /* --- Desktop Responsive Layout --- */
+      @media (min-width: 768px) {
+        body {
+          flex-direction: row;
+        }
+
+        nav {
+          flex-direction: column;
+          width: 240px;
+          height: 100vh;
+          overflow-x: visible;
+        }
+
+        nav button {
+          flex: none;
+          width: 100%;
+          text-align: left;
+          padding: 20px;
+          font-size: 16px;
+          border-bottom: 1px solid #333;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation Buttons -->
+    <nav>
+      <button class="nav-btn active" onclick="showPage('save-the-date', this)">
+        Save the date
+      </button>
+      <button class="nav-btn" onclick="showPage('invitasjon', this)">
+        Invitasjon
+      </button>
+      <button class="nav-btn" onclick="showPage('praktisk', this)">
+        Praktisk
+      </button>
+      <button class="nav-btn" onclick="showPage('faq', this)">
+        Ofte stilte spørsmål
+      </button>
+      <button class="nav-btn" onclick="showPage('kontakt', this)">
+        Kontakt
+      </button>
+    </nav>
+
+    <!-- Content Sections -->
+    <main>
+      <!-- Section 1: Save the Date (Embedded File) -->
+      <div id="save-the-date" class="page-section active">
+        <iframe
+          src="page-a.html"
+          class="embed-frame"
+          title="Save the Date"
+        ></iframe>
+      </div>
+
+      <!-- Section 2: Invitasjon -->
+      <div id="invitasjon" class="page-section">
+        <div class="standard-padding">
+          <h2>Invitasjon</h2>
+          <p>Her kommer teksten til den formelle invitasjonen etter hvert.</p>
+        </div>
+      </div>
+
+      <!-- Section 3: Praktisk -->
+      <div id="praktisk" class="page-section">
+        <div class="standard-padding">
+          <h2>Praktisk info</h2>
+          <p>Informasjon om lokasjon, tider, kleskode, og overnatting.</p>
+        </div>
+      </div>
+
+      <!-- Section 4: Ofte stilte spørsmål -->
+      <div id="faq" class="page-section">
+        <div class="standard-padding">
+          <h2>Ofte stilte spørsmål</h2>
+          <p>
+            Svar på alt gjestene måtte lurer på angående transport, gaveønsker,
+            og allergier.
+          </p>
+        </div>
+      </div>
+
+      <!-- Section 5: Kontakt -->
+      <div id="kontakt" class="page-section">
+        <div class="standard-padding">
+          <h2>Kontakt</h2>
+          <p>Informasjon til forlovere, toastmaster og kontaktpersoner.</p>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      function showPage(pageId, button) {
+        const sections = document.querySelectorAll(".page-section");
+        sections.forEach((section) => section.classList.remove("active"));
+
+        const buttons = document.querySelectorAll(".nav-btn");
+        buttons.forEach((btn) => btn.classList.remove("active"));
+
+        document.getElementById(pageId).classList.add("active");
+        button.classList.add("active");
+      }
+    </script>
+  </body>
+</html>

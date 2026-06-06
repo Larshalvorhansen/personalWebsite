@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="no">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Save the date • Sofie &amp; Mathias</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Great+Vibes&amp;family=Playfair+Display:wght@400;700&amp;family=Inter:wght@300;400;500&amp;display=swap"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Great+Vibes&amp;family=Playfair+Display:wght@400;700&amp;family=Inter:wght@300;400;500&amp;display=swap");
+
+      body {
+        font-family: "Inter", system_ui, sans-serif;
+      }
+      .font-script {
+        font-family: "Great Vibes", cursive;
+      }
+      .font-elegant {
+        font-family: "Playfair Display", Georgia, serif;
+      }
+
+      .countdown-digit {
+        font-variant-numeric: tabular-nums;
+      }
+
+      .wedding-bg {
+        background-image:
+          linear-gradient(rgba(245, 240, 230, 0.92), rgba(245, 240, 230, 0.92)),
+          url("../images/couple-photo.jpg");
+        background-size: cover;
+        background-position: center;
+      }
+    </style>
+  </head>
+  <body class="bg-[#f8f5f0] text-[#3a2f1f]">
+    <!-- Top Navigation -->
+    <nav
+      class="border-b border-[#d4c9b0] bg-white/80 backdrop-blur-md sticky top-0 z-50"
+    >
+      <div
+        class="max-w-5xl mx-auto px-6 py-5 flex items-center justify-between"
+      >
+        <a href="../index.html" class="flex items-center gap-x-3 group">
+          <span
+            class="font-script text-4xl text-[#3a2f1f] group-hover:text-[#2c2419]"
+            >Vi skal gifte oss!</span
+          >
+        </a>
+
+        <div
+          class="hidden md:flex items-center gap-x-8 text-sm tracking-widest"
+        >
+          <a href="save-the-date.html" class="font-medium text-[#3a2f1f]"
+            >Save the date</a
+          >
+          <a
+            href="invitasjon.html"
+            class="hover:text-[#0081af] transition-colors"
+            >Invitasjon</a
+          >
+          <a
+            href="praktisk-info.html"
+            class="hover:text-[#0081af] transition-colors"
+            >Praktisk info</a
+          >
+          <a
+            href="ofte-stilte-sporsmal.html"
+            class="hover:text-[#0081af] transition-colors"
+            >Ofte stilte spørsmål</a
+          >
+        </div>
+
+        <a
+          href="../index.html"
+          class="text-xs px-5 py-2 rounded-full border border-[#d4c9b0] hover:bg-[#f8f5f0] transition-colors hidden md:block"
+        >
+          TILBAKE TIL FORSIDEN
+        </a>
+      </div>
+    </nav>
+
+    <div class="max-w-4xl mx-auto px-6 pt-16 pb-24">
+      <!-- Hero -->
+      <div class="text-center mb-16">
+        <div
+          class="inline-block px-6 py-1.5 rounded-full bg-white border border-[#d4c9b0] text-xs tracking-[3px] mb-6"
+        >
+          VI GLEDER OSS!
+        </div>
+
+        <h1
+          class="font-script text-7xl md:text-8xl leading-none text-[#3a2f1f]"
+        >
+          Save the date
+        </h1>
+        <p class="mt-4 text-2xl font-elegant tracking-tight">
+          Lørdag 22. august 2026
+        </p>
+        <p class="text-[#3a2f1f]/70 mt-1">kl. 15:00 • Frogner Kirke, Oslo</p>
+      </div>
+
+      <!-- Countdown -->
+      <div class="max-w-md mx-auto mb-20">
+        <div class="text-center mb-5">
+          <span class="text-xs tracking-[3px] text-[#3a2f1f]/60"
+            >TID IGJEN TIL DEN STORE DAGEN</span
+          >
+        </div>
+
+        <div id="countdown" class="grid grid-cols-4 gap-3 text-center">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- Details Card -->
+      <div class="max-w-2xl mx-auto">
+        <div
+          class="wedding-card bg-white border border-[#d4c9b0] rounded-3xl p-10 md:p-14 text-center"
+        >
+          <div class="font-script text-5xl mb-6">Sofie &amp; Mathias</div>
+
+          <div class="max-w-xs mx-auto">
+            <p class="leading-relaxed text-[#3a2f1f]/80">
+              Vi gleder oss til å feire vår kjærlighet sammen med dere på denne
+              spesielle dagen.
+            </p>
+          </div>
+
+          <div
+            class="my-8 h-px bg-gradient-to-r from-transparent via-[#d4c9b0] to-transparent"
+          ></div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-y-8 text-sm">
+            <div>
+              <div class="text-[#3a2f1f]/60 tracking-widest text-xs mb-1">
+                SEREMONI
+              </div>
+              <div class="font-elegant text-xl">kl. 15:00</div>
+              <div class="mt-1">Frogner Kirke</div>
+            </div>
+            <div>
+              <div class="text-[#3a2f1f]/60 tracking-widest text-xs mb-1">
+                MOTTAKELSE
+              </div>
+              <div class="font-elegant text-xl">Etter seremonien</div>
+              <div class="mt-1">Villa Solstrand</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center mt-12">
+        <a
+          href="invitasjon.html"
+          class="inline-flex items-center gap-x-2 text-sm tracking-widest border-b border-[#3a2f1f] pb-1 hover:text-[#0081af] hover:border-[#0081af] transition-colors"
+        >
+          LES DEN FULLE INVITASJONEN
+          <span>→</span>
+        </a>
+      </div>
+    </div>
+
+    <footer
+      class="border-t border-[#d4c9b0] py-8 text-center text-xs text-[#3a2f1f]/60"
+    >
+      <p>© 2026 • Sofie &amp; Mathias • Oslo, Norge</p>
+    </footer>
+
+    <script>
+      // Countdown to August 22, 2026 15:00
+      function updateCountdown() {
+        const weddingDate = new Date("2026-08-22T15:00:00+02:00").getTime();
+        const now = new Date().getTime();
+        const distance = weddingDate - now;
+
+        if (distance < 0) {
+          document.getElementById("countdown").innerHTML =
+            `<div class="col-span-4 text-center py-6">
+                        <span class="font-script text-4xl">Vi er gift! 🎉</span>
+                    </div>`;
+          return;
+        }
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor(
+          (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
+        );
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        const countdownEl = document.getElementById("countdown");
+        countdownEl.innerHTML = `
+                <div class="bg-white border border-[#d4c9b0] rounded-2xl p-5">
+                    <div class="countdown-digit text-5xl font-light tracking-tighter">${days}</div>
+                    <div class="text-[10px] tracking-[2px] text-[#3a2f1f]/60 mt-1">DAGER</div>
+                </div>
+                <div class="bg-white border border-[#d4c9b0] rounded-2xl p-5">
+                    <div class="countdown-digit text-5xl font-light tracking-tighter">${hours}</div>
+                    <div class="text-[10px] tracking-[2px] text-[#3a2f1f]/60 mt-1">TIMER</div>
+                </div>
+                <div class="bg-white border border-[#d4c9b0] rounded-2xl p-5">
+                    <div class="countdown-digit text-5xl font-light tracking-tighter">${minutes}</div>
+                    <div class="text-[10px] tracking-[2px] text-[#3a2f1f]/60 mt-1">MINUTTER</div>
+                </div>
+                <div class="bg-white border border-[#d4c9b0] rounded-2xl p-5">
+                    <div class="countdown-digit text-5xl font-light tracking-tighter">${seconds}</div>
+                    <div class="text-[10px] tracking-[2px] text-[#3a2f1f]/60 mt-1">SEKUNDER</div>
+                </div>
+            `;
+      }
+
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+    </script>
+  </body>
+</html>
