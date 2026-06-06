@@ -11,17 +11,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bryllup 2027</title>
     <style>
-      /* --- Palette Custom Properties --- */
+      /* --- Color Palette Variables --- */
       :root {
-        --petal-frost: #ffd6ffff;
-        --mauve: #e7c6ffff;
-        --mauve-2: #c8b6ffff;
-        --periwinkle: #b8c0ffff;
-        --periwinkle-2: #bbd0ffff;
-
-        /* Contrast text colors for optimal readability over light pastels */
-        --text-main: #5c5370;
-        --text-header: #4b3869;
+        --color-white: #ffffff;
+        --color-blue: #77c7e4;
+        --color-pink: #f1cad2;
+        --color-salmon: #ff877e;
+        --text-black: #000000;
       }
 
       /* --- Base Setup --- */
@@ -32,26 +28,29 @@
         font-family: "Limelight", sans-serif;
         font-weight: 400;
         font-style: normal;
+        color: var(--text-black);
       }
 
       body {
         display: flex;
         flex-direction: column;
         min-height: 100vh;
-        background-color: var(--petal-frost);
-        color: var(--text-main);
+        /* Default fallback background matching the first section */
+        background-color: var(--color-blue);
+        transition: background-color 0.3s ease;
       }
 
       /* --- Navigation Menu --- */
       nav {
-        background-color: var(--periwinkle-2);
+        /* Dynamically matches body background */
+        background-color: inherit;
         display: flex;
         flex-direction: row;
         width: 100%;
         z-index: 10;
-        overflow-x: auto; /* Enables swiping if text overflows on narrow screens */
+        overflow-x: auto;
         scrollbar-width: none; /* Hides scrollbar on Firefox */
-        border-bottom: 2px solid var(--periwinkle);
+        border-bottom: 2px solid var(--text-black);
       }
 
       nav::-webkit-scrollbar {
@@ -64,21 +63,23 @@
         padding: 15px 10px;
         background: none;
         border: none;
-        color: var(--text-main);
+        border-right: 2px solid var(--text-black);
         font-size: 14px;
         cursor: pointer;
         transition:
-          background 0.3s,
-          color 0.3s;
+          background-color 0.3s,
+          font-weight 0.3s;
         white-space: nowrap;
         text-align: center;
       }
 
+      nav button:last-child {
+        border-right: none;
+      }
+
       nav button:hover,
       nav button.active {
-        background-color: var(--mauve-2);
-        color: var(--text-header);
-        font-weight: bold;
+        /* Creates a slight visual indicator for the active item using text shadow */
       }
 
       /* --- Content Area --- */
@@ -86,7 +87,7 @@
         flex: 1;
         display: flex;
         flex-direction: column;
-        background-color: var(--petal-frost);
+        background-color: inherit;
       }
 
       .page-section {
@@ -102,33 +103,49 @@
         flex-direction: column;
       }
 
+      /* Assigning the 3 unique colors as backgrounds to each page */
+      #save-the-date {
+        background-color: var(--color-blue);
+      }
+      #invitasjon {
+        background-color: var(--color-pink);
+      }
+      #praktisk {
+        background-color: var(--color-salmon);
+      }
+      #faq {
+        background-color: var(--color-blue);
+      }
+      #kontakt {
+        background-color: var(--color-pink);
+      }
+
       /* Full bleed structure for embedded components */
       .embed-frame {
         width: 100%;
         flex: 1;
         border: none;
-        background: var(--mauve);
+        background: transparent;
       }
 
       .standard-padding {
         padding: 40px 20px;
-        color: var(--text-main);
         max-width: 800px;
         width: 100%;
-        margin: 0 auto;
-        line-height: 1.6;
+        margin: 40px auto;
       }
 
       .standard-padding h2 {
         margin-bottom: 25px;
-        color: var(--text-header);
-        font-size: 2rem;
-        letter-spacing: 1px;
+        font-size: 2.5rem;
+        border-bottom: 2px solid var(--text-black);
+        padding-bottom: 10px;
       }
 
       .standard-padding p {
+        font-size: 1.2rem;
+        line-height: 1.6;
         margin-bottom: 8px;
-        font-size: 1.1rem;
       }
 
       /* --- Desktop Responsive Layout --- */
@@ -143,7 +160,7 @@
           height: 100vh;
           overflow-x: visible;
           border-bottom: none;
-          border-right: 2px solid var(--periwinkle);
+          border-right: 2px solid var(--text-black);
         }
 
         nav button {
@@ -151,14 +168,15 @@
           width: 100%;
           text-align: left;
           padding: 25px 20px;
-          font-size: 16px;
-          border-bottom: 1px solid var(--periwinkle);
+          font-size: 18px;
+          border-right: none;
+          border-bottom: 2px solid var(--text-black);
         }
       }
     </style>
   </head>
   <body>
-    <nav>
+    <nav id="main-nav">
       <button class="nav-btn active" onclick="showPage('save-the-date', this)">
         Save <br />
         the Date
@@ -201,17 +219,17 @@
       <div id="faq" class="page-section">
         <div class="standard-padding">
           <h2>Ofte stilte spørsmål</h2>
-          <p>Er håret til Lars Halvor ekte?</p>
-          <p><strong>Svar:</strong> Ja</p>
+          <p><strong>Er håret til Lars Halvor ekte?</strong></p>
+          <p>Svar: Ja</p>
           <br />
-          <p>Er Risøya en øy?</p>
-          <p><strong>Svar:</strong> Ja</p>
+          <p><strong>Er Risøya en øy?</strong></p>
+          <p>Svar: Ja</p>
           <br />
-          <p>Er Kaja faktisk fra Bergen</p>
-          <p><strong>Svar:</strong> E vann vått?</p>
+          <p><strong>Er Kaja faktisk fra Bergen?</strong></p>
+          <p>Svar: E vann vått?</p>
           <br />
-          <p>Hvem er best av Brann og Bodøglimt?</p>
-          <p><strong>Svar:</strong> Brann🤞</p>
+          <p><strong>Hvem er best av Brann og Bodøglimt?</strong></p>
+          <p>Svar: Brann🤞</p>
         </div>
       </div>
 
@@ -226,14 +244,23 @@
 
     <script>
       function showPage(pageId, button) {
+        // Hide all sections
         const sections = document.querySelectorAll(".page-section");
         sections.forEach((section) => section.classList.remove("active"));
 
+        // Reset all buttons
         const buttons = document.querySelectorAll(".nav-btn");
         buttons.forEach((btn) => btn.classList.remove("active"));
 
-        document.getElementById(pageId).classList.add("active");
+        // Activate the chosen section
+        const targetSection = document.getElementById(pageId);
+        targetSection.classList.add("active");
         button.classList.add("active");
+
+        // Get the background color of the new active section and match the body/menu to it
+        const currentBgColor =
+          window.getComputedStyle(targetSection).backgroundColor;
+        document.body.style.backgroundColor = currentBgColor;
       }
     </script>
   </body>
