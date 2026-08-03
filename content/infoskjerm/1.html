@@ -225,7 +225,7 @@
         <div id="quote">Du må bare lage deg litt is i magen.</div>
           -->
       <div class="quote-section">
-        <h2>Velkommen Øystein!!</h2>
+        <h2></h2>
         <!--<div id="quote">Hva er det som kler seg i hvitt og er helt umulig å få øye på, men som du vet alltid kommer hvert år?</div>-->
         <!-- <div id="quote">
           Jeg faller uten vinger, samler meg opp i hauger, men smelter bort på
@@ -234,9 +234,52 @@
         <!--<div id="quote">Hva er det som kaster lange skygger om morgenen, og forvandler seg til en fargerik kåpe om høsten?</div>-->
         <!--<div id="quote">Hva er det som kan knekke trær uten å ta i dem, men forsvinner når solen skinner?</div>
 -->
-        <div id="quote">
-          
-           </div>
+<div id="quote"></div>
+
+<script>
+  async function loadDailyQuote() {
+    const START_DATE = new Date("2026-08-02"); // Your start date (YYYY-MM-DD)
+    const QUOTES_FILE = "quotes.txt";
+
+    try {
+      // 1. Fetch the quotes text file
+      const response = await fetch(QUOTES_FILE);
+      if (!response.ok) throw new Error("Could not load quotes file.");
+
+      const text = await response.text();
+      // Split by newline and remove empty lines
+      const quotes = text.split("\n").map(line => line.trim()).filter(Boolean);
+
+      if (quotes.length === 0) return;
+
+      // 2. Calculate the difference in days from the start date
+      const today = new Date();
+      
+      // Zero out time portions to calculate whole calendar days accurately
+      const startUtc = Date.UTC(START_DATE.getFullYear(), START_DATE.getMonth(), START_DATE.getDate());
+      const todayUtc = Date.UTC(today.getFullYear(), today.getMonth(), today.getDate());
+
+      const msPerDay = 1000 * 60 * 60 * 24;
+      let dayIndex = Math.floor((todayUtc - startUtc) / msPerDay);
+
+      // Handle dates prior to the start date (defaults to line 1)
+      if (dayIndex < 0) dayIndex = 0;
+
+      // 3. Prevent going out of bounds (loops back to line 1 if quotes run out)
+      const selectedIndex = dayIndex % quotes.length;
+
+      // 4. Inject into the HTML element
+      document.getElementById("quote").textContent = quotes[selectedIndex];
+
+    } catch (error) {
+      console.error(error);
+      document.getElementById("quote").textContent = "Could not load quote today.";
+    }
+  }
+
+  // Execute on page load
+  loadDailyQuote();
+</script>
         <!--
         <div id="quote">En dag bestemte Tore seg for å besøke bestemor som bodde på den andre siden av skogen. Han startet klokken 10.00 og var fremme hos bestemor to timer senere.
 
