@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="no">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="refresh" content="60" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stue-skjerm – Vertikal</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        width: 100vw;
+        height: 100vh;
+        background: #000;
+        color: #eee;
+        overflow: hidden;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      }
+      body {
+        position: absolute;
+        width: 100vh;
+        height: 100vw;
+        left: 0;
+        top: 100vh;
+        transform: rotate(-90deg);
+        transform-origin: 0 0;
+      }
+
+      .main-content {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+      }
+
+      /* === CLOCKS ROW === */
+      .clocks-row {
+        display: flex;
+        width: 97%;
+        max-width: 1500px;
+        margin-top: 5px;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+      }
+
+      /* Digital Clock */
+      .digital-clock {
+        background: #000000;
+        border-radius: 10px;
+        padding: 10px 10px;
+        min-width: 450px;
+        text-align: center;
+        box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
+      }
+      .digital-time {
+        font-size: 6.8rem;
+        font-weight: 300;
+        letter-spacing: 6px;
+        color: #ffffff;
+        line-height: 1;
+      }
+      .digital-date {
+        font-size: 3rem;
+        color: #ffffff;
+        margin-top: 10px;
+      }
+      .digital-week {
+        font-size: 3rem;
+        color: #ffffff;
+        margin-top: 3px;
+        font-weight: 500;
+      }
+
+      /* Image Hour Container */
+      .clock-container {
+        position: relative;
+        width: 600px;
+        height: 400px;
+        flex-shrink: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .clock-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain; /* Endre til 'cover' hvis du vil at bildet skal fylle hele boksen uansett proporsjoner */
+        border-radius: 10px; /* Valgfri avrunding av kantene på bildet */
+      }
+
+      /* Rest of your styles */
+      .quote-section,
+      .section {
+        width: 92%;
+        margin-top: 50px;
+      }
+      h2 {
+        font-size: 3rem;
+        color: #88ddff;
+        margin: 5px 0;
+        font-weight: 400;
+        border-bottom: 1px solid #222;
+      }
+      #quote {
+        font-size: 2rem;
+        font-style: italic;
+        color: #ccc;
+        text-align: center;
+      }
+      .bus {
+        display: flex;
+        font-size: 2rem;
+        padding: 5px 0;
+        border-bottom: 1px solid #111;
+        align-items: center;
+      }
+      .line {
+        font-weight: bold;
+        color: #88ddff;
+        width: 80px;
+        flex-shrink: 0;
+      }
+      .dest {
+        flex: 1;
+        color: #ddd;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding-right: 10px;
+      }
+      .status {
+        width: 250px;
+        text-align: right;
+        font-size: 2rem;
+      }
+      .time {
+        color: #ffdd88;
+        width: 150px;
+        text-align: right;
+        font-weight: bold;
+      }
+      .special {
+        color: #ff7777;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main-content">
+      <div class="clocks-row">
+        <!-- Digital Clock -->
+        <div class="digital-clock">
+          <div class="digital-time" id="digitalTime">00:00</div>
+          <div class="digital-date" id="digitalDate"></div>
+          <div class="digital-week" id="digitalWeek"></div>
+          <!-- New Countdown Line -->
+          <div class="digital-week" id="countdown"></div>
+        </div>
+
+        <!-- 24-Hour Image Display -->
+        <div class="clock-container">
+          <img id="hourImage" src="" alt="Timebilde" />
+        </div>
+      </div>
+
+      <div class="quote-section">
+        <h2></h2>
+        <div id="quote"></div>
+
+        <script>
+          async function loadDailyQuote() {
+            const START_DATE = new Date("2026-08-02");
+            const QUOTES_FILE = "quotes.txt";
+
+            try {
+              const response = await fetch(QUOTES_FILE);
+              if (!response.ok) throw new Error("Could not load quotes file.");
+
+              const text = await response.text();
+              const quotes = text
+                .split("\n")
+                .map((line) => line.trim())
+                .filter(Boolean);
+
+              if (quotes.length === 0) return;
+
+              const today = new Date();
+              const startUtc = Date.UTC(
+                START_DATE.getFullYear(),
+                START_DATE.getMonth(),
+                START_DATE.getDate(),
+              );
+              const todayUtc = Date.UTC(
+                today.getFullYear(),
+                today.getMonth(),
+                today.getDate(),
+              );
+
+              const msPerDay = 1000 * 60 * 60 * 24;
+              let dayIndex = Math.floor((todayUtc - startUtc) / msPerDay);
+
+              if (dayIndex < 0) dayIndex = 0;
+
+              const selectedIndex = dayIndex % quotes.length;
+              document.getElementById("quote").textContent =
+                quotes[selectedIndex];
+            } catch (error) {
+              console.error(error);
+              document.getElementById("quote").textContent =
+                "Could not load quote today.";
+            }
+          }
+
+          loadDailyQuote();
+        </script>
+      </div>
+
+      <div class="section">
+        <h2>Buss fra Jakob kirke</h2>
+        <div id="jakob-bus"></div>
+      </div>
+      <div class="section">
+        <h2>Trikk fra Nybrua</h2>
+        <div id="nybrua-trikk"></div>
+      </div>
+
+      <div style="margin-top: 2.5rem; width: 100%">
+        <img
+          src="https://www.yr.no/nb/innhold/1-72837/meteogram.svg?mode=dark"
+          width="100%"
+          style="
+            display: block;
+            filter: brightness(1.08) contrast(1.12) saturate(0.95);
+          "
+          alt="Været"
+        />
+      </div>
+    </div>
+
+    <script>
+      /* Digital Clock + Week */
+      function getISOWeek(date) {
+        const d = new Date(
+          Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()),
+        );
+        d.setUTCDate(d.getUTCDate() + 3 - ((d.getUTCDay() + 6) % 7));
+        const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+        return Math.ceil(((d - yearStart) / 86400000 + 1) / 7);
+      }
+
+      function updateDigitalClock() {
+        const now = new Date();
+
+        // --- Countdown Logic ---
+        const targetDate = new Date("2027-07-24");
+        const diffInMs = targetDate - now;
+        const diffInDays = Math.ceil(diffInMs / (1000 * 60 * 60 * 24));
+
+        let countdownText = "";
+        if (diffInDays > 0) {
+          countdownText = `${diffInDays} dager til vi gifter oss!`;
+        } else if (diffInDays === 0) {
+          countdownText = "Vi ses i dag!";
+        } else {
+          countdownText = "Endelig sammen!";
+        }
+        // -----------------------
+
+        const timeStr = now.toLocaleTimeString("no-NO", {
+          hour: "2-digit",
+          minute: "2-digit",
+        });
+        const dateStr = now.toLocaleDateString("no-NO", {
+          weekday: "long",
+          day: "numeric",
+          month: "long",
+        });
+
+        document.getElementById("digitalTime").textContent = timeStr;
+        document.getElementById("digitalDate").textContent =
+          dateStr.charAt(0).toUpperCase() + dateStr.slice(1);
+        document.getElementById("digitalWeek").textContent =
+          `Uke ${getISOWeek(now)}`;
+
+        // Update the countdown element
+        document.getElementById("countdown").textContent = countdownText;
+      }
+      setInterval(updateDigitalClock, 1000);
+      updateDigitalClock();
+
+      /* Bildeoppdatering per time (globetime/t1.png - t24.png) */
+      function updateHourImage() {
+        const now = new Date();
+        const hour = now.getHours(); // Returnerer 0 til 23
+
+        // Logikk for bildenavn: 00:xx blir t24.png, 01:xx blir t1.png o.s.v.
+        // Ønsker du at 00:xx er t1.png, bytt til: const imgNumber = hour + 1;
+        const imgNumber = hour === 0 ? 24 : hour;
+
+        const imgElement = document.getElementById("hourImage");
+        const newSrc = `globetime/t${imgNumber}.png`;
+
+        // Oppdaterer kun hvis det er en ny time (forhindrer blinking i UI)
+        if (!imgElement.src.endsWith(newSrc)) {
+          imgElement.src = newSrc;
+        }
+      }
+      // Sjekker om bildet må byttes en gang i minuttet
+      setInterval(updateHourImage, 60000);
+      updateHourImage();
+
+      /* Bus/Tram code */
+      const API_URL = "https://api.entur.io/journey-planner/v3/graphql";
+      const JAKOB_KIRKE_ID = "NSR:StopPlace:6435";
+      const NYBRUA_ID = "NSR:StopPlace:61989";
+      const query = `{ stopPlace(id: "STOP_ID") { estimatedCalls(numberOfDepartures: 4, timeRange: 3600) { expectedDepartureTime destinationDisplay { frontText } serviceJourney { journeyPattern { line { publicCode } } } } } }`;
+
+      async function fetchDepartures(stopId, elementId) {
+        const el = document.getElementById(elementId);
+        try {
+          const res = await fetch(API_URL, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "ET-Client-Name": "stue-skjerm-v2",
+            },
+            body: JSON.stringify({ query: query.replace("STOP_ID", stopId) }),
+          });
+          const json = await res.json();
+          const calls = json.data?.stopPlace?.estimatedCalls || [];
+          let html = "";
+          for (let call of calls) {
+            const time = new Date(call.expectedDepartureTime);
+            const diffMin = Math.round((time - new Date()) / 60000);
+            let statusStr = "",
+              timeStr = "";
+
+            if (diffMin <= 0) timeStr = "nå...";
+            else if (diffMin === 1) {
+              statusStr = "Ikke prøv deg";
+              timeStr = "1 min";
+            } else if (diffMin === 2) {
+              statusStr = "Løp!";
+              timeStr = "2 min";
+            } else if (diffMin === 3) {
+              statusStr = "Goood tid";
+              timeStr = "3 min";
+            } else if (diffMin < 60) timeStr = `${diffMin} min`;
+            else
+              timeStr = time.toLocaleTimeString("no-NO", {
+                hour: "2-digit",
+                minute: "2-digit",
+              });
+
+            const line =
+              call.serviceJourney?.journeyPattern?.line?.publicCode || "–";
+            const dest = call.destinationDisplay?.frontText || "Ukjent";
+
+            html += `<div class="bus">
+              <span class="line">${line}</span>
+              <span class="dest">${dest}</span>
+              <span class="status">${statusStr}</span>
+              <span class="time ${diffMin === 2 ? "special" : ""}">${timeStr}</span>
+            </div>`;
+          }
+          el.innerHTML = html || `<p style="opacity:0.6">Ingen avganger</p>`;
+        } catch (e) {
+          el.innerHTML = `<p style="color:#f55">Feil ved lasting</p>`;
+        }
+      }
+
+      const refreshAll = () => {
+        fetchDepartures(JAKOB_KIRKE_ID, "jakob-bus");
+        fetchDepartures(NYBRUA_ID, "nybrua-trikk");
+      };
+      refreshAll();
+      setInterval(refreshAll, 15000);
+    </script>
+  </body>
+</html>
