@@ -257,20 +257,35 @@
       function updateDigitalClock() {
         const now = new Date();
 
-        // --- Countdown Logic ---
-        const targetDate = new Date("2027-07-24");
-        const diffInMs = targetDate - now;
-        const diffInDays = Math.ceil(diffInMs / (1000 * 60 * 60 * 24));
+       // --- Countdown Logic ---
+// Sett dato OG klokkeslett for når dere ses:
+const targetDate = new Date("2026-08-25T15:00:00");
 
-        let countdownText = "";
-        if (diffInDays > 0) {
-          countdownText = `${diffInDays} dager igjen!❤️`;
-        } else if (diffInDays === 0) {
-          countdownText = "Vi ses i dag!";
-        } else {
-          countdownText = "Endelig sammen!";
-        }
-        // -----------------------
+const diffInMs = targetDate - now;
+
+let countdownText = "";
+
+if (diffInMs > 0) {
+  const totalMinutes = Math.floor(diffInMs / (1000 * 60));
+
+  const days = Math.floor(totalMinutes / (60 * 24));
+  const hours = Math.floor((totalMinutes % (60 * 24)) / 60);
+  const minutes = totalMinutes % 60;
+
+  if (days > 0) {
+    countdownText =
+      `${days} dager, ${hours} timer og ${minutes} min til vi ses ❤️`;
+  } else if (hours > 0) {
+    countdownText =
+      `${hours} timer og ${minutes} min til vi ses ❤️`;
+  } else {
+    countdownText =
+      `${minutes} min til vi ses ❤️`;
+  }
+} else {
+  countdownText = "Endelig sammen! ❤️";
+}
+// -----------------------
 
         const timeStr = now.toLocaleTimeString("no-NO", {
           hour: "2-digit",
