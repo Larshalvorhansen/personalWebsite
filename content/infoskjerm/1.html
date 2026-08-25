@@ -257,35 +257,32 @@
       function updateDigitalClock() {
         const now = new Date();
 
-       // --- Countdown Logic ---
-// Sett dato OG klokkeslett for når dere ses:
-const targetDate = new Date("2026-08-25T15:00:00");
+        // --- Countdown Logic ---
+        // Sett dato OG klokkeslett for når dere ses:
+        const targetDate = new Date("2027-07-24T13:00:00");
 
-const diffInMs = targetDate - now;
+        const diffInMs = targetDate - now;
 
-let countdownText = "";
+        let countdownText = "";
 
-if (diffInMs > 0) {
-  const totalMinutes = Math.floor(diffInMs / (1000 * 60));
+        if (diffInMs > 0) {
+          const totalMinutes = Math.floor(diffInMs / (1000 * 60));
 
-  const days = Math.floor(totalMinutes / (60 * 24));
-  const hours = Math.floor((totalMinutes % (60 * 24)) / 60);
-  const minutes = totalMinutes % 60;
+          const days = Math.floor(totalMinutes / (60 * 24));
+          const hours = Math.floor((totalMinutes % (60 * 24)) / 60);
+          const minutes = totalMinutes % 60;
 
-  if (days > 0) {
-    countdownText =
-      `${days} dager, ${hours} timer og ${minutes} min til vi ses ❤️`;
-  } else if (hours > 0) {
-    countdownText =
-      `${hours} timer og ${minutes} min til vi ses ❤️`;
-  } else {
-    countdownText =
-      `${minutes} min til vi ses ❤️`;
-  }
-} else {
-  countdownText = "Endelig sammen! ❤️";
-}
-// -----------------------
+          if (days > 0) {
+            countdownText = `${days} dager, ${hours} timer og ${minutes} min igjen ❤️`;
+          } else if (hours > 0) {
+            countdownText = `${hours} timer og ${minutes} min til vi ses ❤️`;
+          } else {
+            countdownText = `${minutes} min til vi ses ❤️`;
+          }
+        } else {
+          countdownText = "Endelig sammen! ❤️";
+        }
+        // -----------------------
 
         const timeStr = now.toLocaleTimeString("no-NO", {
           hour: "2-digit",
@@ -316,7 +313,7 @@ if (diffInMs > 0) {
 
         // Logikk for bildenavn: 00:xx blir t24.png, 01:xx blir t1.png o.s.v.
         // Ønsker du at 00:xx er t1.png, bytt til: const imgNumber = hour + 1;
-        const imgNumber = Math.abs((-1 * hour-8) % 24 || 24);
+        const imgNumber = Math.abs((-1 * hour - 8) % 24 || 24);
 
         const imgElement = document.getElementById("hourImage");
         const newSrc = `globetime/t${imgNumber}.png`;
