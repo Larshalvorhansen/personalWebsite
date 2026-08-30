@@ -292,7 +292,7 @@
 
         // Logikk for bildenavn: 00:xx blir t24.png, 01:xx blir t1.png o.s.v.
         // Ønsker du at 00:xx er t1.png, bytt til: const imgNumber = hour + 1;
-        const imgNumber = Math.abs((1 * hour - 11) % 24 || 24);
+        const imgNumber = Math.abs((1 * hour - 15) % 24 || 24);
 
         const imgElement = document.getElementById("hourImage");
         const newSrc = `globetime/t${imgNumber}.png`;
