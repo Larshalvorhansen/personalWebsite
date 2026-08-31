@@ -1,0 +1,1001 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CubeSat COTS Component Research Catalog</title>
+
+  <style>
+    :root {
+      --bg: #ffffff;
+      --panel: #f7f9fb;
+      --panel-2: #eef3f8;
+      --text: #24313d;
+      --muted: #66727d;
+      --line: #d9e0e7;
+      --accent: #075fa8;
+      --accent-soft: #e8f2fb;
+      --warning-bg: #fff7dc;
+      --warning-line: #f0c84b;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family:
+        -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+        Arial, sans-serif;
+      line-height: 1.5;
+    }
+
+    .page-shell {
+      max-width: 1750px;
+      margin: 0 auto;
+      padding: 22px;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: clamp(1.7rem, 2.6vw, 2.35rem);
+      line-height: 1.15;
+    }
+
+    .description {
+      max-width: 1100px;
+      margin: 0 0 18px;
+      color: #4e5a65;
+    }
+
+    .metadata {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px 16px;
+      margin-bottom: 18px;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .metadata span {
+      white-space: nowrap;
+    }
+
+    .warning {
+      margin: 18px 0 22px;
+      padding: 14px 16px;
+      border-left: 4px solid var(--warning-line);
+      border-radius: 4px;
+      background: var(--warning-bg);
+      font-size: 0.92rem;
+    }
+
+    .summary-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin: 0 0 22px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .summary-stats li {
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--panel);
+      font-size: 0.9rem;
+    }
+
+    .catalog-layout {
+      display: grid;
+      grid-template-columns: minmax(285px, 360px) minmax(0, 1fr);
+      gap: 22px;
+      align-items: start;
+    }
+
+    .tree-panel {
+      position: sticky;
+      top: 14px;
+      max-height: calc(100vh - 28px);
+      overflow: auto;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--panel);
+    }
+
+    .tree-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .tree-toolbar button,
+    .tree-link,
+    .clear-filter {
+      appearance: none;
+      border: 1px solid #b8c5d0;
+      border-radius: 6px;
+      background: #fff;
+      color: var(--text);
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .tree-toolbar button {
+      padding: 6px 9px;
+      font-size: 0.82rem;
+    }
+
+    .tree-toolbar button:hover,
+    .tree-link:hover,
+    .clear-filter:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .tree {
+      font-size: 0.91rem;
+    }
+
+    .tree details {
+      margin: 2px 0;
+    }
+
+    .tree details details {
+      margin-left: 15px;
+      padding-left: 8px;
+      border-left: 1px solid #d4dde5;
+    }
+
+    .tree summary {
+      padding: 5px 4px;
+      border-radius: 5px;
+      cursor: pointer;
+      user-select: none;
+      font-weight: 650;
+    }
+
+    .tree summary:hover {
+      background: #eaf0f5;
+    }
+
+    .tree-node-row {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      min-width: 0;
+    }
+
+    .tree-link {
+      width: calc(100% - 18px);
+      margin: 2px 0 2px 18px;
+      padding: 5px 7px;
+      text-align: left;
+      border-color: transparent;
+      background: transparent;
+      font-size: 0.88rem;
+    }
+
+    .tree-link.active {
+      border-color: #a9cceb;
+      background: var(--accent-soft);
+      color: #064e87;
+      font-weight: 700;
+    }
+
+    .tree small {
+      display: block;
+      margin: 0 0 4px 21px;
+      color: var(--muted);
+      font-size: 0.78rem;
+    }
+
+    .results-panel {
+      min-width: 0;
+    }
+
+    .results-tools {
+      display: grid;
+      grid-template-columns: minmax(210px, 1fr) auto;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .search-wrap input {
+      width: 100%;
+      min-height: 40px;
+      padding: 9px 11px;
+      border: 1px solid #bcc8d2;
+      border-radius: 7px;
+      font: inherit;
+    }
+
+    .clear-filter {
+      min-height: 40px;
+      padding: 8px 12px;
+      white-space: nowrap;
+    }
+
+    .filter-status {
+      margin: 4px 0 10px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .filter-status strong {
+      color: var(--text);
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+    }
+
+    table {
+      width: 100%;
+      min-width: 1180px;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      background: #fff;
+    }
+
+    th,
+    td {
+      padding: 11px;
+      border-bottom: 1px solid var(--line);
+      border-right: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th:last-child,
+    td:last-child {
+      border-right: 0;
+    }
+
+    tr:last-child td {
+      border-bottom: 0;
+    }
+
+    th {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      background: #f1f4f7;
+      font-weight: 750;
+    }
+
+    tbody tr:hover {
+      background: #fbfdff;
+    }
+
+    tbody tr[hidden] {
+      display: none;
+    }
+
+    .tree-location {
+      color: var(--muted);
+      font-size: 0.83rem;
+    }
+
+    .tree-location strong {
+      display: block;
+      margin-bottom: 3px;
+      color: var(--text);
+      font-size: 0.9rem;
+    }
+
+    a {
+      color: #005da8;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .vendor {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 0.83rem;
+    }
+
+    .price {
+      font-weight: 750;
+      white-space: nowrap;
+    }
+
+    .empty-state {
+      display: none;
+      margin-top: 12px;
+      padding: 18px;
+      border: 1px dashed #b8c5d0;
+      border-radius: 8px;
+      color: var(--muted);
+      text-align: center;
+      background: var(--panel);
+    }
+
+    .empty-state.show {
+      display: block;
+    }
+
+    @media (max-width: 1050px) {
+      .catalog-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .tree-panel {
+        position: static;
+        max-height: none;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .page-shell {
+        padding: 14px;
+      }
+
+      .results-tools {
+        grid-template-columns: 1fr;
+      }
+
+      .clear-filter {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page-shell">
+    <h1>CubeSat COTS Component Research Catalog</h1>
+
+    <p class="description">
+      Procurement-oriented survey of commercially available CubeSat/smallsat
+      hardware plus selected engineering/laboratory COTS for lower-level items
+      such as IMUs, connectors, thermal materials and biological payload
+      hardware. Product names are clickable HTML links.
+    </p>
+
+    <div class="metadata">
+      <span>117 researched entries</span>
+      <span>Checked 31 Aug 2026</span>
+      <span>Prices kept in source currency</span>
+      <span>Taxes, shipping and export restrictions not included</span>
+    </div>
+
+    <div class="warning">
+      <strong>Qualification warning:</strong> “COTS” does not mean “safe to
+      launch.” Items marked Engineering/Lab COTS need mission-specific
+      radiation, thermal-vacuum, vibration/shock, EMC, materials/outgassing,
+      contamination, derating and reliability review. Biological hardware also
+      needs containment and biosafety analysis. Vendor stock and prices change,
+      because procurement apparently needed its own weather system.
+    </div>
+
+    <ul class="summary-stats">
+      <li><strong>39</strong> Electrical / Avionics</li>
+      <li><strong>22</strong> ADCS</li>
+      <li><strong>17</strong> Mechanical / Structural</li>
+      <li><strong>8</strong> Thermal</li>
+      <li><strong>13</strong> Payload</li>
+      <li><strong>3</strong> Propulsion</li>
+      <li><strong>2</strong> Software</li>
+      <li><strong>10</strong> Ground Segment</li>
+      <li><strong>3</strong> Other / System-level</li>
+    </ul>
+
+    <section class="catalog-layout">
+      <aside class="tree-panel" aria-label="CubeSat component tree">
+        <div class="tree-toolbar">
+          <button type="button" id="showAllButton">Show all</button>
+          <button type="button" id="expandAllButton">Expand all</button>
+          <button type="button" id="collapseAllButton">Collapse all</button>
+        </div>
+
+        <nav class="tree" id="componentTree">
+          <details open>
+            <summary>CubeSat</summary>
+
+            <details open>
+              <summary>1. Electrical / Avionics</summary>
+
+              <details>
+                <summary>Power System (EPS)</summary>
+                <button class="tree-link" data-filter="Electrical / Avionics > Power System (EPS) > Solar panels / solar cells">Solar panels / solar cells</button>
+                <button class="tree-link" data-filter="Electrical / Avionics > Power System (EPS) > Battery">Battery</button>
+                <button class="tree-link" data-filter="Electrical / Avionics > Power System (EPS) > Battery management system">Battery management system</button>
+                <button class="tree-link" data-filter="Electrical / Avionics > Power System (EPS) > Power distribution board">Power distribution board</button>
+                <button class="tree-link" data-filter="Electrical / Avionics > Power System (EPS) > Voltage regulators / converters">Voltage regulators / converters</button>
+                <button class="tree-link" data-filter="Electrical / Avionics > Power System (EPS) > Current / voltage sensors">Current / voltage sensors</button>
+              </details>
+
+              <details>
+                <summary>Computational / On-Board Computer (OBC)</summary>
+                <button class="tree-link" data-filter="Electrical / Avionics > Computational / On-Board Computer (OBC) > Main processor / MCU">Main processor / MCU</button>
+                <button class="tree-link" data-filter="Electrical / Avionics > Computational / On-Board Computer (OBC) > Flight computer">Flight computer</button>
+                <button class="tree-link" data-filter="Electrical / Avionics > Computational / On-Board Computer (OBC) > RAM">RAM</button>
+                <button class="tree-link" data-filter="Electrical / Avionics > Computational / On-Board Computer (OBC) > Flash / SD storage">Flash / SD storage</button>
+                <button class="tree-link" data-filter="Electrical / Avionics > Computational / On-Board Computer (OBC) > Watchdog / redundancy electronics">Watchdog / redundancy electronics</button>
+              </details>
+
+              <details open>
+                <summary>Communications</summary>
+                <button class="tree-link active" data-filter="Electrical / Avionics > Communications > Antenna">Antenna</button>
+                <button class="tree-link" data-filter="Electrical / Avionics > Communications > Radio / transceiver">Radio / transceiver</button>
+                <button class="tree-link" data-filter="Electrical / Avionics > Communications > RF amplifier">RF amplifier</button>
+                <button class="tree-link" data-filter="Electrical / Avionics > Communications > Antenna deployment electronics">Antenna deployment electronics</button>
+                <button class="tree-link" data-filter="Electrical / Avionics > Communications > Modem / RF circuitry">Modem / RF circuitry</button>
+              </details>
+
+              <details>
+                <summary>Sensors</summary>
+                <button class="tree-link" data-filter="Electrical / Avionics > Sensors > Temperature sensors">Temperature sensors</button>
+                <button class="tree-link" data-filter="Electrical / Avionics > Sensors > Voltage / current sensors">Voltage / current sensors</button>
+                <button class="tree-link" data-filter="Electrical / Avionics > Sensors > Pressure sensors">Pressure sensors</button>
+                <button class="tree-link" data-filter="Electrical / Avionics > Sensors > Payload sensors">Payload sensors</button>
+              </details>
+
+              <details>
+                <summary>Electrical Interconnect</summary>
+                <button class="tree-link" data-filter="Electrical / Avionics > Electrical Interconnect > Wiring harnesses">Wiring harnesses</button>
+                <button class="tree-link" data-filter="Electrical / Avionics > Electrical Interconnect > Connectors">Connectors</button>
+                <button class="tree-link" data-filter="Electrical / Avionics > Electrical Interconnect > PCB backplane">PCB backplane</button>
+                <button class="tree-link" data-filter="Electrical / Avionics > Electrical Interconnect > Data buses">Data buses</button>
+              </details>
+            </details>
+
+            <details>
+              <summary>2. ADCS</summary>
+              <small>Attitude Determination &amp; Control System</small>
+
+              <details>
+                <summary>Attitude Sensors</summary>
+                <button class="tree-link" data-filter="ADCS > Attitude Sensors > Sun sensors">Sun sensors</button>
+                <button class="tree-link" data-filter="ADCS > Attitude Sensors > Star tracker">Star tracker</button>
+                <button class="tree-link" data-filter="ADCS > Attitude Sensors > Magnetometer">Magnetometer</button>
+                <button class="tree-link" data-filter="ADCS > Attitude Sensors > Gyroscope">Gyroscope</button>
+                <button class="tree-link" data-filter="ADCS > Attitude Sensors > Accelerometer / IMU">Accelerometer / IMU</button>
+              </details>
+
+              <details>
+                <summary>Actuators</summary>
+                <button class="tree-link" data-filter="ADCS > Actuators > Reaction wheels">Reaction wheels</button>
+                <button class="tree-link" data-filter="ADCS > Actuators > Magnetorquers">Magnetorquers</button>
+                <button class="tree-link" data-filter="ADCS > Actuators > Control moment gyros">Control moment gyros [rare for CubeSats]</button>
+                <button class="tree-link" data-filter="ADCS > Actuators > Thrusters">Thrusters [if used for attitude control]</button>
+              </details>
+
+              <details>
+                <summary>ADCS Controller</summary>
+                <button class="tree-link" data-filter="ADCS > ADCS Controller > ADCS computer">ADCS computer</button>
+                <button class="tree-link" data-filter="ADCS > ADCS Controller > Control software">Control software</button>
+              </details>
+            </details>
+
+            <details>
+              <summary>3. Mechanical / Structural</summary>
+
+              <details>
+                <summary>Primary Structure</summary>
+                <button class="tree-link" data-filter="Mechanical / Structural > Primary Structure > Frame / rails">Frame / rails</button>
+                <button class="tree-link" data-filter="Mechanical / Structural > Primary Structure > Side panels">Side panels</button>
+                <button class="tree-link" data-filter="Mechanical / Structural > Primary Structure > Structural plates">Structural plates</button>
+                <button class="tree-link" data-filter="Mechanical / Structural > Primary Structure > Payload mounting structure">Payload mounting structure</button>
+              </details>
+
+              <details>
+                <summary>Fasteners</summary>
+                <button class="tree-link" data-filter="Mechanical / Structural > Fasteners > Screws">Screws</button>
+                <button class="tree-link" data-filter="Mechanical / Structural > Fasteners > Nuts">Nuts</button>
+                <button class="tree-link" data-filter="Mechanical / Structural > Fasteners > Washers">Washers</button>
+                <button class="tree-link" data-filter="Mechanical / Structural > Fasteners > Standoffs / spacers">Standoffs / spacers</button>
+              </details>
+
+              <details>
+                <summary>Mechanisms</summary>
+                <button class="tree-link" data-filter="Mechanical / Structural > Mechanisms > Hinges">Hinges</button>
+                <button class="tree-link" data-filter="Mechanical / Structural > Mechanisms > Springs">Springs</button>
+                <button class="tree-link" data-filter="Mechanical / Structural > Mechanisms > Latches">Latches</button>
+                <button class="tree-link" data-filter="Mechanical / Structural > Mechanisms > Deployment mechanisms">Deployment mechanisms</button>
+                <button class="tree-link" data-filter="Mechanical / Structural > Mechanisms > Antenna deployment">Antenna deployment</button>
+                <button class="tree-link" data-filter="Mechanical / Structural > Mechanisms > Solar-panel deployment">Solar-panel deployment</button>
+                <button class="tree-link" data-filter="Mechanical / Structural > Mechanisms > Servo / motor mechanisms">Servo / motor mechanisms</button>
+              </details>
+            </details>
+
+            <details>
+              <summary>4. Thermal</summary>
+
+              <details>
+                <summary>Passive Thermal Control</summary>
+                <button class="tree-link" data-filter="Thermal > Passive Thermal Control > Radiators">Radiators</button>
+                <button class="tree-link" data-filter="Thermal > Passive Thermal Control > Thermal coatings">Thermal coatings</button>
+                <button class="tree-link" data-filter="Thermal > Passive Thermal Control > Insulation / MLI">Insulation / MLI</button>
+                <button class="tree-link" data-filter="Thermal > Passive Thermal Control > Thermal pads">Thermal pads</button>
+                <button class="tree-link" data-filter="Thermal > Passive Thermal Control > Heat straps">Heat straps</button>
+              </details>
+
+              <details>
+                <summary>Active Thermal Control</summary>
+                <button class="tree-link" data-filter="Thermal > Active Thermal Control > Electrical heaters">Electrical heaters</button>
+                <button class="tree-link" data-filter="Thermal > Active Thermal Control > Heater controllers">Heater controllers</button>
+                <button class="tree-link" data-filter="Thermal > Active Thermal Control > Temperature sensors">Temperature sensors</button>
+              </details>
+            </details>
+
+            <details>
+              <summary>5. Payload</summary>
+
+              <details>
+                <summary>Scientific Payload</summary>
+                <button class="tree-link" data-filter="Payload > Scientific Payload > Camera">Camera</button>
+                <button class="tree-link" data-filter="Payload > Scientific Payload > Spectrometer">Spectrometer</button>
+                <button class="tree-link" data-filter="Payload > Scientific Payload > Radiation detector">Radiation detector</button>
+                <button class="tree-link" data-filter="Payload > Scientific Payload > Atmospheric sensor">Atmospheric sensor</button>
+                <button class="tree-link" data-filter="Payload > Scientific Payload > Other experiment sensors">Other experiment sensors</button>
+              </details>
+
+              <details>
+                <summary>Biological Payload [if applicable]</summary>
+                <button class="tree-link" data-filter="Payload > Biological Payload > Cells / microorganisms">Cells / microorganisms</button>
+                <button class="tree-link" data-filter="Payload > Biological Payload > Growth chamber">Growth chamber</button>
+                <button class="tree-link" data-filter="Payload > Biological Payload > Culture medium">Culture medium</button>
+                <button class="tree-link" data-filter="Payload > Biological Payload > Microfluidics">Microfluidics</button>
+                <button class="tree-link" data-filter="Payload > Biological Payload > Sample containers">Sample containers</button>
+                <button class="tree-link" data-filter="Payload > Biological Payload > Pumps / valves">Pumps / valves</button>
+                <button class="tree-link" data-filter="Payload > Biological Payload > Biological sensors">Biological sensors</button>
+                <button class="tree-link" data-filter="Payload > Biological Payload > Containment system">Containment system</button>
+              </details>
+
+              <details>
+                <summary>Technology Demonstration Payload</summary>
+                <button class="tree-link" data-filter="Payload > Technology Demonstration Payload > Experimental electronics">Experimental electronics</button>
+                <button class="tree-link" data-filter="Payload > Technology Demonstration Payload > New material">New material</button>
+                <button class="tree-link" data-filter="Payload > Technology Demonstration Payload > New sensor">New sensor</button>
+                <button class="tree-link" data-filter="Payload > Technology Demonstration Payload > Experimental mechanism">Experimental mechanism</button>
+              </details>
+            </details>
+
+            <details>
+              <summary>6. Propulsion [optional]</summary>
+              <button class="tree-link" data-filter="Propulsion > Thruster">Thruster</button>
+              <button class="tree-link" data-filter="Propulsion > Propellant tank">Propellant tank</button>
+              <button class="tree-link" data-filter="Propulsion > Propellant">Propellant</button>
+              <button class="tree-link" data-filter="Propulsion > Valves">Valves</button>
+              <button class="tree-link" data-filter="Propulsion > Feed system">Feed system</button>
+              <button class="tree-link" data-filter="Propulsion > Pressure sensors">Pressure sensors</button>
+              <button class="tree-link" data-filter="Propulsion > Propulsion controller">Propulsion controller</button>
+            </details>
+
+            <details>
+              <summary>7. Software</summary>
+              <button class="tree-link" data-filter="Software > Flight software">Flight software</button>
+              <button class="tree-link" data-filter="Software > ADCS algorithms">ADCS algorithms</button>
+              <button class="tree-link" data-filter="Software > Communication software">Communication software</button>
+              <button class="tree-link" data-filter="Software > Payload software">Payload software</button>
+              <button class="tree-link" data-filter="Software > Fault detection / recovery">Fault detection / recovery</button>
+              <button class="tree-link" data-filter="Software > Data handling">Data handling</button>
+            </details>
+
+            <details>
+              <summary>8. Ground Segment</summary>
+              <button class="tree-link" data-filter="Ground Segment > Ground station antenna">Ground station antenna</button>
+              <button class="tree-link" data-filter="Ground Segment > Ground radio">Ground radio</button>
+              <button class="tree-link" data-filter="Ground Segment > Mission-control computer">Mission-control computer</button>
+              <button class="tree-link" data-filter="Ground Segment > Tracking software">Tracking software</button>
+              <button class="tree-link" data-filter="Ground Segment > Telemetry / command software">Telemetry / command software</button>
+            </details>
+          </details>
+        </nav>
+      </aside>
+
+      <section class="results-panel">
+        <div class="results-tools">
+          <div class="search-wrap">
+            <input
+              id="catalogSearch"
+              type="search"
+              placeholder="Search products, vendors, descriptions, prices..."
+              aria-label="Search catalog"
+            />
+          </div>
+          <button type="button" class="clear-filter" id="clearFilterButton">
+            Clear tree filter
+          </button>
+        </div>
+
+        <div class="filter-status" id="filterStatus">
+          Showing <strong>Antenna</strong> items.
+        </div>
+
+        <div class="table-wrap">
+          <table id="catalogTable">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Tree location</th>
+                <th>Item type</th>
+                <th>COTS product / HTML link</th>
+                <th>Description</th>
+                <th>Published price</th>
+                <th>Availability</th>
+                <th>Procurement class</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr data-path="Electrical / Avionics > Communications > Antenna">
+                <td>1</td>
+                <td class="tree-location"><strong>Electrical / Avionics</strong>Communications • Antenna</td>
+                <td><strong>Amplified S-band antenna</strong></td>
+                <td>
+                  <a href="https://www.cubesatshop.com/product-category/antenna-systems/" target="_blank" rel="noopener noreferrer">EXA SSA02 34 dB Amplified S-band Patch Antenna</a>
+                  <span class="vendor">EXA</span>
+                </td>
+                <td>Amplified S-band patch antenna with integrated gain stage.</td>
+                <td class="price">€9,400</td>
+                <td>Active CubeSatShop listing; request info</td>
+                <td>Flight-oriented COTS</td>
+              </tr>
+
+              <tr data-path="Electrical / Avionics > Communications > Antenna">
+                <td>2</td>
+                <td class="tree-location"><strong>Electrical / Avionics</strong>Communications • Antenna</td>
+                <td><strong>GNSS antenna</strong></td>
+                <td>
+                  <a href="https://www.cubesatshop.com/product-category/antenna-systems/" target="_blank" rel="noopener noreferrer">EXA GCA01 Compact GNSS Active Patch Antenna</a>
+                  <span class="vendor">EXA</span>
+                </td>
+                <td>Compact active GNSS patch antenna listed for nanosatellite use.</td>
+                <td class="price">€1,700</td>
+                <td>Active CubeSatShop listing; request info</td>
+                <td>Flight-oriented COTS</td>
+              </tr>
+
+              <tr data-path="Electrical / Avionics > Communications > Antenna">
+                <td>3</td>
+                <td class="tree-location"><strong>Electrical / Avionics</strong>Communications • Antenna</td>
+                <td><strong>GNSS antenna</strong></td>
+                <td>
+                  <a href="https://www.endurosat.com/products/gnss-patch-antenna-l1-l2/" target="_blank" rel="noopener noreferrer">EnduroSat GNSS Patch Antenna L1+L2+L5</a>
+                  <span class="vendor">EnduroSat</span>
+                </td>
+                <td>Multi-band GNSS patch antenna supporting L1, L2 and L5.</td>
+                <td class="price">$8,200</td>
+                <td>Active product; order/inquiry via vendor</td>
+                <td>Flight-oriented COTS</td>
+              </tr>
+
+              <tr data-path="Electrical / Avionics > Communications > Antenna">
+                <td>4</td>
+                <td class="tree-location"><strong>Electrical / Avionics</strong>Communications • Antenna</td>
+                <td><strong>GNSS antenna</strong></td>
+                <td>
+                  <a href="https://www.endurosat.com/products/gnss-patch-antenna/" target="_blank" rel="noopener noreferrer">EnduroSat GNSS Patch Antenna L1/E1</a>
+                  <span class="vendor">EnduroSat</span>
+                </td>
+                <td>Compact active GNSS patch antenna for L1/E1 navigation reception.</td>
+                <td class="price">$5,500</td>
+                <td>Active product; order/inquiry via vendor</td>
+                <td>Flight-oriented COTS</td>
+              </tr>
+
+              <tr data-path="Electrical / Avionics > Communications > Antenna">
+                <td>5</td>
+                <td class="tree-location"><strong>Electrical / Avionics</strong>Communications • Antenna</td>
+                <td><strong>S-band TM/TC antenna</strong></td>
+                <td>
+                  <a href="https://www.isispace.nl/product/s-band-tmtc-antenna/" target="_blank" rel="noopener noreferrer">ISISPACE S-band TMTC Antenna</a>
+                  <span class="vendor">ISISPACE</span>
+                </td>
+                <td>S-band telemetry/telecommand antenna for nanosatellite missions.</td>
+                <td class="price">Quote required</td>
+                <td>Current vendor product; contact sales</td>
+                <td>Flight-oriented COTS</td>
+              </tr>
+
+              <tr data-path="Electrical / Avionics > Communications > Antenna">
+                <td>6</td>
+                <td class="tree-location"><strong>Electrical / Avionics</strong>Communications • Antenna</td>
+                <td><strong>S-band antenna</strong></td>
+                <td>
+                  <a href="https://www.cubesatshop.com/product-category/antenna-systems/" target="_blank" rel="noopener noreferrer">EXA SSA01 Wide-Bandwidth S-band Patch Antenna</a>
+                  <span class="vendor">EXA</span>
+                </td>
+                <td>Compact wide-bandwidth S-band patch antenna.</td>
+                <td class="price">€2,200</td>
+                <td>Active CubeSatShop listing; request info</td>
+                <td>Flight-oriented COTS</td>
+              </tr>
+
+              <tr data-path="Electrical / Avionics > Communications > Antenna">
+                <td>7</td>
+                <td class="tree-location"><strong>Electrical / Avionics</strong>Communications • Antenna</td>
+                <td><strong>S-band antenna</strong></td>
+                <td>
+                  <a href="https://www.endurosat.com/products/" target="_blank" rel="noopener noreferrer">EnduroSat S-Band Antenna Wideband</a>
+                  <span class="vendor">EnduroSat</span>
+                </td>
+                <td>Wideband S-band patch antenna for CubeSat/smallsat links.</td>
+                <td class="price">$6,700</td>
+                <td>Active product listing</td>
+                <td>Flight-oriented COTS</td>
+              </tr>
+
+              <tr data-path="Electrical / Avionics > Communications > Antenna">
+                <td>8</td>
+                <td class="tree-location"><strong>Electrical / Avionics</strong>Communications • Antenna</td>
+                <td><strong>UHF antenna</strong></td>
+                <td>
+                  <a href="https://www.endurosat.com/products/uhf-antenna-2u/" target="_blank" rel="noopener noreferrer">EnduroSat UHF Antenna 2U</a>
+                  <span class="vendor">EnduroSat</span>
+                </td>
+                <td>Deployable VHF/UHF antenna covering 144–438 MHz with triple-redundant burn-wire deployment.</td>
+                <td class="price">$10,400–$15,600</td>
+                <td>Active product; order/inquiry via vendor</td>
+                <td>Flight-oriented COTS</td>
+              </tr>
+
+              <tr data-path="Electrical / Avionics > Communications > Radio / transceiver">
+                <td>9</td>
+                <td class="tree-location"><strong>Electrical / Avionics</strong>Communications • Radio / transceiver</td>
+                <td><strong>S-band radio/transceiver</strong></td>
+                <td>
+                  <a href="https://www.endurosat.com/products/s-band-transceiver/" target="_blank" rel="noopener noreferrer">EnduroSat S-Band Transceiver</a>
+                  <span class="vendor">EnduroSat</span>
+                </td>
+                <td>Full-duplex S-band transceiver, 5–125 kbps, 11–28 V input, ~246 g.</td>
+                <td class="price">$17,500</td>
+                <td>Active product; order/inquiry via vendor</td>
+                <td>Flight-oriented COTS</td>
+              </tr>
+
+              <tr data-path="Electrical / Avionics > Communications > Radio / transceiver">
+                <td>10</td>
+                <td class="tree-location"><strong>Electrical / Avionics</strong>Communications • Radio / transceiver</td>
+                <td><strong>S-band transmitter</strong></td>
+                <td>
+                  <a href="https://www.cubesatshop.com/product-category/communication-systems/" target="_blank" rel="noopener noreferrer">IQ Spacecom S-Band Transmitter</a>
+                  <span class="vendor">IQ Spacecom</span>
+                </td>
+                <td>S-band transmitter listed in CubeSatShop communication systems.</td>
+                <td class="price">€6,500</td>
+                <td>Active CubeSatShop listing; request info</td>
+                <td>Flight-oriented COTS</td>
+              </tr>
+
+              <tr data-path="Electrical / Avionics > Communications > Radio / transceiver">
+                <td>11</td>
+                <td class="tree-location"><strong>Electrical / Avionics</strong>Communications • Radio / transceiver</td>
+                <td><strong>Simplex satellite radio</strong></td>
+                <td>
+                  <a href="https://www.cubesatshop.com/product-category/communication-systems/" target="_blank" rel="noopener noreferrer">EyeStar-S3 Satellite Simplex Communications System</a>
+                  <span class="vendor">NearSpace Launch</span>
+                </td>
+                <td>Simplex satellite communication system sold through CubeSatShop.</td>
+                <td class="price">€2,100–€6,600</td>
+                <td>Active CubeSatShop listing; request info</td>
+                <td>Flight-oriented COTS</td>
+              </tr>
+
+              <tr data-path="Electrical / Avionics > Communications > Radio / transceiver">
+                <td>12</td>
+                <td class="tree-location"><strong>Electrical / Avionics</strong>Communications • Radio / transceiver</td>
+                <td><strong>UHF radio/transceiver</strong></td>
+                <td>
+                  <a href="https://www.endurosat.com/products/uhf-transceiver-ii/" target="_blank" rel="noopener noreferrer">EnduroSat UHF Transceiver II</a>
+                  <span class="vendor">EnduroSat</span>
+                </td>
+                <td>CubeSat UHF transceiver for 400–403 or 435–438 MHz; up to 19.6 kbps; ~8 W typical transmit consumption.</td>
+                <td class="price">$7,900</td>
+                <td>Active product; order/inquiry via vendor</td>
+                <td>Flight-oriented COTS</td>
+              </tr>
+
+              <tr data-path="Electrical / Avionics > Communications > Radio / transceiver">
+                <td>13</td>
+                <td class="tree-location"><strong>Electrical / Avionics</strong>Communications • Radio / transceiver</td>
+                <td><strong>X-band SDR</strong></td>
+                <td>
+                  <a href="https://www.endurosat.com/products/x-band-sdr/" target="_blank" rel="noopener noreferrer">EnduroSat X-Band Software Defined Radio</a>
+                  <span class="vendor">EnduroSat</span>
+                </td>
+                <td>High-rate X-band software-defined radio for payload/mission downlink.</td>
+                <td class="price">$180,000</td>
+                <td>Active product; order/inquiry via vendor</td>
+                <td>Flight-oriented COTS</td>
+              </tr>
+
+              <tr data-path="Electrical / Avionics > Computational / On-Board Computer (OBC) > Flight computer">
+                <td>14</td>
+                <td class="tree-location"><strong>Electrical / Avionics</strong>Computational / On-Board Computer (OBC) • Flight computer</td>
+                <td><strong>Flight computer</strong></td>
+                <td>
+                  <a href="https://quantumgalactics.com/products/CyBER_OBC/" target="_blank" rel="noopener noreferrer">CyBER OBC</a>
+                  <span class="vendor">Quantum Galactics</span>
+                </td>
+                <td>Configurable on-board computer offered as engineering/flight model configurations.</td>
+                <td class="price">From €16,310 excl. tax/customs</td>
+                <td>Current vendor listing; configurable</td>
+                <td>Flight-oriented COTS</td>
+              </tr>
+
+              <tr data-path="Electrical / Avionics > Computational / On-Board Computer (OBC) > Flight computer">
+                <td>15</td>
+                <td class="tree-location"><strong>Electrical / Avionics</strong>Computational / On-Board Computer (OBC) • Flight computer</td>
+                <td><strong>Flight computer</strong></td>
+                <td>
+                  <a href="https://www.endurosat.com/products/onboard-computer/" target="_blank" rel="noopener noreferrer">EnduroSat Onboard Computer</a>
+                  <span class="vendor">EnduroSat</span>
+                </td>
+                <td>ARM Cortex-M7 OBC with ECC storage, redundant FRAM/NAND and CAN/CAN-FD/RS422/485/SPI/I²C/UART/Ethernet interfaces.</td>
+                <td class="price">$16,000–$26,000</td>
+                <td>Active product; order/inquiry via vendor</td>
+                <td>Flight-oriented COTS</td>
+              </tr>
+
+              <tr data-path="Electrical / Avionics > Computational / On-Board Computer (OBC) > Flight computer">
+                <td>16</td>
+                <td class="tree-location"><strong>Electrical / Avionics</strong>Computational / On-Board Computer (OBC) • Flight computer</td>
+                <td><strong>Flight computer</strong></td>
+                <td>
+                  <a href="https://www.cubesatshop.com/product/isis-on-board-computer/" target="_blank" rel="noopener noreferrer">ISISPACE On Board Computer (iOBC)</a>
+                  <span class="vendor">ISISPACE</span>
+                </td>
+                <td>CubeSat on-board computer with flight heritage; available in multiple variants.</td>
+                <td class="price">Quote required</td>
+                <td>CubeSatShop currently shows out of stock / request info</td>
+                <td>Flight-oriented COTS</td>
+              </tr>
+
+              <tr data-path="Electrical / Avionics > Computational / On-Board Computer (OBC) > Flight computer">
+                <td>17</td>
+                <td class="tree-location"><strong>Electrical / Avionics</strong>Computational / On-Board Computer (OBC) • Flight computer</td>
+                <td><strong>Flight computer</strong></td>
+                <td>
+                  <a href="https://gomspace.com/product/nanomind-a3200/" target="_blank" rel="noopener noreferrer">NanoMind A3200</a>
+                  <span class="vendor">GomSpace</span>
+                </td>
+                <td>Established GomSpace on-board computer.</td>
+                <td class="price">Quote required</td>
+                <td>Vendor product page</td>
+                <td>Flight-oriented COTS</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="empty-state" id="emptyState">
+          No products in the pasted table match this branch yet.
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script>
+    (() => {
+      const tree = document.getElementById("componentTree");
+      const treeLinks = [...document.querySelectorAll(".tree-link")];
+      const rows = [...document.querySelectorAll("#catalogTable tbody tr")];
+      const searchInput = document.getElementById("catalogSearch");
+      const filterStatus = document.getElementById("filterStatus");
+      const emptyState = document.getElementById("emptyState");
+
+      const showAllButton = document.getElementById("showAllButton");
+      const clearFilterButton = document.getElementById("clearFilterButton");
+      const expandAllButton = document.getElementById("expandAllButton");
+      const collapseAllButton = document.getElementById("collapseAllButton");
+
+      let activePath = "Electrical / Avionics > Communications > Antenna";
+
+      function leafName(path) {
+        const parts = path.split(" > ");
+        return parts[parts.length - 1];
+      }
+
+      function applyFilters() {
+        const query = searchInput.value.trim().toLowerCase();
+        let visible = 0;
+
+        rows.forEach((row) => {
+          const rowPath = row.dataset.path || "";
+          const matchesTree =
+            !activePath ||
+            rowPath === activePath ||
+            rowPath.startsWith(activePath + " > ");
+
+          const matchesSearch =
+            !query || row.textContent.toLowerCase().includes(query);
+
+          const shouldShow = matchesTree && matchesSearch;
+          row.hidden = !shouldShow;
+
+          if (shouldShow) {
+            visible += 1;
+          }
+        });
+
+        if (activePath) {
+          filterStatus.innerHTML =
+            `Showing <strong>${escapeHtml(leafName(activePath))}</strong> ` +
+            `items: <strong>${visible}</strong> visible.`;
+        } else {
+          filterStatus.innerHTML =
+            `Showing <strong>all categories</strong>: <strong>${visible}</strong> visible.`;
+        }
+
+        emptyState.classList.toggle("show", visible === 0);
+      }
+
+      function escapeHtml(value) {
+        return value
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;")
+          .replaceAll("'", "&#039;");
+      }
+
+      function setActivePath(path, clickedButton = null) {
+        activePath = path;
+
+        treeLinks.forEach((button) => {
+          button.classList.toggle(
+            "active",
+            clickedButton ? button === clickedButton : false
+          );
+        });
+
+        applyFilters();
+      }
+
+      tree.addEventListener("click", (event) => {
+        const button = event.target.closest(".tree-link");
+        if (!button) return;
+
+        setActivePath(button.dataset.filter, button);
+      });
+
+      searchInput.addEventListener("input", applyFilters);
+
+      showAllButton.addEventListener("click", () => {
+        setActivePath("");
+      });
+
+      clearFilterButton.addEventListener("click", () => {
+        setActivePath("");
+      });
+
+      expandAllButton.addEventListener("click", () => {
+        document.querySelectorAll(".tree details").forEach((details) => {
+          details.open = true;
+        });
+      });
+
+      collapseAllButton.addEventListener("click", () => {
+        document.querySelectorAll(".tree details").forEach((details, index) => {
+          details.open = index === 0;
+        });
+      });
+
+      applyFilters();
+    })();
+  </script>
+</body>
+</html>
