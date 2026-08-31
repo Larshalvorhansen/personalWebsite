@@ -39,9 +39,7 @@
     @media (min-width: 768px) {
       .sidebar {
         width: auto;
-        /* Let the width adjust based on the content */
         max-width: 25%;
-        /* Set a maximum width */
         height: 100vh;
         position: fixed;
         top: 0;
@@ -52,7 +50,6 @@
       .main-content {
         margin-left: 17%;
         margin-right: 5%;
-        /* Adjust based on the sidebar width */
         z-index: 1;
       }
     }
@@ -60,9 +57,7 @@
     @media (max-width: 767px) {
       .sidebar {
         width: 100%;
-        /* Full width in smaller screens */
         max-width: none;
-        /* Ignore the max-width constraint */
         height: auto;
         position: fixed;
         top: 0;
@@ -75,7 +70,6 @@
 
       .main-content {
         margin-top: 60px;
-        /* Adjust based on the height of */
       }
     }
 
@@ -106,7 +100,12 @@
     ]);
 </script>
 </head>
-
+<thead class="sticky top-0 bg-white z-10 shadow-sm">
+  <tr>
+    <th class="p-3 text-left bg-white">Column 1</th>
+    <th class="p-3 text-left bg-white">Column 2</th>
+  </tr>
+</thead>
 <body class="bg-white">
   <!-- Sidebar -->
   <div class="sidebar bg-black text-white p-4">
