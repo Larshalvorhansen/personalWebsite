@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CubeSat COTS Database</title>
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<header>
+  <h1>CubeSat COTS Database</h1>
+  <p class="lede">
+    The complete component catalog lives in <code>cubesat_cots.json</code>.
+    The table and collapsible CubeSat navigation tree are generated from that file at runtime.
+  </p>
+  <div class="topline">
+    <span class="badge"><span class="count" id="visibleCount">0</span> shown / <span id="totalCount">0</span> loaded</span>
+    <span class="badge">JSON data source</span>
+    <span class="badge">Collapsible subsystem tree</span>
+    <span class="badge">Search + filters + sortable columns</span>
+  </div>
+</header>
+
+<div class="workspace">
+  <aside class="sidebar" aria-label="CubeSat component tree">
+    <div class="sidebar-head">
+      <div class="sidebar-title">CubeSat component tree</div>
+      <div class="tree-actions">
+        <button id="showAllTree" type="button">Show all</button>
+        <button id="expandAll" type="button">Expand all</button>
+        <button id="collapseAll" type="button">Collapse all</button>
+      </div>
+    </div>
+    <div id="treeNav" class="tree-scroll">
+      <div class="tree-empty">Waiting for JSON data…</div>
+    </div>
+  </aside>
+
+  <main class="content">
+    <div id="status" class="status">Loading <code>cubesat_cots.json</code>…</div>
+
+    <div class="controls">
+      <input id="search" type="search" placeholder="Search all fields…" autocomplete="off">
+
+      <select id="classFilter">
+        <option value="">All procurement classes</option>
+      </select>
+
+      <label class="filebtn">
+        <button type="button" id="fileButton" class="primary">Load JSON file</button>
+        <input id="fileInput" type="file" accept=".json,application/json">
+      </label>
+
+      <button id="reset" type="button">Reset</button>
+    </div>
+
+    <div class="selectionbar">
+      <span>Tree selection:</span>
+      <strong id="treeSelection">CubeSat / Show all</strong>
+      <button id="clearTree" class="clear-tree" type="button" hidden>clear</button>
+    </div>
+
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr>
+            <th data-key="id">#</th>
+            <th data-key="tree_location">Tree location</th>
+            <th data-key="item_type">Item type</th>
+            <th data-key="product_name">COTS product / HTML link</th>
+            <th data-key="description">Description</th>
+            <th data-key="published_price">Published price</th>
+            <th data-key="availability">Availability</th>
+            <th data-key="procurement_class">Procurement class</th>
+          </tr>
+        </thead>
+        <tbody id="tbody">
+          <tr>
+            <td colspan="8" class="empty">Waiting for JSON data…</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <footer>
+      <p>
+        <strong>Local use:</strong> some browsers block <code>fetch()</code> when
+        <code>index.html</code> is opened directly with <code>file://</code>.
+        The <strong>Load JSON file</strong> button works as a fallback.
+        For automatic loading, serve this folder, for example with
+        <code>python -m http.server 8000</code>.
+      </p>
+      <p>
+        The sidetree is generated entirely from <code>tree_location</code> and
+        <code>item_type</code> in the JSON. Add a component to the JSON and its
+        branch appears automatically.
+      </p>
+    </footer>
+  </main>
+</div>
+
+<script src="./app.js"></script>
+</body>
+</html>
