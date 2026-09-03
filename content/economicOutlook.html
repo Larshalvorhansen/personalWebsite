@@ -1,33 +1,34 @@
-<!--
-The goal is for this website to display economic outlooks that I, Lars Halvor, have placed in a private spreadsheet online. A great CRM system if i can get it to work.
--->
-
 <!doctype html>
 <html lang="en">
-  <style>
-    * {
-      font-family: "Space Grotesk", sans-serif !important;
-    }
-    h1.title {
-      font-family: "Bentham", serif !important;
-    }
-  </style>
-
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Economic Outλook</title>
 
+    <!-- Load fonts -->
     <link
       href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap"
       rel="stylesheet"
     />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bentham&display=swap"
+      rel="stylesheet"
+    />
     <link rel="manifest" href="/site.webmanifest" />
     <script src="https://cdn.tailwindcss.com"></script>
-    <!--brevo stuff-->
+
+    <style>
+      * {
+        font-family: "Space Grotesk", sans-serif !important;
+      }
+      h1.title {
+        font-family: "Bentham", serif !important;
+      }
+    </style>
+
+    <!-- Brevo -->
     <script src="https://cdn.brevo.com/js/sdk-loader.js" async></script>
     <script>
-      // Version: 2.0
       window.Brevo = window.Brevo || [];
       Brevo.push([
         "init",
@@ -41,13 +42,6 @@ The goal is for this website to display economic outlooks that I, Lars Halvor, h
   <body class="p-8 md:p-16 max-w-3xl mx-auto">
     <!-- Header -->
     <header class="mb-12">
-      <!-- Load Bentham font from Google Fonts -->
-      <link
-        href="https://fonts.googleapis.com/css2?family=Bentham&display=swap"
-        rel="stylesheet"
-      />
-
-      <!-- Tailwind HTML -->
       <h1
         class="title text-5xl md:text-7xl lg:text-9xl font-bold leading-tight tracking-tight uppercase font-bentham"
       >
@@ -67,18 +61,10 @@ The goal is for this website to display economic outlooks that I, Lars Halvor, h
         economic and geopolitical perspective.
       </p>
       <p class="mt-2 text-sm md:text-lg text-gray-500">
-        <!--<b
-          >As this website is only in its infancy weekly updates will start out
-          quite brief. Please also sprinkle some grains of salt when reading as
-          im only in my 2nd year of an economics bachelor.</b
-        ><br />-->
         The reason I write this is to get some wheels turning and gradually
         improve by engaging with the constant stream of reports, statistics, and
         analysis being published all around the world.
       </p>
-      <!--  <p class="mt-2 text-sm md:text-lg text-gray-500">
-      <b>Since week 5 this site has been down prioritized. However, I will pick this up again at week 19. Stay tuned!</b>
-    </p>-->
       <a
         href="https://halvorhansen.no"
         target="_blank"
@@ -102,7 +88,6 @@ The goal is for this website to display economic outlooks that I, Lars Halvor, h
     </header>
 
     <!-- Main Content -->
-
     <div
       style="
         margin-bottom: 2rem;
@@ -113,9 +98,10 @@ The goal is for this website to display economic outlooks that I, Lars Halvor, h
       <p>
         <strong>Publication Update:</strong> Currently working on a large
         semesterproject. Monthly articles will resume in January. Feel free to
-        read older artivles available below.
+        read older articles available below.
       </p>
     </div>
+
     <main>
       <div id="posts-container" class="divide-y divide-gray-300"></div>
     </main>
@@ -124,7 +110,7 @@ The goal is for this website to display economic outlooks that I, Lars Halvor, h
       async function fetchBlogPosts() {
         try {
           const sheetId = "1cooW6kZlSKUgBjK4uPnv4cynbw3nM7NjwMjDHHFJ6mY";
-          const apiKey = "AIzaSyABuVJIWSJiUqk01nvpYF4QVzmgyZDCaGc"; <!--public and read only so its ok!-->
+          const apiKey = "AIzaSyABuVJIWSJiUqk01nvpYF4QVzmgyZDCaGc";
           const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/EO2Response!A2:G?key=${apiKey}`;
 
           const response = await fetch(url);
@@ -147,7 +133,6 @@ The goal is for this website to display economic outlooks that I, Lars Halvor, h
               caption,
             ] = post;
 
-            // Check for manual year divider
             if (timestamp && timestamp.trim().startsWith("---")) {
               const yearHeader = document.createElement("h1");
               yearHeader.textContent = timestamp.replace(/-/g, "").trim();
@@ -161,29 +146,26 @@ The goal is for this website to display economic outlooks that I, Lars Halvor, h
             postElement.className = "py-8";
 
             const linkedSources = sources
-              // Convert markdown-style links [text](url) to HTML links
               .replace(
                 /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g,
                 (match, text, url) =>
                   `<a href="${url}" target="_blank" rel="noopener noreferrer" class="text-blue-500 underline">${text}</a>`,
               )
-              // Convert plain URLs to HTML links (only if not already part of an anchor tag)
               .replace(
                 /(?<!["'=\])])(https?:\/\/[^\s<]+)/g,
                 (url) =>
                   `<a href="${url}" target="_blank" rel="noopener noreferrer" class="text-blue-500 underline">${url}</a>`,
               )
-              // Replace newlines with <br> tags
               .replace(/\n/g, "<br>");
 
             postElement.innerHTML = `
-        <h2 class="text-2xl font-bold mb-2">Week ${weekNum}</h2>
-        <small class="text-sm mb-4 block">${timestamp}</small>
-        <p class="mb-4"><strong>Status:</strong> ${status}<br><br><strong>Prediction:</strong> ${prediction}</p>
-        <img src="${imageUrl || `images/${index + 1}.jpg`}" alt="${caption || ""}" class="w-full object-cover rounded-md mb-2">
-        <p class="text-sm italic mb-4">${caption || ""}</p>
-        <p class="text-xs"><strong>Sources:</strong><br>${linkedSources}</p>
-      `;
+              <h2 class="text-2xl font-bold mb-2">Week ${weekNum}</h2>
+              <small class="text-sm mb-4 block">${timestamp}</small>
+              <p class="mb-4"><strong>Status:</strong> ${status}<br><br><strong>Prediction:</strong> ${prediction}</p>
+              <img src="${imageUrl || `images/${index + 1}.jpg`}" alt="${caption || ""}" class="w-full object-cover rounded-md mb-2">
+              <p class="text-sm italic mb-4">${caption || ""}</p>
+              <p class="text-xs"><strong>Sources:</strong><br>${linkedSources}</p>
+            `;
 
             postsContainer.appendChild(postElement);
           });
@@ -194,22 +176,21 @@ The goal is for this website to display economic outlooks that I, Lars Halvor, h
 
       window.onload = fetchBlogPosts;
     </script>
-  </body>
 
-  <!-- Newsletter Signup Section -->
-  <!-- Full-width iframe container -->
-  <iframe
-    width="540"
-    height="540"
-    src="https://205e8466.sibforms.com/serve/MUIFAENkeHNkEaGxjTOJr8a26weXlWYi7C_aY4BcGa4-Kz-tZEdA1zzEaubAz-3Zobkx5CkfViCxfhqKMtMAV1Wl0I_XniYTQ1J3m58_gGjQHoPEvMSrxwNvqa4-zhvB7cANeaY5PxSpWKnIbQmX9gTNXos-8ECQ3eq41vHEuR7YWU2OkmJrXYc8qs1ku9QYK3qUKXMimoIkFOtQ"
-    frameborder="0"
-    scrolling="auto"
-    allowfullscreen
-    style="
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-      max-width: 100%;
-    "
-  ></iframe>
+    <!-- Newsletter Signup Section -->
+    <iframe
+      width="540"
+      height="540"
+      src="https://205e8466.sibforms.com/serve/MUIFAENkeHNkEaGxjTOJr8a26weXlWYi7C_aY4BcGa4-Kz-tZEdA1zzEaubAz-3Zobkx5CkfViCxfhqKMtMAV1Wl0I_XniYTQ1J3m58_gGjQHoPEvMSrxwNvqa4-zhvB7cANeaY5PxSpWKnIbQmX9gTNXos-8ECQ3eq41vHEuR7YWU2OkmJrXYc8qs1ku9QYK3qUKXMimoIkFOtQ"
+      frameborder="0"
+      scrolling="auto"
+      allowfullscreen
+      style="
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 100%;
+      "
+    ></iframe>
+  </body>
 </html>
