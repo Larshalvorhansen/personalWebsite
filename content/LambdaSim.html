@@ -4,42 +4,49 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Lambda: The simulation project</title>
+
+    <!-- Added Google Fonts for a modern look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
     <link rel="icon" sizes="32x32" href="litenhh.png" />
     <link
       href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
       rel="stylesheet"
     />
 
-    <!--
-      Notes
-      - Sidebar HTML is left exactly as-is per your request.
-      - Main content has been tightened up: better spacing, legible widths, soft cards, and a cleaner timeline.
-      - All original text is preserved verbatim.
-    -->
-
     <style>
       :root {
         --brand: #38acfc;
-        --ink: #111827; /* gray-900 */
-        --muted: #6b7280; /* gray-500 */
-        --bg: #f9fafb; /* gray-50 */
+        --brand-dark: #208ee0;
+        --ink: #0f172a;
+        --muted: #64748b;
+        --bg: #f8fafc;
       }
 
-      /* ---- Sidebar (unchanged structure) ---- */
+      body {
+        font-family: "Plus Jakarta Sans", sans-serif;
+      }
+
+      /* ---- Sidebar Layout (matches index.html) ---- */
       @media (min-width: 768px) {
         .sidebar {
           width: auto;
-          max-width: 25%;
+          max-width: 20%;
           height: 100vh;
           position: fixed;
           top: 0;
           left: 0;
-          z-index: 30;
+          z-index: 1;
         }
+
         .main-content {
-          margin-left: 17%;
-          margin-right: 5%;
-          z-index: 10;
+          margin-left: 20%;
+          z-index: 1;
         }
       }
 
@@ -54,28 +61,25 @@
           display: flex;
           flex-direction: row;
           justify-content: space-around;
-          padding: 1rem;
+          align-items: center;
+          padding: 0.75rem 1rem;
+          z-index: 50;
         }
+
         .main-content {
-          margin-top: 72px; /* accomodate fixed mobile bar */
+          margin-top: 70px;
         }
       }
 
-      /* Accent text hover */
+      /* Accent text gradient */
       .gradient-text {
-        background: linear-gradient(45deg, #002896, #77cfff);
+        background: linear-gradient(135deg, #002896, #38acfc);
         -webkit-background-clip: text;
         background-clip: text;
         color: transparent;
-        transition: background-position 0.3s ease-in-out;
-        background-size: 200% 200%;
-        background-position: 0% 50%;
-      }
-      .gradient-text:hover {
-        background-position: 100% 50%;
       }
 
-      /* ----- Timeline (clean vertical) ----- */
+      /* ----- Timeline (Clean & Interactive) ----- */
       .timeline {
         position: relative;
         padding-left: 1.5rem;
@@ -84,21 +88,34 @@
         content: "";
         position: absolute;
         left: 0.5rem;
-        top: 0;
-        bottom: 0;
+        top: 0.5rem;
+        bottom: 0.5rem;
         width: 2px;
-        background: linear-gradient(180deg, var(--brand), #376eff);
-        opacity: 0.8;
+        background: linear-gradient(180deg, var(--brand), #3b82f6);
+        border-radius: 9999px;
+        opacity: 0.7;
       }
       .timeline-item {
         position: relative;
-        margin: 1rem 0 1.25rem;
+        margin-bottom: 1rem;
       }
-      .timeline-item::marker {
-        display: none;
+      .timeline-item::before {
+        content: "";
+        position: absolute;
+        left: -1.35rem;
+        top: 1.25rem;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: var(--brand);
+        border: 2px solid white;
+        box-shadow: 0 0 0 2px rgba(56, 172, 252, 0.3);
       }
       details.timeline-item > summary {
         list-style: none;
+      }
+      details.timeline-item > summary::-webkit-details-marker {
+        display: none;
       }
       details.timeline-item[open] summary .chev {
         transform: rotate(180deg);
@@ -118,47 +135,55 @@
     </script>
   </head>
 
-  <body class="bg-white text-gray-900">
-    <!-- Sidebar (left untouched) -->
-    <div class="sidebar bg-black text-white p-4">
-      <a href="index.html">
+  <body class="bg-gray-50 text-gray-800 antialiased">
+    <!-- Sidebar (matches index.html) -->
+    <div
+      class="sidebar bg-black text-gray-300 p-6 shadow-2xl flex flex-col justify-start"
+    >
+      <a href="index.html" class="mb-2 md:mb-8 block">
         <img
-          class="object-scale-down max-h-16 max-w-16 drop-shadow-md rounded-md m-auto"
+          class="object-scale-down max-h-12 md:max-h-20 max-w-full drop-shadow-xl rounded-xl m-auto transform hover:scale-105 transition duration-300"
           src="logo3.png"
           alt=""
         />
       </a>
-      <a
-        href="LambdaSim.html"
-        class="block p-2 md:w/full text-center md:text-left"
-        >Lambdasim</a
-      >
-      <a href="art.html" class="block p-2 md:w/full text-center md:text-left"
-        >Art</a
-      >
-      <a
-        href="Economicoutlook.html"
-        class="block p-2 md:w/full text-center md:text-left"
-        >Economic Outλook</a
-      >
-      <a href="cv.html" class="block p-2 md:w/full text-center md:text-left"
-        >CV</a
-      >
-      <a href="index.html" class="block p-2 md:w/full text-center md:text-left"
-        >About</a
-      ><br />
-      <div
-        class="hidden md:flex place-content-baseline md:justify-content-flex-end md:space-x-4 display: block ml-2"
-      >
+      <div class="flex-grow space-y-1">
+        <a
+          href="LambdaSim.html"
+          class="block p-2 md:px-4 md:py-3 rounded-lg transition-all duration-200 hover:bg-gray-900 hover:text-white md:w-full text-center md:text-left font-medium"
+          >Lambdasim</a
+        >
+        <a
+          href="art.html"
+          class="block p-2 md:px-4 md:py-3 rounded-lg transition-all duration-200 hover:bg-gray-900 hover:text-white md:w-full text-center md:text-left font-medium"
+          >Art</a
+        >
+        <a
+          href="Economicoutlook.html"
+          class="block p-2 md:px-4 md:py-3 rounded-lg transition-all duration-200 hover:bg-gray-900 hover:text-white md:w-full text-center md:text-left font-medium"
+          >Economic Outλook</a
+        >
+        <a
+          href="cv.html"
+          class="block p-2 md:px-4 md:py-3 rounded-lg transition-all duration-200 hover:bg-gray-900 hover:text-white md:w-full text-center md:text-left font-medium"
+          >CV</a
+        >
+        <a
+          href="index.html"
+          class="block p-2 md:px-4 md:py-3 rounded-lg transition-all duration-200 hover:bg-gray-900 hover:text-white md:w-full text-center md:text-left font-medium"
+          >About</a
+        >
+      </div>
+
+      <!-- Social Icons -->
+      <div class="hidden md:flex items-center space-x-5 mt-auto pt-6 px-4">
         <a
           href="mailto:larshalvorhansen1@gmail.com"
           target="_blank"
           title="Send an email"
           rel="noreferrer"
-          class="text-white"
-          aria-label="Email"
+          class="text-gray-400 hover:text-blue-400 transition-colors"
         >
-          <!-- email icon -->
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -179,17 +204,13 @@
           target="_blank"
           title="Add me on X"
           rel="noreferrer"
-          class="text-white"
-          aria-label="X / Twitter"
+          class="text-gray-400 hover:text-blue-400 transition-colors"
         >
-          <!-- x icon -->
           <svg
-            class="w-6 h-6"
+            class="w-5 h-5"
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            fill="white"
+            fill="currentColor"
             viewBox="0 0 24 24"
           >
             <path
@@ -202,17 +223,13 @@
           target="_blank"
           title="Add me on Linked in"
           rel="noreferrer"
-          class="text-white"
-          aria-label="LinkedIn"
+          class="text-gray-400 hover:text-blue-400 transition-colors"
         >
-          <!-- linkedin icon -->
           <svg
             class="w-6 h-6"
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            fill="white"
+            fill="currentColor"
             viewBox="0 0 24 24"
           >
             <path
@@ -228,17 +245,15 @@
           target="_blank"
           title="Go to Githbub"
           rel="noreferrer"
-          class="text-white"
-          aria-label="GitHub"
+          class="text-gray-400 hover:text-blue-400 transition-colors"
         >
-          <!-- github icon -->
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 98 96"
             class="h-6 w-6"
           >
             <path
-              fill="#fff"
+              fill="currentColor"
               fill-rule="evenodd"
               d="M48.854 0C21.839 0 0 22 0 49.217c0 21.756 13.993 40.172 33.405 46.69 2.427.49 3.316-1.059 3.316-2.362 0-1.141-.08-5.052-.08-9.127-13.59 2.934-16.42-5.867-16.42-5.867-2.184-5.704-5.42-7.17-5.42-7.17-4.448-3.015.324-3.015.324-3.015 4.934.326 7.523 5.052 7.523 5.052 4.367 7.496 11.404 5.378 14.235 4.074.404-3.178 1.699-5.378 3.074-6.6-10.839-1.141-22.243-5.378-22.243-24.283 0-5.378 1.94-9.778 5.014-13.2-.485-1.222-2.184-6.275.486-13.038 0 0 4.125-1.304 13.426 5.052a46.97 46.97 0 0 1 12.214-1.63c4.125 0 8.33.571 12.213 1.63 9.302-6.356 13.427-5.052 13.427-5.052 2.67 6.763.97 11.816.485 13.038 3.155 3.422 5.015 7.822 5.015 13.2 0 18.905-11.404 23.06-22.324 24.283 1.78 1.548 3.316 4.481 3.316 9.126 0 6.6-.08 11.897-.08 13.526 0 1.304.89 2.853 3.316 2.364 19.412-6.52 33.405-24.935 33.405-46.691C97.707 22 75.788 0 48.854 0z"
               clip-rule="evenodd"
@@ -250,25 +265,34 @@
 
     <!-- Main Content -->
     <main class="main-content">
-      <section class="mx-auto max-w-3xl px-6 md:px-12 py-10 md:py-16">
-        <div class="flex justify-center">
+      <section class="mx-auto max-w-4xl px-6 md:px-12 py-10 md:py-16">
+        <!-- Logo Header -->
+        <div class="flex justify-center mb-8">
           <img
             src="lambdaLogoCrop52.png"
-            alt="Your image description"
-            class="w-64 md:w-80 h-auto"
+            alt="LambdaSim Logo"
+            class="w-64 md:w-80 h-auto object-contain filter drop-shadow-sm transition-transform duration-300 hover:scale-105"
           />
         </div>
 
-        <h2 class="mt-8 text-lg md:text-xl text-gray-600 leading-relaxed">
-          LambdaSim's main goal is to act as a digital twin of the world from a
-          macroeconomic perspective and to simulate future scenarios by taking
-          advantage of agent based modeing and various methods from multivariat
-          data analysis.<br />
-        </h2>
+        <!-- Main Goal Banner -->
+        <div
+          class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-gray-100 mb-10"
+        >
+          <h2
+            class="text-lg md:text-xl text-gray-700 leading-relaxed font-normal"
+          >
+            LambdaSim's main goal is to act as a digital twin of the world from
+            a macroeconomic perspective and to simulate future scenarios by
+            taking advantage of agent based modeing and various methods from
+            multivariat data analysis.
+          </h2>
+        </div>
 
+        <!-- Floating GitHub Action Button -->
         <button
           id="github-button"
-          class="fixed bottom-5 right-5 z-50 px-4 py-2 text-black rounded-lg shadow transition-opacity duration-500"
+          class="fixed bottom-6 right-6 z-50 px-5 py-3 text-gray-900 font-semibold rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-0.5 flex items-center space-x-2 border border-white/20"
           style="background-color: var(--brand)"
           onclick="
             window.open(
@@ -280,15 +304,29 @@
             setTimeout(() => (btn.style.display = 'none'), 500);
           "
         >
-          Click to view the project on GitHub
+          <span>Click to view the project on GitHub</span>
+          <svg
+            class="w-4 h-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M14 5l7 7m0 0l-7 7m7-7H3"
+            />
+          </svg>
         </button>
 
-        <div class="mt-10 space-y-6 text-base leading-7 text-gray-800">
-          <p>
-            <b
-              >Here is a peek at what's driving this project along with a
-              project timeline.</b
-            >
+        <!-- Context & Motivation Paragraphs -->
+        <div class="space-y-6 text-base leading-relaxed text-gray-700">
+          <p
+            class="text-lg font-semibold text-gray-900 border-l-4 border-blue-500 pl-4 py-1"
+          >
+            Here is a peek at what's driving this project along with a project
+            timeline.
           </p>
           <p>
             Complexity arises when there are nonlinear relationships, feedback
@@ -331,101 +369,128 @@
           </p>
         </div>
 
-        <!-- Paper section -->
-        <section id="abm-application" class="mt-14 md:mt-16">
+        <!-- Paper Card Section -->
+        <section id="abm-application" class="mt-12">
           <div
-            class="rounded-2xl border border-gray-200 shadow-sm p-6 md:p-8 bg-white"
+            class="rounded-2xl border border-gray-200/80 shadow-md p-6 md:p-8 bg-white relative overflow-hidden"
           >
-            <h2 class="text-2xl font-semibold mb-3 text-gray-900">
-              Highly relevant paper
-            </h2>
-            <p class="text-gray-700 leading-relaxed mb-6">
-              The paper applies an Agent Based Model (ABM) model to simulate
-              Austria’s medium-run economic recovery from COVID-19 lockdowns,
-              finding the ABM’s results consistent with official forecasts by
-              Austrian institutions.
-            </p>
+            <div
+              class="absolute top-0 right-0 w-32 h-32 bg-blue-50 rounded-bl-full -z-0 opacity-50"
+            ></div>
 
-            <h3 class="text-xl font-semibold mb-2 text-gray-900">
-              Key Takeaways
-            </h3>
-            <ul class="list-disc pl-5 space-y-2 text-gray-800 mb-6">
-              <li>
-                The paper argues ABMs can now be realistic, empirically
-                validated tools for forecasting and policy analysis, challenging
-                the idea that the status quo Dynamic stochastic general
-                equilibrium models (DSGEs) are the only serious condender for
-                economic forcasting.
-              </li>
-              <li>
-                ABMs naturally incorporate bounded rationality, agent
-                heterogeneity, and financial frictions—areas where DSGEs
-                struggle without heavy extensions.
-              </li>
-            </ul>
+            <div class="relative z-10">
+              <h2 class="text-2xl font-bold mb-3 text-gray-900">
+                Highly relevant paper
+              </h2>
+              <p class="text-gray-700 leading-relaxed mb-6">
+                The paper applies an Agent Based Model (ABM) model to simulate
+                Austria’s medium-run economic recovery from COVID-19 lockdowns,
+                finding the ABM’s results consistent with official forecasts by
+                Austrian institutions.
+              </p>
 
-            <h3 class="text-xl font-semibold mb-2 text-gray-900">
-              Why It’s Important
-            </h3>
-            <ul class="list-disc pl-5 space-y-2 text-gray-800 mb-6">
-              <li>
-                This approach makes it possible to model the economy WITHOUT
-                assuming that all agens behave perfectly rationally, while still
-                providing forecasts as good as mainstream models.
-              </li>
-              <li>
-                It opens the door for using ABMs in practical macroeconomic
-                forecasting, stress testing, and analyzing the impact of
-                policies at both aggregate and sectoral levels.
-              </li>
-            </ul>
-
-            <h3 class="text-xl font-semibold mb-3 text-gray-900">
-              Read the Full Paper
-            </h3>
-            <p>
-              <a
-                href="https://www.sciencedirect.com/science/article/pii/S0014292122001891"
-                target="_blank"
-                class="text-blue-600 underline hover:text-blue-800"
-                >Download the PDF of "Economic Forecasting with an Agent-Based
-                Model"</a
+              <h3
+                class="text-lg font-semibold mb-2 text-gray-900 flex items-center"
               >
-            </p>
+                Key Takeaways
+              </h3>
+              <ul class="list-disc pl-6 space-y-2 text-gray-700 mb-6">
+                <li>
+                  The paper argues ABMs can now be realistic, empirically
+                  validated tools for forecasting and policy analysis,
+                  challenging the idea that the status quo Dynamic stochastic
+                  general equilibrium models (DSGEs) are the only serious
+                  condender for economic forcasting.
+                </li>
+                <li>
+                  ABMs naturally incorporate bounded rationality, agent
+                  heterogeneity, and financial frictions—areas where DSGEs
+                  struggle without heavy extensions.
+                </li>
+              </ul>
+
+              <h3
+                class="text-lg font-semibold mb-2 text-gray-900 flex items-center"
+              >
+                Why it matters
+              </h3>
+              <ul class="list-disc pl-6 space-y-2 text-gray-700 mb-6">
+                <li>
+                  This approach makes it possible to model the economy WITHOUT
+                  assuming that all agens behave perfectly rationally, while
+                  still providing forecasts as good as mainstream models.
+                </li>
+                <li>
+                  It opens the door for using ABMs in practical macroeconomic
+                  forecasting, stress testing, and analyzing the impact of
+                  policies at both aggregate and sectoral levels.
+                </li>
+              </ul>
+
+              <h3 class="text-lg font-semibold mb-2 text-gray-900">
+                Read the Full Paper
+              </h3>
+              <p>
+                <a
+                  href="https://www.sciencedirect.com/science/article/pii/S0014292122001891"
+                  target="_blank"
+                  class="inline-flex items-center text-blue-600 font-medium hover:text-blue-800 underline transition-colors"
+                >
+                  Download the PDF of "Economic Forecasting with an Agent-Based
+                  Model"
+                  <svg
+                    class="w-4 h-4 ml-1"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                    />
+                  </svg>
+                </a>
+              </p>
+            </div>
           </div>
         </section>
 
-        <div class="mt-8">
+        <!-- Main GitHub CTA Button -->
+        <div class="mt-10 text-center">
           <a
             href="https://github.com/Larshalvorhansen/LambdaTheSimulationProject/blob/main/Research-Plan.md"
-            class="inline-flex items-center justify-center bg-black text-white px-6 md:px-8 py-3 rounded-xl hover:bg-blue-500 hover:text-black hover:border-4 hover:border-black transition-all duration-200 shadow"
+            target="_blank"
+            class="inline-flex items-center justify-center bg-gray-900 text-white font-medium px-8 py-4 rounded-xl hover:bg-blue-600 transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
           >
             Check out LambdaSim on GitHub
           </a>
         </div>
 
-        <!-- Project Timeline -->
-        <section id="project-timeline" class="mt-16 md:mt-20">
-          <header class="text-center mb-6">
-            <h1 class="text-2xl font-bold">Project Timeline</h1>
-            <h2 class="text-sm text-gray-500">(Click the rows to expand)</h2>
+        <!-- Project Timeline Section -->
+        <section id="project-timeline" class="mt-16">
+          <header class="text-center mb-10">
+            <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">
+              Project Timeline
+            </h1>
+            <p class="text-sm text-gray-500 mt-1">(Click the rows to expand)</p>
           </header>
 
           <div class="timeline">
             <!-- Item 1 -->
             <details
-              class="timeline-item group rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors"
+              class="timeline-item group rounded-xl bg-white border border-gray-200/80 hover:border-blue-300 transition-all shadow-sm overflow-hidden"
             >
               <summary
-                class="cursor-pointer select-none p-4 pl-8 flex items-start justify-between"
+                class="cursor-pointer select-none p-4 pl-6 flex items-center justify-between hover:bg-gray-50 transition-colors"
               >
                 <span class="sr-only">Expand</span>
-
-                <div class="pr-6 font-medium">
+                <div class="font-semibold text-gray-900 text-base">
                   February 2024 - Git repo started
                 </div>
                 <svg
-                  class="chev w-4 h-4 mt-1 flex-shrink-0 transform transition-transform"
+                  class="chev w-5 h-5 text-gray-400 group-hover:text-gray-600 flex-shrink-0 transform transition-transform duration-200"
                   viewBox="0 0 20 20"
                   fill="currentColor"
                   aria-hidden="true"
@@ -437,7 +502,9 @@
                   />
                 </svg>
               </summary>
-              <div class="px-6 pb-4 text-gray-700">
+              <div
+                class="px-6 pb-4 pt-1 text-gray-600 border-t border-gray-100 bg-gray-50/50"
+              >
                 <p>
                   This is where the whole project lies. Several different
                   approaches lie here. Small experimental baby steps etc.
@@ -447,16 +514,16 @@
 
             <!-- Item 2 -->
             <details
-              class="timeline-item group rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors"
+              class="timeline-item group rounded-xl bg-white border border-gray-200/80 hover:border-blue-300 transition-all shadow-sm overflow-hidden"
             >
               <summary
-                class="cursor-pointer select-none p-4 pl-8 flex items-start justify-between"
+                class="cursor-pointer select-none p-4 pl-6 flex items-center justify-between hover:bg-gray-50 transition-colors"
               >
-                <div class="pr-6 font-medium">
+                <div class="font-semibold text-gray-900 text-base">
                   June 2024 - This website was created
                 </div>
                 <svg
-                  class="chev w-4 h-4 mt-1 transform transition-transform"
+                  class="chev w-5 h-5 text-gray-400 group-hover:text-gray-600 flex-shrink-0 transform transition-transform duration-200"
                   viewBox="0 0 20 20"
                   fill="currentColor"
                 >
@@ -467,7 +534,9 @@
                   />
                 </svg>
               </summary>
-              <div class="px-6 pb-4 text-gray-700">
+              <div
+                class="px-6 pb-4 pt-1 text-gray-600 border-t border-gray-100 bg-gray-50/50"
+              >
                 <p>
                   With the purpose of sharing the project with friends,
                   interested people, etc.
@@ -477,16 +546,16 @@
 
             <!-- Item 3 -->
             <details
-              class="timeline-item group rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors"
+              class="timeline-item group rounded-xl bg-white border border-gray-200/80 hover:border-blue-300 transition-all shadow-sm overflow-hidden"
             >
               <summary
-                class="cursor-pointer select-none p-4 pl-8 flex items-start justify-between"
+                class="cursor-pointer select-none p-4 pl-6 flex items-center justify-between hover:bg-gray-50 transition-colors"
               >
-                <div class="pr-6 font-medium">
+                <div class="font-semibold text-gray-900 text-base">
                   August 2024 - Market research and experimental development
                 </div>
                 <svg
-                  class="chev w-4 h-4 mt-1 transform transition-transform"
+                  class="chev w-5 h-5 text-gray-400 group-hover:text-gray-600 flex-shrink-0 transform transition-transform duration-200"
                   viewBox="0 0 20 20"
                   fill="currentColor"
                 >
@@ -497,7 +566,9 @@
                   />
                 </svg>
               </summary>
-              <div class="px-6 pb-4 text-gray-700">
+              <div
+                class="px-6 pb-4 pt-1 text-gray-600 border-t border-gray-100 bg-gray-50/50"
+              >
                 <p>
                   Since this is a software-based project, there are no upfront
                   costs. The time is well spent even if there isn't much
@@ -509,16 +580,16 @@
 
             <!-- Item 4 -->
             <details
-              class="timeline-item group rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors"
+              class="timeline-item group rounded-xl bg-white border border-gray-200/80 hover:border-blue-300 transition-all shadow-sm overflow-hidden"
             >
               <summary
-                class="cursor-pointer select-none p-4 pl-8 flex items-start justify-between"
+                class="cursor-pointer select-none p-4 pl-6 flex items-center justify-between hover:bg-gray-50 transition-colors"
               >
-                <div class="pr-6 font-medium">
+                <div class="font-semibold text-gray-900 text-base">
                   September 2024 - Relational Database
                 </div>
                 <svg
-                  class="chev w-4 h-4 mt-1 transform transition-transform"
+                  class="chev w-5 h-5 text-gray-400 group-hover:text-gray-600 flex-shrink-0 transform transition-transform duration-200"
                   viewBox="0 0 20 20"
                   fill="currentColor"
                 >
@@ -529,7 +600,9 @@
                   />
                 </svg>
               </summary>
-              <div class="px-6 pb-4 text-gray-700">
+              <div
+                class="px-6 pb-4 pt-1 text-gray-600 border-t border-gray-100 bg-gray-50/50"
+              >
                 <p>
                   After brainstorming and research, the project landed on
                   building a relational database — ideal for managing structured
@@ -541,16 +614,16 @@
 
             <!-- Item 5 -->
             <details
-              class="timeline-item group rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors"
+              class="timeline-item group rounded-xl bg-white border border-gray-200/80 hover:border-blue-300 transition-all shadow-sm overflow-hidden"
             >
               <summary
-                class="cursor-pointer select-none p-4 pl-8 flex items-start justify-between"
+                class="cursor-pointer select-none p-4 pl-6 flex items-center justify-between hover:bg-gray-50 transition-colors"
               >
-                <div class="pr-6 font-medium">
+                <div class="font-semibold text-gray-900 text-base">
                   October 2024 - Accepted by NTNU as a student project
                 </div>
                 <svg
-                  class="chev w-4 h-4 mt-1 transform transition-transform"
+                  class="chev w-5 h-5 text-gray-400 group-hover:text-gray-600 flex-shrink-0 transform transition-transform duration-200"
                   viewBox="0 0 20 20"
                   fill="currentColor"
                 >
@@ -561,7 +634,9 @@
                   />
                 </svg>
               </summary>
-              <div class="px-6 pb-4 text-gray-700">
+              <div
+                class="px-6 pb-4 pt-1 text-gray-600 border-t border-gray-100 bg-gray-50/50"
+              >
                 <p>
                   Thanks to supportive professors at NTNU's IE faculty,
                   LambdaSim was granted as a course worth 7.5 study points,
@@ -570,7 +645,7 @@
                     href="https://www.ntnu.edu/studies/courses/TFE4205#tab=omEmnet"
                     target="_blank"
                     rel="noopener"
-                    class="text-blue-600 underline"
+                    class="text-blue-600 hover:text-blue-800 underline font-medium"
                     >TFE4205 - Student Defined Development Project</a
                   >.
                 </p>
@@ -579,16 +654,16 @@
 
             <!-- Item 6 -->
             <details
-              class="timeline-item group rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors"
+              class="timeline-item group rounded-xl bg-white border border-gray-200/80 hover:border-blue-300 transition-all shadow-sm overflow-hidden"
             >
               <summary
-                class="cursor-pointer select-none p-4 pl-8 flex items-start justify-between"
+                class="cursor-pointer select-none p-4 pl-6 flex items-center justify-between hover:bg-gray-50 transition-colors"
               >
-                <div class="pr-6 font-medium">
+                <div class="font-semibold text-gray-900 text-base">
                   November 2024 and into the future...
                 </div>
                 <svg
-                  class="chev w-4 h-4 mt-1 transform transition-transform"
+                  class="chev w-5 h-5 text-gray-400 group-hover:text-gray-600 flex-shrink-0 transform transition-transform duration-200"
                   viewBox="0 0 20 20"
                   fill="currentColor"
                 >
@@ -599,24 +674,28 @@
                   />
                 </svg>
               </summary>
-              <div class="px-6 pb-4 text-gray-700">
-                <h4 class="font-bold">Who knows what might happen here?</h4>
+              <div
+                class="px-6 pb-4 pt-1 text-gray-600 border-t border-gray-100 bg-gray-50/50"
+              >
+                <h4 class="font-bold text-gray-900 mb-1">
+                  Who knows what might happen here?
+                </h4>
                 <p>Hopefully, this will get clearer by the end of September.</p>
               </div>
             </details>
 
             <!-- Item 7 -->
             <details
-              class="timeline-item group rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors"
+              class="timeline-item group rounded-xl bg-white border border-gray-200/80 hover:border-blue-300 transition-all shadow-sm overflow-hidden"
             >
               <summary
-                class="cursor-pointer select-none p-4 pl-8 flex items-start justify-between"
+                class="cursor-pointer select-none p-4 pl-6 flex items-center justify-between hover:bg-gray-50 transition-colors"
               >
-                <div class="pr-6 font-medium">
+                <div class="font-semibold text-gray-900 text-base">
                   December 2024 - Committing more to the project
                 </div>
                 <svg
-                  class="chev w-4 h-4 mt-1 transform transition-transform"
+                  class="chev w-5 h-5 text-gray-400 group-hover:text-gray-600 flex-shrink-0 transform transition-transform duration-200"
                   viewBox="0 0 20 20"
                   fill="currentColor"
                 >
@@ -627,8 +706,12 @@
                   />
                 </svg>
               </summary>
-              <div class="px-6 pb-4 text-gray-700">
-                <h4 class="font-bold">Saying no is scary.</h4>
+              <div
+                class="px-6 pb-4 pt-1 text-gray-600 border-t border-gray-100 bg-gray-50/50"
+              >
+                <h4 class="font-bold text-gray-900 mb-1">
+                  Saying no is scary.
+                </h4>
                 <p>
                   I declined an offer to work with a satellite communication
                   system to dedicate more time to LambdaSim in summer 2025.
@@ -638,16 +721,16 @@
 
             <!-- Item 8 -->
             <details
-              class="timeline-item group rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors"
+              class="timeline-item group rounded-xl bg-white border border-gray-200/80 hover:border-blue-300 transition-all shadow-sm overflow-hidden"
             >
               <summary
-                class="cursor-pointer select-none p-4 pl-8 flex items-start justify-between"
+                class="cursor-pointer select-none p-4 pl-6 flex items-center justify-between hover:bg-gray-50 transition-colors"
               >
-                <div class="pr-6 font-medium">
+                <div class="font-semibold text-gray-900 text-base">
                   January 2025 - A new approach
                 </div>
                 <svg
-                  class="chev w-4 h-4 mt-1 transform transition-transform"
+                  class="chev w-5 h-5 text-gray-400 group-hover:text-gray-600 flex-shrink-0 transform transition-transform duration-200"
                   viewBox="0 0 20 20"
                   fill="currentColor"
                 >
@@ -658,8 +741,12 @@
                   />
                 </svg>
               </summary>
-              <div class="px-6 pb-4 text-gray-700">
-                <h4 class="font-bold">The project is now quite concrete.</h4>
+              <div
+                class="px-6 pb-4 pt-1 text-gray-600 border-t border-gray-100 bg-gray-50/50"
+              >
+                <h4 class="font-bold text-gray-900 mb-1">
+                  The project is now quite concrete.
+                </h4>
                 <p>
                   The current goal: develop a macroeconomic model that combines
                   real-time data and complex adaptive systems to predict global
@@ -671,16 +758,16 @@
 
             <!-- Item 9 -->
             <details
-              class="timeline-item group rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors"
+              class="timeline-item group rounded-xl bg-white border border-gray-200/80 hover:border-blue-300 transition-all shadow-sm overflow-hidden"
             >
               <summary
-                class="cursor-pointer select-none p-4 pl-8 flex items-start justify-between"
+                class="cursor-pointer select-none p-4 pl-6 flex items-center justify-between hover:bg-gray-50 transition-colors"
               >
-                <div class="pr-6 font-medium">
+                <div class="font-semibold text-gray-900 text-base">
                   July 2025 - A paper is found (linked above)
                 </div>
                 <svg
-                  class="chev w-4 h-4 mt-1 transform transition-transform"
+                  class="chev w-5 h-5 text-gray-400 group-hover:text-gray-600 flex-shrink-0 transform transition-transform duration-200"
                   viewBox="0 0 20 20"
                   fill="currentColor"
                 >
@@ -691,7 +778,9 @@
                   />
                 </svg>
               </summary>
-              <div class="px-6 pb-4 text-gray-700">
+              <div
+                class="px-6 pb-4 pt-1 text-gray-600 border-t border-gray-100 bg-gray-50/50 space-y-2"
+              >
                 <p>
                   This paper is very useful and informative for me and this
                   project because it provides detailed insights into economic
@@ -705,7 +794,7 @@
                     href="https://www.sciencedirect.com/science/article/pii/S0014292122001891"
                     target="_blank"
                     rel="noopener"
-                    class="text-blue-600 underline"
+                    class="text-blue-600 hover:text-blue-800 underline font-medium"
                     >View the PDF</a
                   >
                 </p>
@@ -714,16 +803,16 @@
 
             <!-- Item 10 -->
             <details
-              class="timeline-item group rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors"
+              class="timeline-item group rounded-xl bg-white border border-gray-200/80 hover:border-blue-300 transition-all shadow-sm overflow-hidden"
             >
               <summary
-                class="cursor-pointer select-none p-4 pl-8 flex items-start justify-between"
+                class="cursor-pointer select-none p-4 pl-6 flex items-center justify-between hover:bg-gray-50 transition-colors"
               >
-                <div class="pr-6 font-medium">
+                <div class="font-semibold text-gray-900 text-base">
                   January 2026 - Work on bachelor thesis started
                 </div>
                 <svg
-                  class="chev w-4 h-4 mt-1 transform transition-transform"
+                  class="chev w-5 h-5 text-gray-400 group-hover:text-gray-600 flex-shrink-0 transform transition-transform duration-200"
                   viewBox="0 0 20 20"
                   fill="currentColor"
                 >
@@ -734,7 +823,9 @@
                   />
                 </svg>
               </summary>
-              <div class="px-6 pb-4 text-gray-700">
+              <div
+                class="px-6 pb-4 pt-1 text-gray-600 border-t border-gray-100 bg-gray-50/50"
+              >
                 <p>
                   This bachelor thesis aims to explore the usefullness of agent
                   based modeling combinee with behaveroal economics and game
@@ -743,18 +834,19 @@
                 </p>
               </div>
             </details>
-            <!-- Item 10 -->
+
+            <!-- Item 11 -->
             <details
-              class="timeline-item group rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors"
+              class="timeline-item group rounded-xl bg-white border border-gray-200/80 hover:border-blue-300 transition-all shadow-sm overflow-hidden"
             >
               <summary
-                class="cursor-pointer select-none p-4 pl-8 flex items-start justify-between"
+                class="cursor-pointer select-none p-4 pl-6 flex items-center justify-between hover:bg-gray-50 transition-colors"
               >
-                <div class="pr-6 font-medium">
+                <div class="font-semibold text-gray-900 text-base">
                   May 2026 - Bachelor thesis finished
                 </div>
                 <svg
-                  class="chev w-4 h-4 mt-1 transform transition-transform"
+                  class="chev w-5 h-5 text-gray-400 group-hover:text-gray-600 flex-shrink-0 transform transition-transform duration-200"
                   viewBox="0 0 20 20"
                   fill="currentColor"
                 >
@@ -765,7 +857,9 @@
                   />
                 </svg>
               </summary>
-              <div class="px-6 pb-4 text-gray-700">
+              <div
+                class="px-6 pb-4 pt-1 text-gray-600 border-t border-gray-100 bg-gray-50/50"
+              >
                 <p>
                   The bachelor thesis called: Regional Impacts of Global Oil
                   Price Volatility utilizes a two-way fixed-effects model to
@@ -783,7 +877,6 @@
     </main>
 
     <script>
-      // No JS needed for the timeline (uses <details>), keeping your original toggle for reference if you want it.
       function toggleDetail(element) {
         const isActive = element.classList.toggle("active");
         element.setAttribute("aria-expanded", isActive);
