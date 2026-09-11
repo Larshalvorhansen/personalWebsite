@@ -4,15 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Halvor Hansen</title>
-
-    <!-- Added Google Fonts for a modern look -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-
     <link
       href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
       rel="stylesheet"
@@ -25,7 +16,6 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="manifest" href="/site.webmanifest" />
-
     <!-- JSON-LD for Organization Schema -->
     <script type="application/ld+json">
       {
@@ -52,10 +42,18 @@
     </script>
 
     <style>
+      :root {
+        --brand: #38acfc;
+        --brand-dark: #208ee0;
+        --ink: #0f172a;
+        --muted: #64748b;
+        --bg: #f8fafc;
+      }
+
       body {
         font-family: "Plus Jakarta Sans", sans-serif;
       }
-
+      /* ---- Sidebar Layout (matches index.html) ---- */
       @media (min-width: 768px) {
         .sidebar {
           width: auto;
@@ -95,7 +93,7 @@
       }
 
       .gradient-text {
-        background: linear-gradient(135deg, #002896, #0084ff, #77cfff);
+        background: linear-gradient(45deg, #002896, #77cfff);
         background-clip: text;
         -webkit-background-clip: text;
         color: transparent;
@@ -121,15 +119,16 @@
       ]);
     </script>
   </head>
+
   <body class="bg-gray-50 text-gray-800 antialiased">
-    <!-- Sidebar -->
+    <!-- Sidebar (matches index.html) -->
     <div
       class="sidebar bg-black text-gray-300 p-6 shadow-2xl flex flex-col justify-start"
     >
       <a href="index.html" class="mb-2 md:mb-8 block">
         <img
           class="object-scale-down max-h-12 md:max-h-20 max-w-full drop-shadow-xl rounded-xl m-auto transform hover:scale-105 transition duration-300"
-          src="logo3.png"
+          src="logo3art.png"
           alt=""
         />
       </a>
@@ -205,7 +204,7 @@
           </svg>
         </a>
         <a
-          href="https://www.linkedin.com/in/lars-halvor-hansen/"
+          href="https://www.linkedin.com/in/larshalvorhansen/"
           target="_blank"
           title="Add me on Linked in"
           rel="noreferrer"
@@ -248,218 +247,607 @@
         </a>
       </div>
     </div>
-
     <!-- Main Content -->
-    <div
-      class="main-content min-h-screen px-6 py-12 md:px-16 lg:px-24 max-w-6xl mx-auto"
-    >
-      <h1
-        class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4 tracking-tight"
-      >
-        Hello and welcome 👋
-      </h1>
-      <h2
-        class="text-xl md:text-2xl text-gray-500 mb-12 font-light leading-relaxed"
-      >
-        to my little corner of the internet.
-        <br />
-        <br />
-        <span class="text-gray-700 font-medium text-lg md:text-xl">
-          I'm a full-time student at
-          <a
-            href="https://www.ntnu.edu/"
-            class="gradient-text font-bold hover:underline"
-            >NTNU in Trondheim</a
-          >. I have a
-          <a
-            href="https://www.ntnu.no/studier/bsok/studiets-oppbygning"
-            class="gradient-text font-bold hover:underline"
-            >Bachelor's in Economics</a
-          >. Now im in my final year of a
-          <a
-            href="https://www.ntnu.no/studier/studieplan#programmeCode=MTELSYS&year=2020"
-            class="gradient-text font-bold hover:underline"
-            >Master's in Electronic Engineering</a
-          >
-          specializing in
-          <a
-            href="https://hypso.space/projects/the-hypso-satellites"
-            class="gradient-text font-bold hover:underline"
-            >Space systems engineering</a
-          >.<br /><br />
-          I apply principles from both of these fields and solve real-world
-          problems.
-          <a
-            href="LambdaSim.html"
-            class="gradient-text font-bold hover:underline"
-            >Here</a
-          >
-          is the project that backs up this claim.
-        </span>
-      </h2>
-
-      <div class="my-16">
-        <h1 class="text-3xl font-extrabold text-gray-900 mb-8 tracking-tight">
-          Why this website?
-        </h1>
-
-        <div
-          class="flex flex-col-reverse md:flex-row md:space-x-8 items-center md:items-start bg-white p-8 md:p-10 rounded-3xl shadow-sm border border-gray-100"
-        >
-          <div class="flex-1 w-full mt-8 md:mt-0">
-            <ul class="space-y-6">
-              <li class="flex items-start">
-                <span class="text-blue-500 mr-3 text-xl leading-none"
-                  >&bull;</span
-                >
-                <h2 class="font-medium text-gray-700 text-lg leading-relaxed">
-                  Share my creative work and blog posts – check out my
-                  <a
-                    href="https://halvorhansen.no/art"
-                    target="_blank"
-                    class="text-blue-600 font-semibold hover:text-blue-800 transition-colors"
-                    >art gallery</a
-                  >
-                  and
-                  <a
-                    href="https://halvorhansen.no/blogg"
-                    target="_blank"
-                    class="text-blue-600 font-semibold hover:text-blue-800 transition-colors"
-                    >blog</a
-                  >.
-                </h2>
-              </li>
-              <li class="flex items-start">
-                <span class="text-blue-500 mr-3 text-xl leading-none"
-                  >&bull;</span
-                >
-                <h2 class="font-medium text-gray-700 text-lg leading-relaxed">
-                  Connect with fellow enthusiasts. Feel free to
-                  <a
-                    href="#contact"
-                    class="text-blue-600 font-semibold hover:text-blue-800 transition-colors"
-                    >get in touch</a
-                  >
-                  or explore my
-                  <a
-                    href="https://github.com/Larshalvorhansen"
-                    target="_blank"
-                    class="text-blue-600 font-semibold hover:text-blue-800 transition-colors"
-                    >GitHub</a
-                  >.
-                </h2>
-              </li>
-              <li class="flex items-start">
-                <span class="text-blue-500 mr-3 text-xl leading-none"
-                  >&bull;</span
-                >
-                <h2 class="font-medium text-gray-700 text-lg leading-relaxed">
-                  Showcase my academic and technical projects. Such as the
-                  <a
-                    href="https://halvorhansen.no/lambdasim"
-                    target="_blank"
-                    class="text-blue-600 font-semibold hover:text-blue-800 transition-colors"
-                    >Lambda Simulation project</a
-                  >
-                  and the monthly newsletter
-                  <a
-                    href="https://halvorhansen.no/economicoutlook"
-                    target="_blank"
-                    class="text-blue-600 font-semibold hover:text-blue-800 transition-colors"
-                    >Economic Outλook</a
-                  >.
-                </h2>
-              </li>
-            </ul>
-          </div>
-          <div class="flex-shrink-0">
-            <img
-              src="pb2.png"
-              alt="simpleProfilePicture"
-              class="w-40 md:w-48 h-auto shadow-lg border-4 border-white object-cover transform hover:scale-105 transition-transform duration-300"
-            />
-          </div>
+    <div class="main-content bg-white p-4 md:px-8 max-w-full mx-auto">
+      <br />
+      <h1 class="text-2xl textcolor-blue font-bold mb-4">Art gallery</h1>
+      <h2 class="text-xl text-gray-500 mb-10"></h2>
+      <!--<a
+				href="https://www.youtube.com/watch?v=qM78LnYnyf0" class="gradient-text font-bold">VikenFHS</a>, I got
+			an iPad for displaying sheet music.
+			I soon discovered it’s also perfect for digital art!
+			Check out my artwork since then, starting with <a href="#target-section" class="gradient-text font-bold">the
+				pieces from 2021</a>.
+			</h3>
+			<!-- Body -->
+      <div class="rounde<br><br>d-lg overflow-hidden shadow-md">
+        <img
+          id="36"
+          src="art/art43.png"
+          loading="lazy"
+          alt="Dinna her no!"
+          class="w-full h-auto object-cover"
+        />
+        <div class="px-4 py-2 text-gray-700">
+          <h3 class="text-base font-bold">Paint</h3>
+          <p class="text-sm"></p>
+          <p class="text-sm">December, 2024</p>
         </div>
-      </div>
+        <br /><br />
+        <img
+          id="36"
+          src="art/art42.jpg"
+          loading="lazy"
+          alt="Dinna her no!"
+          class="w-full h-auto object-cover"
+        />
+        <div class="px-4 py-2 text-gray-700">
+          <h3 class="text-base font-bold">Lambda🌻</h3>
+          <p class="text-sm"></p>
+          <p class="text-sm">November, 2024</p>
+        </div>
+        <br /><br />
+        <img
+          id="36"
+          src="art/art41.jpg"
+          loading="lazy"
+          alt="Dinna her no!"
+          class="w-full h-auto object-cover"
+        />
+        <div class="px-4 py-2 text-gray-700">
+          <h3 class="text-base font-bold">AMBIVALENT</h3>
+          <!-- <p class="text-sm">Relax have fun -> Live long. Be uncomfortable -> Live lots.</p> -->
+          <p class="text-sm">November, 2024</p>
+        </div>
+        <br /><br />
+        <img
+          id="36"
+          src="art/art40.png"
+          loading="lazy"
+          alt="Dinna her no!"
+          class="w-full h-auto object-cover"
+        />
+        <div class="px-4 py-2 text-gray-700">
+          <h3 class="text-base font-bold">Dinna her no!</h3>
+          <p class="text-sm">
+            It's høst now! And its so beautiful! Pictures really don't do it
+            justice!
+          </p>
+          <p class="text-sm">October, 2024</p>
+        </div>
+        <br /><br />
+        <img
+          id="35"
+          src="art/art0.jpg"
+          loading="lazy"
+          alt="Old's-New's"
+          class="w-full h-auto object-cover"
+        />
+        <div class="px-4 py-2 text-gray-700">
+          <h3 class="text-base font-bold">Old's-New's</h3>
+          <p class="text-sm">Image taken from Berg Studentby in Trondheim!</p>
+          <p class="text-sm">May, 2024</p>
+        </div>
+        <br /><br />
+        <img
+          id="34"
+          src="art/art1.jpg"
+          loading="lazy"
+          alt="Future"
+          class="w-full h-auto object-cover"
+        />
+        <div class="px-4 py-2 text-gray-700">
+          <h3 class="text-base font-bold">Future</h3>
+          <p class="text-sm">This was an early logo draft of Lambdasim</p>
+          <p class="text-sm">April 25, 2024</p>
+        </div>
+        <br /><br />
+        <img
+          id="33"
+          src="art/art2.jpg"
+          loading="lazy"
+          alt="Grass"
+          class="w-full h-auto object-cover"
+        />
+        <div class="px-4 py-2 text-gray-700">
+          <h3 class="text-base font-bold">Grass</h3>
+          <p class="text-sm">Taken with the Sony a7 II camera</p>
+          <p class="text-sm">February 23, 2024</p>
+        </div>
+        <br /><br />
+        <!--<img id="32" src="art/art3.png" loading="lazy" alt="DreamHouse" class="w-full h-auto object-cover">
+				<div class="px-4 py-2 text-gray-700">
+					<h3 class="text-base font-bold">Dreamhouse?</h3>
+					<p class="text-sm">This was the best I could get out of Dall-e</p>
+					<p class="text-sm">December 19, 2023</p>
+</div><br><br>-->
+        <img
+          id="31"
+          src="art/art4.jpg"
+          loading="lazy"
+          alt="Ælvsjø sjø"
+          class="w-full h-auto object-cover"
+        />
+        <div class="px-4 py-2 text-gray-700">
+          <h3 class="text-base font-bold">Sun River</h3>
+          <p class="text-sm">Taken in Trondheim with the Sony a7 II camera.</p>
+          <p class="text-sm">December 6, 2023</p>
+        </div>
+        <br /><br />
+        <img
+          id="30"
+          src="art/art5.jpg"
+          loading="lazy"
+          alt="Tridno"
+          class="w-full h-auto object-cover"
+        />
+        <div class="px-4 py-2 text-gray-700">
+          <h3 class="text-base font-bold">City</h3>
+          <p class="text-sm">Taken in Trondheim with the Sony a7 II camera.</p>
+          <p class="text-sm">December 6, 2023</p>
+        </div>
+        <br /><br />
+        <img
+          id="29"
+          src="art/art6.jpg"
+          loading="lazy"
+          alt="Bakklandet"
+          class="w-full h-auto object-cover"
+        />
+        <div class="px-4 py-2 text-gray-700">
+          <h3 class="text-base font-bold">Bakklandet</h3>
+          <p class="text-sm">Taken in Trondheim with the Sony a7 II camera.</p>
+          <p class="text-sm">December 6, 2023</p>
+        </div>
+        <br /><br />
+        <img
+          id="28"
+          src="art/art7.jpg"
+          loading="lazy"
+          alt="Demning"
+          class="w-full h-auto object-cover"
+        />
+        <div class="px-4 py-2 text-gray-700">
+          <h3 class="text-base font-bold">Demning</h3>
+          <p class="text-sm">Taken in Trondheim with the Sony a7 II camera.</p>
+          <p class="text-sm">December 6, 2023</p>
+        </div>
+        <br /><br />
+        <img
+          id="27"
+          src="art/art8.jpg"
+          loading="lazy"
+          alt="LysPåSki"
+          class="w-full h-auto object-cover"
+        />
+        <div class="px-4 py-2 text-gray-700">
+          <h3 class="text-base font-bold">Snw</h3>
+          <p class="text-sm">Picture from a skee trip</p>
+          <p class="text-sm">Winter, 2023</p>
+        </div>
+        <br /><br />
+        <img
+          id="25"
+          src="art/art10.jpg"
+          loading="lazy"
+          alt="Glassgården"
+          class="w-full h-auto object-cover"
+        />
+        <div class="px-4 py-2 text-gray-700">
+          <h3 class="text-base font-bold">Glassgården</h3>
+          <p class="text-sm"></p>
+          <p class="text-sm">November 14, 2023</p>
+        </div>
+        <br /><br />
+        <!-- <img id="" src="art/art11.jpg" loading="lazy" alt="Trondheim" class="w-full h-auto object-cover">
+				<div class="px-4 py-2 text-gray-700">
+					<h3 class="text-base font-bold">Art Title</h3>
+					<p class="text-sm">Description of your art</p>
+					<p class="text-sm">March 21, 202</p>
+				</div> --><br /><br />
+        <!-- <img id="" src="art/art12.jpg" loading="lazy" alt="Galtvort" class="w-full h-auto object-cover">
+				<div class="px-4 py-2 text-gray-700">
+					<h3 class="text-base font-bold">Art Title</h3>
+					<p class="text-sm">Description of your art</p>
+					<p class="text-sm">March 21, 202</p>
+				</div> --><br /><br />
+        <img
+          id="24"
+          src="art/art13.jpg"
+          loading="lazy"
+          alt="Lokk"
+          class="w-full h-auto object-cover"
+        />
+        <div class="px-4 py-2 text-gray-700">
+          <h3 class="text-base font-bold">Ohma Elektra!</h3>
+          <p class="text-sm">Taken with the Sony a7 II</p>
+          <p class="text-sm">November 16, 2023</p>
+        </div>
+        <br /><br />
+        <img
+          id="23"
+          src="art/art14.jpg"
+          loading="lazy"
+          alt="Akademika trapp"
+          class="w-full h-auto object-cover"
+        />
+        <div class="px-4 py-2 text-gray-700">
+          <h3 class="text-base font-bold">Light</h3>
+          <p class="text-sm">This one I was quite happy with :)</p>
+          <p class="text-sm">October 26, 2023</p>
+        </div>
+        <br /><br />
+        <img
+          id="22"
+          src="art/art15.jpg"
+          loading="lazy"
+          alt="Spygrønn"
+          class="w-full h-auto object-cover"
+        />
+        <div class="px-4 py-2 text-gray-700">
+          <h3 class="text-base font-bold">Spygrønn</h3>
+          <p class="text-sm">
+            Many of the images in this Gallery are inspired by
+            <a
+              href="https://folk.ntnu.no/mortano/figurer/L1021297.jpg"
+              class="gradient-text font-bold"
+              >Morten Nome</a
+            >. This one especially.
+          </p>
+          <p class="text-sm">October 26, 2023</p>
+        </div>
+        <br /><br />
+        <img
+          id="21"
+          src="art/art16.jpg"
+          loading="lazy"
+          alt="Math"
+          class="w-full h-auto object-cover"
+        />
+        <div class="px-4 py-2 text-gray-700">
+          <h3 class="text-base font-bold">Math?</h3>
+          <p class="text-sm"></p>
+          <p class="text-sm">October 26, 2023</p>
+        </div>
+        <br /><br />
+        <img
+          id="20"
+          src="art/art17.jpg"
+          loading="lazy"
+          alt="Bench"
+          class="w-full h-auto object-cover"
+        />
+        <div class="px-4 py-2 text-gray-700">
+          <h3 class="text-base font-bold">Bench</h3>
+          <p class="text-sm">Bench</p>
+          <p class="text-sm">October 26, 2023</p>
+        </div>
+        <br /><br />
+        <img
+          id="19"
+          src="art/art18.jpg"
+          loading="lazy"
+          alt="Birds nest"
+          class="w-full h-auto object-cover"
+        />
+        <div class="px-4 py-2 text-gray-700">
+          <h3 class="text-base font-bold">Birds nest</h3>
+          <!-- <p class="text-sm"></p> -->
+          <p class="text-sm">October 26, 2023</p>
+        </div>
+        <br /><br />
+        <!-- <img id="" src="art/art19.jpg" loading="lazy" alt="Sky" class="w-full h-auto object-cover">
+				<div class="px-4 py-2 text-gray-700">
+					<h3 class="text-base font-bold">Art Title</h3>
+					<p class="text-sm">Description of your art</p>
+					<p class="text-sm">March 21, 202</p>
+				</div> --><br /><br />
+        <img
+          id="18"
+          src="art/art20.jpg"
+          loading="lazy"
+          alt="Sky?"
+          class="w-full h-auto object-cover"
+        />
+        <div class="px-4 py-2 text-gray-700">
+          <h3 class="text-base font-bold">Sky?</h3>
+          <p class="text-sm">
+            My friend Peter has a telescope now so we migth take some awesome
+            pictures this winter 2024/25 :D
+          </p>
+          <p class="text-sm">October 26, 2023</p>
+        </div>
+        <br /><br />
+        <img
+          id="17"
+          src="art/art21.jpg"
+          loading="lazy"
+          alt="Swish"
+          class="w-full h-auto object-cover"
+        />
+        <div class="px-4 py-2 text-gray-700">
+          <h3 class="text-base font-bold">Swish</h3>
+          <p class="text-sm">Vector art. It's such a fun thing!</p>
+          <p class="text-sm">August 12, 2023</p>
+        </div>
+        <br /><br />
+        <img
+          id="16"
+          src="art/art22.jpg"
+          loading="lazy"
+          alt="Glimt av himmel"
+          class="w-full h-auto object-cover"
+        />
+        <div class="px-4 py-2 text-gray-700">
+          <h3 class="text-base font-bold">Glimt av himmel</h3>
+          <!-- <p class="text-sm"></p> -->
+          <p class="text-sm">July 27, 2023</p>
+        </div>
+        <br /><br />
+        <img
+          id="15"
+          src="art/art23.jpg"
+          loading="lazy"
+          alt="Venner vinter"
+          class="w-full h-auto object-cover"
+        />
+        <div class="px-4 py-2 text-gray-700">
+          <h3 class="text-base font-bold">Togetherness</h3>
+          <p class="text-sm"></p>
+          <p class="text-sm">March 18, 2023</p>
+        </div>
+        <br /><br />
+        <img
+          id="14"
+          src="art/art24.jpg"
+          loading="lazy"
+          alt="Kraft til å bære"
+          class="w-full h-auto object-cover"
+        />
+        <div class="px-4 py-2 text-gray-700">
+          <h3 class="text-base font-bold">Kraft til å bære</h3>
+          <!-- <p class="text-sm"></p> -->
+          <p class="text-sm">July 12, 2022</p>
+        </div>
+        <br /><br />
+        <img
+          id="13"
+          src="art/art25.jpg"
+          loading="lazy"
+          alt="Newtongreier"
+          class="w-full h-auto object-cover"
+        />
+        <div class="px-4 py-2 text-gray-700">
+          <h3 class="text-base font-bold">WWXXZZ</h3>
+          <!-- <p class="text-sm"></p> -->
+          <p class="text-sm">July 7, 2022</p>
+        </div>
+        <br /><br />
+        <img
+          id="12"
+          src="art/art26.jpg"
+          loading="lazy"
+          alt="Striper"
+          class="w-full h-auto object-cover"
+        />
+        <div class="px-4 py-2 text-gray-700">
+          <h3 class="text-base font-bold">C</h3>
+          <!-- <p class="text-sm">Description of your art</p> -->
+          <p class="text-sm">March 11, 2022</p>
+        </div>
+        <br /><br />
+        <img
+          id="11"
+          src="art/art27.jpg"
+          loading="lazy"
+          alt="Fyr"
+          class="w-full h-auto object-cover"
+        />
+        <div class="px-4 py-2 text-gray-700">
+          <h3 class="text-base font-bold">Øy i havet</h3>
+          <!-- <p class="text-sm">Description of your art</p> -->
+          <p class="text-sm">August 2, 2021</p>
+        </div>
+        <br /><br />
+        <img
+          id="10"
+          src="art/art28.jpg"
+          loading="lazy"
+          alt="Place to be"
+          class="w-full h-auto object-cover"
+        />
+        <div class="px-4 py-2 text-gray-700">
+          <h3 class="text-base font-bold">Place to be</h3>
+          <p class="text-sm">
+            Risøya! <br />
+            This place is so beautiful.
+          </p>
+          <p class="text-sm">June 6, 2021</p>
+        </div>
+        <br /><br />
+        <img
+          id="9"
+          src="art/art29.jpg"
+          loading="lazy"
+          alt="Road"
+          class="w-full h-auto object-cover"
+        />
+        <div class="px-4 py-2 text-gray-700">
+          <h3 class="text-base font-bold">
+            Let's have generative AI critique this art piece:
+          </h3>
+          <p class="text-sm">
+            This artwork bursts with abstract expressionism, characterized by
+            its vivid and chaotic energy. The composition is a kaleidoscope of
+            striking colors and dynamic forms that evoke a sense of surrealism.
+            The central focus appears to be an abstract face, with exaggerated
+            features such as long, sweeping eyelashes and a bold, red mouth. The
+            eye-catching, fiery red lines at the top inject a sense of movement
+            and intensity, almost as if capturing a moment of high emotion or
+            thought. <br /><br />
 
-      <div class="contact mt-16" id="contact">
-        <div class="max-w-3xl mx-auto">
-          <h1
-            class="text-3xl font-extrabold text-gray-900 text-center mb-8 tracking-tight"
-          >
-            Let's get in touch!
-          </h1>
+            On the right, a figure emerges from a pathway, adorned with green
+            foliage, suggesting a journey or a connection to nature. The pathway
+            itself seems to merge into the face, symbolizing an internal voyage
+            or a merging of the external and internal worlds. The fragmented,
+            maze-like patterns within the face indicate complexity and
+            introspection, hinting at the labyrinth of human thoughts and
+            emotions. <br /><br />
 
-          <form
-            action="https://formsubmit.co/larshalvorhansen1@gmail.com"
-            method="POST"
-            class="bg-white p-8 md:p-10 rounded-3xl shadow-xl border border-gray-100"
-          >
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-5">
-              <div>
-                <label
-                  for="name"
-                  class="block text-sm font-semibold text-gray-700 mb-2"
-                  >Name</label
-                >
-                <input
-                  type="text"
-                  name="name"
-                  id="name"
-                  placeholder="Enter your name"
-                  class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
-                  required
-                />
-              </div>
-              <div>
-                <label
-                  for="email"
-                  class="block text-sm font-semibold text-gray-700 mb-2"
-                  >Email Address</label
-                >
-                <input
-                  type="email"
-                  name="email"
-                  id="email"
-                  placeholder="Enter your email"
-                  class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
-                  required
-                />
-              </div>
-            </div>
-            <div class="mb-6">
-              <label
-                for="message"
-                class="block text-sm font-semibold text-gray-700 mb-2"
-                >Message</label
-              >
-              <textarea
-                name="message"
-                id="message"
-                rows="5"
-                placeholder="Enter your message"
-                class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all resize-y"
-                required
-              ></textarea>
-            </div>
-            <div class="flex flex-col sm:flex-row sm:items-center mt-6">
-              <button
-                type="submit"
-                class="bg-black text-white px-8 py-3 rounded-xl font-semibold hover:bg-gray-800 hover:shadow-lg transform hover:-translate-y-0.5 transition-all w-full sm:w-auto"
-              >
-                Send Message
-              </button>
-              <button
-                type="button"
-                onclick="copyToClipboard()"
-                class="bg-gray-100 text-gray-600 font-semibold py-3 px-6 rounded-xl hover:bg-gray-200 hover:text-gray-900 transition-all mt-4 sm:mt-0 sm:ml-4 w-full sm:w-auto"
-              >
-                Or copy my email
-              </button>
-            </div>
-          </form>
+            The lower portion of the image is dotted with various small,
+            colorful shapes and scribbled text, adding layers of texture and a
+            playful yet mysterious element. This juxtaposition of detailed
+            elements with broader strokes creates a rich tapestry, inviting
+            viewers to explore its depths and interpret its many facets.
+            Overall, the artwork captures a whirlwind of emotion and thought,
+            blending reality with abstraction in a visually captivating manner.
+            <br />
+          </p>
+          <p class="text-sm">May 20, 2021</p>
+        </div>
+        <br /><br />
+        <img
+          id="8"
+          src="art/art30.jpg"
+          loading="lazy"
+          alt="Ærlend2"
+          class="w-full h-auto object-cover"
+        />
+        <div class="px-4 py-2 text-gray-700">
+          <h3 class="text-base font-bold">Ærlænd2</h3>
+          <p class="text-sm">Jau</p>
+          <p class="text-sm">April 9, 2021</p>
+        </div>
+        <br /><br />
+        <img
+          id="7"
+          src="art/art31.jpg"
+          loading="lazy"
+          alt="Swing"
+          class="w-full h-auto object-cover"
+        />
+        <div class="px-4 py-2 text-gray-700">
+          <h3 class="text-base font-bold">Swing</h3>
+          <p class="text-sm">
+            More vector art :D These kinda images are so fun to make!
+          </p>
+          <p class="text-sm">April 1, 2021</p>
+        </div>
+        <br /><br />
+        <img
+          id="6"
+          src="art/art32.jpg"
+          loading="lazy"
+          alt="Distance"
+          class="w-full h-auto object-cover"
+        />
+        <div class="px-4 py-2 text-gray-700">
+          <h3 class="text-base font-bold">Distance</h3>
+          <p class="text-sm">This artwork brings back distant memories.</p>
+          <p class="text-sm">March 28, 2021</p>
+        </div>
+        <br /><br />
+        <img
+          id="5"
+          src="art/art33.jpg"
+          loading="lazy"
+          alt="Sailaway"
+          class="w-full h-auto object-cover"
+        />
+        <div class="px-4 py-2 text-gray-700">
+          <h3 class="text-base font-bold">~~~~~Sailaway~~~~~</h3>
+          <p class="text-sm">Okkonokkonokkoflowwww</p>
+          <p class="text-sm">March 26, 2021</p>
+        </div>
+        <br /><br />
+        <img
+          id="5"
+          src="art/art34.jpg"
+          loading="lazy"
+          alt="Ærlend"
+          class="w-full h-auto object-cover"
+        />
+        <div class="px-4 py-2 text-gray-700">
+          <h3 class="text-base font-bold">Ærlænd.</h3>
+          <p class="text-sm">Ærlænd.</p>
+          <p class="text-sm">March 23, 2021</p>
+        </div>
+        <br /><br />
+        <img
+          id="4"
+          src="art/art35.jpg"
+          loading="lazy"
+          alt="sup"
+          class="w-full h-auto object-cover"
+        />
+        <div class="px-4 py-2 text-gray-700">
+          <h3 class="text-base font-bold">sup</h3>
+          <p class="text-sm">Another fun and weird one</p>
+          <p class="text-sm">March 22, 2021</p>
+        </div>
+        <br /><br />
+        <img
+          id="3"
+          src="art/art36.jpg"
+          loading="lazy"
+          alt="Vikheim"
+          class="w-full h-auto object-cover"
+        />
+        <div class="px-4 py-2 text-gray-700">
+          <h3 class="text-base font-bold">Vikeim</h3>
+          <p class="text-sm">
+            From my gapyear at
+            <a
+              href="https://musikkfolkehogskolen.no"
+              class="gradient-text font-bold"
+              >Viken musikk FHS</a
+            >
+          </p>
+          <p class="text-sm">March 21, 2021</p>
+        </div>
+        <br /><br />
+        <img
+          id="2"
+          src="art/art37.jpg"
+          loading="lazy"
+          alt="Art title"
+          class="w-full h-auto object-cover"
+        />
+        <div class="px-4 py-2 text-gray-700">
+          <h3 class="text-base font-bold">Sun?</h3>
+          <p class="text-sm">Some fun drawing i made</p>
+          <p class="text-sm">March 21, 2021</p>
+        </div>
+        <br /><br />
+        <img
+          id="1"
+          src="art/art39.jpg"
+          loading="lazy"
+          alt="Art title"
+          class="w-full h-auto object-cover"
+        />
+        <div class="px-4 py-2 text-gray-700">
+          <h3 class="text-base font-bold">Nigth</h3>
+          <p class="text-sm">My second vector graphic</p>
+          <p class="text-sm">March 21, 2021</p>
+        </div>
+        <br /><br />
+        <img
+          id="0"
+          src="art/art38.jpg"
+          loading="lazy"
+          alt="Art title"
+          class="w-full h-auto object-cover"
+        />
+        <div id="target-section" class="px-4 py-2 text-gray-700">
+          <h3 class="text-base font-bold">Day</h3>
+          <p class="text-sm">My first vector graphic</p>
+          <p class="text-sm">March 21, 2021</p>
         </div>
       </div>
     </div>
   </body>
+  <div class="w-0 h-0 invisible">
+    <img src="lese.jpg" alt="" />
+  </div>
 </html>
