@@ -3,19 +3,106 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#dfbfe5" />
+    <meta name="theme-color" content="#c8e6f5" />
+    <meta
+      name="description"
+      content="Save the date for bryllupet til Kaja Gunnarson og Lars Halvor Hansen, 23.–25. juli 2027 på Risøya."
+    />
     <title>Save the date · Kaja & Lars Halvor</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Limelight&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/style.css" />
+    <script defer src="assets/site.js"></script>
+
     <style>
-      * { box-sizing: border-box; }
-      body { margin: 0; min-height: 100svh; display: grid; place-items: center; padding: 70px 22px 48px; background: #dfbfe5; font-family: Arial, sans-serif; color: #171715; }
-      a { position: fixed; left: max(18px, env(safe-area-inset-left)); top: max(18px, env(safe-area-inset-top)); background: #f7f2e9; border: 2px solid #171715; padding: 10px 14px; text-decoration: none; font-weight: 700; font-size: 0.88rem; }
-      a:hover { background: #cce0af; }
-      a:focus-visible { outline: 3px solid #b32975; outline-offset: 3px; }
-      img { display: block; max-width: min(520px, 100%); max-height: min(79svh, 800px); width: auto; height: auto; object-fit: contain; border: 2px solid #171715; box-shadow: 14px 16px 0 #171715; }
+      /* Pastel blue background for this standalone page */
+      body {
+        background: #c8e6f5;
+      }
+
+      /* Back-to-site button (top-left) */
+      .back-to-site {
+        position: fixed;
+        left: max(18px, env(safe-area-inset-left));
+        top: max(18px, env(safe-area-inset-top));
+        z-index: 10;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4em;
+        background: var(--cream, #f7f2e9);
+        color: var(--ink, #171715);
+        border: 2px solid var(--ink, #171715);
+        padding: 10px 14px;
+        text-decoration: none;
+        font-family: "DM Sans", system-ui, sans-serif;
+        font-weight: 700;
+        font-size: 0.88rem;
+        box-shadow: 4px 4px 0 var(--ink, #171715);
+        transition:
+          background 0.15s ease,
+          transform 0.15s ease;
+      }
+      .back-to-site:hover {
+        background: #cce0af;
+        transform: translate(-1px, -1px);
+      }
+      .back-to-site:focus-visible {
+        outline: 3px solid #b32975;
+        outline-offset: 3px;
+      }
+
+      /* Center the section vertically on this standalone page */
+      body {
+        min-height: 100svh;
+        display: grid;
+        place-items: center;
+        padding: 88px 22px 48px;
+      }
+      .save-date-section {
+        width: 100%;
+      }
     </style>
   </head>
   <body>
-    <a href="index.html#save-the-date">← Tilbake til nettsiden</a>
-    <main><img src="assets/save-the-date-original.jpg" alt="Save the date-kort for Kaja og Lars Halvor, 24. juli 2027 på Risøya" /></main>
+    <a class="back-to-site" href="kajaoglarshalvor4.html#hjem">
+      <span aria-hidden="true">←</span> Tilbake til nettsiden
+    </a>
+
+    <section
+      id="save-the-date"
+      class="section-panel save-date-section"
+      aria-labelledby="save-date-title"
+    >
+      <div class="save-date-inner">
+        <div class="save-date-copy">
+          <h2 id="save-date-title">Save the date</h2>
+        </div>
+        <button
+          id="flip-save-date"
+          class="flip-card"
+          type="button"
+          aria-label="Vis baksiden av save the date-kortet"
+          aria-pressed="false"
+        >
+          <span class="flip-card-inner">
+            <span class="flip-face flip-front"
+              ><img
+                src="assets/f.jpg"
+                alt="Save the date-kortets forside med Kaja og Lars Halvor"
+            /></span>
+            <span class="flip-face flip-back"
+              ><img
+                src="assets/b.jpg"
+                alt="Save the date-kortets bakside med dato og sted"
+            /></span>
+          </span>
+        </button>
+        <p class="flip-hint" aria-hidden="true">TRYKK FOR Å SNU KORTET ↻</p>
+      </div>
+    </section>
   </body>
 </html>
