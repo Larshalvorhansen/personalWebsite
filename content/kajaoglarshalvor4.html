@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#c7e1aa" />
+    <meta name="theme-color" content="#cce0af" />
     <meta
       name="description"
       content="Bryllupsinvitasjon for Kaja Gunnarson og Lars Halvor Hansen, 23.–25. juli 2027 på Risøya."
@@ -16,6 +16,167 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="assets/style.css" />
+
+    <!--
+      === Envelope (intro) styles ===
+      Ported from test.html. Uses the same class names so it's easy to
+      swap, and it's triggered by the .is-open class that site.js will
+      toggle when the "Åpne kortet" button is clicked.
+      You can move these rules into assets/style.css whenever you like.
+    -->
+    <style>
+      /* Envelope wrapper (aspect ratio + base gradient that fades on open) */
+      .env_wrap {
+        position: relative;
+        overflow: hidden;
+        padding-top: 110%;
+        width: 100%;
+        max-width: 500px;
+        margin: 0 auto;
+        background: linear-gradient(
+          0deg,
+          #c7c2c5 0%,
+          #c7c2c5 55%,
+          rgba(255, 255, 255, 0) 55%,
+          rgba(255, 255, 255, 0) 100%
+        );
+        transition: background 1.2s ease-in-out 1.1s;
+      }
+      #envelope_form {
+        width: 100%;
+        position: relative;
+      }
+
+      /* Top flap */
+      .env_top {
+        filter: drop-shadow(0px 6px 3px rgba(50, 50, 0, 0.1));
+        position: absolute;
+        width: 100%;
+        height: 33%;
+        top: 45%;
+        z-index: 0;
+        transition:
+          transform 0.8s ease-in-out,
+          opacity 1.2s ease-in-out 1.1s;
+        transform-origin: top;
+        pointer-events: none;
+      }
+      .env_top:before {
+        content: "";
+        position: absolute;
+        transform-origin: top;
+        width: 100%;
+        height: 100%;
+        background: white;
+        clip-path: polygon(50% 100%, 0 0, 100% 0);
+        transition: all 0.8s ease-in-out;
+        border-radius: 4px 4px 0 0;
+      }
+
+      /* Bottom pocket */
+      .env_bottom_wrap {
+        height: 55%;
+        width: 100%;
+        z-index: 2;
+        bottom: 0;
+        position: absolute;
+        filter: drop-shadow(0px -6px 3px rgba(50, 50, 0, 0.1));
+        pointer-events: none;
+        transition: opacity 1.2s ease-in-out 1.1s;
+      }
+      .env_bottom {
+        clip-path: polygon(50% 50%, 100% 0, 100% 100%, 0 100%, 0 0);
+        background: white;
+        width: 100%;
+        height: 100%;
+        position: relative;
+        border-radius: 0 0.8px 8px;
+      }
+      .env_bottom:before,
+      .env_bottom:after {
+        content: "";
+        position: absolute;
+        background: #f8f6f7;
+        width: 50%;
+        height: 100%;
+      }
+      .env_bottom:before {
+        clip-path: polygon(100% 50%, 0 0, 0 100%);
+        left: 0;
+      }
+      .env_bottom:after {
+        right: 0;
+        clip-path: polygon(0 50%, 100% 0, 100% 100%);
+      }
+
+      /* The card that slides up out of the envelope */
+      .env_form_wrap {
+        width: calc(100% - 2rem);
+        left: 1rem;
+        padding: 0;
+        background: var(--cream, #f7f2e9);
+        color: var(--ink, #171715);
+        position: absolute;
+        height: 100%;
+        z-index: 2;
+        transition: top 2.1s cubic-bezier(0.2, 0.9, 0.3, 1) 0.42s;
+        top: 100%;
+        border: 2px solid var(--ink, #171715);
+        box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: stretch;
+        justify-content: stretch;
+        overflow: hidden;
+      }
+      .env_form_wrap img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      /* ==== Open state (driven by the button) ==== */
+      #envelope_form.is-open .env_top {
+        transform: rotateX(-180deg);
+        opacity: 0;
+      }
+      #envelope_form.is-open .env_form_wrap {
+        top: 0;
+      }
+      #envelope_form.is-open .env_wrap {
+        background: transparent;
+      }
+      #envelope_form.is-open .env_bottom_wrap {
+        opacity: 0;
+      }
+
+      /* Optional: keep hover as a nice extra on desktop */
+      @media (hover: hover) {
+        #envelope_form:hover .env_top {
+          transform: rotateX(-180deg);
+          opacity: 0;
+        }
+        #envelope_form:hover .env_form_wrap {
+          top: 0;
+        }
+        #envelope_form:hover .env_wrap {
+          background: transparent;
+        }
+        #envelope_form:hover .env_bottom_wrap {
+          opacity: 0;
+        }
+      }
+
+      /* Ready-stage layout: envelope on top, button under it */
+      .ready-stage .envelope_form_wrap {
+        width: min(500px, 88vw);
+        margin: 0 auto 32px;
+      }
+      #open-card-btn {
+        min-width: min(300px, 85vw);
+      }
+    </style>
+
     <script defer src="assets/site.js"></script>
   </head>
   <body>
@@ -30,6 +191,7 @@
         >
         <div class="nav-links">
           <a href="#hjem">Hjem</a>
+          <a href="#save-the-date">Save the date</a>
           <a href="#program">Program</a>
           <a href="#praktisk">Praktisk</a>
           <a href="#om-oss">Om oss</a>
@@ -49,11 +211,6 @@
           aria-labelledby="hero-title"
           tabindex="-1"
         >
-          <!--  <div class="hero-topline">
-            <span>EN INVITASJON FRA OSS</span
-            ><span>RISØYA · SOMMEREN 2027</span>
-          </div>
-        -->
           <div class="hero-grid">
             <div class="hero-copy">
               <p class="eyebrow">Vi skal gifte oss!</p>
@@ -78,15 +235,6 @@
             >
               <div class="hero-stamp">K<br /><span>&</span><br />LH</div>
               <div class="hero-card">
-                <!--
-                <span class="card-kicker"
-                  >Her kan vi evt legge inn bilde av risøya? :) Eller et bilde
-                  av ooss</span
-                >
-                <span class="card-flower" aria-hidden="true">✳</span>
-                <strong>Bilde fra<br /><em>Riøsya </em><br />av oss?</strong>
-                <span class="card-date">23. — 24. JULI 2027</span>
-                -->
                 <div class="card-cover">
                   <img
                     src="assets/forb.PNG"
@@ -102,6 +250,40 @@
             ><span aria-hidden="true">
               EN HELG SAMMEN · RISØYA · 23.-25. JULI 2027 ·</span
             >
+          </div>
+        </section>
+
+        <section
+          id="save-the-date"
+          class="section-panel save-date-section"
+          aria-labelledby="save-date-title"
+        >
+          <div class="save-date-inner">
+            <div class="save-date-copy">
+              <h2 id="save-date-title">Save the date</h2>
+              <p>Trykk på kortet for å se baksiden.</p>
+            </div>
+            <button
+              id="flip-save-date"
+              class="flip-card"
+              type="button"
+              aria-label="Vis baksiden av save the date-kortet"
+              aria-pressed="false"
+            >
+              <span class="flip-card-inner">
+                <span class="flip-face flip-front"
+                  ><img
+                    src="assets/f.jpg"
+                    alt="Save the date-kortets forside med Kaja og Lars Halvor"
+                /></span>
+                <span class="flip-face flip-back"
+                  ><img
+                    src="assets/b.jpg"
+                    alt="Save the date-kortets bakside med dato og sted"
+                /></span>
+              </span>
+            </button>
+            <p class="flip-hint" aria-hidden="true">TRYKK FOR Å SNU KORTET ↻</p>
           </div>
         </section>
 
@@ -296,9 +478,7 @@
             <h2 id="rsvp2-title" style="font-size: 2rem">
               Hva får du om du kombinerer en bodøværing og en bergenser?
             </h2>
-            <h2 id="rsvp2-title" style="font-size: 4rem">
-              Verdens beste toastmastere!
-            </h2>
+            <h2 style="font-size: 4rem">Verdens beste toastmastere!</h2>
             <p>Hvis du vil holde, hendvend deg her til toastmasterene!</p>
             <a
               class="button button-light"
@@ -385,7 +565,7 @@
             <div>
               <span>FORLOVER</span>
               <h3>Sofie Pettersen</h3>
-              <a href="tel:+47123 45 678">951 69 496</a>
+              <a href="tel:+4795169496">951 69 496</a>
               <a href="mailto:sofie.pettersen10@gmail.com"
                 >sofie.pettersen10@gmail.com</a
               >
@@ -406,6 +586,11 @@
       </main>
     </div>
 
+    <!--
+      ===== Intro / invitation overlay =====
+      Stage 1: video  →  Stage 2: envelope + "Åpne kortet" button
+      Stage 3: card is open — click anywhere on the overlay to continue.
+    -->
     <div
       id="intro"
       class="intro"
@@ -436,33 +621,38 @@
         </div>
         <p class="intro-hint">Videoen varer i fem sekunder</p>
       </div>
+
       <div id="ready-stage" class="intro-stage ready-stage" hidden>
-        <div class="ready-envelope">
-          <span>Til deg</span><strong>K <i>&</i> LH</strong
-          ><small>23.-25. JULI 2027 · RISØYA</small>
+        <!-- Envelope built after test.html -->
+        <div class="envelope_form_wrap">
+          <div id="envelope_form">
+            <div class="env_wrap">
+              <!-- The card that slides up -->
+              <div class="env_form_wrap">
+                <img
+                  src="assets/invitasjonskort.png"
+                  alt="Invitasjonskortet fra Kaja og Lars Halvor"
+                />
+              </div>
+
+              <!-- Top flap -->
+              <div class="env_top"></div>
+
+              <!-- Bottom pocket -->
+              <div class="env_bottom_wrap">
+                <div class="env_bottom"></div>
+              </div>
+            </div>
+          </div>
         </div>
-        <button id="open-invite" class="button button-dark" type="button">
-          Åpne invitasjonen <span aria-hidden="true">↗</span>
+
+        <button id="open-card-btn" class="button button-dark" type="button">
+          Åpne kortet <span aria-hidden="true">↗</span>
         </button>
       </div>
-      <div id="card-stage" class="intro-stage card-stage" hidden>
-        <div id="opening-card" class="opening-card">
-          <div class="card-inside">
-            <p>VI SKAL GIFTE OSS</p>
-            <strong>Kaja <em>&</em><br />Lars Halvor</strong
-            ><span>23.-25. juli 2027 · Risøya</span>
-          </div>
-          <div class="card-cover">
-            <img
-              src="assets/kort-forside.jpg"
-              alt="Midlertidig kortforside med bryllupsmotiv"
-            />
-          </div>
-        </div>
-        <p class="intro-hint">Velkommen til bryllupshelgen vår</p>
-      </div>
+
       <button id="skip-intro" class="skip-intro" type="button">
-        Hopp over video og animasjon <span aria-hidden="true">↗</span>
+        Hopp over<span aria-hidden="true">↗</span>
       </button>
     </div>
   </body>

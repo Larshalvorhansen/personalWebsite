@@ -1,9 +1,9 @@
 :root {
   --ink: #171715;
   --line: #171715;
-  --green: #c7e1aa;
-  --blue: #c0e8f7;
-  --pink: #ffd4f7;
+  --green: #cce0af;
+  --blue: #c8e6f5;
+  --pink: #f8d6f5;
   --yellow: #fef8c5;
   --cream: #f7f2e9;
   --purple: #dfbfe5;
@@ -120,14 +120,19 @@ main {
   letter-spacing: 0.14em;
   font-weight: 700;
 }
+
+/* ---- HERO GRID: two horizontal columns, full width ---- */
 .hero-grid {
-  max-width: 1440px;
-  margin: auto;
+  width: 100%;
+  margin: 0;
   display: grid;
   grid-template-columns: 1.06fr 0.94fr;
   min-height: min(690px, calc(100svh - 106px));
 }
 .hero-copy {
+  grid-column: 1;
+  grid-row: 1;
+  min-width: 0;
   background: var(--green);
   padding: clamp(42px, 7vw, 104px) clamp(24px, 6vw, 90px);
   display: flex;
@@ -135,6 +140,21 @@ main {
   flex-direction: column;
   justify-content: center;
 }
+.hero-art {
+  grid-column: 2;
+  grid-row: 1;
+  min-width: 0;
+  position: relative;
+  min-height: 620px;
+  background: var(--blue);
+  border-left: 2px solid var(--line);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 80px 34px;
+}
+/* ---- end hero grid ---- */
+
 .eyebrow {
   font-size: 0.78rem;
   letter-spacing: 0.18em;
@@ -215,16 +235,6 @@ h1 {
 .button-light {
   background: var(--yellow);
   color: var(--ink);
-}
-.hero-art {
-  position: relative;
-  min-height: 620px;
-  background: var(--pink);
-  border-left: 2px solid var(--line);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 80px 34px;
 }
 .hero-art:before {
   content: "";
@@ -347,7 +357,7 @@ h1 {
   padding: clamp(50px, 7vw, 100px) clamp(20px, 5vw, 76px);
 }
 .program-section {
-  background: var(--green);
+  background: var(--pink);
 }
 .program-scroll {
   display: grid;
@@ -618,6 +628,12 @@ h1 {
 .contact-grid > div:first-child {
   border-right: 2px solid var(--ink);
 }
+.contact-grid > div:nth-child(odd) {
+  border-right: 2px solid var(--ink);
+}
+.contact-grid > div:nth-child(-n + 4) {
+  border-bottom: 2px solid var(--ink);
+}
 .contact-grid span {
   font-size: 0.75rem;
   font-weight: 700;
@@ -666,11 +682,174 @@ footer {
 .intro-stage[hidden] {
   display: none !important;
 }
+body.intro-active .original-card-link {
+  display: none;
+}
+
+/* The two-sided save the date card */
+.save-date-section {
+  background: var(--yellow);
+  padding: clamp(56px, 7vw, 100px) 22px;
+  text-align: center;
+}
+.save-date-inner {
+  max-width: 1100px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.save-date-copy h2 {
+  font-size: clamp(2.6rem, 5vw, 4.5rem);
+  line-height: 1.1;
+  margin-bottom: 12px;
+}
+.save-date-copy p:last-child {
+  line-height: 1.5;
+  margin-bottom: 34px;
+}
+.flip-card {
+  display: block;
+  position: relative;
+  width: min(360px, 78vw);
+  aspect-ratio: 2 / 3;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+  perspective: 1300px;
+  -webkit-tap-highlight-color: transparent;
+}
+.flip-card-inner {
+  position: absolute;
+  inset: 0;
+  display: block;
+  transform-style: preserve-3d;
+  transition: transform 0.8s cubic-bezier(0.2, 0.7, 0.25, 1);
+  box-shadow: 12px 14px 0 var(--ink);
+}
+.flip-card.is-flipped .flip-card-inner {
+  transform: rotateY(180deg);
+}
+.flip-face {
+  position: absolute;
+  inset: 0;
+  display: block;
+  border: 2px solid var(--ink);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  background: var(--cream);
+}
+.flip-back {
+  transform: rotateY(180deg);
+}
+.flip-face img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.flip-hint {
+  font-size: 0.75rem;
+  letter-spacing: 0.13em;
+  font-weight: 700;
+  margin: 28px 0 0;
+}
+.original-card-link {
+  position: fixed;
+  z-index: 30;
+  bottom: max(14px, env(safe-area-inset-bottom));
+  left: max(14px, env(safe-area-inset-left));
+  max-width: min(300px, calc(100vw - 28px));
+  padding: 10px 13px;
+  background: var(--cream);
+  border: 2px solid var(--ink);
+  box-shadow: 3px 3px 0 var(--ink);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-decoration: none;
+  line-height: 1.35;
+}
+.original-card-link:hover {
+  background: var(--purple);
+}
+
+/* Envelope follows the flap, pocket and sliding paper in test.html. */
+.invitation-envelope {
+  position: relative;
+  width: min(370px, 82vw, 44svh);
+  aspect-ratio: 1 / 1.1;
+  margin: 56px 0 36px;
+  background: linear-gradient(to top, #c7c2c5 0 55%, transparent 55%);
+  transition: background 0.7s 1.35s;
+}
+.envelope-paper {
+  position: absolute;
+  left: 11%;
+  top: 36%;
+  width: 78%;
+  height: 83%;
+  z-index: 2;
+  background: var(--cream);
+  border: 2px solid var(--ink);
+  box-shadow: 0 12px 22px rgba(0, 0, 0, 0.25);
+  transition: top 2.1s cubic-bezier(0.2, 0.9, 0.3, 1) 0.42s;
+}
+.envelope-paper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.envelope-flap {
+  position: absolute;
+  top: 45%;
+  left: 0;
+  width: 100%;
+  height: 33%;
+  z-index: 1;
+  background: #fff;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transform-origin: center top;
+  transition:
+    transform 0.8s,
+    opacity 0.7s 1.35s;
+  filter: drop-shadow(0 5px 3px rgba(0, 0, 0, 0.12));
+}
+.envelope-pocket {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 55%;
+  z-index: 3;
+  background: #f8f6f7;
+  clip-path: polygon(0 0, 50% 50%, 100% 0, 100% 100%, 0 100%);
+  filter: drop-shadow(0 -5px 4px rgba(0, 0, 0, 0.12));
+  transition: opacity 0.7s 1.35s;
+}
+.invitation-envelope.is-open {
+  background: transparent;
+}
+.invitation-envelope.is-open .envelope-flap {
+  transform: rotateX(-180deg);
+  opacity: 0;
+}
+.invitation-envelope.is-open .envelope-paper {
+  top: -17%;
+}
+.invitation-envelope.is-open .envelope-pocket {
+  opacity: 0;
+}
+
+/* ---- Intro overlay: semi-transparent so the site shows through ---- */
 .intro {
   position: fixed;
   inset: 0;
   z-index: 100;
-  background: var(--cream);
+  background: rgba(247, 242, 233, 0.62);
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -688,7 +867,7 @@ footer {
   padding: 20px 0 75px;
 }
 .video-stage {
-  background: var(--cream);
+  background: transparent;
 }
 .video-frame {
   position: relative;
@@ -799,6 +978,40 @@ footer {
 .ready-stage > .button {
   min-width: min(300px, 85vw);
 }
+
+/* Card-open hint (visual only, no button) */
+.intro.is-card-open {
+  cursor: pointer;
+}
+.card-open-hint {
+  position: fixed;
+  left: 50%;
+  bottom: max(28px, env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  z-index: 108;
+  padding: 12px 20px;
+  background: rgba(247, 242, 233, 0.92);
+  border: 2px solid var(--ink);
+  box-shadow: 6px 6px 0 var(--ink);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-align: center;
+  pointer-events: none;
+  animation: hint-in 0.5s ease-out both;
+}
+@keyframes hint-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 14px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
 .card-stage {
   perspective: 1100px;
   background: var(--pink);
@@ -879,9 +1092,17 @@ footer {
   box-shadow: 3px 3px 0 var(--ink);
   font-size: 0.85rem;
   font-weight: 700;
+  transition:
+    opacity 0.4s,
+    transform 0.4s;
 }
 .skip-intro:hover {
   background: var(--yellow);
+}
+.skip-intro.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
 }
 @media (min-width: 900px) {
   html {
@@ -950,7 +1171,7 @@ footer {
     min-height: 0;
   }
   .hero-copy {
-    background: var(--blue);
+    background: var(--green);
     padding: 72px 32px;
   }
   .hero-art {
@@ -974,125 +1195,5 @@ footer {
   .hero-art {
     border-left: 0;
     border-top: 2px solid var(--ink);
-    min-height: 490px;
-    padding: 58px 25px 66px;
-  }
-  .hero-card {
-    min-height: 350px;
-    width: min(68%, 285px);
-    box-shadow: 10px 11px 0 rgba(23, 23, 21, 0.75);
-  }
-  .hero-stamp {
-    top: 8%;
-    right: 11%;
-  }
-  .hero-topline span:last-child {
-    display: none;
-  }
-  .ticker span:nth-child(2) {
-    background: var(--purple);
-    display: none;
-  }
-  .section-heading {
-    margin-bottom: 28px;
-  }
-  .program-scroll {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: thin;
-    scrollbar-color: var(--ink) transparent;
-  }
-  .day-card {
-    flex: 0 0 min(80vw, 350px);
-    scroll-snap-align: start;
-    min-height: 333px;
-  }
-  .day-card:last-child {
-    border-right: 0;
-  }
-  .scroll-hint {
-    display: block;
-    font-size: 0.84rem;
-    margin: 16px 0 0;
-  }
-  .info-grid {
-    grid-template-columns: 1fr;
-  }
-  .info-card,
-  .info-card:nth-child(2n) {
-    border-right: 0;
-    border-bottom: 2px solid var(--ink);
-    min-height: 0;
-  }
-  .info-card:last-child {
-    border-bottom: 0;
-  }
-  .about-section {
-    display: flex;
-    flex-direction: column;
-  }
-  .about-image {
-    border-right: 0;
-    border-bottom: 2px solid var(--ink);
-    min-height: 460px;
-  }
-  .about-image img {
-    height: 380px;
-    width: auto;
-    max-width: min(100%, 310px);
-  }
-  .about-copy {
-    padding: 58px 24px;
-  }
-  .contact-grid {
-    grid-template-columns: 1fr;
-  }
-  .contact-grid > div:first-child {
-    border-right: 0;
-    border-bottom: 2px solid var(--ink);
-  }
-  .contact-grid > div {
-    padding: 24px;
-  }
-  footer {
-    margin-top: 55px;
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 5px;
-  }
-  .video-frame {
-    height: min(65svh, 600px);
-  }
-}
-@media (max-width: 380px) {
-  .hero-card {
-    width: min(75%, 280px);
-  }
-  .hero-card strong {
-    font-size: 1.75rem;
-  }
-  .hero-stamp {
-    width: 68px;
-    height: 68px;
-    font-size: 0.85rem;
-  }
-  .skip-intro {
-    font-size: 0.75rem;
-    padding: 10px;
-  }
-  .video-frame {
-    height: min(60svh, 550px);
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-  *,
-  *:before,
-  *:after {
-    animation-duration: 0.01ms !important;
-    transition-duration: 0.01ms !important;
   }
 }
