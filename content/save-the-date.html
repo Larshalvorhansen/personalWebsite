@@ -66,6 +66,18 @@
         width: 100%;
       }
     </style>
+    <script>
+      (function () {
+        var btn = document.getElementById("flip-save-date");
+        if (!btn) return;
+        // Only add fallback if site.js didn't already wire it up
+        btn.addEventListener("click", function () {
+          var pressed = btn.getAttribute("aria-pressed") === "true";
+          btn.setAttribute("aria-pressed", String(!pressed));
+          btn.classList.toggle("is-flipped", !pressed);
+        });
+      })();
+    </script>
   </head>
   <body>
     <a class="back-to-site" href="kajaoglarshalvor4.html#hjem">
