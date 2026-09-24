@@ -417,7 +417,7 @@ h1 {
   display: none;
 }
 .practical-section {
-  background: var(--pink);
+  background: var(--blue);
 }
 .info-grid {
   display: grid;
