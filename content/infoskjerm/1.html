@@ -295,7 +295,7 @@
         const imgNumber = Math.abs((24+12-hour) % 24 || 24);
 
         const imgElement = document.getElementById("hourImage");
-        const newSrc = `globetime/t${imgNumber}.png`;
+        const newSrc = `globetime/t${imgNumber}.jpeg`;
 
         // Oppdaterer kun hvis det er en ny time (forhindrer blinking i UI)
         if (!imgElement.src.endsWith(newSrc)) {
