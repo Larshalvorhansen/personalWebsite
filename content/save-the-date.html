@@ -15,16 +15,31 @@
       href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Limelight&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="assets/style.css" />
-    <script defer src="assets/site.js"></script>
 
     <style>
-      /* Pastel blue background for this standalone page */
-      body {
-        background: #c8e6f5;
+      /* ----- reset & base ----- */
+      * {
+        box-sizing: border-box;
       }
 
-      /* Back-to-site button (top-left) */
+      body {
+        margin: 0;
+        background: #c8e6f5; /* pastel blue background from save-the-date.html */
+        font-family:
+          "DM Sans",
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          Roboto,
+          sans-serif;
+        min-height: 100svh;
+        display: grid;
+        place-items: center;
+        padding: 88px 22px 48px;
+      }
+
+      /* ----- back button (preserved from save-the-date) ----- */
       .back-to-site {
         position: fixed;
         left: max(18px, env(safe-area-inset-left));
@@ -33,18 +48,18 @@
         display: inline-flex;
         align-items: center;
         gap: 0.4em;
-        background: var(--cream, #f7f2e9);
-        color: var(--ink, #171715);
-        border: 2px solid var(--ink, #171715);
+        background: #f7f2e9;
+        color: #171715;
+        border: 2px solid #171715;
         padding: 10px 14px;
         text-decoration: none;
-        font-family: "DM Sans", system-ui, sans-serif;
         font-weight: 700;
         font-size: 0.88rem;
-        box-shadow: 4px 4px 0 var(--ink, #171715);
+        box-shadow: 4px 4px 0 #171715;
         transition:
           background 0.15s ease,
           transform 0.15s ease;
+        font-family: "DM Sans", system-ui, sans-serif;
       }
       .back-to-site:hover {
         background: #cce0af;
@@ -55,44 +70,150 @@
         outline-offset: 3px;
       }
 
-      /* Center the section vertically on this standalone page */
-      body {
-        min-height: 100svh;
-        display: grid;
-        place-items: center;
-        padding: 88px 22px 48px;
-      }
+      /* ----- container for the section ----- */
       .save-date-section {
         width: 100%;
+        max-width: 700px;
+        margin: 0 auto;
+      }
+
+      /* ----- flipping card (integrated from the !doctype html.txt) ----- */
+      .flip-card {
+        perspective: 1200px;
+        width: 100%;
+        max-width: 600px;
+        height: 70vh;
+        min-height: 360px;
+        margin: 0 auto;
+        cursor: pointer;
+        border: none;
+        background: transparent;
+        padding: 0;
+        display: block;
+        border-radius: 0;
+        transition: transform 0.2s ease;
+        /* ensure it's a block-level button without default styles */
+        appearance: none;
+        -webkit-appearance: none;
+        font: inherit;
+        color: inherit;
+        outline: none;
+      }
+
+      .flip-card:focus-visible {
+        outline: 3px solid #b32975;
+        outline-offset: 6px;
+      }
+
+      .flip-card-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        transform-style: preserve-3d;
+      }
+
+      .flip-card.flipped .flip-card-inner {
+        transform: rotateY(180deg);
+      }
+
+      .flip-face {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 15px 30px -8px rgba(0, 0, 0, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #ffffff; /* fallback while image loads */
+      }
+
+      .flip-front {
+        /* front side – no rotation */
+      }
+
+      .flip-back {
+        transform: rotateY(180deg);
+      }
+
+      .flip-face img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain; /* keeps image fully visible, like in your snippet */
+        display: block;
+        filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.2));
+        background: #f0f7fc; /* subtle background to avoid harsh white edges */
+      }
+
+      /* ----- hint text ----- */
+      .flip-hint {
+        text-align: center;
+        margin: 22px 0 0;
+        font-size: 0.95rem;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        color: #171715;
+        opacity: 0.8;
+        font-family: "DM Sans", system-ui, sans-serif;
+        transition: opacity 0.2s;
+      }
+
+      /* small screen adjustments */
+      @media (max-width: 480px) {
+        .flip-card {
+          height: 60vh;
+          min-height: 300px;
+        }
+        body {
+          padding: 80px 16px 40px;
+        }
+        .back-to-site {
+          padding: 8px 12px;
+          font-size: 0.8rem;
+        }
+      }
+
+      /* if the image aspect ratio is very tall, keep it contained */
+      .flip-face img {
+        max-width: 100%;
+        max-height: 100%;
+        width: auto;
+        height: auto;
+        object-fit: contain;
       }
     </style>
-    <script>
-      (function () {
-        var btn = document.getElementById("flip-save-date");
-        if (!btn) return;
-        // Only add fallback if site.js didn't already wire it up
-        btn.addEventListener("click", function () {
-          var pressed = btn.getAttribute("aria-pressed") === "true";
-          btn.setAttribute("aria-pressed", String(!pressed));
-          btn.classList.toggle("is-flipped", !pressed);
-        });
-      })();
-    </script>
   </head>
   <body>
     <a class="back-to-site" href="kajaoglarshalvor4.html#hjem">
       <span aria-hidden="true">←</span> Tilbake til nettsiden
     </a>
 
-    <section
-      aria-labelledby="save-date-title"
-      background="transparent"
-      opacity="0"
-    >
+    <section aria-labelledby="save-date-title" class="save-date-section">
       <div class="save-date-inner">
-        <div class="save-date-copy">
-          <h2 id="save-date-title">Save the date</h2>
-        </div>
+        <!-- heading kept for accessibility & structure, but hidden visually to match original save-the-date layout? 
+           original had an h2, but we keep it and just style it minimally to keep a clean look -->
+        <h2
+          id="save-date-title"
+          style="
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+          "
+        >
+          Save the date
+        </h2>
+
+        <!-- Flip card button (semantic & accessible) -->
         <button
           id="flip-save-date"
           class="flip-card"
@@ -101,20 +222,45 @@
           aria-pressed="false"
         >
           <span class="flip-card-inner">
-            <span class="flip-face flip-front"
-              ><img
+            <span class="flip-face flip-front">
+              <img
                 src="assets/f.jpg"
                 alt="Save the date-kortets forside med Kaja og Lars Halvor"
-            /></span>
-            <span class="flip-face flip-back"
-              ><img
+                loading="eager"
+              />
+            </span>
+            <span class="flip-face flip-back">
+              <img
                 src="assets/b.jpg"
                 alt="Save the date-kortets bakside med dato og sted"
-            /></span>
+                loading="eager"
+              />
+            </span>
           </span>
         </button>
+
         <p class="flip-hint" aria-hidden="true">TRYKK FOR Å SNU KORTET ↻</p>
       </div>
     </section>
+
+    <!-- JavaScript: toggle flipped class & aria-pressed -->
+    <script>
+      (function () {
+        const flipButton = document.getElementById("flip-save-date");
+        if (!flipButton) return;
+
+        // Remove any previously attached listeners from inline fallback? we just use this one.
+        // But we'll make sure it works as the primary handler.
+        // Also update aria-pressed for accessibility.
+        flipButton.addEventListener("click", function () {
+          const isFlipped = flipButton.classList.toggle("flipped");
+          flipButton.setAttribute("aria-pressed", String(isFlipped));
+        });
+
+        // Optional: keyboard support is native because it's a button.
+        // Ensure that if site.js also tries to toggle, we don't double-toggle.
+        // Since we removed the inline fallback script, this is the only handler.
+      })();
+    </script>
   </body>
 </html>
