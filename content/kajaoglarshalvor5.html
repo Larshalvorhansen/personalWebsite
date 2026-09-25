@@ -133,7 +133,7 @@
         display: block;
         width: 100%;
         height: 100%;
-        object-fit: cover;
+        object-fit: contain;
       }
 
       /* ==== Open state (driven by the button) ==== */
@@ -192,7 +192,7 @@
         >
         <div class="nav-links">
           <a href="#hjem">Hjem</a>
-          <a href="#save-the-date">Save the date</a>
+          <a href="save-the-date.html">Save the date</a>
           <a href="#program">Program</a>
           <a href="#praktisk">Praktisk</a>
           <a href="#om-oss">Om oss</a>
@@ -200,16 +200,14 @@
           <a href="#sporsmal">Spørsmål</a>
           <a href="#kontakt">Kontakt</a>
         </div>
-        <button class="replay nav-replay" type="button" data-replay>
-          ↺ <span>Se videoen igjen</span>
-        </button>
-
-        <a
-          class="replay nav-replay"
-          href="https://halvorhansen.no/save-the-date"
-        >
-          ↗ <span>Save the date</span>
-        </a>
+        <div class="nav-extras" aria-label="Ekstra lenker">
+          <a class="replay nav-replay" href="save-the-date.html">
+            ↗ <span>Save the date</span>
+          </a>
+          <button class="replay nav-replay" type="button" data-replay>
+            ↺ <span>Se invitasjonen igjen</span>
+          </button>
+        </div>
       </nav>
 
       <main id="innhold">
@@ -244,7 +242,10 @@
               <div class="hero-stamp">K<br /><span>&</span><br />LH</div>
               <div class="hero-card">
                 <div class="card-cover">
-                  <img src="assets/forb.PNG" alt="kort" />
+                  <img
+                    src="assets/forb.png"
+                    alt="Kaja og Lars Halvor på bryllupsinvitasjonen"
+                  />
                 </div>
               </div>
               <span class="art-caption"></span>
@@ -257,40 +258,6 @@
             >
           </div>
         </section>
-
-        <!--  <section
-          id="save-the-date"
-          class="section-panel save-date-section"
-          aria-labelledby="save-date-title"
-        >
-          <div class="save-date-inner">
-            <div class="save-date-copy">
-              <h2 id="save-date-title">Save the date</h2>
-            </div>
-            <button
-              id="flip-save-date"
-              class="flip-card"
-              type="button"
-              aria-label="Vis baksiden av save the date-kortet"
-              aria-pressed="false"
-            >
-              <span class="flip-card-inner">
-                <span class="flip-face flip-front"
-                  ><img
-                    src="assets/f.jpg"
-                    alt="Save the date-kortets forside med Kaja og Lars Halvor"
-                /></span>
-                <span class="flip-face flip-back"
-                  ><img
-                    src="assets/b.jpg"
-                    alt="Save the date-kortets bakside med dato og sted"
-                /></span>
-              </span>
-            </button>
-            <p class="flip-hint" aria-hidden="true">TRYKK FOR Å SNU KORTET ↻</p>
-          </div>
-        </section>
-      -->
 
         <section
           id="program"
@@ -361,8 +328,9 @@
               <span class="info-no">01 / STED</span>
               <h3>Risøya</h3>
               <p>
-                Bryllupshelgen er på Risøya, 4912 Gjeving. Vielsen er i
-                Fjellkirken.
+                Risøya er en øy i Tvedestrand. Det er hovedsakelig en
+                folkehøyskole på øyen, men på sommeren egner den seg godt som
+                leirsted eller som et nydelig sted å feire kjerligheten!
               </p>
               <a
                 class="text-link"
@@ -376,16 +344,18 @@
               <span class="info-no">02 / MAT</span>
               <h3>Mat & allergier</h3>
               <p>
-                Vi planlegger tapas. Menyen er ikke endelig. Oppgi allergier og
-                matpreferanser i svarskjemaet.
+                Vi planlegger tapas. Gi oss beskjed i svarskjemaet om alle
+                allergier og behov, for eksempel egg, melk, gluten, nøtter,
+                skalldyr eller vegetarisk/vegansk mat.
               </p>
             </article>
             <article class="info-card">
               <span class="info-no">03 / OVERNATTING</span>
               <h3>Sov godt</h3>
               <p>
-                Det blir overnatting på folkehøyskolen. Praktiske detaljer
-                kommer senere.
+                Det blir overnatting på folkehøyskolen. Oppgi i svarskjemaet om
+                du ønsker overnatting, slik at vi kan holde av riktig antall
+                senger.
               </p>
             </article>
             <article class="info-card">
@@ -401,23 +371,23 @@
               >
             </article>
             <article class="info-card">
-              <span class="info-no">05 / Reise ut til øyen</span>
+              <span class="info-no">05 / TRANSPORT TIL ØYA</span>
               <h3>Trenger du hjelp ut til øya?</h3>
-              <p>jflksjlkfjklsdjfkldjskl</p>
-              <a
-                class="text-link"
-                href="https://maps.app.goo.gl/"
-                target="_blank"
-                rel="noopener noreferrer"
-                >Link til ettelerannet<span aria-hidden="true">↗</span></a
+              <p>
+                Ta kontakt med oss i god tid dersom det ikke ordner seg med
+                transport inn til øya, så ordner vi det sammen.
+              </p>
+              <a class="text-link" href="#kontakt"
+                >Se kontaktinformasjon <span aria-hidden="true">↓</span></a
               >
             </article>
             <article class="info-card">
               <span class="info-no">06 / KLESKODE</span>
               <h3>Kleskode</h3>
               <p>
-                Fredag: Sommerlig og fint! <br />
-                Lørdag: Dress/Sommerkjole
+                <strong>Fredag:</strong> Sommerlig og fint.<br />
+                <strong>Lørdag:</strong> Dress, kjole eller bunad – ta på deg
+                det du føler deg fin i!
               </p>
             </article>
           </div>
@@ -430,10 +400,10 @@
         >
           <div class="about-image">
             <img
-              src="assets/kort-forside.png"
-              alt="Eksempelbilde brukt inntil et endelig bilde av Kaja og Lars Halvor er klart"
+              src="assets/forb.png"
+              alt="Kaja og Lars Halvor"
               loading="lazy"
-            /><span>EKSEMPELBILDE · BYTTES UT SENERE</span>
+            /><span>Kaja &amp; Lars Halvor</span>
           </div>
           <div class="about-copy">
             <p class="eyebrow">03 / BRUDEPARET</p>
@@ -442,10 +412,7 @@
               Historien vår kommer her etter hvert. Akkurat nå teller vi ned til
               vi kan feire med dere på Risøya.
             </p>
-            <p class="subtle">
-              Bilde og tekst blir oppdatert når vi har valgt de endelige
-              versjonene.
-            </p>
+            <p class="subtle">Kaja skriver ferdig denne delen snart.</p>
             <div class="signature">Kaja <span>&</span> Lars Halvor</div>
           </div>
         </section>
@@ -458,7 +425,16 @@
           <div class="rsvp-inner">
             <p class="eyebrow">04 / SVAR PÅ INVITASJONEN</p>
             <h2 id="rsvp-title">Kommer du?</h2>
-            <p>Vi håper du vil feire med oss! Svar i skjemaet!</p>
+            <p>
+              Vi håper du vil feire med oss. Svar gjerne så snart du kan, slik
+              at vi kan planlegge en god helg for alle.
+            </p>
+            <ul class="rsvp-checklist">
+              <li>Fullt navn og hvem som kommer sammen med deg</li>
+              <li>Om du kommer eller dessverre ikke kan komme</li>
+              <li>Overnatting, inkludert om du trenger seng</li>
+              <li>Alle matallergier og andre behov</li>
+            </ul>
             <a
               class="button button-light"
               href="https://docs.google.com/forms/d/e/1FAIpQLSdeb0JNVtJMJD5CC-O8c7TiY-Vy78JjC7-iOcSYvGdNayI0Fg/viewform?usp=publish-editor"
@@ -482,7 +458,10 @@
               Hva får du om du kombinerer en bodøværing og en bergenser?
             </h2>
             <h2 style="font-size: 4rem">Verdens beste toastmastere!</h2>
-            <p>Hvis du vil holde, hendvend deg her til toastmasterene!</p>
+            <p>
+              Har du lyst til å holde tale eller gjøre et innslag? Meld det inn
+              her, og ta gjerne direkte kontakt med toastmasterne.
+            </p>
             <a
               class="button button-light"
               href="https://docs.google.com/forms/d/e/1FAIpQLSdU6wWX0bmY7gt5Ci3EaT91TQzJG9drw-u0Tn0XnWdgKxVvtA/viewform?usp=header"
@@ -492,6 +471,9 @@
                 >↗</span
               ></a
             >
+            <p class="toast-contact-link">
+              <a href="#toastmaster-vigleik">Kontakt toastmasterne direkte ↓</a>
+            </p>
             <p class="rsvp2-note">
               Svarfrist så fort som mulig og senest 10. juni 2027.
             </p>
@@ -554,12 +536,12 @@
                 >larshalvorhansen1@gmail.com</a
               >
             </div>
-            <div>
+            <div id="toastmaster-vigleik">
               <span>TOASTMASTER</span>
               <h3>Vigleik M. Aas</h3>
               <a href="tel:+4745228865">452 28 865</a>
             </div>
-            <div>
+            <div id="toastmaster-lea">
               <span>TOASTMASTER</span>
               <h3>Lea Sommersten Branstadmoen</h3>
               <a href="tel:+479550525">955 50 525</a>
@@ -577,6 +559,16 @@
               <span>FORLOVER</span>
               <h3>Øystein Skjerdal Bondevik</h3>
               <a href="tel:+4748195161">481 95 161</a>
+            </div>
+          </div>
+          <div class="closing-note">
+            <div>
+              <p class="eyebrow">VI GLEDER OSS</p>
+              <h3>Vi håper dere kan komme!</h3>
+              <p>
+                Det betyr mye for oss å få dele denne helgen med dere. Vi gleder
+                oss til feiring, latter og fine minner på Risøya.
+              </p>
             </div>
           </div>
           <footer>

@@ -44,6 +44,14 @@ a {
   outline: 3px solid #b32975;
   outline-offset: 3px;
 }
+
+/* ---- Global image rule: image defines its own box, nothing forced ---- */
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
 .skip-link {
   position: absolute;
   z-index: 40;
@@ -243,11 +251,13 @@ h1 {
   border: 1px solid var(--line);
   pointer-events: none;
 }
+
+/* ---- Hero card: shrink-wraps the image so its built-in border is visible ---- */
 .hero-card {
   position: relative;
   z-index: 1;
-  width: min(78%, 360px);
-  min-height: 460px;
+  width: fit-content;
+  max-width: min(92%, 600px);
   padding: 30px 18px;
   background: var(--cream);
   border: 2px solid var(--ink);
@@ -265,6 +275,13 @@ h1 {
   inset: 11px;
   border: 1px solid var(--ink);
   pointer-events: none;
+}
+/* Image inside hero card fills the card; card is wide enough to show it all */
+.hero-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
 }
 .card-kicker,
 .card-date {
@@ -476,17 +493,17 @@ h1 {
   position: relative;
   background: #e7d7bd;
   border-right: 2px solid var(--ink);
-  min-height: 540px;
   padding: 35px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
+/* ---- About image: box shrinks to image, image drives size ---- */
 .about-image img {
   display: block;
-  width: min(100%, 350px);
-  height: 470px;
-  object-fit: contain;
+  width: auto;
+  max-width: 100%;
+  height: auto;
   box-shadow: 10px 10px 0 var(--ink);
   border: 2px solid var(--ink);
   background: var(--cream);
@@ -708,11 +725,12 @@ body.intro-active .original-card-link {
   line-height: 1.5;
   margin-bottom: 34px;
 }
+/* ---- Flip card: box now shrinks to the image ---- */
 .flip-card {
-  display: block;
+  display: inline-block;
   position: relative;
-  width: min(360px, 78vw);
-  aspect-ratio: 2 / 3;
+  width: fit-content;
+  max-width: min(360px, 78vw);
   border: 0;
   padding: 0;
   background: transparent;
@@ -721,8 +739,7 @@ body.intro-active .original-card-link {
   -webkit-tap-highlight-color: transparent;
 }
 .flip-card-inner {
-  position: absolute;
-  inset: 0;
+  position: relative;
   display: block;
   transform-style: preserve-3d;
   transition: transform 0.8s cubic-bezier(0.2, 0.7, 0.25, 1);
@@ -732,22 +749,31 @@ body.intro-active .original-card-link {
   transform: rotateY(180deg);
 }
 .flip-face {
-  position: absolute;
-  inset: 0;
   display: block;
   border: 2px solid var(--ink);
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
   background: var(--cream);
 }
-.flip-back {
-  transform: rotateY(180deg);
+/* Front face drives the size; back face overlays it */
+.flip-front {
+  position: relative;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
+.flip-back {
+  position: absolute;
+  inset: 0;
+  transform: rotateY(180deg);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* ---- Flip card images: image defines its own box ---- */
 .flip-face img {
   display: block;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
 }
 .flip-hint {
   font-size: 0.75rem;
@@ -774,72 +800,29 @@ body.intro-active .original-card-link {
   background: var(--purple);
 }
 
-/* Envelope follows the flap, pocket and sliding paper in test.html. */
+/* ---- Envelope: paper image defines its size, envelope wraps it ---- */
 .invitation-envelope {
   position: relative;
-  width: min(370px, 82vw, 44svh);
-  aspect-ratio: 1 / 1.1;
+  width: fit-content;
+  max-width: min(370px, 82vw);
   margin: 56px 0 36px;
-  background: linear-gradient(to top, #c7c2c5 0 55%, transparent 55%);
-  transition: background 0.7s 1.35s;
 }
 .envelope-paper {
-  position: absolute;
-  left: 11%;
-  top: 36%;
-  width: 78%;
-  height: 83%;
+  position: relative;
   z-index: 2;
   background: var(--cream);
   border: 2px solid var(--ink);
   box-shadow: 0 12px 22px rgba(0, 0, 0, 0.25);
-  transition: top 2.1s cubic-bezier(0.2, 0.9, 0.3, 1) 0.42s;
+  transition: transform 2.1s cubic-bezier(0.2, 0.9, 0.3, 1) 0.42s;
 }
+/* ---- Envelope paper image: image defines its own box ---- */
 .envelope-paper img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
   display: block;
-}
-.envelope-flap {
-  position: absolute;
-  top: 45%;
-  left: 0;
   width: 100%;
-  height: 33%;
-  z-index: 1;
-  background: #fff;
-  clip-path: polygon(0 0, 100% 0, 50% 100%);
-  transform-origin: center top;
-  transition:
-    transform 0.8s,
-    opacity 0.7s 1.35s;
-  filter: drop-shadow(0 5px 3px rgba(0, 0, 0, 0.12));
-}
-.envelope-pocket {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 55%;
-  z-index: 3;
-  background: #f8f6f7;
-  clip-path: polygon(0 0, 50% 50%, 100% 0, 100% 100%, 0 100%);
-  filter: drop-shadow(0 -5px 4px rgba(0, 0, 0, 0.12));
-  transition: opacity 0.7s 1.35s;
-}
-.invitation-envelope.is-open {
-  background: transparent;
-}
-.invitation-envelope.is-open .envelope-flap {
-  transform: rotateX(-180deg);
-  opacity: 0;
+  height: auto;
 }
 .invitation-envelope.is-open .envelope-paper {
-  top: -17%;
-}
-.invitation-envelope.is-open .envelope-pocket {
-  opacity: 0;
+  transform: translateY(-25%);
 }
 
 /* ---- Intro overlay: semi-transparent so the site shows through ---- */
@@ -869,21 +852,23 @@ body.intro-active .original-card-link {
 .video-stage {
   background: transparent;
 }
+/* ---- Video frame: shrinks to the video's own ratio ---- */
 .video-frame {
   position: relative;
-  height: min(69svh, 650px);
-  aspect-ratio: 9/16;
+  width: fit-content;
   max-width: 100%;
   border: 2px solid var(--ink);
   background: var(--green);
   box-shadow: 10px 10px 0 var(--ink);
   overflow: hidden;
 }
+/* ---- Video: video defines its own box ---- */
 .video-frame video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
   display: block;
+  width: auto;
+  max-width: 100%;
+  max-height: min(69svh, 650px);
+  height: auto;
 }
 .video-caption {
   position: absolute;
@@ -1012,32 +997,48 @@ body.intro-active .original-card-link {
   }
 }
 
+/* ---- Opening card: box shrinks to the cover image ---- */
 .card-stage {
   perspective: 1100px;
   background: var(--pink);
 }
 .opening-card {
   position: relative;
-  width: min(260px, 43svh, 70vw);
-  aspect-ratio: 2/3;
+  width: fit-content;
+  max-width: min(260px, 70vw);
   transform-style: preserve-3d;
   filter: drop-shadow(12px 15px 0 rgba(0, 0, 0, 0.25));
 }
-.card-inside,
 .card-cover {
-  position: absolute;
-  inset: 0;
+  position: relative;
+  transform-origin: left center;
+  background: var(--cream);
   border: 2px solid var(--ink);
-  backface-visibility: hidden;
+  transition: transform 1.2s cubic-bezier(0.2, 0.7, 0.25, 1);
+  z-index: 2;
+}
+/* ---- Card cover image: image defines its own box ---- */
+.card-cover img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.opening-card.is-open .card-cover {
+  transform: rotateY(-155deg);
 }
 .card-inside {
+  position: absolute;
+  inset: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
   text-align: center;
   background: var(--cream);
+  border: 2px solid var(--ink);
   padding: 20px 10px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 .card-inside:before {
   content: "";
@@ -1063,21 +1064,6 @@ body.intro-active .original-card-link {
   font:
     italic 1em Georgia,
     serif;
-}
-.card-cover {
-  transform-origin: left center;
-  background: var(--cream);
-  transition: transform 1.2s cubic-bezier(0.2, 0.7, 0.25, 1);
-  z-index: 2;
-}
-.card-cover img {
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-  display: block;
-}
-.opening-card.is-open .card-cover {
-  transform: rotateY(-155deg);
 }
 .skip-intro {
   position: fixed;
