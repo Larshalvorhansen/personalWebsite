@@ -10,6 +10,9 @@
   --salmon: #ffc4d6;
   --display: "Limelight", Georgia, serif;
   --body: "DM Sans", Arial, sans-serif;
+  /* --- animation timing --- */
+  --ease-silk: cubic-bezier(0.22, 1, 0.36, 1); /* soft, decelerating landing */
+  --ease-veil: cubic-bezier(0.65, 0, 0.35, 1); /* steady, even drift */
 }
 * {
   box-sizing: border-box;
@@ -228,8 +231,8 @@ h1 {
   text-decoration: none;
   cursor: pointer;
   transition:
-    transform 0.18s,
-    box-shadow 0.18s;
+    transform 0.45s var(--ease-silk),
+    box-shadow 0.45s var(--ease-silk);
   background: transparent;
 }
 .button:hover {
@@ -282,6 +285,19 @@ h1 {
   width: 100%;
   height: auto;
   max-width: 100%;
+}
+/* Slow, barely-there drift so the card feels hand-placed, not static */
+@keyframes card-sway {
+  0%,
+  100% {
+    transform: rotate(-6deg) translate3d(0, 0, 0);
+  }
+  50% {
+    transform: rotate(-5.4deg) translate3d(0, -8px, 0);
+  }
+}
+.hero-card {
+  animation: card-sway 12s var(--ease-veil) infinite;
 }
 .card-kicker,
 .card-date {
@@ -634,8 +650,8 @@ h1 {
   margin: auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-auto-rows: 1fr; /* all rows equal height */
-  align-items: stretch; /* items fill their row (default, but explicit) */
+  grid-auto-rows: 1fr;
+  align-items: stretch;
   border: 2px solid var(--ink);
   background: var(--cream);
 }
@@ -743,7 +759,7 @@ body.intro-active .original-card-link {
   position: relative;
   display: block;
   transform-style: preserve-3d;
-  transition: transform 0.8s cubic-bezier(0.2, 0.7, 0.25, 1);
+  transition: transform 1.8s var(--ease-veil);
   box-shadow: 12px 14px 0 var(--ink);
 }
 .flip-card.is-flipped .flip-card-inner {
@@ -814,7 +830,7 @@ body.intro-active .original-card-link {
   background: var(--cream);
   border: 2px solid var(--ink);
   box-shadow: 0 12px 22px rgba(0, 0, 0, 0.25);
-  transition: transform 2.1s cubic-bezier(0.2, 0.9, 0.3, 1) 0.42s;
+  transition: transform 3.3s var(--ease-silk) 0.15s;
 }
 /* ---- Envelope paper image: image defines its own box ---- */
 .envelope-paper img {
@@ -840,6 +856,15 @@ body.intro-active .original-card-link {
   padding: 20px;
   overflow-y: auto;
   overscroll-behavior: contain;
+  animation: intro-veil 1.2s var(--ease-silk) both;
+}
+@keyframes intro-veil {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 .intro-stage {
   width: 100%;
@@ -965,6 +990,24 @@ body.intro-active .original-card-link {
   min-width: min(300px, 85vw);
 }
 
+/* ---- Ready stage arrives gently once the video stage is gone ---- */
+@keyframes intro-rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 26px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+#ready-stage:not([hidden]) .envelope_form_wrap {
+  animation: intro-rise 1.8s var(--ease-silk) both;
+}
+#ready-stage:not([hidden]) > .button {
+  animation: intro-rise 1.6s var(--ease-silk) 0.7s both;
+}
+
 /* Card-open hint (visual only, no button) */
 .intro.is-card-open {
   cursor: pointer;
@@ -985,7 +1028,7 @@ body.intro-active .original-card-link {
   text-transform: uppercase;
   text-align: center;
   pointer-events: none;
-  animation: hint-in 0.5s ease-out both;
+  animation: hint-in 1.1s var(--ease-silk) both;
 }
 @keyframes hint-in {
   from {
@@ -1015,7 +1058,7 @@ body.intro-active .original-card-link {
   transform-origin: left center;
   background: var(--cream);
   border: 2px solid var(--ink);
-  transition: transform 1.2s cubic-bezier(0.2, 0.7, 0.25, 1);
+  transition: transform 2.4s var(--ease-veil) 0.2s;
   z-index: 2;
 }
 /* ---- Card cover image: image defines its own box ---- */
@@ -1080,8 +1123,8 @@ body.intro-active .original-card-link {
   font-size: 0.85rem;
   font-weight: 700;
   transition:
-    opacity 0.4s,
-    transform 0.4s;
+    opacity 0.7s var(--ease-silk),
+    transform 0.7s var(--ease-silk);
 }
 .skip-intro:hover {
   background: var(--yellow);
@@ -1091,6 +1134,94 @@ body.intro-active .original-card-link {
   pointer-events: none;
   transform: translateY(10px);
 }
+
+/* ============================================================
+   ENVELOPE — image defines the size, everything else overlays it
+   ============================================================ */
+
+.envelope_form_wrap {
+  /* Center the envelope on the page */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 16px;
+}
+
+#envelope_form {
+  display: inline-block;
+  width: fit-content;
+  max-width: 100%;
+}
+
+.env_wrap {
+  /* KEY: shrink to the card image, and become the positioning context */
+  position: relative;
+  display: inline-block;
+  width: fit-content;
+  max-width: min(420px, 90vw);
+  isolation: isolate;
+}
+
+/* ---- The card: the ONLY thing that sets the envelope size ---- */
+.env_form_wrap {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  /* Lift the card out of the pocket — pure transform, no layout impact */
+  transform: translateY(-12%);
+  transition: transform 3.3s var(--ease-silk) 0.15s;
+  box-shadow: 0 14px 24px rgba(0, 0, 0, 0.28);
+  border: 2px solid var(--ink);
+  background: var(--cream);
+}
+
+/* The image fills the card; the card is exactly as wide as the image. */
+.env_form_wrap img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* When the user opens the envelope, the card slides further up */
+.env_wrap.is-open .env_form_wrap {
+  transform: translateY(-42%);
+}
+
+/* ---- Top flap: absolutely positioned so it never adds to layout ---- */
+.env_top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  aspect-ratio: 1 / 0.42; /* adjust to taste — flap depth */
+  background: var(--yellow);
+  border: 2px solid var(--ink);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ---- Bottom pocket: absolutely positioned too ---- */
+.env_bottom_wrap {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3; /* sits IN FRONT of the card's lower half */
+  pointer-events: none;
+}
+
+.env_bottom {
+  aspect-ratio: 1 / 0.55; /* adjust — pocket depth */
+  background: var(--salmon);
+  border: 2px solid var(--ink);
+  border-top: 0;
+  clip-path: polygon(0 0, 50% 100%, 100% 0, 100% 100%, 0 100%);
+}
+
+/* ============================================================
+   Media queries
+   ============================================================ */
 @media (min-width: 900px) {
   html {
     scroll-padding-top: 0;
@@ -1182,5 +1313,27 @@ body.intro-active .original-card-link {
   .hero-art {
     border-left: 0;
     border-top: 2px solid var(--ink);
+  }
+}
+
+/* ============================================================
+   Reduced motion
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .hero-card,
+  #ready-stage:not([hidden]) .envelope_form_wrap,
+  #ready-stage:not([hidden]) > .button,
+  .intro,
+  .card-open-hint {
+    animation: none;
+  }
+  .button,
+  .flip-card-inner,
+  .envelope-paper,
+  .env_form_wrap,
+  .opening-card .card-cover,
+  .skip-intro {
+    transition-duration: 0.01ms;
+    transition-delay: 0ms;
   }
 }
