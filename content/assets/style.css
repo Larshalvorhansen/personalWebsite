@@ -650,10 +650,14 @@ h1 {
   margin: auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-auto-rows: 1fr;
+  grid-auto-rows: 260px; /* <- equal heights, guaranteed */
   align-items: stretch;
   border: 2px solid var(--ink);
   background: var(--cream);
+}
+
+.contact-grid > * {
+  overflow: auto; /* safety for long content */
 }
 .contact-grid > div {
   min-width: 0;
