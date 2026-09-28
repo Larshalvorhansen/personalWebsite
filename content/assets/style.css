@@ -318,7 +318,6 @@ h1 {
   line-height: 1.16;
 }
 .hero-card em,
-.ready-envelope i,
 .signature span {
   font-family: Georgia, serif;
   font-weight: 400;
@@ -857,31 +856,6 @@ body.intro-active .original-card-link {
   background: var(--purple);
 }
 
-/* ---- Envelope: paper image defines its size, envelope wraps it ---- */
-.invitation-envelope {
-  position: relative;
-  width: fit-content;
-  max-width: min(370px, 82vw);
-  margin: 56px 0 36px;
-}
-.envelope-paper {
-  position: relative;
-  z-index: 2;
-  background: var(--cream);
-  border: 2px solid var(--ink);
-  box-shadow: 0 12px 22px rgba(0, 0, 0, 0.25);
-  transition: transform 3.3s var(--ease-silk) 0.15s;
-}
-/* ---- Envelope paper image: image defines its own box ---- */
-.envelope-paper img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-.invitation-envelope.is-open .envelope-paper {
-  transform: translateY(-25%);
-}
-
 /* ---- Intro overlay: semi-transparent so the site shows through ---- */
 .intro {
   position: fixed;
@@ -978,54 +952,6 @@ body.intro-active .original-card-link {
   text-align: center;
   margin: 15px 0 0;
 }
-.ready-envelope {
-  position: relative;
-  width: min(440px, 88vw);
-  aspect-ratio: 1.35;
-  background: var(--yellow);
-  border: 2px solid var(--ink);
-  box-shadow: 11px 11px 0 var(--ink);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 15px;
-  text-align: center;
-  margin-bottom: 42px;
-  overflow: hidden;
-}
-.ready-envelope:before {
-  content: "";
-  position: absolute;
-  inset: 13px;
-  border: 1px solid var(--ink);
-  pointer-events: none;
-}
-.ready-envelope:after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 37%;
-  border-top: 2px solid var(--ink);
-  background: rgba(255, 212, 247, 0.5);
-  clip-path: polygon(0 0, 50% 85%, 100% 0, 100% 100%, 0 100%);
-  opacity: 0.55;
-}
-.ready-envelope span,
-.ready-envelope small {
-  font-size: 0.72rem;
-  letter-spacing: 0.15em;
-  font-weight: 700;
-  z-index: 1;
-}
-.ready-envelope strong {
-  font-family: var(--display);
-  font-weight: 400;
-  font-size: clamp(2rem, 9vw, 4rem);
-  z-index: 1;
-}
 .ready-stage > .button {
   min-width: min(300px, 85vw);
 }
@@ -1081,74 +1007,6 @@ body.intro-active .original-card-link {
   }
 }
 
-/* ---- Opening card: box shrinks to the cover image ---- */
-.card-stage {
-  perspective: 1100px;
-  background: var(--pink);
-}
-.opening-card {
-  position: relative;
-  width: fit-content;
-  max-width: min(260px, 70vw);
-  transform-style: preserve-3d;
-  filter: drop-shadow(12px 15px 0 rgba(0, 0, 0, 0.25));
-}
-.card-cover {
-  position: relative;
-  transform-origin: left center;
-  background: var(--cream);
-  border: 2px solid var(--ink);
-  transition: transform 2.4s var(--ease-veil) 0.2s;
-  z-index: 2;
-}
-/* ---- Card cover image: image defines its own box ---- */
-.card-cover img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-.opening-card.is-open .card-cover {
-  transform: rotateY(-155deg);
-}
-.card-inside {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-  text-align: center;
-  background: var(--cream);
-  border: 2px solid var(--ink);
-  padding: 20px 10px;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-}
-.card-inside:before {
-  content: "";
-  position: absolute;
-  inset: 9px;
-  border: 1px solid var(--ink);
-}
-.card-inside p,
-.card-inside span {
-  font-size: 0.66rem;
-  letter-spacing: 0.11em;
-  font-weight: 700;
-  z-index: 1;
-}
-.card-inside strong {
-  font-family: var(--display);
-  font-size: clamp(1.4rem, 4svh, 2.3rem);
-  font-weight: 400;
-  line-height: 1.22;
-  z-index: 1;
-}
-.card-inside em {
-  font:
-    italic 1em Georgia,
-    serif;
-}
 .skip-intro {
   position: fixed;
   right: max(15px, env(safe-area-inset-right));
@@ -1173,90 +1031,6 @@ body.intro-active .original-card-link {
   opacity: 0;
   pointer-events: none;
   transform: translateY(10px);
-}
-
-/* ============================================================
-   ENVELOPE — image defines the size, everything else overlays it
-   ============================================================ */
-
-.envelope_form_wrap {
-  /* Center the envelope on the page */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 40px 16px;
-}
-
-#envelope_form {
-  display: inline-block;
-  width: fit-content;
-  max-width: 100%;
-}
-
-.env_wrap {
-  /* KEY: shrink to the card image, and become the positioning context */
-  position: relative;
-  display: inline-block;
-  width: fit-content;
-  max-width: min(420px, 90vw);
-  isolation: isolate;
-}
-
-/* ---- The card: the ONLY thing that sets the envelope size ---- */
-.env_form_wrap {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  /* Lift the card out of the pocket — pure transform, no layout impact */
-  transform: translateY(-12%);
-  transition: transform 3.3s var(--ease-silk) 0.15s;
-  box-shadow: 0 14px 24px rgba(0, 0, 0, 0.28);
-  border: 2px solid var(--ink);
-  background: var(--cream);
-}
-
-/* The image fills the card; the card is exactly as wide as the image. */
-.env_form_wrap img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-/* When the user opens the envelope, the card slides further up */
-.env_wrap.is-open .env_form_wrap {
-  transform: translateY(-42%);
-}
-
-/* ---- Top flap: absolutely positioned so it never adds to layout ---- */
-.env_top {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  aspect-ratio: 1 / 0.42; /* adjust to taste — flap depth */
-  background: var(--yellow);
-  border: 2px solid var(--ink);
-  clip-path: polygon(0 0, 100% 0, 50% 100%);
-  z-index: 1;
-  pointer-events: none;
-}
-
-/* ---- Bottom pocket: absolutely positioned too ---- */
-.env_bottom_wrap {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 3; /* sits IN FRONT of the card's lower half */
-  pointer-events: none;
-}
-
-.env_bottom {
-  aspect-ratio: 1 / 0.55; /* adjust — pocket depth */
-  background: var(--salmon);
-  border: 2px solid var(--ink);
-  border-top: 0;
-  clip-path: polygon(0 0, 50% 100%, 100% 0, 100% 100%, 0 100%);
 }
 
 /* ============================================================
@@ -1369,9 +1143,7 @@ body.intro-active .original-card-link {
   }
   .button,
   .flip-card-inner,
-  .envelope-paper,
   .env_form_wrap,
-  .opening-card .card-cover,
   .skip-intro {
     transition-duration: 0.01ms;
     transition-delay: 0ms;
