@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="no">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#c8e6f5" />
+    <meta
+      name="description"
+      content="Save the date for bryllupet til Kaja Gunnarson og Lars Halvor Hansen, 23.–25. juli 2027 på Risøya."
+    />
+    <title>Save the date · Kaja & Lars Halvor</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background: #c8e6f5;
+        font-family:
+          "DM Sans",
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          Roboto,
+          sans-serif;
+        min-height: 100svh;
+        display: grid;
+        place-items: center;
+        padding: 88px 22px 48px;
+      }
+
+      /* Back button */
+      .back-to-site {
+        position: fixed;
+        left: max(18px, env(safe-area-inset-left));
+        top: max(18px, env(safe-area-inset-top));
+        z-index: 10;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4em;
+        background: #f7f2e9;
+        color: #171715;
+        border: 2px solid #171715;
+        padding: 10px 14px;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 0.88rem;
+        box-shadow: 4px 4px 0 #171715;
+        transition:
+          background 0.15s,
+          transform 0.15s;
+      }
+      .back-to-site:hover {
+        background: #cce0af;
+        transform: translate(-1px, -1px);
+      }
+      .back-to-site:focus-visible {
+        outline: 3px solid #b32975;
+        outline-offset: 3px;
+      }
+
+      /* ---- Flip card ---- */
+      /* The CARD is just a wrapper — its size is driven by the front image. */
+      .flip-card {
+        position: relative;
+        display: inline-block; /* shrinks to fit its content */
+        max-width: 100%;
+        max-height: 78svh; /* never taller than the screen */
+        perspective: 1400px;
+        cursor: pointer;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+        outline: none;
+        line-height: 0; /* kill the inline-image whitespace */
+      }
+      .flip-card:focus-visible {
+        outline: 3px solid #b32975;
+        outline-offset: 6px;
+      }
+
+      .flip-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+        transform-style: preserve-3d;
+        -webkit-transform-style: preserve-3d;
+      }
+      .flip-card.flipped .flip-inner {
+        transform: rotateY(180deg);
+      }
+
+      /* The front image defines the card's exact box, no cropping ever. */
+      .flip-front img {
+        display: block;
+        max-width: 100%;
+        max-height: 78svh; /* fit on screen */
+        width: auto;
+        height: auto;
+        border-radius: 4px;
+      }
+
+      /* Back face sits exactly on top of the front face. */
+      .flip-back {
+        position: absolute;
+        inset: 0;
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        transform: rotateY(180deg);
+        border-radius: 4px;
+        overflow: hidden;
+        box-shadow: 0 15px 30px -8px rgba(0, 0, 0, 0.3);
+      }
+      /* Hide the front's backface when flipped */
+      .flip-front {
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+      }
+
+      .flip-back img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* back fills the front's box exactly */
+      }
+
+      /* Hint */
+      .flip-hint {
+        text-align: center;
+        margin-top: 22px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        color: #171715;
+        opacity: 0.8;
+        text-transform: uppercase;
+        line-height: 1.2;
+      }
+
+      @media (max-width: 480px) {
+        body {
+          padding: 80px 16px 40px;
+        }
+        .back-to-site {
+          padding: 8px 12px;
+          font-size: 0.8rem;
+        }
+        .flip-hint {
+          font-size: 0.85rem;
+          margin-top: 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="back-to-site" href="kajaoglarshalvor5.html">
+      <span aria-hidden="true">←</span> Tilbake til nettsiden
+    </a>
+
+    <section>
+      <h2
+        style="
+          position: absolute;
+          width: 1px;
+          height: 1px;
+          overflow: hidden;
+          clip: rect(0, 0, 0, 0);
+        "
+      >
+        Save the date
+      </h2>
+
+      <div
+        id="flip-save-date"
+        class="flip-card"
+        role="button"
+        tabindex="0"
+        aria-pressed="false"
+        aria-label="Vis baksiden av save the date-kortet"
+      >
+        <div class="flip-inner">
+          <div class="flip-front">
+            <img
+              src="assets/f.jpg"
+              alt="Save the date-kortets forside med Kaja og Lars Halvor"
+            />
+          </div>
+          <div class="flip-back">
+            <img
+              src="assets/b.jpg"
+              alt="Save the date-kortets bakside med dato og sted"
+            />
+          </div>
+        </div>
+      </div>
+
+      <p class="flip-hint" aria-hidden="true">SNISNI</p>
+    </section>
+
+    <script>
+      (function () {
+        const card = document.getElementById("flip-save-date");
+        const toggle = () => {
+          const flipped = card.classList.toggle("flipped");
+          card.setAttribute("aria-pressed", String(flipped));
+        };
+        card.addEventListener("click", toggle);
+        card.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            toggle();
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>
