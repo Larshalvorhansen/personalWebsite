@@ -1,0 +1,524 @@
+<!doctype html>
+<html lang="no">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="refresh" content="60" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stue-skjerm – Vertikal</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        width: 100vw;
+        height: 100vh;
+        background: #000;
+        color: #ffffff;
+        overflow: hidden;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      }
+      body {
+        position: absolute;
+        width: 100vh;
+        height: 100vw;
+        left: 0;
+        top: 100vh;
+        transform: rotate(-90deg);
+        transform-origin: 0 0;
+      }
+
+      .main-content {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+      }
+
+      /* === CLOCKS ROW === */
+      .clocks-row {
+        display: flex;
+        width: 97%;
+        max-width: 1500px;
+        margin-top: 5px;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+      }
+
+      /* Digital Clock */
+      .digital-clock {
+        background: #000000;
+        border-radius: 10px;
+        padding: 10px 10px;
+        min-width: 450px;
+        text-align: center;
+        box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
+      }
+      .digital-time {
+        font-size: 6.8rem;
+        font-weight: 300;
+        letter-spacing: 6px;
+        color: #ffffff;
+        line-height: 1;
+      }
+      .digital-date {
+        font-size: 3rem;
+        color: #ffffff;
+        margin-top: 10px;
+      }
+      .digital-week {
+        font-size: 3rem;
+        color: #ffffff;
+        margin-top: 3px;
+        font-weight: 500;
+      }
+
+      /* ImageHour Container */
+      .clock-container {
+        position: relative;
+        width: 600px;
+        height: 400px;
+        flex-shrink: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .clock-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        border-radius: 10px;
+      }
+
+      /* Rest of your styles */
+      .quote-section,
+      .section {
+        width: 92%;
+        margin-top: 50px;
+      }
+      h2 {
+        font-size: 3rem;
+        color: #ffffff;
+        margin: 5px 0;
+        font-weight: 400;
+        border-bottom: 1px solid #222;
+      }
+      #quote {
+        font-size: 2rem;
+        color: #ffffff;
+        text-align: center;
+      }
+      .bus {
+        display: flex;
+        font-size: 2rem;
+        padding: 5px 0;
+        border-bottom: 1px solid #111;
+        align-items: center;
+      }
+      .line {
+        font-weight: bold;
+        color: #ffffff;
+        width: 80px;
+        flex-shrink: 0;
+      }
+      .dest {
+        flex: 1;
+        color: #ffffff;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding-right: 10px;
+      }
+      .status {
+        width: 250px;
+        text-align: right;
+        font-size: 2rem;
+      }
+      .time {
+        color: #ffffff;
+        width: 150px;
+        text-align: right;
+        font-weight: bold;
+      }
+      .time.special {
+        color: #ff7777;
+        font-weight: bold;
+      }
+
+      /* === SUN GRAPH (bottom-left corner) === */
+      #sun-graph {
+        position: fixed;
+        left: 10px;
+        bottom: 10px;
+        width: 420px;
+        height: 90px;
+        z-index: 100;
+        pointer-events: none;
+      }
+      #sun-graph svg {
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Sun graph, fixed bottom-left -->
+    <div id="sun-graph"></div>
+
+    <div class="main-content">
+      <div class="clocks-row">
+        <!-- Digital Clock -->
+        <div class="digital-clock">
+          <div class="digital-time" id="digitalTime">00:00</div>
+          <div class="digital-date" id="digitalDate"></div>
+          <div class="digital-week" id="digitalWeek"></div>
+          <div class="digital-week" id="countdown"></div>
+        </div>
+
+        <!-- 24-Hour Image Display -->
+        <div class="clock-container">
+          <img id="hourImage" src="" alt="Timebilde" />
+        </div>
+      </div>
+
+      <div class="quote-section">
+        <h2></h2>
+        <div id="quote"></div>
+
+        <script>
+          async function loadDailyQuote() {
+            const START_DATE = new Date("2026-08-02");
+            const QUOTES_FILE = "quotes.txt";
+
+            try {
+              const response = await fetch(QUOTES_FILE);
+              if (!response.ok) throw new Error("Could not load quotes file.");
+
+              const text = await response.text();
+              const quotes = text
+                .split("\n")
+                .map((line) => line.trim())
+                .filter(Boolean);
+
+              if (quotes.length === 0) return;
+
+              const today = new Date();
+              const startUtc = Date.UTC(
+                START_DATE.getFullYear(),
+                START_DATE.getMonth(),
+                START_DATE.getDate(),
+              );
+              const todayUtc = Date.UTC(
+                today.getFullYear(),
+                today.getMonth(),
+                today.getDate(),
+              );
+
+              const msPerDay = 1000 * 60 * 60 * 24;
+              let dayIndex = Math.floor((todayUtc - startUtc) / msPerDay);
+
+              if (dayIndex < 0) dayIndex = 0;
+
+              const selectedIndex = dayIndex % quotes.length;
+              document.getElementById("quote").textContent =
+                quotes[selectedIndex];
+            } catch (error) {
+              console.error(error);
+              document.getElementById("quote").textContent =
+                "Could not load quote today.";
+            }
+          }
+
+          loadDailyQuote();
+        </script>
+      </div>
+
+      <div class="section">
+        <h2>Buss fra Jakob kirke</h2>
+        <div id="jakob-bus"></div>
+      </div>
+      <div class="section">
+        <h2>Trikk fra Nybrua</h2>
+        <div id="nybrua-trikk"></div>
+      </div>
+
+      <div style="margin-top: 2.5rem; width: 100%">
+        <img
+          src="https://www.yr.no/nb/innhold/1-72837/meteogram.svg?mode=dark"
+          width="100%"
+          style="
+            display: block;
+            filter: brightness(1.08) contrast(1.12) saturate(0.95);
+          "
+          alt="Været"
+        />
+      </div>
+    </div>
+
+    <script>
+      /* Digital Clock + Week */
+      function getISOWeek(date) {
+        const d = new Date(
+          Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()),
+        );
+        d.setUTCDate(d.getUTCDate() + 3 - ((d.getUTCDay() + 6) % 7));
+        const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+        return Math.ceil(((d - yearStart) / 86400000 + 1) / 7);
+      }
+
+      function updateDigitalClock() {
+        const now = new Date();
+
+        const targetDate = new Date("2027-07-24T13:00:00");
+        const diffInMs = targetDate - now;
+        const days = Math.ceil(diffInMs / (1000 * 60 * 60 * 24));
+
+        let countdownText = `${days} dager igjen! ❤️`;
+
+        const timeStr = now.toLocaleTimeString("no-NO", {
+          hour: "2-digit",
+          minute: "2-digit",
+        });
+        const dateStr = now.toLocaleDateString("no-NO", {
+          weekday: "long",
+          day: "numeric",
+          month: "long",
+        });
+
+        document.getElementById("digitalTime").textContent = timeStr;
+        document.getElementById("digitalDate").textContent =
+          dateStr.charAt(0).toUpperCase() + dateStr.slice(1);
+        document.getElementById("digitalWeek").textContent =
+          `Uke ${getISOWeek(now)}`;
+
+        document.getElementById("countdown").textContent = countdownText;
+      }
+      setInterval(updateDigitalClock, 1000);
+      updateDigitalClock();
+
+      /* Bildeoppdatering per time */
+      function updateHourImage() {
+        const now = new Date();
+        const hour = now.getHours();
+
+        const imgNumber = Math.abs((24 + 12 - hour) % 24 || 24);
+
+        const imgElement = document.getElementById("hourImage");
+        const newSrc = `globetime/t${imgNumber}.jpeg`;
+
+        if (!imgElement.src.endsWith(newSrc)) {
+          imgElement.src = newSrc;
+        }
+      }
+      setInterval(updateHourImage, 60000);
+      updateHourImage();
+
+      /* Bus/Tram code */
+      const API_URL = "https://api.entur.io/journey-planner/v3/graphql";
+      const JAKOB_KIRKE_ID = "NSR:StopPlace:6435";
+      const NYBRUA_ID = "NSR:StopPlace:61989";
+      const query = `{ stopPlace(id: "STOP_ID") { estimatedCalls(numberOfDepartures: 4, timeRange: 3600) { expectedDepartureTime destinationDisplay { frontText } serviceJourney { journeyPattern { line { publicCode } } } } } }`;
+
+      async function fetchDepartures(stopId, elementId) {
+        const el = document.getElementById(elementId);
+        try {
+          const res = await fetch(API_URL, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "ET-Client-Name": "stue-skjerm-v2",
+            },
+            body: JSON.stringify({ query: query.replace("STOP_ID", stopId) }),
+          });
+          const json = await res.json();
+          const calls = json.data?.stopPlace?.estimatedCalls || [];
+          let html = "";
+          for (let call of calls) {
+            const time = new Date(call.expectedDepartureTime);
+            const diffMin = Math.round((time - new Date()) / 60000);
+            let statusStr = "",
+              timeStr = "";
+
+            if (diffMin <= 0) timeStr = "nå...";
+            else if (diffMin === 1) {
+              statusStr = "Ikke prøv deg";
+              timeStr = "1 min";
+            } else if (diffMin === 2) {
+              statusStr = "Løp!";
+              timeStr = "2 min";
+            } else if (diffMin === 3) {
+              statusStr = "Goood tid";
+              timeStr = "3 min";
+            } else if (diffMin < 60) timeStr = `${diffMin} min`;
+            else
+              timeStr = time.toLocaleTimeString("no-NO", {
+                hour: "2-digit",
+                minute: "2-digit",
+              });
+
+            const line =
+              call.serviceJourney?.journeyPattern?.line?.publicCode || "–";
+            const dest = call.destinationDisplay?.frontText || "Ukjent";
+
+            html += `<div class="bus">
+              <span class="line">${line}</span>
+              <span class="dest">${dest}</span>
+              <span class="status">${statusStr}</span>
+              <span class="time ${diffMin === 2 ? "special" : ""}">${timeStr}</span>
+            </div>`;
+          }
+          el.innerHTML = html || `<p style="opacity:0.6">Ingen avganger</p>`;
+        } catch (e) {
+          el.innerHTML = `<p style="color:#f55">Feil ved lasting</p>`;
+        }
+      }
+
+      const refreshAll = () => {
+        fetchDepartures(JAKOB_KIRKE_ID, "jakob-bus");
+        fetchDepartures(NYBRUA_ID, "nybrua-trikk");
+      };
+      refreshAll();
+      setInterval(refreshAll, 15000);
+    </script>
+
+    <!-- Sun graph script -->
+    <script src="https://cdn.jsdelivr.net/npm/suncalc@1.9.0/suncalc.js"></script>
+    <script>
+      (function () {
+        const LAT = 59.9139,
+          LNG = 10.7522;
+
+        function drawSunGraph() {
+          const container = document.getElementById("sun-graph");
+          if (!container) return;
+
+          if (typeof SunCalc === "undefined") {
+            container.textContent = "SunCalc not loaded";
+            return;
+          }
+
+          const today = new Date();
+          const times = SunCalc.getTimes(today, LAT, LNG);
+          const sunrise = times.sunrise;
+          const sunset = times.sunset;
+          const solarNoon = times.solarNoon;
+
+          if (!sunrise || !sunset || isNaN(sunrise) || isNaN(sunset)) {
+            container.textContent = "No sunrise/sunset";
+            return;
+          }
+
+          const dayStart = new Date(today);
+          dayStart.setHours(0, 0, 0, 0);
+          const dayEnd = new Date(dayStart);
+          dayEnd.setDate(dayEnd.getDate() + 1);
+          const dayMs = dayEnd - dayStart;
+
+          const steps = 144;
+          const points = [];
+          for (let i = 0; i <= steps; i++) {
+            const t = new Date(dayStart.getTime() + (dayMs * i) / steps);
+            const pos = SunCalc.getPosition(t, LAT, LNG);
+            points.push({ t, alt: pos.altitude });
+          }
+
+          const W = 1000,
+            H = 220;
+          const padX = 40,
+            padTop = 30,
+            padBottom = 50;
+
+          const maxAlt = Math.max(...points.map((p) => p.alt), 0.1);
+          const minAlt = Math.min(...points.map((p) => p.alt), -0.1);
+
+          const xForTime = (t) =>
+            padX + ((t - dayStart) / dayMs) * (W - padX * 2);
+          const yFor = (alt) =>
+            H -
+            padBottom -
+            ((alt - minAlt) / (maxAlt - minAlt)) * (H - padBottom - padTop);
+
+          const horizonY = yFor(0);
+
+          let pathD = "";
+          points.forEach((p, i) => {
+            const x = xForTime(p.t).toFixed(1);
+            const y = yFor(p.alt).toFixed(1);
+            pathD += (i === 0 ? "M" : "L") + x + "," + y + " ";
+          });
+
+          const now = new Date();
+          const nowPos = SunCalc.getPosition(now, LAT, LNG);
+          const cx = xForTime(now);
+          const cy = yFor(nowPos.altitude);
+          const dotColor = nowPos.altitude >= 0 ? "#ffaa00" : "#666";
+          const currentMarker = `<circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="7" fill="${dotColor}"/>`;
+
+          const fmt = (d) =>
+            d.toLocaleTimeString("no-NO", {
+              hour: "2-digit",
+              minute: "2-digit",
+            });
+
+          const srX = xForTime(sunrise);
+          const srY = yFor(0);
+          const snX = xForTime(solarNoon);
+          const snPos = SunCalc.getPosition(solarNoon, LAT, LNG);
+          const snY = yFor(snPos.altitude);
+          const ssX = xForTime(sunset);
+          const ssY = yFor(0);
+
+          let eventMarkers = `
+            <line x1="${srX.toFixed(1)}" y1="${srY.toFixed(1)}" x2="${srX.toFixed(1)}" y2="${padTop}"
+                  stroke="#888" stroke-width="1" stroke-dasharray="3,3"/>
+            <circle cx="${srX.toFixed(1)}" cy="${srY.toFixed(1)}" r="5" fill="#fff"/>
+            <text x="${srX.toFixed(1)}" y="${(padTop - 8).toFixed(1)}" fill="#fff" font-size="16" text-anchor="middle">
+              ${fmt(sunrise)}
+            </text>
+
+            <line x1="${snX.toFixed(1)}" y1="${snY.toFixed(1)}" x2="${snX.toFixed(1)}" y2="${padTop}"
+                  stroke="#888" stroke-width="1" stroke-dasharray="3,3"/>
+            <circle cx="${snX.toFixed(1)}" cy="${snY.toFixed(1)}" r="5" fill="#ffcc33"/>
+            <text x="${snX.toFixed(1)}" y="${(padTop - 8).toFixed(1)}" fill="#ffcc33" font-size="16" text-anchor="middle">
+              ${fmt(solarNoon)}
+            </text>
+
+            <line x1="${ssX.toFixed(1)}" y1="${ssY.toFixed(1)}" x2="${ssX.toFixed(1)}" y2="${padTop}"
+                  stroke="#888" stroke-width="1" stroke-dasharray="3,3"/>
+            <circle cx="${ssX.toFixed(1)}" cy="${ssY.toFixed(1)}" r="5" fill="#fff"/>
+            <text x="${ssX.toFixed(1)}" y="${(padTop - 8).toFixed(1)}" fill="#fff" font-size="16" text-anchor="middle">
+              ${fmt(sunset)}
+            </text>
+          `;
+
+          let ticks = "";
+          for (let h = 0; h <= 24; h += 3) {
+            const t = new Date(dayStart.getTime() + h * 3600 * 1000);
+            const x = xForTime(t).toFixed(1);
+            ticks += `<line x1="${x}" y1="${horizonY.toFixed(1)}" x2="${x}" y2="${(horizonY + 6).toFixed(1)}" stroke="#666" stroke-width="1"/>`;
+            ticks += `<text x="${x}" y="${H - 12}" fill="#aaa" font-size="14" text-anchor="middle">${String(h).padStart(2, "0")}</text>`;
+          }
+
+          container.innerHTML = `
+            <svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none">
+              <line x1="${padX}" y1="${horizonY.toFixed(1)}" x2="${W - padX}" y2="${horizonY.toFixed(1)}"
+                    stroke="#666" stroke-width="1"/>
+              ${ticks}
+              <path d="${pathD}" fill="none" stroke="#fff" stroke-width="2.5"/>
+              ${eventMarkers}
+              ${currentMarker}
+            </svg>
+          `;
+        }
+
+        drawSunGraph();
+        setInterval(drawSunGraph, 60000);
+      })();
+    </script>
+  </body>
+</html>

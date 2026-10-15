@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="no">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Solgraf – Oslo</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: #000;
+        color: #fff;
+        font-family: monospace;
+      }
+      #sun-graph svg {
+        width: 100%;
+        height: 200px;
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="sun-graph"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/suncalc@1.9.0/suncalc.js"></script>
+    <script>
+      (function () {
+        const LAT = 59.9139,
+          LNG = 10.7522;
+
+        function drawSunGraph() {
+          const container = document.getElementById("sun-graph");
+          if (!container) return;
+
+          if (typeof SunCalc === "undefined") {
+            container.textContent = "SunCalc not loaded";
+            return;
+          }
+
+          const today = new Date();
+          const times = SunCalc.getTimes(today, LAT, LNG);
+          const sunrise = times.sunrise;
+          const sunset = times.sunset;
+          const solarNoon = times.solarNoon;
+
+          if (!sunrise || !sunset || isNaN(sunrise) || isNaN(sunset)) {
+            container.textContent = "No sunrise/sunset";
+            return;
+          }
+
+          // --- 24-hour timeline: midnight to midnight ---
+          const dayStart = new Date(today);
+          dayStart.setHours(0, 0, 0, 0);
+          const dayEnd = new Date(dayStart);
+          dayEnd.setDate(dayEnd.getDate() + 1);
+          const dayMs = dayEnd - dayStart;
+
+          // Sample sun position across the whole 24h
+          const steps = 144;
+          const points = [];
+          for (let i = 0; i <= steps; i++) {
+            const t = new Date(dayStart.getTime() + (dayMs * i) / steps);
+            const pos = SunCalc.getPosition(t, LAT, LNG);
+            points.push({ t, alt: pos.altitude });
+          }
+
+          // Chart geometry
+          const W = 1000,
+            H = 200;
+          const padX = 40,
+            padTop = 20,
+            padBottom = 40;
+
+          const maxAlt = Math.max(...points.map((p) => p.alt), 0.1);
+          const minAlt = Math.min(...points.map((p) => p.alt), -0.1);
+
+          const xForTime = (t) =>
+            padX + ((t - dayStart) / dayMs) * (W - padX * 2);
+          const yFor = (alt) =>
+            H -
+            padBottom -
+            ((alt - minAlt) / (maxAlt - minAlt)) * (H - padBottom - padTop);
+
+          const horizonY = yFor(0);
+
+          // Full 24h sun path
+          let pathD = "";
+          points.forEach((p, i) => {
+            const x = xForTime(p.t).toFixed(1);
+            const y = yFor(p.alt).toFixed(1);
+            pathD += (i === 0 ? "M" : "L") + x + "," + y + " ";
+          });
+
+          // Current sun position
+          const now = new Date();
+          const nowPos = SunCalc.getPosition(now, LAT, LNG);
+          const cx = xForTime(now);
+          const cy = yFor(nowPos.altitude);
+          const dotColor = nowPos.altitude >= 0 ? "#ffaa00" : "#666";
+          const currentMarker = `<circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="6" fill="${dotColor}"/>`;
+
+          const fmt = (d) =>
+            d.toLocaleTimeString("no-NO", {
+              hour: "2-digit",
+              minute: "2-digit",
+            });
+
+          // --- Sunrise / solar noon / sunset markers ---
+          const srX = xForTime(sunrise);
+          const srY = yFor(0);
+          const snX = xForTime(solarNoon);
+          const snPos = SunCalc.getPosition(solarNoon, LAT, LNG);
+          const snY = yFor(snPos.altitude);
+          const ssX = xForTime(sunset);
+          const ssY = yFor(0);
+
+          let eventMarkers = `
+          <!-- sunrise -->
+          <line x1="${srX.toFixed(1)}" y1="${srY.toFixed(1)}" x2="${srX.toFixed(1)}" y2="${padTop}"
+                stroke="#888" stroke-width="1" stroke-dasharray="3,3"/>
+          <circle cx="${srX.toFixed(1)}" cy="${srY.toFixed(1)}" r="4" fill="#fff"/>
+          <text x="${srX.toFixed(1)}" y="${(padTop - 6).toFixed(1)}" fill="#fff" font-size="14" text-anchor="middle">
+            ${fmt(sunrise)}
+          </text>
+          <text x="${srX.toFixed(1)}" y="${(padTop + 10).toFixed(1)}" fill="#888" font-size="11" text-anchor="middle">
+            soloppgang
+          </text>
+
+          <!-- solar noon -->
+          <line x1="${snX.toFixed(1)}" y1="${snY.toFixed(1)}" x2="${snX.toFixed(1)}" y2="${padTop}"
+                stroke="#888" stroke-width="1" stroke-dasharray="3,3"/>
+          <circle cx="${snX.toFixed(1)}" cy="${snY.toFixed(1)}" r="4" fill="#ffcc33"/>
+          <text x="${snX.toFixed(1)}" y="${(padTop - 6).toFixed(1)}" fill="#ffcc33" font-size="14" text-anchor="middle">
+            ${fmt(solarNoon)}
+          </text>
+          <text x="${snX.toFixed(1)}" y="${(padTop + 10).toFixed(1)}" fill="#888" font-size="11" text-anchor="middle">
+            meridian
+          </text>
+
+          <!-- sunset -->
+          <line x1="${ssX.toFixed(1)}" y1="${ssY.toFixed(1)}" x2="${ssX.toFixed(1)}" y2="${padTop}"
+                stroke="#888" stroke-width="1" stroke-dasharray="3,3"/>
+          <circle cx="${ssX.toFixed(1)}" cy="${ssY.toFixed(1)}" r="4" fill="#fff"/>
+          <text x="${ssX.toFixed(1)}" y="${(padTop - 6).toFixed(1)}" fill="#fff" font-size="14" text-anchor="middle">
+            ${fmt(sunset)}
+          </text>
+          <text x="${ssX.toFixed(1)}" y="${(padTop + 10).toFixed(1)}" fill="#888" font-size="11" text-anchor="middle">
+            solnedgang
+          </text>
+        `;
+
+          // Hour ticks every 3 hours
+          let ticks = "";
+          for (let h = 0; h <= 24; h += 3) {
+            const t = new Date(dayStart.getTime() + h * 3600 * 1000);
+            const x = xForTime(t).toFixed(1);
+            ticks += `<line x1="${x}" y1="${horizonY.toFixed(1)}" x2="${x}" y2="${(horizonY + 4).toFixed(1)}" stroke="#666" stroke-width="1"/>`;
+            ticks += `<text x="${x}" y="${H - 10}" fill="#aaa" font-size="12" text-anchor="middle">${String(h).padStart(2, "0")}</text>`;
+          }
+
+          container.innerHTML = `
+          <svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none">
+            <line x1="${padX}" y1="${horizonY.toFixed(1)}" x2="${W - padX}" y2="${horizonY.toFixed(1)}"
+                  stroke="#666" stroke-width="1"/>
+            ${ticks}
+            <path d="${pathD}" fill="none" stroke="#fff" stroke-width="2"/>
+            ${eventMarkers}
+            ${currentMarker}
+          </svg>
+        `;
+        }
+
+        drawSunGraph();
+        setInterval(drawSunGraph, 60000);
+      })();
+    </script>
+  </body>
+</html>
