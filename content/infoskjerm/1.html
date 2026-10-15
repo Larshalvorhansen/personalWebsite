@@ -457,7 +457,7 @@
           const cx = xForTime(now);
           const cy = yFor(nowPos.altitude);
           const dotColor = nowPos.altitude >= 0 ? "#ffaa00" : "#666";
-          const currentMarker = `<circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="7" fill="${dotColor}"/>`;
+          const currentMarker = `<circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="12" fill="${dotColor}"/>`;
 
           const fmt = (d) =>
             d.toLocaleTimeString("no-NO", {
@@ -483,8 +483,8 @@
 
             <line x1="${snX.toFixed(1)}" y1="${snY.toFixed(1)}" x2="${snX.toFixed(1)}" y2="${padTop}"
                   stroke="#888" stroke-width="1" stroke-dasharray="3,3"/>
-            <circle cx="${snX.toFixed(1)}" cy="${snY.toFixed(1)}" r="5" fill="#ffcc33"/>
-            <text x="${snX.toFixed(1)}" y="${(padTop - 8).toFixed(1)}" fill="#ffcc33" font-size="16" text-anchor="middle">
+            <circle cx="${snX.toFixed(1)}" cy="${snY.toFixed(1)}" r="5" fill="#fff"/>
+            <text x="${snX.toFixed(1)}" y="${(padTop - 8).toFixed(1)}" fill="#fff" font-size="16" text-anchor="middle">
               ${fmt(solarNoon)}
             </text>
 
