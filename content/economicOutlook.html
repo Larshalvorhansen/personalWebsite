@@ -907,33 +907,45 @@
         const a = String(s || "").match(/(?:^|\D)(20\d{2})(?:\D|$)/);
         return a ? a[1] : null;
       }
+
       function parsePosts(rows) {
-        // The CMS separator marks the start of that year's block. Rows ABOVE the
-        // first separator are the following year (e.g. 2025 above --- 2024 ---).
+        // Year separators mark the END of a year.
+        // Example: "--- 2024 ---" means rows above are 2024,
+        // and rows below are 2025.
+
         const markers = rows
-          .map((row, i) => ({ i, year: parseYearMarker(row[0]) }))
-          .filter((m) => m.year);
+          .map((row, i) => ({
+            i,
+            year: parseYearMarker(row[0]),
+          }))
+          .filter((marker) => marker.year !== null);
+
         const firstMarker = markers[0];
-        const initialYear = firstMarker
-          ? String(Number(firstMarker.year) + 1)
-          : null;
-        let sectionYear = initialYear,
-          entries = [];
+        let sectionYear = firstMarker ? Number(firstMarker.year) : null;
+
+        const entries = [];
+
         for (let i = 0; i < rows.length; i++) {
-          const row = rows[i],
-            timestamp = String(row[0] || "").trim();
+          const row = rows[i];
+          const timestamp = String(row[0] || "").trim();
           const marker = parseYearMarker(timestamp);
-          if (marker) {
-            sectionYear = marker;
+
+          if (marker !== null) {
+            sectionYear = Number(marker) + 1;
             continue;
           }
+
           const n = Number(String(row[1] || "").trim());
           if (!Number.isInteger(n) || n < 1 || n > 12) continue;
-          const year = sectionYear || dateYear(timestamp) || "Archive";
+
+          const year =
+            sectionYear ??
+            (dateYear(timestamp) ? Number(dateYear(timestamp)) : null);
+
           entries.push({
             month: n,
             monthName: months[n - 1],
-            year,
+            year: year === null ? "Archive" : String(year),
             stamp: timestamp,
             status: row[2] || "",
             prediction: row[3] || "",
@@ -943,7 +955,14 @@
             index: i,
           });
         }
-        return entries.reverse();
+
+        // Sort newest year first, then newest month.
+        return entries.sort(
+          (a, b) =>
+            (Number(b.year) || 0) - (Number(a.year) || 0) ||
+            b.month - a.month ||
+            b.index - a.index,
+        );
       }
       function buildNavLink(parent, href, label, extraClass = "") {
         const a = document.createElement("a");
