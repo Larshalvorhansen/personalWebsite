@@ -11,8 +11,13 @@
     <script>
       try {
         const savedTheme = localStorage.getItem("eo-theme");
-        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-        document.documentElement.dataset.theme = savedTheme === "dark" || (!savedTheme && prefersDark) ? "dark" : "light";
+        const prefersDark = window.matchMedia(
+          "(prefers-color-scheme: dark)",
+        ).matches;
+        document.documentElement.dataset.theme =
+          savedTheme === "dark" || (!savedTheme && prefersDark)
+            ? "dark"
+            : "light";
       } catch (_) {
         document.documentElement.dataset.theme = "light";
       }
@@ -645,24 +650,38 @@
         --muted: #a0b0ad;
         --line: #34403e;
         --accent: #83adff;
-        --soft: #263331;
+        --soft: #000;
       }
-      :root[data-theme="dark"] .navlink { color: #bdc9c6; }
-      :root[data-theme="dark"] .navlink:hover { background: #25302e; }
-      :root[data-theme="dark"] .navlink.active { color: var(--ink); }
-      :root[data-theme="dark"] .navlink .count { color: var(--muted); }
+      :root[data-theme="dark"] .navlink {
+        color: #bdc9c6;
+      }
+      :root[data-theme="dark"] .navlink:hover {
+        background: #25302e;
+      }
+      :root[data-theme="dark"] .navlink.active {
+        color: var(--ink);
+      }
+      :root[data-theme="dark"] .navlink .count {
+        color: var(--muted);
+      }
       :root[data-theme="dark"] .navlink.nav-month-link.active {
         color: #10191c;
       }
       :root[data-theme="dark"] .intro,
-      :root[data-theme="dark"] .source { color: var(--muted); }
+      :root[data-theme="dark"] .source {
+        color: var(--muted);
+      }
       :root[data-theme="dark"] .status {
         background: #24312d;
         border-left-color: #7da69a;
         color: #c5d3ce;
       }
-      :root[data-theme="dark"] .status strong { color: var(--ink); }
-      :root[data-theme="dark"] .feature { background: #283735; }
+      :root[data-theme="dark"] .status strong {
+        color: var(--ink);
+      }
+      :root[data-theme="dark"] .feature {
+        background: #283735;
+      }
       :root[data-theme="dark"] .fake-form input {
         background: #202a29;
         border-color: var(--line);
@@ -672,11 +691,15 @@
         background: #436d68;
         color: #fff;
       }
-      :root[data-theme="dark"] .fake-form button:hover { background: #548981; }
+      :root[data-theme="dark"] .fake-form button:hover {
+        background: #548981;
+      }
       :root[data-theme="dark"] .mobile-bar {
         background: rgba(20, 26, 27, 0.97);
       }
-      :root[data-theme="dark"] .sidebar { box-shadow: none; }
+      :root[data-theme="dark"] .sidebar {
+        box-shadow: none;
+      }
       :root[data-theme="dark"] .brand-wordmark,
       :root[data-theme="dark"] .brand-mini,
       :root[data-theme="dark"] .hero-logo {
@@ -699,12 +722,17 @@
         cursor: pointer;
         text-align: left;
       }
-      .theme-toggle:hover { border-color: var(--accent); }
+      .theme-toggle:hover {
+        border-color: var(--accent);
+      }
       .theme-toggle:focus-visible {
         outline: 2px solid var(--accent);
         outline-offset: 3px;
       }
-      .theme-toggle-indicator { color: var(--muted); font-weight: 500; }
+      .theme-toggle-indicator {
+        color: var(--muted);
+        font-weight: 500;
+      }
     </style>
   </head>
   <body>
@@ -743,9 +771,17 @@
         <a href="https://halvorhansen.no" target="_blank" rel="noopener"
           >← halvorhansen.no</a
         >
-        <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Switch to dark mode" aria-pressed="false">
+        <button
+          type="button"
+          class="theme-toggle"
+          id="theme-toggle"
+          aria-label="Switch to dark mode"
+          aria-pressed="false"
+        >
           <span id="theme-toggle-label">☾ Dark mode</span>
-          <span class="theme-toggle-indicator" id="theme-toggle-state">Off</span>
+          <span class="theme-toggle-indicator" id="theme-toggle-state"
+            >Off</span
+          >
         </button>
       </div>
     </aside>
@@ -851,14 +887,23 @@
       function updateThemeToggle() {
         const dark = document.documentElement.dataset.theme === "dark";
         themeToggle.setAttribute("aria-pressed", String(dark));
-        themeToggle.setAttribute("aria-label", dark ? "Switch to light mode" : "Switch to dark mode");
-        document.getElementById("theme-toggle-label").textContent = dark ? "☀ Light mode" : "☾ Dark mode";
-        document.getElementById("theme-toggle-state").textContent = dark ? "On" : "Off";
+        themeToggle.setAttribute(
+          "aria-label",
+          dark ? "Switch to light mode" : "Switch to dark mode",
+        );
+        document.getElementById("theme-toggle-label").textContent = dark
+          ? "☀ Light mode"
+          : "☾ Dark mode";
+        document.getElementById("theme-toggle-state").textContent = dark
+          ? "On"
+          : "Off";
       }
       themeToggle.addEventListener("click", () => {
         const dark = document.documentElement.dataset.theme !== "dark";
         document.documentElement.dataset.theme = dark ? "dark" : "light";
-        try { localStorage.setItem("eo-theme", dark ? "dark" : "light"); } catch (_) {}
+        try {
+          localStorage.setItem("eo-theme", dark ? "dark" : "light");
+        } catch (_) {}
         updateThemeToggle();
       });
       updateThemeToggle();
