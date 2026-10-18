@@ -632,10 +632,7 @@
   <body>
     <div class="mobile-bar">
       <a href="#home" class="brand" aria-label="Economic Outlambdaook home"
-        ><img
-          src="./eo/eo.webp"
-          alt="Economic Outlambdaook"
-          class="brand-mini" /></a
+        ><img src="./eo/eo.webp" alt="Economic Outlook" class="brand-mini" /></a
       ><button
         class="menu-toggle"
         id="menu-toggle"
@@ -648,10 +645,7 @@
     <div class="scrim" id="scrim"></div>
     <aside class="sidebar" id="sidebar" aria-label="Main navigation">
       <a href="#home" class="brand" aria-label="Economic Outlambdaook home"
-        ><img
-          src="./eo/eo.webp"
-          alt="Economic Outlambdaook"
-          class="brand-wordmark"
+        ><img src="./eo/eo.webp" alt="Economic Outlook" class="brand-wordmark"
       /></a>
       <nav aria-label="Article navigation">
         <div class="navgroup">
@@ -682,7 +676,429 @@
             />
           </h1>
         </header>
+        <div id="latest" class="posts" aria-live="polite">
+          <p class="loading-copy">Loading articles from the archive…</p>
+        </div>
+        <section class="newsletter" id="newsletter">
+          <span class="eyebrow">Stay in the loop</span>
+          <h2>New perspectives, in your inbox.</h2>
+          <p>Occasional notes on economics and the world.</p>
+
+          <form class="fake-form" id="brevo-form" method="POST">
+            <input
+              type="email"
+              name="EMAIL"
+              placeholder="Your email address"
+              aria-label="Email address"
+              required
+            />
+            <!-- Brevo hidden fields to prevent spam -->
+            <input
+              type="text"
+              name="email_address_check"
+              value=""
+              class="input--hidden"
+              style="display: none"
+            />
+            <input type="hidden" name="locale" value="en" />
+
+            <button type="submit" id="submit-btn">Subscribe →</button>
+          </form>
+
+          <p id="demo-note" class="demo-note" style="display: none"></p>
+        </section>
+
+        <script>
+          document
+            .getElementById("brevo-form")
+            .addEventListener("submit", function (e) {
+              e.preventDefault(); // Stop the page from redirecting
+
+              const form = this;
+              const btn = document.getElementById("submit-btn");
+              const note = document.getElementById("demo-note");
+
+              // Give the user visual feedback that it's loading
+              btn.innerText = "Subscribing...";
+              btn.disabled = true;
+
+              // Send the data to Brevo in the background
+              fetch(form.action, {
+                method: "POST",
+                body: new FormData(form),
+              })
+                .then((response) => response.json())
+                .then((data) => {
+                  if (data.success) {
+                    // Success! Hide the form and show the success message
+                    form.style.display = "none";
+                    note.innerText =
+                      "Success! Please check your inbox to confirm your subscription.";
+                    note.style.display = "block";
+                  } else {
+                    // Brevo returned an error (e.g., invalid email)
+                    btn.innerText = "Subscribe →";
+                    btn.disabled = false;
+                    note.innerText =
+                      data.message || "Something went wrong. Please try again.";
+                    note.style.color = "red";
+                    note.style.display = "block";
+                  }
+                })
+                .catch((error) => {
+                  // Network error
+                  btn.innerText = "Subscribe →";
+                  btn.disabled = false;
+                  note.innerText = "Something went wrong. Please try again.";
+                  note.style.color = "red";
+                  note.style.display = "block";
+                });
+            });
+        </script>
       </main>
     </div>
+    <script>
+      const sidebar = document.getElementById("sidebar");
+      const toggle = document.getElementById("menu-toggle");
+      const scrim = document.getElementById("scrim");
+      function closeMenu() {
+        sidebar.classList.remove("open");
+        scrim.classList.remove("show");
+        toggle.setAttribute("aria-expanded", "false");
+      }
+      toggle.addEventListener("click", () => {
+        const open = !sidebar.classList.contains("open");
+        sidebar.classList.toggle("open", open);
+        scrim.classList.toggle("show", open);
+        toggle.setAttribute("aria-expanded", String(open));
+      });
+      scrim.addEventListener("click", closeMenu);
+      const months = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+      ];
+      const sheetId = "1cooW6kZlSKUgBjK4uPnv4cynbw3nM7NjwMjDHHFJ6mY";
+      const apiKey = "AIzaSyABuVJIWSJiUqk01nvpYF4QVzmgyZDCaGc";
+      const range = "EO2Response!A2:G";
+      function escapeHTML(s) {
+        return String(s ?? "").replace(
+          /[&<>"']/g,
+          (c) =>
+            ({
+              "&": "&amp;",
+              "<": "&lt;",
+              ">": "&gt;",
+              '"': "&quot;",
+              "'": "&#39;",
+            })[c],
+        );
+      }
+      function formatRichText(value) {
+        // Only retain a narrow set of safe formatting tags from article CMS cells.
+        const raw = String(value ?? "").replace(/<br\s*\/?\s*>/gi, "<br>");
+        if (!/<\/?[a-z][^>]*>/i.test(raw))
+          return escapeHTML(raw).replace(/\n/g, "<br>");
+        const parsed = new DOMParser().parseFromString(
+          "<div>" + raw + "</div>",
+          "text/html",
+        );
+        const allowed = new Set([
+          "P",
+          "BR",
+          "B",
+          "STRONG",
+          "I",
+          "EM",
+          "UL",
+          "OL",
+          "LI",
+          "A",
+          "H3",
+          "H4",
+          "BLOCKQUOTE",
+        ]);
+        function clean(n) {
+          if (n.nodeType === Node.TEXT_NODE)
+            return document.createTextNode(n.textContent);
+          if (n.nodeType !== Node.ELEMENT_NODE)
+            return document.createDocumentFragment();
+          let frag = document.createDocumentFragment();
+          for (const ch of [...n.childNodes]) frag.appendChild(clean(ch));
+          if (!allowed.has(n.tagName)) return frag;
+          let el = document.createElement(n.tagName.toLowerCase());
+          if (n.tagName === "A") {
+            let href = n.getAttribute("href") || "";
+            if (/^https?:\/\//i.test(href)) {
+              el.href = href;
+              el.target = "_blank";
+              el.rel = "noopener noreferrer";
+            }
+          }
+          el.appendChild(frag);
+          return el;
+        }
+        const holder = document.createElement("div");
+        for (const child of [...parsed.body.firstElementChild.childNodes])
+          holder.appendChild(clean(child));
+        return holder.innerHTML;
+      }
+      function sourceHTML(value) {
+        let t = escapeHTML(value || "");
+        t = t.replace(
+          /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g,
+          (_, label, url) =>
+            '<a href="' +
+            url +
+            '" target="_blank" rel="noopener noreferrer">' +
+            label +
+            "</a>",
+        );
+        t = t.replace(/(^|[\s(])(https?:\/\/[^\s<]+)/g, (_, before, url) => {
+          let trimmed = url.replace(/[.,;]+$/, "");
+          return (
+            before +
+            '<a href="' +
+            trimmed +
+            '" target="_blank" rel="noopener noreferrer">' +
+            trimmed +
+            "</a>" +
+            url.slice(trimmed.length)
+          );
+        });
+        return t.replace(/\n/g, "<br>");
+      }
+      function parseYearMarker(s) {
+        let match = String(s || "")
+          .trim()
+          .match(/^-+\s*(20\d{2})\s*-+$/);
+        return match ? match[1] : null;
+      }
+      function dateYear(s) {
+        const a = String(s || "").match(/(?:^|\D)(20\d{2})(?:\D|$)/);
+        return a ? a[1] : null;
+      }
+      function parsePosts(rows) {
+        // A marker such as "--- 2024 ---" CLOSES 2024 in this CMS.
+        // Rows before it are from 2024; rows after it are from 2025.
+        // The same convention applies to subsequent year-end markers.
+        const markers = rows
+          .map((row, i) => ({ i, year: parseYearMarker(row[0]) }))
+          .filter((marker) => marker.year !== null);
+
+        const firstMarker = markers[0];
+        let sectionYear = firstMarker ? Number(firstMarker.year) : null;
+        const entries = [];
+
+        for (let i = 0; i < rows.length; i++) {
+          const row = rows[i];
+          const timestamp = String(row[0] || "").trim();
+          const marker = parseYearMarker(timestamp);
+          if (marker !== null) {
+            sectionYear = Number(marker) + 1;
+            continue;
+          }
+
+          const n = Number(String(row[1] || "").trim());
+          if (!Number.isInteger(n) || n < 1 || n > 12) continue;
+
+          // A real timestamp can supply a year where there are no markers.
+          // Markers take precedence because timestamps may be missing,
+          // or may represent form submission rather than publication.
+          const year =
+            sectionYear ??
+            (dateYear(timestamp) ? Number(dateYear(timestamp)) : null);
+          entries.push({
+            month: n,
+            monthName: months[n - 1],
+            year: year === null ? "Archive" : String(year),
+            stamp: timestamp,
+            status: row[2] || "",
+            prediction: row[3] || "",
+            image: row[4] || "",
+            sources: row[5] || "",
+            caption: row[6] || "",
+            index: i,
+          });
+        }
+
+        // Chronological order, newest first. Sheet row order only breaks ties.
+        return entries.sort(
+          (a, b) =>
+            (Number(b.year) || 0) - (Number(a.year) || 0) ||
+            b.month - a.month ||
+            b.index - a.index,
+        );
+      }
+      function buildNavLink(parent, href, label, extraClass = "") {
+        const a = document.createElement("a");
+        a.href = href;
+        a.className = "navlink " + extraClass;
+        a.textContent = label;
+        parent.appendChild(a);
+      }
+      function renderPosts(entries) {
+        const out = document.getElementById("latest"),
+          years = document.getElementById("year-navigation");
+        out.innerHTML = "";
+        years.innerHTML = "";
+        if (!entries.length) {
+          out.innerHTML =
+            '<p class="loading-copy">No monthly entries found in the sheet.</p>';
+          return;
+        }
+        let groups = new Map();
+        for (const entry of entries) {
+          if (!groups.has(entry.year)) groups.set(entry.year, []);
+          groups.get(entry.year).push(entry);
+        }
+        for (const [year, posts] of groups) {
+          let section = document.createElement("section");
+          section.className = "year-block";
+          section.id = "year-" + year;
+          const heading = document.createElement("div");
+          heading.className = "section-heading";
+          heading.innerHTML =
+            "<h2>" +
+            (year === "Archive" ? "Archive" : escapeHTML(year)) +
+            "</h2>";
+          if (year !== String(new Date().getFullYear()))
+            section.appendChild(heading);
+          const navYear = document.createElement("div");
+          navYear.className = "nav-year";
+          if (year !== String(new Date().getFullYear()))
+            buildNavLink(navYear, "#year-" + year, year, "nav-year-heading");
+          const navMonths = document.createElement("div");
+          navMonths.className = "nav-months";
+          navYear.appendChild(navMonths);
+          years.appendChild(navYear);
+          for (const post of posts) {
+            const id = "post-" + post.index;
+            const article = document.createElement("article");
+            article.id = id;
+            const dated =
+              post.stamp && !parseYearMarker(post.stamp)
+                ? '<span class="dot"></span><span>' +
+                  escapeHTML(post.stamp) +
+                  "</span>"
+                : "";
+            const image = /^https?:\/\//i.test(post.image) ? post.image : "";
+            article.innerHTML =
+              '<div class="meta">' +
+              '</div><h2 class="post-title">' +
+              escapeHTML(post.monthName) +
+              "</h2>" +
+              (post.status
+                ? '<div class="article-label">World status</div><div class="post-copy rich-copy">' +
+                  formatRichText(post.status) +
+                  "</div>"
+                : "") +
+              (post.prediction
+                ? '<div class="article-label">World prediction</div><div class="post-copy rich-copy">' +
+                  formatRichText(post.prediction) +
+                  "</div>"
+                : "") +
+              (image
+                ? '<img class="post-image" loading="lazy" alt="' +
+                  escapeHTML(
+                    post.caption || post.monthName + " article figure",
+                  ) +
+                  '">'
+                : "") +
+              (post.caption
+                ? '<p class="caption">' + escapeHTML(post.caption) + "</p>"
+                : "") +
+              (post.sources
+                ? '<p class="source-list"><strong>Sources:</strong><br>' +
+                  sourceHTML(post.sources) +
+                  "</p>"
+                : "");
+            if (image) {
+              let imageEl = article.querySelector("img.post-image");
+              imageEl.src = image;
+              imageEl.referrerPolicy = "no-referrer";
+              imageEl.addEventListener("error", () => imageEl.remove());
+            }
+            section.appendChild(article);
+            buildNavLink(
+              navMonths,
+              "#" + id,
+              post.monthName.slice(0, 3),
+              "nav-month-link",
+            );
+          }
+          out.appendChild(section);
+        }
+        document.querySelectorAll(".navlink").forEach((a) =>
+          a.addEventListener("click", () => {
+            document
+              .querySelectorAll(".navlink")
+              .forEach((l) => l.classList.remove("active"));
+            a.classList.add("active");
+            closeMenu();
+          }),
+        );
+        const seen = ["home", "latest", ...groups.keys()]
+          .filter((x) => x !== "Archive")
+          .map((x) => (/^\d{4}$/.test(String(x)) ? "year-" + x : x))
+          .concat([...entries.map((e) => "post-" + e.index), "newsletter"]);
+        const observer = new IntersectionObserver(
+          (entries) => {
+            const visible = entries
+              .filter((e) => e.isIntersecting)
+              .sort(
+                (a, b) => a.boundingClientRect.top - b.boundingClientRect.top,
+              );
+            if (!visible.length) return;
+            const id = visible[0].target.id;
+            const a = document.querySelector('.navlink[href="#' + id + '"]');
+            if (a) {
+              document
+                .querySelectorAll(".navlink")
+                .forEach((l) => l.classList.remove("active"));
+              a.classList.add("active");
+            }
+          },
+          { rootMargin: "-10% 0px -75% 0px", threshold: 0 },
+        );
+        seen.forEach((id) => {
+          const el = document.getElementById(id);
+          if (el) observer.observe(el);
+        });
+      }
+      async function fetchBlogPosts() {
+        const out = document.getElementById("latest");
+        try {
+          const url =
+            "https://sheets.googleapis.com/v4/spreadsheets/" +
+            sheetId +
+            "/values/" +
+            encodeURIComponent(range) +
+            "?key=" +
+            encodeURIComponent(apiKey);
+          const response = await fetch(url);
+          if (!response.ok)
+            throw new Error("Google Sheets returned HTTP " + response.status);
+          const data = await response.json();
+          if (!Array.isArray(data.values))
+            throw new Error("No sheet data returned");
+          renderPosts(parsePosts(data.values));
+        } catch (err) {
+          console.error("Failed to load articles:", err);
+          out.innerHTML =
+            '<p class="loading-copy">Could not load the article archive. Check that the sheet is accessible and that the sheet tab name in the code is correct.</p>';
+        }
+      }
+      fetchBlogPosts();
+    </script>
   </body>
 </html>
