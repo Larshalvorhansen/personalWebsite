@@ -996,10 +996,14 @@
             "<h2>" +
             (year === "Archive" ? "Archive" : escapeHTML(year)) +
             "</h2>";
-          section.appendChild(heading);
+          if (year !== groups.keys().next().value) {
+            section.appendChild(heading);
+          }
           const navYear = document.createElement("div");
           navYear.className = "nav-year";
-          buildNavLink(navYear, "#year-" + year, year, "nav-year-heading");
+          if (year !== groups.keys().next().value) {
+            buildNavLink(navYear, "#year-" + year, year, "nav-year-heading");
+          }
           const navMonths = document.createElement("div");
           navMonths.className = "nav-months";
           navYear.appendChild(navMonths);
