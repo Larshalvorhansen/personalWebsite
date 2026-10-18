@@ -699,7 +699,6 @@
           <h2>New perspectives, in your inbox.</h2>
           <p>Occasional notes on economics and the world.</p>
 
-          <!-- Native form posting to Brevo -->
           <form
             class="fake-form"
             id="brevo-form"
@@ -713,7 +712,7 @@
               aria-label="Email address"
               required
             />
-            <!-- Brevo requires this hidden input to prevent spam -->
+            <!-- Brevo hidden fields to prevent spam -->
             <input
               type="text"
               name="email_address_check"
@@ -723,13 +722,59 @@
             />
             <input type="hidden" name="locale" value="en" />
 
-            <button type="submit">Subscribe →</button>
+            <button type="submit" id="submit-btn">Subscribe →</button>
           </form>
 
-          <p id="demo-note" class="demo-note">
-            Demo only — no subscription was created.
-          </p>
+          <p id="demo-note" class="demo-note" style="display: none"></p>
         </section>
+
+        <script>
+          document
+            .getElementById("brevo-form")
+            .addEventListener("submit", function (e) {
+              e.preventDefault(); // Stop the page from redirecting
+
+              const form = this;
+              const btn = document.getElementById("submit-btn");
+              const note = document.getElementById("demo-note");
+
+              // Give the user visual feedback that it's loading
+              btn.innerText = "Subscribing...";
+              btn.disabled = true;
+
+              // Send the data to Brevo in the background
+              fetch(form.action, {
+                method: "POST",
+                body: new FormData(form),
+              })
+                .then((response) => response.json())
+                .then((data) => {
+                  if (data.success) {
+                    // Success! Hide the form and show the success message
+                    form.style.display = "none";
+                    note.innerText =
+                      "Success! Please check your inbox to confirm your subscription.";
+                    note.style.display = "block";
+                  } else {
+                    // Brevo returned an error (e.g., invalid email)
+                    btn.innerText = "Subscribe →";
+                    btn.disabled = false;
+                    note.innerText =
+                      data.message || "Something went wrong. Please try again.";
+                    note.style.color = "red";
+                    note.style.display = "block";
+                  }
+                })
+                .catch((error) => {
+                  // Network error
+                  btn.innerText = "Subscribe →";
+                  btn.disabled = false;
+                  note.innerText = "Something went wrong. Please try again.";
+                  note.style.color = "red";
+                  note.style.display = "block";
+                });
+            });
+        </script>
       </main>
     </div>
     <script>
