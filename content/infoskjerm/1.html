@@ -164,19 +164,36 @@
         height: 100%;
         display: block;
       }
+
+      /* === BOTTOM RIGHT IMAGE === */
+      #bottom-right-img-container {
+        position: fixed;
+        right: 10px;
+        bottom: 10px;
+        height: 180px; /* Matches sun-graph height */
+        width: 220px; /* Constrains width so it doesn't overlap sun-graph */
+        z-index: 100;
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+      }
+
+      #bottom-right-img-container img {
+        max-height: 100%;
+        max-width: 100%;
+        object-fit: contain;
+        border-radius: 10px;
+      }
     </style>
   </head>
   <body>
     <!-- Sun graph, fixed bottom-left -->
     <div id="sun-graph"></div>
 
-    <!-- Sun graph, fixed bottom-left -->
-    <div id="sun-graph"></div>
-
-    <!-- Bottom Right Image -->
+    <!-- Bottom Right Image, fixed bottom-right -->
     <div id="bottom-right-img-container">
-      <!-- Replace 'your-image.jpg' with the actual path to your image -->
-      <img src="" alt="Bottom Right Image" />
+      <!-- REPLACE 'din-bilde-fil.jpg' WITH YOUR ACTUAL IMAGE PATH -->
+      <img src="bildehihi.png" alt="Bilde" />
     </div>
 
     <div class="main-content">
