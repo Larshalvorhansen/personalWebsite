@@ -1,0 +1,1006 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="What would you like to do with your time-series data? Explore practical Harmonize examples and published charts."
+    />
+    <title>Harmonize — What do you want to do?</title>
+    <style>
+      :root {
+        --navy: #1a3a70;
+        --blue: #628dcb;
+        --ink: #293445;
+        --muted: #697686;
+        --line: #dbe1e8;
+        --pale: #f5f7fa;
+        --white: #fff;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        color: var(--ink);
+        background: #fff;
+        font:
+          16px/1.65 Arial,
+          Helvetica,
+          sans-serif;
+      }
+      a {
+        color: var(--navy);
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      button {
+        font: inherit;
+        cursor: pointer;
+      }
+      button:focus-visible,
+      a:focus-visible {
+        outline: 3px solid var(--blue);
+        outline-offset: 3px;
+      }
+      .wrap {
+        max-width: 1120px;
+        margin: auto;
+        padding: 0 28px;
+      }
+      header {
+        border-bottom: 1px solid var(--line);
+        background: #fff;
+      }
+      header .wrap {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        min-height: 77px;
+        gap: 15px;
+      }
+      header .brand {
+        text-decoration: none;
+        color: var(--navy);
+        font-weight: 700;
+        font-size: 25px;
+        letter-spacing: -0.6px;
+      }
+      header .brand small {
+        display: block;
+        font-size: 11px;
+        color: var(--muted);
+        font-weight: 400;
+        letter-spacing: 0;
+        line-height: 1.2;
+      }
+      nav {
+        display: flex;
+        align-items: center;
+        gap: 26px;
+      }
+      nav a {
+        font-size: 14px;
+        text-decoration: none;
+        color: var(--ink);
+      }
+      .nav-btn,
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        background: var(--navy);
+        color: #fff;
+        text-decoration: none;
+        padding: 11px 18px;
+        border: 1px solid var(--navy);
+        border-radius: 4px;
+        font-size: 14px;
+        font-weight: 600;
+      }
+      .nav-btn:hover,
+      .button:hover {
+        background: #294d86;
+        color: white;
+        text-decoration: none;
+      }
+      .button.secondary {
+        background: white;
+        color: var(--navy);
+      }
+      .button.secondary:hover {
+        background: var(--pale);
+      }
+      .intro {
+        padding: 76px 0 48px;
+        max-width: 850px;
+      }
+      .eyebrow {
+        font-size: 12px;
+        letter-spacing: 0.11em;
+        text-transform: uppercase;
+        color: var(--navy);
+        font-weight: 700;
+        margin: 0 0 14px;
+      }
+      .intro h1 {
+        font-size: clamp(35px, 5vw, 59px);
+        line-height: 1.13;
+        color: var(--navy);
+        letter-spacing: -1.5px;
+        margin: 0 0 21px;
+      }
+      .intro p:not(.eyebrow) {
+        font-size: 19px;
+        color: var(--muted);
+        max-width: 700px;
+        margin: 0;
+      }
+      .section-head {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 15px;
+        margin-bottom: 20px;
+      }
+      .section-head h2 {
+        font-size: 25px;
+        color: var(--navy);
+        margin: 0;
+      }
+      .section-head p {
+        margin: 5px 0 0;
+        color: var(--muted);
+        font-size: 14px;
+      }
+      .story {
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        overflow: hidden;
+        background: #fff;
+      }
+      .story-main {
+        display: grid;
+        grid-template-columns: 42% 58%;
+        min-height: 490px;
+      }
+      .story-copy {
+        padding: 48px 42px 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .tag {
+        display: inline-block;
+        background: #edf2f8;
+        color: var(--navy);
+        font-size: 12px;
+        font-weight: 700;
+        padding: 4px 9px;
+        border-radius: 3px;
+      }
+      .story-copy h3 {
+        font-size: clamp(25px, 3.2vw, 38px);
+        line-height: 1.2;
+        color: var(--navy);
+        letter-spacing: -0.5px;
+        margin: 20px 0 15px;
+      }
+      .story-copy p {
+        margin: 0 0 16px;
+      }
+      .muted {
+        color: var(--muted);
+      }
+      .story-copy .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: auto;
+        padding-top: 18px;
+      }
+      .story-visual {
+        background: var(--pale);
+        border-left: 1px solid var(--line);
+        padding: 27px;
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+      }
+      .preview-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 12px;
+        font-size: 13px;
+      }
+      .preview-head strong {
+        color: var(--navy);
+      }
+      .preview-head a {
+        text-decoration: none;
+      }
+      .frame {
+        flex: 1;
+        position: relative;
+        min-height: 335px;
+        border: 1px solid var(--line);
+        background: #fff;
+        border-radius: 3px;
+        overflow: hidden;
+      }
+      .frame iframe {
+        width: 100%;
+        height: 100%;
+        min-height: 335px;
+        border: 0;
+        background: #fff;
+      }
+      .static-example {
+        height: 100%;
+        padding: 25px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .static-example h4 {
+        font-size: 21px;
+        margin: 0 0 8px;
+        color: var(--navy);
+      }
+      .static-example p {
+        color: var(--muted);
+        margin: 0 0 17px;
+      }
+      .static-example .flow-list {
+        display: grid;
+        gap: 10px;
+      }
+      .static-example .flow-list span {
+        background: white;
+        border: 1px solid var(--line);
+        border-left: 3px solid var(--blue);
+        padding: 10px 14px;
+        font-size: 14px;
+      }
+      .demo-note {
+        font-size: 12px;
+        color: var(--muted);
+        margin: 12px 0 0;
+        line-height: 1.5;
+      }
+      .controls {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 15px;
+        padding: 15px 20px;
+        border-top: 1px solid var(--line);
+        background: white;
+      }
+      .dots {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .dot {
+        width: 24px;
+        height: 7px;
+        border: 0;
+        border-radius: 4px;
+        background: #d6deea;
+        padding: 0;
+        transition: background 0.2s;
+      }
+      .dot[aria-current="true"] {
+        background: var(--navy);
+      }
+      .control-buttons {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+      }
+      .control-buttons button {
+        background: white;
+        border: 1px solid var(--line);
+        border-radius: 4px;
+        padding: 6px 12px;
+        color: var(--navy);
+      }
+      .control-buttons button:hover {
+        background: var(--pale);
+      }
+      #counter {
+        color: var(--muted);
+        font-size: 13px;
+        margin-right: 8px;
+        font-variant-numeric: tabular-nums;
+      }
+      .timebar {
+        height: 3px;
+        background: #e8edf3;
+      }
+      .timebar div {
+        height: 100%;
+        width: 0;
+        background: var(--blue);
+      }
+      section {
+        padding-bottom: 70px;
+      }
+      .overview {
+        padding-top: 68px;
+      }
+      .templates {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+        margin-top: 22px;
+      }
+      .template {
+        border: 1px solid var(--line);
+        padding: 22px;
+        border-radius: 4px;
+        text-decoration: none;
+        color: inherit;
+        transition:
+          border-color 0.2s,
+          transform 0.2s;
+      }
+      .template:hover {
+        border-color: var(--blue);
+        transform: translateY(-2px);
+        text-decoration: none;
+      }
+      .template .icon {
+        width: 43px;
+        height: 43px;
+        border-radius: 4px;
+        background: #e9eff7;
+        color: var(--navy);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 22px;
+        margin-bottom: 16px;
+      }
+      .template h3 {
+        font-size: 17px;
+        line-height: 1.35;
+        margin: 0 0 8px;
+        color: var(--navy);
+      }
+      .template p {
+        font-size: 14px;
+        line-height: 1.6;
+        color: var(--muted);
+        margin: 0 0 12px;
+      }
+      .template span {
+        font-size: 13px;
+        color: var(--navy);
+        font-weight: 600;
+      }
+      .how {
+        background: var(--pale);
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+        padding: 60px 0;
+      }
+      .steps {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 40px;
+        margin-top: 25px;
+      }
+      .steps b {
+        display: block;
+        font-size: 16px;
+        color: var(--navy);
+        margin-bottom: 8px;
+      }
+      .steps p {
+        font-size: 14px;
+        color: var(--muted);
+        margin: 0;
+      }
+      .steps .number {
+        font-size: 13px;
+        font-weight: bold;
+        color: var(--blue);
+        display: block;
+        margin-bottom: 10px;
+      }
+      .bottom {
+        padding: 65px 0;
+      }
+      .bottom h2 {
+        color: var(--navy);
+        font-size: 28px;
+        margin: 0 0 10px;
+      }
+      .bottom p {
+        margin: 0 0 22px;
+        color: var(--muted);
+        max-width: 670px;
+      }
+      footer {
+        border-top: 1px solid var(--line);
+        padding: 22px 0;
+        color: var(--muted);
+        font-size: 12px;
+      }
+      footer .wrap {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+      @media (max-width: 850px) {
+        nav {
+          gap: 13px;
+        }
+        nav a {
+          font-size: 12px;
+        }
+        .story-main {
+          grid-template-columns: 1fr;
+        }
+        .story-copy {
+          padding: 32px;
+        }
+        .story-visual {
+          border-left: 0;
+          border-top: 1px solid var(--line);
+          padding: 18px;
+        }
+        .frame,
+        .frame iframe {
+          min-height: 310px;
+        }
+        .templates {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .intro {
+          padding: 52px 0 40px;
+        }
+      }
+      @media (max-width: 540px) {
+        .wrap {
+          padding: 0 17px;
+        }
+        header .wrap {
+          min-height: 65px;
+        }
+        header .brand {
+          font-size: 22px;
+        }
+        nav a:not(.nav-btn) {
+          display: none;
+        }
+        .intro h1 {
+          letter-spacing: -0.5px;
+        }
+        .story-copy {
+          padding: 25px;
+        }
+        .story-visual {
+          padding: 13px;
+        }
+        .frame,
+        .frame iframe {
+          min-height: 270px;
+        }
+        .templates,
+        .steps {
+          grid-template-columns: 1fr;
+          gap: 12px;
+        }
+        .controls {
+          padding: 12px;
+        }
+        .control-buttons button {
+          padding: 6px 9px;
+        }
+        .section-head {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          scroll-behavior: auto !important;
+          transition: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="wrap">
+        <a class="brand" href="https://www.harmonize.no/"
+          >Harmonize <small>It's all about Time!</small></a
+        >
+        <nav aria-label="Main navigation">
+          <a href="#examples">Examples</a><a href="#templates">Charts</a
+          ><a href="https://www.harmonize.no/docs/docview.php?doc=GUIDE"
+            >Guide</a
+          ><a class="nav-btn" href="https://www.harmonize.no/"
+            >Harmonize.no ↗</a
+          >
+        </nav>
+      </div>
+    </header>
+    <main>
+      <div class="wrap">
+        <div class="intro">
+          <p class="eyebrow">What can you do with Harmonize?</p>
+          <h1>I want to understand my data over time.</h1>
+          <p>
+            From comparing prices to following reservoir levels, discover how
+            Harmonize helps you bring time-series data together, understand
+            changes, and publish the results.
+          </p>
+        </div>
+      </div>
+      <section id="examples">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <h2>Start with a question</h2>
+              <p>
+                Real published Harmonize examples, with a few illustrative ways
+                to apply the same tools.
+              </p>
+            </div>
+            <span id="autohint" class="muted" style="font-size: 13px"
+              >Stories advance automatically</span
+            >
+          </div>
+          <div class="story" aria-label="Use case slideshow">
+            <div class="story-main">
+              <div class="story-copy" aria-live="polite">
+                <span class="tag" id="kind">Published example</span>
+                <h3 id="story-title"></h3>
+                <p id="story-problem"></p>
+                <p id="story-solution" class="muted"></p>
+                <div class="actions">
+                  <a
+                    id="view-demo"
+                    class="button"
+                    href="#"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Open live example ↗</a
+                  ><a
+                    id="view-guide"
+                    class="button secondary"
+                    href="https://www.harmonize.no/docs/docview.php?doc=GUIDE"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >How it works ↗</a
+                  >
+                </div>
+              </div>
+              <div class="story-visual">
+                <div class="preview-head">
+                  <strong id="preview-title">Live Harmonize example</strong
+                  ><a
+                    id="external"
+                    href="#"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Open full chart ↗</a
+                  >
+                </div>
+                <div class="frame" id="visual"></div>
+                <p class="demo-note" id="visual-note"></p>
+              </div>
+            </div>
+            <div class="controls">
+              <div class="dots" id="dots" aria-label="Choose a story"></div>
+              <div class="control-buttons">
+                <span id="counter"></span
+                ><button type="button" id="back" aria-label="Previous story">
+                  ←</button
+                ><button
+                  type="button"
+                  id="toggle"
+                  aria-label="Pause automatic slideshow"
+                >
+                  Pause</button
+                ><button type="button" id="next" aria-label="Next story">
+                  →
+                </button>
+              </div>
+            </div>
+            <div class="timebar" aria-hidden="true">
+              <div id="progress"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="overview" id="templates">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <h2>See what Harmonize can publish</h2>
+              <p>
+                These six chart samples come directly from the official
+                Harmonize demo page.
+              </p>
+            </div>
+            <a
+              href="https://www.harmonize.no/templates/demo.php"
+              target="_blank"
+              rel="noopener noreferrer"
+              >See all originals ↗</a
+            >
+          </div>
+          <div class="templates" id="gallery"></div>
+        </div>
+      </section>
+      <section class="how">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <h2>From data to a published chart</h2>
+              <p>A simple workflow, based on the Harmonize user guide.</p>
+            </div>
+          </div>
+          <div class="steps">
+            <div>
+              <span class="number">01</span><b>Select the series</b>
+              <p>
+                Browse the database and select one or more time series in the
+                Harmonize Windows application.
+              </p>
+            </div>
+            <div>
+              <span class="number">02</span><b>Compare and transform</b>
+              <p>
+                Use aggregations, percentage changes, a common base year, or a
+                year-over-year overlay.
+              </p>
+            </div>
+            <div>
+              <span class="number">03</span><b>Share the result</b>
+              <p>
+                Generate a chart, multi-chart or report; export data or publish
+                reusable charts on a website.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div class="wrap bottom">
+        <h2>Have a time-series question of your own?</h2>
+        <p>
+          Explore the user guide, open the public databank, or try the published
+          chart examples. Some examples require your own data and a configured
+          Harmonize installation.
+        </p>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap">
+          <a
+            class="button"
+            href="https://www.harmonize.no/docs/docview.php?doc=GUIDE"
+            >Read the user guide ↗</a
+          ><a class="button secondary" href="https://www.harmonize.no/databank/"
+            >Explore the databank ↗</a
+          >
+        </div>
+      </div>
+    </main>
+    <footer>
+      <div class="wrap">
+        <span
+          >Concept landing page based on the Harmonize user guide and official
+          demo charts.</span
+        ><span>Harmonize © 2026 · Unofficial demonstration page</span>
+      </div>
+    </footer>
+    <script>
+      const base = "https://www.harmonize.no/templates/";
+      const demos = [
+        {
+          type: "Chart",
+          title: "Consumer Price Index totals",
+          desc: "See a price index evolve over time in a single interactive chart.",
+          url:
+            base +
+            "Chart.html?filename=../databank/Prices_CPI_(2025)/charts/cpi_total.json",
+        },
+        {
+          type: "Chart",
+          title: "CPI and PPI on a common base",
+          desc: "Compare price indices using a common base year and aggregated periods.",
+          url:
+            base +
+            "Chart.html?filename=../databank/Prices_PPI_(2021)/charts/ppi.json",
+        },
+        {
+          type: "MultiChart",
+          title: "A collection of price indices",
+          desc: "Compare related series in separate, scrollable charts.",
+          url:
+            base +
+            "MultiChart.html?filename=../databank/Prices_CPI_(2025)/charts/cpi_series.json",
+        },
+        {
+          type: "MultiChart",
+          title: "Inflation across time horizons",
+          desc: "Explore the CPI level alongside monthly and yearly changes.",
+          url:
+            base +
+            "MultiChart.html?filename=../databank/Prices_CPI_(2025)/charts/cpi_total.json",
+        },
+        {
+          type: "YearChart",
+          title: "Reservoir levels, year over year",
+          desc: "Overlay yearly water-level curves to reveal seasonal differences.",
+          url:
+            base +
+            "YearChart.html?filename=../databank/Energy_Reservoirs/charts/waterlevel_year.json",
+        },
+        {
+          type: "YearChart",
+          title: "Transport prices by year",
+          desc: "Place years side by side to understand changes in transport price patterns.",
+          url:
+            base +
+            "YearChart.html?filename=../databank/Prices_CPI_(2025)/charts/cpi_transport.json",
+        },
+      ];
+      const guide = "https://www.harmonize.no/docs/docview.php?doc=GUIDE";
+      const stories = [
+        {
+          tag: "Published example · Norway",
+          title: "I want to compare consumer and producer prices.",
+          problem:
+            "An economic analyst wants to know whether producer prices and consumer prices are moving together. The two indexes may start from different base years, so a raw comparison can be misleading.",
+          solution:
+            "With Harmonize, select both time series, assign a common base year (2021 in this published example), and aggregate the data to quarters or years.",
+          demo: 1,
+          guide: guide + "#common-base-year",
+        },
+        {
+          tag: "Published example · Energy",
+          title: "I want to know if reservoir levels are unusual this year.",
+          problem:
+            "An energy analyst needs more than a single timeline. How do today’s seasonal water levels compare with the same weeks in earlier years?",
+          solution:
+            "The YearChart template overlays each year as a separate line, making seasonal differences easier to see.",
+          demo: 4,
+          guide: guide + "#charts-and-templates",
+        },
+        {
+          tag: "Published example · Inflation",
+          title: "I want to see both inflation and price levels.",
+          problem:
+            "An economic researcher needs to distinguish the consumer price index itself from monthly and year-over-year percentage changes.",
+          solution:
+            "A MultiChart can display the index and its changes in separate plots. Harmonize supports lagged percentage-change functions such as Pct(1) and Pct(12).",
+          demo: 3,
+          guide: guide + "#functions-and-aggregations",
+        },
+        {
+          tag: "Published example · Transport",
+          title: "I want to compare transport costs across years.",
+          problem:
+            "An analyst wants to spot which parts of the year show the strongest changes in transport prices, rather than simply looking at one continuous series.",
+          solution:
+            "Use YearChart to overlay annual trajectories for the transport price index. Each year is displayed independently for comparison.",
+          demo: 5,
+          guide: guide + "#charts-and-templates",
+        },
+        {
+          tag: "Illustrative scenario · Healthcare",
+          title: "I want to compare hospital workload with staffing.",
+          problem:
+            "Imagine a Ugandan hospital network collecting monthly patient visits and staff capacity by facility. Which hospitals experience increased demand without a corresponding staffing increase?",
+          solution:
+            "If those observations are loaded into Harmonize and the user has access, they can select both series, analyze trends, and create a report. This is a proposed use case, not a published hospital dataset.",
+          demo: null,
+          guide: guide + "#reports",
+          illustration: {
+            heading: "From records to a shared monthly report",
+            steps: [
+              "Import hospital time-series observations via CSV or an integration",
+              "Select visits and staffing series for a facility",
+              "Create a chart or report for authorized users",
+            ],
+          },
+        },
+        {
+          tag: "Illustrative scenario · Reporting",
+          title: "I want my monthly Excel report to update faster.",
+          problem:
+            "A reporting team repeatedly copies updated observations into an Excel workbook. They would rather retrieve the latest authorized data without rebuilding the sheet.",
+          solution:
+            "The documented Harmonize Excel add-in supports GetSerie and RefreshAll, which retrieves updated series for configured worksheet queries.",
+          demo: null,
+          guide: guide + "#excel-add-in",
+          illustration: {
+            heading: "A repeatable Excel workflow",
+            steps: [
+              "Configure a Harmonize query in an Excel header cell",
+              "Use GetSerie to retrieve the time series",
+              "Use RefreshAll to update the workbook later",
+            ],
+          },
+        },
+        {
+          tag: "Published example · Statistics",
+          title: "I want to explore several price components.",
+          problem:
+            "A researcher wants to move beyond one headline inflation measure and inspect multiple index series separately.",
+          solution:
+            "Harmonize MultiChart gives each selected series its own chart, letting the reader scroll through related indicators.",
+          demo: 2,
+          guide: guide + "#charts-and-templates",
+        },
+        {
+          tag: "Published example · CPI",
+          title: "I want a clear, shareable price chart.",
+          problem:
+            "A policy team has a single question: how has the total consumer price index evolved over time? They want readers to explore rather than study a static image.",
+          solution:
+            "Harmonize’s Chart template can render an interactive time series with zoom, tooltips, data tables, and export options.",
+          demo: 0,
+          guide: guide + "#charts-and-templates",
+        },
+      ];
+      const $ = (id) => document.getElementById(id);
+      const duration = 9500;
+      let index = 0,
+        playing = !matchMedia("(prefers-reduced-motion: reduce)").matches,
+        start = performance.now(),
+        remaining = duration,
+        hover = false;
+      $("gallery").innerHTML = demos
+        .map(
+          (d, i) =>
+            `<a class="template" href="${d.url}" target="_blank" rel="noopener noreferrer"><div class="icon">${d.type === "Chart" ? "↗" : d.type === "YearChart" ? "◷" : "▤"}</div><div class="tag" style="margin-bottom:12px">${d.type}</div><h3>${d.title}</h3><p>${d.desc}</p><span>Open official demo ↗</span></a>`,
+        )
+        .join("");
+      stories.forEach((s, i) => {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.className = "dot";
+        b.setAttribute("aria-label", "Show story " + (i + 1) + ": " + s.title);
+        b.onclick = () => show(i, true);
+        $("dots").appendChild(b);
+      });
+      function show(i, manual = false) {
+        index = (i + stories.length) % stories.length;
+        const s = stories[index],
+          d = s.demo === null ? null : demos[s.demo];
+        $("kind").textContent = s.tag;
+        $("story-title").textContent = s.title;
+        $("story-problem").textContent = s.problem;
+        $("story-solution").textContent = s.solution;
+        $("view-guide").href = s.guide;
+        if (d) {
+          $("view-demo").textContent = "Open real Harmonize chart ↗";
+          $("view-demo").href = d.url;
+          $("view-demo").style.display = "";
+          $("external").href = d.url;
+          $("external").style.display = "";
+          $("preview-title").textContent =
+            "Official published " + d.type + " example";
+          const frame = document.createElement("iframe");
+          frame.title = "Published Harmonize demo: " + d.title;
+          frame.loading = "lazy";
+          frame.referrerPolicy = "strict-origin-when-cross-origin";
+          frame.src = d.url;
+          $("visual").replaceChildren(frame);
+          $("visual-note").textContent =
+            "This is an embedded published chart from harmonize.no (requires an internet connection). If embedding is restricted by the source website, open the full chart instead.";
+        } else {
+          $("view-demo").style.display = "none";
+          $("external").style.display = "none";
+          $("preview-title").textContent =
+            "Illustrative workflow — no live dataset";
+          const illustration = document.createElement("div");
+          illustration.className = "static-example";
+          const heading = document.createElement("h4");
+          heading.textContent = s.illustration.heading;
+          const p = document.createElement("p");
+          p.textContent =
+            "Example workflow using documented Harmonize features";
+          const list = document.createElement("div");
+          list.className = "flow-list";
+          s.illustration.steps.forEach((step, j) => {
+            const item = document.createElement("span");
+            item.textContent = j + 1 + ". " + step;
+            list.appendChild(item);
+          });
+          illustration.append(heading, p, list);
+          $("visual").replaceChildren(illustration);
+          $("visual-note").textContent =
+            "Hypothetical scenario. No claim of real-world customer adoption or included data.";
+        }
+        $("counter").textContent = index + 1 + " / " + stories.length;
+        [...$("dots").children].forEach((e, j) =>
+          e.setAttribute("aria-current", String(index === j)),
+        );
+        if (manual) resetTimer();
+      }
+      function resetTimer() {
+        start = performance.now();
+        remaining = duration;
+        $("progress").style.width = "0%";
+      }
+      function setPlay(next) {
+        playing = next;
+        $("toggle").textContent = playing ? "Pause" : "Play";
+        $("toggle").setAttribute(
+          "aria-label",
+          playing ? "Pause automatic slideshow" : "Play automatic slideshow",
+        );
+        $("autohint").textContent = playing
+          ? "Stories advance automatically"
+          : "Slideshow paused";
+        if (playing) start = performance.now();
+      }
+      $("back").onclick = () => show(index - 1, true);
+      $("next").onclick = () => show(index + 1, true);
+      $("toggle").onclick = () => {
+        if (playing) {
+          remaining = Math.max(0, duration - (performance.now() - start));
+          setPlay(false);
+        } else {
+          start = performance.now() - (duration - remaining);
+          setPlay(true);
+        }
+      };
+      const storyEl = document.querySelector(".story");
+      storyEl.addEventListener("mouseenter", () => {
+        hover = true;
+      });
+      storyEl.addEventListener("mouseleave", () => {
+        hover = false;
+        start = performance.now() - (duration - remaining);
+      });
+      storyEl.addEventListener("focusin", () => {
+        hover = true;
+      });
+      storyEl.addEventListener("focusout", (e) => {
+        if (!storyEl.contains(e.relatedTarget)) {
+          hover = false;
+          start = performance.now() - (duration - remaining);
+        }
+      });
+      function tick(t) {
+        if (playing) {
+          let elapsed = t - start;
+          if (hover) {
+            remaining = Math.max(0, duration - elapsed);
+            start = t - (duration - remaining);
+          } else {
+            remaining = Math.max(0, duration - elapsed);
+            if (elapsed >= duration) {
+              show(index + 1);
+              start = t;
+              remaining = duration;
+            }
+          }
+          $("progress").style.width =
+            ((duration - remaining) / duration) * 100 + "%";
+        }
+        requestAnimationFrame(tick);
+      }
+      show(0);
+      setPlay(playing);
+      requestAnimationFrame(tick);
+    </script>
+  </body>
+</html>
