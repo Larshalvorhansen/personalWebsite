@@ -15,18 +15,76 @@ header{border-bottom:1px solid var(--line);background:#fff}header .wrap{display:
 section{padding-bottom:70px}.overview{padding-top:68px}.templates{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-top:22px}.template{border:1px solid var(--line);padding:22px;border-radius:4px;text-decoration:none;color:inherit;transition:border-color .2s,transform .2s}.template:hover{border-color:var(--blue);transform:translateY(-2px);text-decoration:none}.template .icon{width:43px;height:43px;border-radius:4px;background:#e8f5ee;color:var(--navy);display:flex;justify-content:center;align-items:center;font-size:22px;margin-bottom:16px}.template h3{font-size:17px;line-height:1.35;margin:0 0 8px;color:var(--navy)}.template p{font-size:14px;line-height:1.6;color:var(--muted);margin:0 0 12px}.template span{font-size:13px;color:var(--navy);font-weight:600}.how{background:var(--pale);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:60px 0}.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:25px}.steps b{display:block;font-size:16px;color:var(--navy);margin-bottom:8px}.steps p{font-size:14px;color:var(--muted);margin:0}.steps .number{font-size:13px;font-weight:bold;color:var(--blue);display:block;margin-bottom:10px}.bottom{padding:65px 0}.bottom h2{color:var(--navy);font-size:28px;margin:0 0 10px}.bottom p{margin:0 0 22px;color:var(--muted);max-width:670px}footer{border-top:1px solid var(--line);padding:22px 0;color:var(--muted);font-size:12px}footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 @media(max-width:850px){nav{gap:13px}nav a{font-size:12px}.story-main{grid-template-columns:1fr}.story-copy{padding:32px}.story-visual{border-left:0;border-top:1px solid var(--line);padding:18px}.frame,.frame iframe{min-height:310px}.templates{grid-template-columns:repeat(2,1fr)}.intro{padding:52px 0 40px}}@media(max-width:540px){.wrap{padding:0 17px}header .wrap{min-height:65px}header .brand{font-size:22px}nav a:not(.nav-btn){display:none}.intro h1{letter-spacing:-.5px}.story-copy{padding:25px}.story-visual{padding:13px}.frame,.frame iframe{min-height:270px}.templates,.steps{grid-template-columns:1fr;gap:12px}.controls{padding:12px}.control-buttons button{padding:6px 9px}.section-head{align-items:flex-start;flex-direction:column}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+
+/* Small screens: keep the chart usable and the landing page compact. */
+.frame{height:355px;flex:none}
+.frame iframe{display:block;width:100%;height:100%;min-height:0}
+.story-copy p{overflow-wrap:break-word}
+@media(max-width:850px){
+  .story-main{min-height:0}
+  .story-copy .actions{margin-top:0}
+  .frame{height:390px}
+  .frame iframe{min-height:0}
+}
+@media(max-width:540px){
+  body{font-size:15px;line-height:1.55}
+  .wrap{padding-inline:16px}
+  header .wrap{min-height:62px;gap:8px}
+  header .brand{font-size:22px;white-space:nowrap}
+  nav{gap:12px}
+  nav .nav-btn{padding:8px 10px;font-size:12px}
+  .intro{padding:32px 0 28px}
+  .intro h1{font-size:34px;line-height:1.12;margin-bottom:12px}
+  .intro p:not(.eyebrow){font-size:16px;line-height:1.5}
+  .section-head{margin-bottom:14px;gap:7px}
+  .section-head h2{font-size:22px}
+  .section-head p{font-size:13px}
+  #autohint{display:none}
+  .story-copy{padding:20px 18px 16px}
+  .story-copy h3{font-size:25px;line-height:1.18;margin:13px 0 12px}
+  .story-copy p{font-size:14px;margin-bottom:10px}
+  .story-copy .actions{padding-top:10px;width:100%;gap:8px}
+  .story-copy .actions .button{padding:9px 10px;font-size:12px;flex:1;min-width:0;text-align:center}
+  .story-visual{padding:12px}
+  .preview-head{font-size:12px;flex-wrap:wrap;margin-bottom:8px}
+  .frame{height:340px;min-height:0}
+  .frame iframe{height:100%;min-height:0}
+  .demo-note{font-size:11px;margin-top:8px}
+  .controls{flex-direction:column;align-items:stretch;gap:12px;padding:12px}
+  .dots{justify-content:center;gap:7px}
+  .dot{width:25px;height:9px}
+  .control-buttons{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:7px}
+  .control-buttons button{padding:9px 4px;font-size:13px}
+  #counter{margin:0;align-self:center;text-align:center}
+  .templates{grid-template-columns:1fr;gap:10px}
+  .template{padding:15px}
+  .template h3{font-size:16px}
+  .template p{margin-bottom:8px}
+  .steps{gap:20px}
+  .how{padding:38px 0}
+  section{padding-bottom:42px}
+  .overview{padding-top:42px}
+  .bottom{padding-top:40px;padding-bottom:40px}
+  .bottom h2{font-size:23px}
+  .bottom .button{width:100%;justify-content:center}
+}
+@media(max-width:380px){
+  .frame{height:300px}
+  .story-copy h3{font-size:23px}
+  nav .nav-btn{font-size:11px;padding:8px}
+}
 </style>
 </head>
 <body>
-<header><div class="wrap"><a class="brand" href="https://www.harmonize.no/">Harmonize <small>It's all about Time!</small></a><nav aria-label="Main navigation"><a href="#examples">Examples</a><a href="#templates">Charts</a><a href="https://www.harmonize.no/docs/docview.php?doc=GUIDE">Guide</a><a class="nav-btn" href="https://www.harmonize.no/">Harmonize.no ↗</a></nav></div></header>
+<header><div class="wrap"><a class="brand" href="https://www.harmonize.no/">Harmonize </a><nav aria-label="Main navigation"><a href="#examples">Examples</a><a href="#templates">Charts</a><a href="https://www.harmonize.no/docs/docview.php?doc=GUIDE">Guide</a><a class="nav-btn" href="https://www.harmonize.no/">Harmonize.no</a></nav></div></header>
 <main>
-<div class="wrap"><div class="intro"><p class="eyebrow">What can you do with Harmonize?</p><h1>I want to understand my data over time.</h1><p>From comparing prices to following reservoir levels, discover how Harmonize helps you bring time-series data together, understand changes, and publish the results.</p></div></div>
-<section id="examples"><div class="wrap"><div class="section-head"><div><h2>Start with a question</h2><p>Real published Harmonize examples, with a few illustrative ways to apply the same tools.</p></div><span id="autohint" class="muted" style="font-size:13px">Stories advance automatically</span></div>
-<div class="story" aria-label="Use case slideshow"><div class="story-main"><div class="story-copy" aria-live="polite"><span class="tag" id="kind">Published example</span><h3 id="story-title"></h3><p id="story-problem"></p><p id="story-solution" class="muted"></p><div class="actions"><a id="view-demo" class="button" href="#" target="_blank" rel="noopener noreferrer">Open live example ↗</a><a id="view-guide" class="button secondary" href="https://www.harmonize.no/docs/docview.php?doc=GUIDE" target="_blank" rel="noopener noreferrer">How it works ↗</a></div></div><div class="story-visual"><div class="preview-head"><strong id="preview-title">Live Harmonize example</strong><a id="external" href="#" target="_blank" rel="noopener noreferrer">Open full chart ↗</a></div><div class="frame" id="visual"></div><p class="demo-note" id="visual-note"></p></div></div><div class="controls"><div class="dots" id="dots" aria-label="Choose a story"></div><div class="control-buttons"><span id="counter"></span><button type="button" id="back" aria-label="Previous story">←</button><button type="button" id="toggle" aria-label="Pause automatic slideshow">Pause</button><button type="button" id="next" aria-label="Next story">→</button></div></div><div class="timebar" aria-hidden="true"><div id="progress"></div></div></div></div></section>
-<section class="overview" id="templates"><div class="wrap"><div class="section-head"><div><h2>See what Harmonize can publish</h2><p>These six chart samples come directly from the official Harmonize demo page.</p></div><a href="https://www.harmonize.no/templates/demo.php" target="_blank" rel="noopener noreferrer">See all originals ↗</a></div><div class="templates" id="gallery"></div></div></section>
+<div class="wrap"><div class="intro"><h1>Harmonize use cases</h1><p>Examples of time-series comparison, analysis and reporting using Harmonize.</p></div></div>
+<section id="examples"><div class="wrap"><div class="section-head"><div><h2>Use cases</h2><p>Real published Harmonize examples, with a few illustrative ways to apply the same tools.</p></div><span id="autohint" class="muted" style="font-size:13px">Stories advance automatically</span></div>
+<div class="story" aria-label="Use case slideshow"><div class="story-main"><div class="story-copy" aria-live="polite"><span class="tag" id="kind">Published example</span><h3 id="story-title"></h3><p id="story-problem"></p><p id="story-solution" class="muted"></p><div class="actions"><a id="view-demo" class="button" href="#" target="_blank" rel="noopener noreferrer">Open live example</a><a id="view-guide" class="button secondary" href="https://www.harmonize.no/docs/docview.php?doc=GUIDE" target="_blank" rel="noopener noreferrer">How it works</a></div></div><div class="story-visual"><div class="preview-head"><strong id="preview-title">Live Harmonize example</strong><a id="external" href="#" target="_blank" rel="noopener noreferrer">Open full chart</a></div><div class="frame" id="visual"></div><p class="demo-note" id="visual-note"></p></div></div><div class="controls"><div class="dots" id="dots" aria-label="Choose a story"></div><div class="control-buttons"><span id="counter"></span><button type="button" id="back" aria-label="Previous story">Previous</button><button type="button" id="toggle" aria-label="Pause automatic slideshow">Pause</button><button type="button" id="next" aria-label="Next story">Next</button></div></div><div class="timebar" aria-hidden="true"><div id="progress"></div></div></div></div></section>
+<section class="overview" id="templates"><div class="wrap"><div class="section-head"><div><h2>Published chart examples</h2><p>These six chart samples come directly from the official Harmonize demo page.</p></div><a href="https://www.harmonize.no/templates/demo.php" target="_blank" rel="noopener noreferrer">See all originals</a></div><div class="templates" id="gallery"></div></div></section>
 <section class="how"><div class="wrap"><div class="section-head"><div><h2>From data to a published chart</h2><p>A simple workflow, based on the Harmonize user guide.</p></div></div><div class="steps"><div><span class="number">01</span><b>Select the series</b><p>Browse the database and select one or more time series in the Harmonize Windows application.</p></div><div><span class="number">02</span><b>Compare and transform</b><p>Use aggregations, percentage changes, a common base year, or a year-over-year overlay.</p></div><div><span class="number">03</span><b>Share the result</b><p>Generate a chart, multi-chart or report; export data or publish reusable charts on a website.</p></div></div></div></section>
-<div class="wrap bottom"><h2>Have a time-series question of your own?</h2><p>Explore the user guide, open the public databank, or try the published chart examples. Some examples require your own data and a configured Harmonize installation.</p><div style="display:flex;gap:10px;flex-wrap:wrap"><a class="button" href="https://www.harmonize.no/docs/docview.php?doc=GUIDE">Read the user guide ↗</a><a class="button secondary" href="https://www.harmonize.no/databank/">Explore the databank ↗</a></div></div>
-</main><footer><div class="wrap"><span>Concept landing page based on the Harmonize user guide and official demo charts.</span><span>Harmonize © 2026 · Unofficial demonstration page</span></div></footer>
+<div class="wrap bottom"><h2>Explore Harmonize</h2><p>Explore the user guide, open the public databank, or try the published chart examples. Some examples require your own data and a configured Harmonize installation.</p><div style="display:flex;gap:10px;flex-wrap:wrap"><a class="button" href="https://www.harmonize.no/docs/docview.php?doc=GUIDE">Read the user guide</a><a class="button secondary" href="https://www.harmonize.no/databank/">Explore the databank</a></div></div>
+</main><footer><div class="wrap"><span>Concept landing page based on the Harmonize user guide and official demo charts.</span><span>Unofficial demonstration page</span></div></footer>
 <script>
 const base='https://www.harmonize.no/templates/';
 const demos=[
@@ -49,9 +107,9 @@ const stories=[
 {tag:'Published example · CPI',title:'I want a clear, shareable price chart.',problem:'A policy team has a single question: how has the total consumer price index evolved over time? They want readers to explore rather than study a static image.',solution:'Harmonize’s Chart template can render an interactive time series with zoom, tooltips, data tables, and export options.',demo:0,guide:guide+'#charts-and-templates'}
 ];
 const $=id=>document.getElementById(id);const duration=9500;let index=0,playing=true,start=performance.now(),remaining=duration;
-$('gallery').innerHTML=demos.map((d,i)=>`<a class="template" href="${d.url}" target="_blank" rel="noopener noreferrer"><div class="icon">${d.type==='Chart'?'↗':d.type==='YearChart'?'◷':'▤'}</div><div class="tag" style="margin-bottom:12px">${d.type}</div><h3>${d.title}</h3><p>${d.desc}</p><span>Open official demo ↗</span></a>`).join('');
+$('gallery').innerHTML=demos.map((d,i)=>`<a class="template" href="${d.url}" target="_blank" rel="noopener noreferrer"><div class="tag" style="margin-bottom:12px">${d.type}</div><h3>${d.title}</h3><p>${d.desc}</p><span>Open official demo</span></a>`).join('');
 stories.forEach((s,i)=>{const b=document.createElement('button');b.type='button';b.className='dot';b.setAttribute('aria-label','Show story '+(i+1)+': '+s.title);b.onclick=()=>show(i,true);$('dots').appendChild(b)});
-function show(i,manual=false){index=(i+stories.length)%stories.length;const s=stories[index],d=s.demo===null?null:demos[s.demo];$('kind').textContent=s.tag;$('story-title').textContent=s.title;$('story-problem').textContent=s.problem;$('story-solution').textContent=s.solution;$('view-guide').href=s.guide;if(d){$('view-demo').textContent='Open real Harmonize chart ↗';$('view-demo').href=d.url;$('view-demo').style.display='';$('external').href=d.url;$('external').style.display='';$('preview-title').textContent='Official published '+d.type+' example';const frame=document.createElement('iframe');frame.title='Published Harmonize demo: '+d.title;frame.loading='eager';frame.referrerPolicy='strict-origin-when-cross-origin';frame.setAttribute('allow','fullscreen');frame.src=d.url;$('visual').replaceChildren(frame);$('visual-note').textContent='Live graph loads automatically from harmonize.no. An internet connection is required; if the source blocks embedding, use Open full chart.';}else{$('view-demo').style.display='none';$('external').style.display='none';$('preview-title').textContent='Illustrative workflow — no live dataset';const illustration=document.createElement('div');illustration.className='static-example';const heading=document.createElement('h4');heading.textContent=s.illustration.heading;const p=document.createElement('p');p.textContent='Example workflow using documented Harmonize features';const list=document.createElement('div');list.className='flow-list';s.illustration.steps.forEach((step,j)=>{const item=document.createElement('span');item.textContent=(j+1)+'. '+step;list.appendChild(item)});illustration.append(heading,p,list);$('visual').replaceChildren(illustration);$('visual-note').textContent='Hypothetical scenario. No claim of real-world customer adoption or included data.';}$('counter').textContent=(index+1)+' / '+stories.length;[...$('dots').children].forEach((e,j)=>e.setAttribute('aria-current',String(index===j)));if(manual)resetTimer()}
+function show(i,manual=false){index=(i+stories.length)%stories.length;const s=stories[index],d=s.demo===null?null:demos[s.demo];$('kind').textContent=s.tag;$('story-title').textContent=s.title;$('story-problem').textContent=s.problem;$('story-solution').textContent=s.solution;$('view-guide').href=s.guide;if(d){$('view-demo').textContent='Open real Harmonize chart';$('view-demo').href=d.url;$('view-demo').style.display='';$('external').href=d.url;$('external').style.display='';$('preview-title').textContent='Official published '+d.type+' example';const frame=document.createElement('iframe');frame.title='Published Harmonize demo: '+d.title;frame.loading='eager';frame.referrerPolicy='strict-origin-when-cross-origin';frame.setAttribute('allow','fullscreen');frame.src=d.url;$('visual').replaceChildren(frame);$('visual-note').textContent='Chart from harmonize.no. Requires an internet connection.';}else{$('view-demo').style.display='none';$('external').style.display='none';$('preview-title').textContent='Illustrative workflow — no live dataset';const illustration=document.createElement('div');illustration.className='static-example';const heading=document.createElement('h4');heading.textContent=s.illustration.heading;const p=document.createElement('p');p.textContent='Example workflow using documented Harmonize features';const list=document.createElement('div');list.className='flow-list';s.illustration.steps.forEach((step,j)=>{const item=document.createElement('span');item.textContent=(j+1)+'. '+step;list.appendChild(item)});illustration.append(heading,p,list);$('visual').replaceChildren(illustration);$('visual-note').textContent='Hypothetical scenario. No claim of real-world customer adoption or included data.';}$('counter').textContent=(index+1)+' / '+stories.length;[...$('dots').children].forEach((e,j)=>e.setAttribute('aria-current',String(index===j)));if(manual)resetTimer()}
 function resetTimer(){start=performance.now();remaining=duration;$('progress').style.width='0%'}
 function setPlay(next){playing=next;$('toggle').textContent=playing?'Pause':'Play';$('toggle').setAttribute('aria-label',playing?'Pause automatic slideshow':'Play automatic slideshow');$('autohint').textContent=playing?'Stories advance automatically':'Slideshow paused';if(playing)start=performance.now()}
 $('back').onclick=()=>show(index-1,true);$('next').onclick=()=>show(index+1,true);$('toggle').onclick=()=>{if(playing){remaining=Math.max(0,duration-(performance.now()-start));setPlay(false)}else{start=performance.now()-(duration-remaining);setPlay(true)}};
