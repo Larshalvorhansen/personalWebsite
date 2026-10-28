@@ -1,0 +1,1489 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EverlongSTK — UI Mockup</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font:
+          14px Arial,
+          Helvetica,
+          sans-serif;
+        color: #222;
+        background: #f5f5f5;
+      }
+      button,
+      input,
+      select,
+      textarea {
+        font: inherit;
+      }
+      button {
+        padding: 6px 12px;
+        cursor: pointer;
+        border: 1px solid #aaa;
+        background: #f5f5f5;
+        border-radius: 3px;
+        color: #222;
+      }
+      button:hover {
+        background: #e9e9e9;
+      }
+      button:disabled {
+        opacity: 0.45;
+        cursor: not-allowed;
+      }
+      input,
+      select,
+      textarea {
+        border: 1px solid #aaa;
+        border-radius: 2px;
+        padding: 5px 6px;
+        background: white;
+        min-width: 0;
+      }
+      input[type="number"] {
+        width: 105px;
+      }
+      input[type="checkbox"] {
+        width: auto;
+      }
+      textarea {
+        width: 100%;
+        min-height: 170px;
+        resize: vertical;
+        font-family: monospace;
+        font-size: 12px;
+      }
+      h2 {
+        font-size: 18px;
+        margin: 0 0 12px;
+      }
+      h3 {
+        font-size: 15px;
+        margin: 0 0 10px;
+      }
+      p {
+        line-height: 1.45;
+      }
+      .browser-tabs {
+        display: flex;
+        gap: 2px;
+        align-items: end;
+        padding: 9px 12px 0;
+        background: #ddd;
+        border-bottom: 1px solid #aaa;
+      }
+      .browser-tab {
+        border: 1px solid #aaa;
+        border-bottom: none;
+        border-radius: 6px 6px 0 0;
+        background: #e9e9e9;
+        padding: 10px 20px;
+        min-width: 160px;
+        text-align: left;
+      }
+      .browser-tab.active {
+        background: white;
+        position: relative;
+        top: 1px;
+        font-weight: bold;
+      }
+      .header {
+        background: white;
+        border-bottom: 1px solid #ccc;
+        padding: 12px 18px;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        flex-wrap: wrap;
+      }
+      .header h1 {
+        font-size: 18px;
+        margin: 0;
+        font-weight: 600;
+      }
+      .subtle {
+        color: #666;
+        font-size: 12px;
+      }
+      .spacer {
+        flex: 1;
+      }
+      .toolbar {
+        display: flex;
+        gap: 6px;
+        align-items: center;
+        flex-wrap: wrap;
+        padding: 10px 18px;
+        border-bottom: 1px solid #ccc;
+        background: #fafafa;
+      }
+      .primary {
+        background: #e7f0fa;
+        border-color: #6d98bd;
+      }
+      .primary:hover {
+        background: #d8e7f7;
+      }
+      .page {
+        display: none;
+        padding: 18px;
+        min-height: calc(100vh - 180px);
+      }
+      .page.active {
+        display: block;
+      }
+      .columns {
+        display: grid;
+        grid-template-columns: minmax(340px, 1fr) minmax(360px, 1fr);
+        gap: 16px;
+      }
+      .panel {
+        border: 1px solid #ccc;
+        background: #fff;
+        padding: 16px;
+        margin-bottom: 16px;
+        min-width: 0;
+      }
+      .panel-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 12px;
+      }
+      .panel-head h2,
+      .panel-head h3 {
+        margin: 0;
+      }
+      .subtabs {
+        display: flex;
+        gap: 4px;
+        border-bottom: 1px solid #ccc;
+        margin-bottom: 16px;
+        flex-wrap: wrap;
+      }
+      .subtab {
+        background: white;
+        border: 1px solid transparent;
+        border-bottom: 0;
+        border-radius: 3px 3px 0 0;
+        padding: 8px 13px;
+      }
+      .subtab.active {
+        border-color: #ccc;
+        background: #f7f7f7;
+        font-weight: bold;
+      }
+      .section {
+        display: none;
+      }
+      .section.active {
+        display: block;
+      }
+      .form-grid {
+        display: grid;
+        grid-template-columns: minmax(150px, 1fr) minmax(105px, 180px) 95px;
+        gap: 9px 10px;
+        align-items: center;
+      }
+      .form-grid .field-label {
+        font-size: 13px;
+      }
+      .unit {
+        color: #666;
+        font-size: 12px;
+      }
+      .row {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      .status {
+        padding: 11px 18px;
+        border-top: 1px solid #ccc;
+        background: #eee;
+        display: flex;
+        gap: 18px;
+        flex-wrap: wrap;
+        font-size: 12px;
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        font-size: 13px;
+      }
+      th,
+      td {
+        border: 1px solid #ccc;
+        padding: 8px;
+        text-align: left;
+        vertical-align: middle;
+      }
+      th {
+        background: #f0f0f0;
+        font-weight: 600;
+      }
+      td input[type="number"] {
+        width: 76px;
+      }
+      td input[type="text"] {
+        width: 100%;
+      }
+      .scroll {
+        overflow-x: auto;
+      }
+      .muted {
+        color: #666;
+      }
+      .small {
+        font-size: 12px;
+      }
+      .info {
+        background: #fafafa;
+        border: 1px solid #ddd;
+        padding: 10px;
+        margin: 10px 0;
+      }
+      .metric-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(120px, 1fr));
+        gap: 10px;
+        margin-bottom: 14px;
+      }
+      .metric {
+        border: 1px solid #ccc;
+        padding: 12px;
+        background: white;
+      }
+      .metric .value {
+        font-size: 22px;
+        margin-top: 7px;
+      }
+      .chart {
+        height: 190px;
+        width: 100%;
+        border: 1px solid #ddd;
+        background: white;
+        display: block;
+      }
+      .chart-label {
+        display: flex;
+        justify-content: space-between;
+        margin: 5px 0 12px;
+        font-size: 12px;
+        color: #666;
+      }
+      .rules {
+        display: grid;
+        gap: 8px;
+      }
+      .rule {
+        border: 1px solid #ccc;
+        padding: 12px;
+        background: #fafafa;
+      }
+      .rule select {
+        max-width: 180px;
+      }
+      .rule-title {
+        font-weight: 600;
+        margin-bottom: 8px;
+      }
+      .fake-block {
+        display: inline-block;
+        padding: 8px 10px;
+        border: 1px solid #999;
+        background: #ececec;
+        border-radius: 3px;
+        margin: 3px;
+      }
+      .callout {
+        border: 1px solid #ddd;
+        background: #f8f8f8;
+        padding: 10px;
+        font-size: 12px;
+        margin-bottom: 12px;
+      }
+      .hidden {
+        display: none !important;
+      }
+      .radio-label {
+        margin-right: 18px;
+        white-space: nowrap;
+      }
+      footer {
+        padding: 8px 18px;
+        color: #666;
+        font-size: 12px;
+      }
+      @media (max-width: 850px) {
+        .columns {
+          grid-template-columns: 1fr;
+        }
+        .metric-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .browser-tab {
+          min-width: 0;
+          padding: 10px 12px;
+        }
+        .form-grid {
+          grid-template-columns: 1fr 140px 65px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="browser-tabs" role="tablist" aria-label="Main pages">
+      <button
+        class="browser-tab active"
+        role="tab"
+        aria-selected="true"
+        data-page="configuration"
+      >
+        Configuration
+      </button>
+      <button
+        class="browser-tab"
+        role="tab"
+        aria-selected="false"
+        data-page="control"
+      >
+        Control
+      </button>
+      <button
+        class="browser-tab"
+        role="tab"
+        aria-selected="false"
+        data-page="results"
+      >
+        Results
+      </button>
+    </div>
+    <div class="header">
+      <h1>EverlongSTK</h1>
+      <span class="subtle">Satellite Budget Simulator — Prototype</span
+      ><span class="spacer"></span
+      ><label
+        >Project
+        <input
+          id="projectName"
+          value="Generic CubeSat"
+          style="width: 190px" /></label
+      ><span id="edited" class="subtle">Example configuration</span>
+    </div>
+    <div class="toolbar">
+      <button data-action="new">New</button
+      ><button data-action="open">Open example</button
+      ><button data-action="save">Save mock project</button>
+      <span
+        style="border-left: 1px solid #ccc; height: 24px; margin: 0 5px"
+      ></span>
+      <button class="primary" data-action="start" id="startBtn">Start</button
+      ><button data-action="pause" id="pauseBtn" disabled>Pause</button
+      ><button data-action="stop" id="stopBtn" disabled>Stop</button
+      ><button data-action="restart">Restart</button>
+      <span class="spacer"></span
+      ><button data-action="export">Export demo CSV</button>
+    </div>
+
+    <main id="configuration" class="page active">
+      <div class="columns">
+        <div>
+          <div class="panel">
+            <div class="panel-head">
+              <h2>Project inputs</h2>
+              <span class="subtle">Example values are illustrative</span>
+            </div>
+            <div class="subtabs" data-group="config">
+              <button class="subtab active" data-section="hardware">
+                Components</button
+              ><button class="subtab" data-section="orbit">
+                Orbit & stations</button
+              ><button class="subtab" data-section="timing">Simulation</button
+              ><button class="subtab" data-section="equations">
+                Equations
+              </button>
+            </div>
+            <div class="section active" id="hardware">
+              <div class="panel-head">
+                <h3>Hardware</h3>
+                <button data-action="add-component">Add component</button>
+              </div>
+              <div class="scroll">
+                <table id="componentTable">
+                  <thead>
+                    <tr>
+                      <th>Component</th>
+                      <th>Capability</th>
+                      <th>Hardware value</th>
+                      <th>Unit</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Battery</td>
+                      <td>Energy storage</td>
+                      <td><input type="number" value="40" /></td>
+                      <td>Wh</td>
+                      <td><button class="details">Details</button></td>
+                    </tr>
+                    <tr>
+                      <td>Physical storage</td>
+                      <td>Data storage</td>
+                      <td><input type="number" value="1000" /></td>
+                      <td>MB</td>
+                      <td><button class="details">Details</button></td>
+                    </tr>
+                    <tr>
+                      <td>Camera</td>
+                      <td>Data producer</td>
+                      <td><input type="number" value="500000" /></td>
+                      <td>bytes/s</td>
+                      <td><button class="details">Details</button></td>
+                    </tr>
+                    <tr>
+                      <td>Processor</td>
+                      <td>Data processor</td>
+                      <td><input type="number" value="1000000" /></td>
+                      <td>bytes/s</td>
+                      <td><button class="details">Details</button></td>
+                    </tr>
+                    <tr>
+                      <td>Radio</td>
+                      <td>Downlink</td>
+                      <td><input type="number" value="1" /></td>
+                      <td>Mbit/s</td>
+                      <td><button class="details">Details</button></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="info small">
+                Parameter metadata: <strong>certainty:</strong> guesstimate
+                &nbsp; <strong>source:</strong> none &nbsp;
+                <strong>default:</strong> no. Select Details to inspect notes
+                and bounds.
+              </div>
+            </div>
+            <div class="section" id="orbit">
+              <h3>Orbit</h3>
+              <div class="form-grid">
+                <label class="field-label">Orbit type</label
+                ><select>
+                  <option>Circular</option>
+                  <option>Advanced elements</option></select
+                ><span></span> <label class="field-label">Altitude</label
+                ><input type="number" value="550" /><span class="unit">km</span>
+                <label class="field-label">Inclination</label
+                ><input type="number" value="97.5" /><span class="unit"
+                  >deg</span
+                >
+                <label class="field-label">RAAN</label
+                ><input type="number" value="0" /><span class="unit">deg</span>
+                <label class="field-label">Epoch (UTC)</label
+                ><input type="text" value="2027-01-01 00:00" /><span
+                  class="unit"
+                  >UTC</span
+                >
+                <label class="field-label">J2 correction</label
+                ><select>
+                  <option>Enabled</option>
+                  <option>Disabled</option></select
+                ><span></span>
+              </div>
+              <h3 style="margin-top: 25px">Ground stations</h3>
+              <div class="scroll">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Lat.</th>
+                      <th>Long.</th>
+                      <th>Min elev.</th>
+                      <th>Downlink</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><input value="Example station" /></td>
+                      <td><input type="number" value="63.4" /></td>
+                      <td><input type="number" value="10.4" /></td>
+                      <td><input type="number" value="10" /></td>
+                      <td><input type="number" value="1" /></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="small muted">
+                Coordinates in degrees; downlink in Mbit/s. Contact times are
+                not calculated in this prototype.
+              </p>
+              <button data-action="add-station">Add station</button>
+            </div>
+            <div class="section" id="timing">
+              <h3>Simulation timing</h3>
+              <div class="form-grid">
+                <label class="field-label">Duration</label
+                ><input id="duration" type="number" value="30" /><span
+                  class="unit"
+                  >days</span
+                >
+                <label class="field-label">Calculation step</label
+                ><input type="number" value="20" /><span class="unit"
+                  >seconds</span
+                >
+                <label class="field-label">Saved output interval</label
+                ><input type="number" value="60" /><span class="unit"
+                  >seconds</span
+                >
+                <label class="field-label">Initial battery</label
+                ><input type="number" value="32" /><span class="unit">Wh</span>
+                <label class="field-label">Charge efficiency</label
+                ><input type="number" step="0.01" value="0.95" /><span></span>
+                <label class="field-label">Discharge efficiency</label
+                ><input type="number" step="0.01" value="0.95" /><span></span>
+                <label class="field-label">Initial mode</label
+                ><select>
+                  <option>A — Idle</option>
+                  <option>B — Imaging</option>
+                  <option>C — Processing</option>
+                  <option>D — Downlink</option></select
+                ><span></span>
+              </div>
+              <p class="small muted">
+                Calculation step and output interval are separate. Values here
+                affect labels only in the mockup.
+              </p>
+            </div>
+            <div class="section" id="equations">
+              <h3>Built-in equations (read only)</h3>
+              <pre
+                style="
+                  white-space: pre-wrap;
+                  background: #f7f7f7;
+                  padding: 12px;
+                  border: 1px solid #ddd;
+                "
+              >
+surplus_w = max(generation_w - served_load_w, 0)
+deficit_w = max(served_load_w - generation_w, 0)
+
+energy_change_wh = charge_efficiency * charge_bus_w * dt_hours
+                 - discharge_bus_w / discharge_efficiency * dt_hours
+
+link_bytes_per_second = link_bits_per_second / 8
+storage_used_bytes = sum(queue_bytes)</pre
+              >
+              <p>
+                These equations are shown for understanding; the prototype does
+                not evaluate them.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="panel">
+            <div class="panel-head">
+              <h2>Modes</h2>
+              <button data-action="add-mode">Add mode</button>
+            </div>
+            <p class="small muted">
+              Operational values by mode. Edit names or individual component
+              power values.
+            </p>
+            <div class="scroll">
+              <table id="modesTable">
+                <thead>
+                  <tr>
+                    <th>Component</th>
+                    <th>
+                      A<br /><input value="Idle" aria-label="Mode A name" />
+                    </th>
+                    <th>
+                      B<br /><input value="Imaging" aria-label="Mode B name" />
+                    </th>
+                    <th>
+                      C<br /><input
+                        value="Processing"
+                        aria-label="Mode C name"
+                      />
+                    </th>
+                    <th>
+                      D<br /><input value="Downlink" aria-label="Mode D name" />
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Platform (W)</td>
+                    <td><input type="number" value="2" /></td>
+                    <td><input type="number" value="2" /></td>
+                    <td><input type="number" value="2" /></td>
+                    <td><input type="number" value="2" /></td>
+                  </tr>
+                  <tr>
+                    <td>ADCS (W)</td>
+                    <td><input type="number" value="1" /></td>
+                    <td><input type="number" value="3" /></td>
+                    <td><input type="number" value="1" /></td>
+                    <td><input type="number" value="2" /></td>
+                  </tr>
+                  <tr>
+                    <td>Camera (W)</td>
+                    <td><input type="number" value="0.1" step="0.1" /></td>
+                    <td><input type="number" value="5" /></td>
+                    <td><input type="number" value="0.1" step="0.1" /></td>
+                    <td><input type="number" value="0.1" step="0.1" /></td>
+                  </tr>
+                  <tr>
+                    <td>Processor (W)</td>
+                    <td><input type="number" value="0.2" step="0.1" /></td>
+                    <td><input type="number" value="0.2" step="0.1" /></td>
+                    <td><input type="number" value="4" /></td>
+                    <td><input type="number" value="0.2" step="0.1" /></td>
+                  </tr>
+                  <tr>
+                    <td>Radio (W)</td>
+                    <td><input type="number" value="0.2" step="0.1" /></td>
+                    <td><input type="number" value="0.2" step="0.1" /></td>
+                    <td><input type="number" value="0.2" step="0.1" /></td>
+                    <td><input type="number" value="6" /></td>
+                  </tr>
+                  <tr>
+                    <td>Solar (W, sunlight)</td>
+                    <td><input type="number" value="12" /></td>
+                    <td><input type="number" value="6" /></td>
+                    <td><input type="number" value="12" /></td>
+                    <td><input type="number" value="4" /></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="info small">
+              Solar generation is zero in eclipse. Pointing does not
+              automatically change generation.
+            </div>
+          </div>
+          <div class="panel">
+            <h2>Data queues</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Queue</th>
+                  <th>Initial contents</th>
+                  <th>Destination</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>raw</td>
+                  <td>0 bytes</td>
+                  <td>Processor</td>
+                </tr>
+                <tr>
+                  <td>processed</td>
+                  <td>0 bytes</td>
+                  <td>Radio</td>
+                </tr>
+              </tbody>
+            </table>
+            <p class="small muted">
+              Both queues use the same physical storage. Processing output/input
+              ratio:
+              <input
+                type="number"
+                value="0.25"
+                step="0.05"
+                style="width: 75px"
+              />.
+            </p>
+          </div>
+          <div class="panel">
+            <h2>Parameter details</h2>
+            <div id="detailText" class="small">
+              Click a Details button in the Components table to inspect an
+              example field.
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <main id="control" class="page">
+      <div class="columns">
+        <div>
+          <div class="panel">
+            <h2>Controller</h2>
+            <p>
+              Select one control method. Other editors retain their contents,
+              but only the selected one is active.
+            </p>
+            <div class="row" style="margin-bottom: 14px">
+              <label class="radio-label"
+                ><input type="radio" name="controller" value="rules" checked />
+                Visual rules</label
+              ><label class="radio-label"
+                ><input type="radio" name="controller" value="schedule" />
+                Schedule</label
+              ><label class="radio-label"
+                ><input type="radio" name="controller" value="python" /> Python
+                script</label
+              >
+            </div>
+            <div id="rulesEditor" class="controller-editor">
+              <div class="panel-head">
+                <h3>Conditional rules</h3>
+                <button data-action="add-rule">Add rule</button>
+              </div>
+              <p class="small muted">
+                First matching rule wins, evaluated from top to bottom.
+                Drag-and-drop is not implemented in this mockup.
+              </p>
+              <div class="rules" id="rulesList">
+                <div class="rule">
+                  <div class="rule-title">1. Low battery</div>
+                  <span class="fake-block">IF battery % &lt; 20</span
+                  ><span class="fake-block">THEN mode A — Idle</span
+                  ><button class="moveDown" title="Move down">↓</button>
+                </div>
+                <div class="rule">
+                  <div class="rule-title">2. Ground station contact</div>
+                  <span class="fake-block"
+                    >IF station visible AND processed data &gt; 0</span
+                  ><span class="fake-block">THEN mode D — Downlink</span
+                  ><button class="moveDown" title="Move down">↓</button>
+                </div>
+                <div class="rule">
+                  <div class="rule-title">3. Process in eclipse</div>
+                  <span class="fake-block">IF eclipse AND raw data &gt; 0</span
+                  ><span class="fake-block">THEN mode C — Processing</span
+                  ><button class="moveDown" title="Move down">↓</button>
+                </div>
+                <div class="rule">
+                  <div class="rule-title">4. Imaging opportunity</div>
+                  <span class="fake-block"
+                    >IF sunlight AND battery % &gt; 40 AND storage % &lt;
+                    80</span
+                  ><span class="fake-block">THEN mode B — Imaging</span
+                  ><button class="moveDown" title="Move down">↓</button>
+                </div>
+              </div>
+              <div class="info">
+                <strong>Fallback:</strong>
+                <select>
+                  <option>A — Idle</option>
+                  <option>B — Imaging</option>
+                  <option>C — Processing</option>
+                  <option>D — Downlink</option>
+                </select>
+              </div>
+            </div>
+            <div id="scheduleEditor" class="controller-editor hidden">
+              <h3>Mode schedule</h3>
+              <table id="scheduleTable">
+                <thead>
+                  <tr>
+                    <th>Start (elapsed h)</th>
+                    <th>End (elapsed h)</th>
+                    <th>Mode</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><input type="number" value="0" /></td>
+                    <td><input type="number" value="2" /></td>
+                    <td>
+                      <select>
+                        <option>A — Idle</option>
+                        <option>B — Imaging</option>
+                        <option>C — Processing</option>
+                        <option>D — Downlink</option>
+                      </select>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><input type="number" value="2" /></td>
+                    <td><input type="number" value="4" /></td>
+                    <td>
+                      <select>
+                        <option>B — Imaging</option>
+                        <option>A — Idle</option>
+                        <option>C — Processing</option>
+                        <option>D — Downlink</option>
+                      </select>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="row" style="margin-top: 12px">
+                <button data-action="add-schedule">Add interval</button
+                ><label
+                  >Fallback
+                  <select>
+                    <option>A — Idle</option>
+                    <option>B — Imaging</option>
+                  </select></label
+                >
+              </div>
+            </div>
+            <div id="pythonEditor" class="controller-editor hidden">
+              <h3>Local Python policy (example only)</h3>
+              <textarea spellcheck="false">
+def decide_actions(status):
+    if status.battery_percent < 20:
+        return Actions(mode_id="a")
+    if status.ground_station_visible and status.downlink_queue_bytes > 0:
+        return Actions(mode_id="d", pointing="ground_station")
+    if status.in_eclipse and status.queue_bytes.get("raw", 0) > 0:
+        return Actions(mode_id="c")
+    return Actions(mode_id="b")</textarea
+              >
+              <p class="small muted">
+                Display-only text; scripts are never executed.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="panel">
+            <h2>How control decisions work</h2>
+            <ol>
+              <li>Read battery, storage, sunlight and station status.</li>
+              <li>Evaluate the selected schedule, rules or Python policy.</li>
+              <li>Request a satellite mode and optional actions.</li>
+              <li>
+                The real simulator would enforce physical energy and storage
+                limits.
+              </li>
+            </ol>
+            <div class="callout">
+              Prototype behavior: changing rules does not change the displayed
+              results. Start / Pause / Stop demonstrate UI states, not actual
+              calculations.
+            </div>
+          </div>
+          <div class="panel">
+            <h2>Example status snapshot</h2>
+            <table>
+              <tbody>
+                <tr>
+                  <th>Battery</th>
+                  <td>80%</td>
+                </tr>
+                <tr>
+                  <th>Storage used</th>
+                  <td>32%</td>
+                </tr>
+                <tr>
+                  <th>Sunlight</th>
+                  <td>Yes</td>
+                </tr>
+                <tr>
+                  <th>Ground station visible</th>
+                  <td>No</td>
+                </tr>
+                <tr>
+                  <th>Current mode</th>
+                  <td>B — Imaging</td>
+                </tr>
+              </tbody>
+            </table>
+            <p><strong>Illustrative rule outcome:</strong> B — Imaging</p>
+            <button data-action="validate">
+              Validate configuration (demo)
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <main id="results" class="page">
+      <div class="panel">
+        <div class="panel-head">
+          <h2>Simulation outputs</h2>
+          <div class="row">
+            <label
+              >Run
+              <select id="runSelect">
+                <option>Demo run 001 — Example</option>
+                <option>Demo run 002 — Alternate battery</option>
+              </select></label
+            ><label
+              >Time range
+              <select id="rangeSelect">
+                <option>Full duration</option>
+                <option>First 24 hours</option>
+                <option>First 7 days</option>
+              </select></label
+            >
+          </div>
+        </div>
+        <div class="subtabs" data-group="results">
+          <button class="subtab active" data-section="plots">Plots</button
+          ><button class="subtab" data-section="events">Events</button
+          ><button class="subtab" data-section="runs">Runs & comparison</button>
+        </div>
+        <div class="section active" id="plots">
+          <div class="callout">
+            Illustrative data only — these plots are pre-generated mock values
+            and are not based on the edited configuration.
+          </div>
+          <div class="metric-grid">
+            <div class="metric">
+              <span class="small muted">Battery (end)</span>
+              <div class="value">63%</div>
+            </div>
+            <div class="metric">
+              <span class="small muted">Storage used (end)</span>
+              <div class="value">72%</div>
+            </div>
+            <div class="metric">
+              <span class="small muted">Data downlinked</span>
+              <div class="value">2.4 GB</div>
+            </div>
+            <div class="metric">
+              <span class="small muted">Data rejected</span>
+              <div class="value">0.3 GB</div>
+            </div>
+          </div>
+          <div class="columns">
+            <div class="panel">
+              <h3>Battery level (%)</h3>
+              <canvas class="chart" id="batteryChart"></canvas>
+              <div class="chart-label">
+                <span>Start</span><span>Elapsed time</span><span>End</span>
+              </div>
+              <label
+                ><input type="checkbox" checked data-plot="batteryChart" />
+                Battery energy</label
+              >
+            </div>
+            <div class="panel">
+              <h3>Generated / requested / served power (W)</h3>
+              <canvas class="chart" id="powerChart"></canvas>
+              <div class="chart-label">
+                <span>Start</span><span>Elapsed time</span><span>End</span>
+              </div>
+              <span class="small muted"
+                >Blue: generated · Gray: requested · Black: served</span
+              >
+            </div>
+          </div>
+          <div class="columns">
+            <div class="panel">
+              <h3>Raw / processed / total storage (MB)</h3>
+              <canvas class="chart" id="storageChart"></canvas>
+              <div class="chart-label">
+                <span>Start</span><span>Elapsed time</span><span>End</span>
+              </div>
+              <span class="small muted"
+                >Blue: raw · Gray: processed · Black: total</span
+              >
+            </div>
+            <div class="panel">
+              <h3>Cumulative data (GB)</h3>
+              <canvas class="chart" id="dataChart"></canvas>
+              <div class="chart-label">
+                <span>Start</span><span>Elapsed time</span><span>End</span>
+              </div>
+              <span class="small muted"
+                >Generated · Processed · Downlinked · Lost</span
+              >
+            </div>
+          </div>
+          <div class="panel">
+            <h3>Satellite mode timeline</h3>
+            <canvas class="chart" id="modeChart" style="height: 110px"></canvas>
+            <div class="chart-label">
+              <span>Start</span
+              ><span>A: Idle / B: Imaging / C: Processing / D: Downlink</span
+              ><span>End</span>
+            </div>
+          </div>
+        </div>
+        <div class="section" id="events">
+          <div class="row" style="margin-bottom: 12px">
+            <label
+              >Filter
+              <select id="eventFilter">
+                <option value="all">All event types</option>
+                <option value="Mode change">Mode change</option>
+                <option value="Constraint">Constraint</option>
+                <option value="Data loss">Data loss</option>
+              </select></label
+            ><label
+              ><input type="checkbox" id="onlyWarnings" /> Warnings only</label
+            >
+          </div>
+          <div class="scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>Simulated time</th>
+                  <th>Type</th>
+                  <th>Details</th>
+                </tr>
+              </thead>
+              <tbody id="eventBody">
+                <tr data-type="Mode change">
+                  <td>Day 1 00:18</td>
+                  <td>Mode change</td>
+                  <td>A → B (sunlight)</td>
+                </tr>
+                <tr data-type="Mode change">
+                  <td>Day 1 00:54</td>
+                  <td>Mode change</td>
+                  <td>B → C (eclipse)</td>
+                </tr>
+                <tr data-type="Constraint">
+                  <td>Day 4 08:12</td>
+                  <td>Constraint</td>
+                  <td>Battery below configured 20% rule threshold</td>
+                </tr>
+                <tr data-type="Data loss">
+                  <td>Day 9 14:42</td>
+                  <td>Data loss</td>
+                  <td>Raw queue full; incoming data rejected</td>
+                </tr>
+                <tr data-type="Mode change">
+                  <td>Day 10 03:01</td>
+                  <td>Mode change</td>
+                  <td>C → D (station contact)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="small muted">All events are fictional examples.</p>
+        </div>
+        <div class="section" id="runs">
+          <h3>Saved runs (mock)</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Compare</th>
+                <th>Run</th>
+                <th>Lifecycle</th>
+                <th>Duration</th>
+                <th>Battery at end</th>
+                <th>Storage at end</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><input type="checkbox" checked /></td>
+                <td>Demo run 001 — Example</td>
+                <td>Completed</td>
+                <td>30 days</td>
+                <td>63%</td>
+                <td>72%</td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" checked /></td>
+                <td>Demo run 002 — Alternate battery</td>
+                <td>Completed</td>
+                <td>30 days</td>
+                <td>74%</td>
+                <td>68%</td>
+              </tr>
+            </tbody>
+          </table>
+          <p>
+            <button data-action="compare">Compare selected runs</button>
+            <button data-action="snapshot">View input snapshot</button>
+          </p>
+          <div id="comparison" class="info hidden">
+            Example comparison: Run 002 ends with 11 percentage points more
+            battery charge. These figures are made up for UI demonstration.
+          </div>
+        </div>
+      </div>
+    </main>
+    <div class="status">
+      <span id="statusNote">Mockup only — no simulation engine</span>
+    </div>
+    <script>
+      (() => {
+        const $ = (s) => document.querySelector(s),
+          $$ = (s) => [...document.querySelectorAll(s)];
+        let state = "Created",
+          progress = 0,
+          timer = null,
+          changed = false;
+        const notify = (msg) => {
+          $("#statusNote").textContent = msg;
+        };
+        function switchPage(id) {
+          $$(".browser-tab").forEach((b) => {
+            let yes = b.dataset.page === id;
+            b.classList.toggle("active", yes);
+            b.setAttribute("aria-selected", yes);
+          });
+          $$(".page").forEach((p) => p.classList.toggle("active", p.id === id));
+          if (id === "results") requestAnimationFrame(drawCharts);
+        }
+        $$(".browser-tab").forEach((b) =>
+          b.addEventListener("click", () => switchPage(b.dataset.page)),
+        );
+        $$(".subtabs").forEach((group) =>
+          group.querySelectorAll(".subtab").forEach((b) =>
+            b.addEventListener("click", () => {
+              group
+                .querySelectorAll(".subtab")
+                .forEach((x) => x.classList.toggle("active", x === b));
+              let area = group.closest(".panel");
+              area
+                .querySelectorAll(".section")
+                .forEach((s) =>
+                  s.classList.toggle("active", s.id === b.dataset.section),
+                );
+              if (b.dataset.section === "plots")
+                requestAnimationFrame(drawCharts);
+            }),
+          ),
+        );
+        function update() {
+          $("#lifecycle").textContent = "State: " + state;
+          $("#progress").textContent = "Progress: " + progress + "%";
+          $("#elapsed").textContent =
+            "Simulated time: Day " +
+            Math.floor(progress * 0.3) +
+            ", " +
+            String(Math.floor(((progress * 0.3) % 1) * 24)).padStart(2, "0") +
+            ":00";
+          $("#startBtn").disabled = state === "Running" || state === "Paused";
+          $("#pauseBtn").disabled = !["Running", "Paused"].includes(state);
+          $("#pauseBtn").textContent = state === "Paused" ? "Resume" : "Pause";
+          $("#stopBtn").disabled = !["Running", "Paused"].includes(state);
+        }
+        function stopTimer() {
+          if (timer) {
+            clearInterval(timer);
+            timer = null;
+          }
+        }
+        function start() {
+          stopTimer();
+          state = "Running";
+          progress = 0;
+          notify("Demonstrating run progress — not computing any physics");
+          tick();
+        }
+        function tick() {
+          update();
+          timer = setInterval(() => {
+            if (state !== "Running") return;
+            progress = Math.min(100, progress + 2);
+            update();
+            if (progress >= 100) {
+              stopTimer();
+              state = "Completed";
+              update();
+              notify("Demo run complete. Results are illustrative.");
+              switchPage("results");
+            }
+          }, 120);
+        }
+        const actions = {
+          start: start,
+          restart: start,
+          pause: () => {
+            if (state === "Running") {
+              stopTimer();
+              state = "Paused";
+              notify("Demonstration paused");
+            } else if (state === "Paused") {
+              state = "Running";
+              tick();
+              notify("Demonstration resumed");
+            }
+            update();
+          },
+          stop: () => {
+            stopTimer();
+            state = "Cancelled";
+            update();
+            notify("Demo run cancelled; illustrative results remain available");
+          },
+          open: () => {
+            location.reload();
+          },
+          new: () => {
+            if (confirm("Clear the current mock configuration?")) {
+              location.reload();
+            }
+          },
+          save: () => {
+            let data = {
+              project: $("#projectName").value,
+              prototype: true,
+              components: $$("#componentTable tbody tr").map((r) => ({
+                name: r.cells[0].textContent,
+                value: r.querySelector("input")?.value,
+              })),
+              note: "Mockup values only, not an EverlongSTK project schema",
+            };
+            let a = document.createElement("a");
+            a.href = URL.createObjectURL(
+              new Blob([JSON.stringify(data, null, 2)], {
+                type: "application/json",
+              }),
+            );
+            a.download = "everlongstk-mock-project.json";
+            a.click();
+            setTimeout(() => URL.revokeObjectURL(a.href), 500);
+            notify("Saved a mock JSON summary (not a simulator-ready project)");
+          },
+          export: () => {
+            let csv =
+              "day,battery_percent,storage_percent\n0,80,0\n5,72,25\n10,69,44\n20,66,62\n30,63,72\n";
+            let a = document.createElement("a");
+            a.href = URL.createObjectURL(new Blob([csv], { type: "text/csv" }));
+            a.download = "everlongstk-demo-results.csv";
+            a.click();
+            setTimeout(() => URL.revokeObjectURL(a.href), 500);
+          },
+          "add-component": () => {
+            let name = prompt("Component name");
+            if (!name) return;
+            let tr = document.createElement("tr");
+            tr.innerHTML =
+              '<td></td><td>Load</td><td><input type="number" value="0"></td><td>W</td><td><button class="details">Details</button></td>';
+            tr.cells[0].textContent = name;
+            $("#componentTable tbody").append(tr);
+          },
+          "add-mode": () =>
+            notify(
+              "Extra modes would appear in the mode editor; four example columns are shown in this mockup.",
+            ),
+          "add-station": () =>
+            notify(
+              "Station addition is represented by the existing editable example station.",
+            ),
+          "add-rule": () => {
+            let el = document.createElement("div");
+            el.className = "rule";
+            el.innerHTML =
+              '<div class="rule-title">New rule</div><span class="fake-block">IF <select><option>battery %</option><option>storage %</option><option>sunlight</option></select> <select><option>&lt;</option><option>&gt;</option><option>=</option></select> <input type="number" value="50" style="width:70px"></span><span class="fake-block">THEN <select><option>mode A</option><option>mode B</option><option>mode C</option><option>mode D</option></select></span><button class="moveDown">↓</button>';
+            $("#rulesList").append(el);
+            renumber();
+          },
+          "add-schedule": () => {
+            let tr = document.createElement("tr");
+            tr.innerHTML =
+              '<td><input type="number" value="4"></td><td><input type="number" value="6"></td><td><select><option>C — Processing</option><option>A — Idle</option><option>B — Imaging</option><option>D — Downlink</option></select></td>';
+            $("#scheduleTable tbody").append(tr);
+          },
+          validate: () =>
+            notify(
+              "Demo validation: example configuration shown (no actual validation performed).",
+            ),
+          compare: () => $("#comparison").classList.toggle("hidden"),
+          snapshot: () =>
+            alert(
+              "Run snapshot (illustrative): Generic CubeSat, 550 km circular orbit, 40 Wh battery, 1 GB storage, 20-second step.",
+            ),
+        };
+        document.addEventListener("click", (e) => {
+          let action = e.target.closest("[data-action]");
+          if (action && actions[action.dataset.action])
+            actions[action.dataset.action]();
+          if (e.target.classList.contains("details")) {
+            let tr = e.target.closest("tr");
+            $("#detailText").innerHTML =
+              "<strong>" +
+              tr.cells[0].textContent +
+              "</strong><p>Certainty: guesstimate<br>Source: none<br>Lower / upper bounds: not specified<br>Default applied: no</p><p>Illustrative input. Replace with measured or sourced values in a real project.</p>";
+          }
+          if (e.target.classList.contains("moveDown")) {
+            let r = e.target.closest(".rule");
+            if (r.nextElementSibling)
+              r.parentElement.insertBefore(r.nextElementSibling, r);
+            renumber();
+          }
+        });
+        function renumber() {
+          $$("#rulesList .rule").forEach((r, i) => {
+            let title = r.querySelector(".rule-title");
+            title.textContent =
+              i + 1 + ". " + title.textContent.replace(/^\d+\.\s*/, "");
+          });
+        }
+        $$('input[name="controller"]').forEach((r) =>
+          r.addEventListener("change", () => {
+            $$(".controller-editor").forEach((x) => x.classList.add("hidden"));
+            $("#" + r.value + "Editor").classList.remove("hidden");
+          }),
+        );
+        document.addEventListener("input", (e) => {
+          if (
+            e.target.matches("input,textarea,select") &&
+            !e.target.matches(
+              "#eventFilter,#rangeSelect,#runSelect,#onlyWarnings",
+            )
+          ) {
+            changed = true;
+            $("#edited").textContent = "Unsaved edits (mock)";
+          }
+        });
+        function filterEvents() {
+          let f = $("#eventFilter").value,
+            w = $("#onlyWarnings").checked;
+          $$("#eventBody tr").forEach((r) =>
+            r.classList.toggle(
+              "hidden",
+              (f !== "all" && r.dataset.type !== f) ||
+                (w && r.dataset.type === "Mode change"),
+            ),
+          );
+        }
+        $("#eventFilter").addEventListener("change", filterEvents);
+        $("#onlyWarnings").addEventListener("change", filterEvents);
+        $("#rangeSelect").addEventListener("change", drawCharts);
+        $("#runSelect").addEventListener("change", drawCharts);
+        function draw(canvasId, series, maxY = 100) {
+          let c = $("#" + canvasId);
+          if (!c) return;
+          let rect = c.getBoundingClientRect();
+          if (rect.width < 20) return;
+          let dpr = devicePixelRatio || 1;
+          c.width = Math.round(rect.width * dpr);
+          c.height = Math.round(rect.height * dpr);
+          let g = c.getContext("2d");
+          g.scale(dpr, dpr);
+          let w = rect.width,
+            h = rect.height,
+            left = 35,
+            right = 12,
+            top = 12,
+            bottom = 26;
+          g.clearRect(0, 0, w, h);
+          g.strokeStyle = "#ddd";
+          g.lineWidth = 1;
+          g.font = "11px Arial";
+          g.fillStyle = "#666";
+          for (let i = 0; i <= 4; i++) {
+            let y = top + ((h - top - bottom) * i) / 4;
+            g.beginPath();
+            g.moveTo(left, y);
+            g.lineTo(w - right, y);
+            g.stroke();
+            g.fillText(String(Math.round((maxY * (4 - i)) / 4)), 3, y + 3);
+          }
+          g.fillText("0", left, h - 6);
+          g.fillText("Time →", w - 62, h - 6);
+          series.forEach(({ values, color }) => {
+            g.strokeStyle = color;
+            g.lineWidth = 1.8;
+            g.beginPath();
+            values.forEach((v, i) => {
+              let x = left + ((w - left - right) * i) / (values.length - 1),
+                y = top + (h - top - bottom) * (1 - v / maxY);
+              i ? g.lineTo(x, y) : g.moveTo(x, y);
+            });
+            g.stroke();
+          });
+        }
+        const seq = (n, f) => Array.from({ length: n }, (_, i) => f(i));
+        function drawCharts() {
+          let variant = $("#runSelect").selectedIndex,
+            range = $("#rangeSelect").selectedIndex,
+            n = range === 1 ? 30 : range === 2 ? 50 : 90;
+          draw("batteryChart", [
+            {
+              color: "#3c78a8",
+              values: seq(n, (i) =>
+                Math.max(
+                  8,
+                  80 -
+                    (17 * i) / (n - 1) +
+                    Math.sin(i * 0.54) * 9 +
+                    (variant ? 9 : 0),
+                ),
+              ),
+            },
+          ]);
+          draw(
+            "powerChart",
+            [
+              {
+                color: "#3c78a8",
+                values: seq(n, (i) => (i % 16 < 10 ? 12 : 0)),
+              },
+              {
+                color: "#888",
+                values: seq(n, (i) => 3 + 7 * (Math.sin(i * 0.33) > 0 ? 1 : 0)),
+              },
+              {
+                color: "#222",
+                values: seq(n, (i) => 3 + 6 * (Math.sin(i * 0.33) > 0 ? 1 : 0)),
+              },
+            ],
+            16,
+          );
+          let raw = seq(n, (i) =>
+              Math.min(460, i * 5.3 + 65 * Math.sin(i * 0.18)),
+            ),
+            processed = seq(n, (i) =>
+              Math.max(0, (230 * i) / n + 65 * Math.sin(i * 0.12)),
+            );
+          draw(
+            "storageChart",
+            [
+              { color: "#3c78a8", values: raw },
+              { color: "#888", values: processed },
+              { color: "#222", values: raw.map((v, i) => v + processed[i]) },
+            ],
+            1000,
+          );
+          draw(
+            "dataChart",
+            [
+              { color: "#3c78a8", values: seq(n, (i) => (i * 5) / n) },
+              { color: "#888", values: seq(n, (i) => (i * 3.8) / n) },
+              { color: "#222", values: seq(n, (i) => (i * 2.4) / n) },
+              { color: "#b0b0b0", values: seq(n, (i) => (i * 0.3) / n) },
+            ],
+            5,
+          );
+          let c = $("#modeChart"),
+            r = c.getBoundingClientRect();
+          if (r.width < 20) return;
+          let dpr = devicePixelRatio || 1;
+          c.width = r.width * dpr;
+          c.height = r.height * dpr;
+          let g = c.getContext("2d");
+          g.scale(dpr, dpr);
+          g.clearRect(0, 0, r.width, r.height);
+          let colors = ["#d4d4d4", "#a9c9df", "#b7c8b1", "#d3c3ad"],
+            modes = ["A", "B", "C", "D"];
+          for (let i = 0; i < 24; i++) {
+            let x = 34 + (i * (r.width - 45)) / 24,
+              w = (r.width - 45) / 24;
+            let mode = [0, 1, 1, 2, 0, 3, 1, 2][i % 8];
+            g.fillStyle = colors[mode];
+            g.fillRect(x, 24, w, 45);
+            g.strokeStyle = "#fff";
+            g.strokeRect(x, 24, w, 45);
+            if (w > 14) {
+              g.fillStyle = "#333";
+              g.font = "12px Arial";
+              g.fillText(modes[mode], x + 4, 51);
+            }
+          }
+        }
+        window.addEventListener("resize", drawCharts);
+        update();
+      })();
+    </script>
+  </body>
+</html>
