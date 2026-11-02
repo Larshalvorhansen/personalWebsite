@@ -143,7 +143,7 @@
         position: fixed;
         left: 10px;
         bottom: 10px;
-        width: calc(100% - 250px);
+        width: calc(100% - 20px);
         height: 350px;
         z-index: 100;
         background: #000;
@@ -152,8 +152,9 @@
         gap: 9px;
       }
       .pm-heading {
+        position: relative;
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         align-items: baseline;
         gap: 10px;
         font-size: 18px;
@@ -165,6 +166,9 @@
         font-weight: 500;
       }
       #pm-status {
+        position: absolute;
+        right: 0;
+        bottom: 0;
         font-size: 13px;
         text-align: right;
         color: #aaa;
@@ -182,9 +186,9 @@
         min-width: 0;
         overflow: hidden;
         padding: 11px 12px;
-        border: 1px solid #303030;
-        border-radius: 8px;
-        background: #0b0b0b;
+        border: 0;
+        border-radius: 0;
+        background: transparent;
         color: #fff;
         text-decoration: none;
         display: flex;
@@ -242,11 +246,6 @@
         height: 100%;
         background: #8eb8ab;
       }
-      .pm-note {
-        font-size: 11px;
-        color: #888;
-        margin: 0;
-      }
       .pm-empty {
         justify-content: center;
         color: #888;
@@ -281,10 +280,6 @@
         ><span id="pm-status" role="status">Henter markeder …</span>
       </div>
       <div id="pm-grid"></div>
-      <p class="pm-note">
-        Markedsprising · 3 geopolitikk + 3 økonomi · rangert etter hendelsens
-        døgnvolum
-      </p>
     </section>
     <div id="bottom-right-img-container">
       <!-- REPLACE 'din-bilde-fil.jpg' WITH YOUR ACTUAL IMAGE PATH
