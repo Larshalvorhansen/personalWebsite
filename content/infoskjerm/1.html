@@ -271,7 +271,10 @@
     </style>
   </head>
   <body>
-    <section id="polymarket-panel">
+    <section
+      id="polymarket-panel"
+      aria-label="Polymarket – geopolitikk og verdensøkonomi"
+    >
       <div class="pm-heading">
         <strong>Polymarket</strong
         ><span id="pm-status" role="status">Henter markeder …</span>
@@ -457,7 +460,7 @@
     </script>
     <script>
       /* Public, read-only Gamma API. No wallet, key, third-party proxy or trading. */
-      const PM_CACHE = "stue-polymarket-v1",
+      const PM_CACHE = "stue-polymarket-v2",
         PM_TTL = 5 * 60 * 1000;
       const PM_EXCLUDED =
         /\b(sports?|soccer|football|basketball|baseball|hockey|tennis|nba|nfl|mlb|nhl|ufc|fifa|esports?|celebrity|celebrities|entertainment|pop.culture|music|movies?|awards?|crypto|bitcoin|ethereum|token|nft)\b/i;
@@ -467,6 +470,8 @@
         /\b(ceasefire|war|inva[sd]|invasion|military|peace|blockade|sanctions?|nato|nuclear|missile|territor|hormuz|diplomatic|diplomacy|treaty|annex|recapture|strike|attack|conflict)\w*/i;
       const PM_ECON =
         /\b(inflation|interest rate|fed|fomc|ecb|central bank|bank of|rates?|gdp|recession|unemployment|employment|payroll|cpi|pce|tariff|trade|oil|crude|brent|gold|silver|commodit|treasur|bond|yield|debt|deficit|economic|economy|growth|exports?|imports?)\w*/i;
+      const PM_POLITICS =
+        /\b(election|electoral|midterm|senate|congress|parliament|house|party|government|referendum|coalition|cabinet|majority|primary|shutdown|bill|legislation|approval|politic|policy)\w*/i;
       function pmArray(value) {
         try {
           return Array.isArray(value) ? value : JSON.parse(value || "[]");
@@ -488,15 +493,16 @@
         const tags = (e.tags || [])
             .map((t) => t.slug || t.label || "")
             .join(" "),
-          title = e.title || "";
-        if (
-          !pmOpen(e) ||
-          PM_EXCLUDED.test(tags + " " + title) ||
-          PM_PERSON.test(title)
-        )
+          title = e.title || "",
+          text = title + " " + tags;
+        if (!pmOpen(e) || PM_EXCLUDED.test(text) || PM_PERSON.test(title))
           return null;
-        if (PM_ECON.test(title)) return "";
-        if (PM_GEO.test(title)) return "";
+        if (PM_GEO.test(title)) return "Geopolitikk";
+        if (PM_ECON.test(title)) return "Økonomi";
+        if (PM_POLITICS.test(title)) return "Politikk";
+        if (PM_GEO.test(tags)) return "Geopolitikk";
+        if (PM_ECON.test(tags)) return "Økonomi";
+        if (PM_POLITICS.test(tags)) return "Politikk";
         return null; // Strict topic allowlist: never fill empty slots with unrelated markets.
       }
       function pmCandidate(e) {
@@ -520,7 +526,7 @@
                 : Number(raw);
             return { m, p };
           })
-          .filter((x) => Number.isFinite(x.p) && x.p >= 0 && x.p <= 1)
+          .filter((x) => Number.isFinite(x.p) && x.p > 0.02 && x.p < 0.97)
           .sort(
             (a, b) =>
               (Number(b.m.volume24hr) || 0) - (Number(a.m.volume24hr) || 0),
@@ -542,10 +548,10 @@
           .map(pmCandidate)
           .filter(Boolean)
           .sort((a, b) => b.volume - a.volume);
-        // Keep each topic in its own row, highest event volume first.
-        return ["Geopolitikk", "Økonomi"].flatMap((c) => {
-          const a = candidates.filter((x) => x.category === c).slice(0, 3);
-          while (a.length < 3) a.push({ empty: true, category: c });
+        // Two cards from each topic, highest event volume first.
+        return ["Politikk", "Geopolitikk", "Økonomi"].flatMap((c) => {
+          const a = candidates.filter((x) => x.category === c).slice(0, 2);
+          while (a.length < 2) a.push({ empty: true, category: c });
           return a;
         });
       }
@@ -663,14 +669,19 @@
       async function pmFetchTopic(tag) {
         let events = [],
           cursor = null;
-        // Ordered scan: stop when three eligible events are found in this source.
+        // Ordered scan: stop when two eligible events are found in this source.
         for (let page = 0; page < 5; page++) {
           const j = await pmFetchPage(tag, cursor);
           events.push(...j.events);
-          const category = tag === "geopolitics" ? "Geopolitikk" : "Økonomi";
+          const category =
+            tag === "politics"
+              ? "Politikk"
+              : tag === "geopolitics"
+                ? "Geopolitikk"
+                : "Økonomi";
           if (
             events.map(pmCandidate).filter((c) => c && c.category === category)
-              .length >= 3 ||
+              .length >= 2 ||
             !j.next_cursor ||
             !j.events.length
           )
@@ -685,14 +696,18 @@
           if (Date.now() - pmSaved.time < PM_TTL) return;
         } else
           pmRender(
-            Array.from({ length: 6 }, (_, i) => ({
-              empty: true,
-              category: i < 3 ? "Geopolitikk" : "Økonomi",
-            })),
+            [
+              "Politikk",
+              "Politikk",
+              "Geopolitikk",
+              "Geopolitikk",
+              "Økonomi",
+              "Økonomi",
+            ].map((category) => ({ empty: true, category })),
           );
         try {
           const sources = await Promise.all(
-            ["geopolitics", "economy", "finance"].map(pmFetchTopic),
+            ["politics", "geopolitics", "economy", "finance"].map(pmFetchTopic),
           );
           const cards = pmSelect(sources.flat());
           if (!cards.some((c) => !c.empty)) throw Error("No matching markets");

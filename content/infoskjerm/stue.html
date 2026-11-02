@@ -1,0 +1,731 @@
+<!doctype html>
+<html lang="no">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="refresh" content="60" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stue-skjerm – Vertikal</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        width: 100vw;
+        height: 100vh;
+        background: #000;
+        color: #fff;
+        overflow: hidden;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      }
+      body {
+        position: absolute;
+        width: 100vh;
+        height: 100vw;
+        left: 0;
+        top: 100vh;
+        transform: rotate(-90deg);
+        transform-origin: 0 0;
+      }
+      .main-content {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+      }
+      .clocks-row {
+        display: flex;
+        width: 97%;
+        max-width: 1500px;
+        margin-top: 5px;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+      }
+      .digital-clock {
+        background: #000;
+        border-radius: 10px;
+        padding: 10px 10px;
+        min-width: 450px;
+        text-align: center;
+        box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
+      }
+      .digital-time {
+        font-size: 6.8rem;
+        font-weight: 300;
+        letter-spacing: 6px;
+        color: #fff;
+        line-height: 1;
+      }
+      .digital-date {
+        font-size: 3rem;
+        color: #fff;
+        margin-top: 10px;
+      }
+      .digital-week {
+        font-size: 3rem;
+        color: #fff;
+        margin-top: 3px;
+        font-weight: 500;
+      }
+      .clock-container {
+        position: relative;
+        width: 600px;
+        height: 400px;
+        flex-shrink: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .clock-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        border-radius: 10px;
+      }
+      .quote-section,
+      .section {
+        width: 92%;
+        margin-top: 50px;
+      }
+      h2 {
+        font-size: 3rem;
+        color: #fff;
+        margin: 5px 0;
+        font-weight: 400;
+        border-bottom: 1px solid #222;
+      }
+      #quote {
+        font-size: 2rem;
+        color: #fff;
+        text-align: center;
+      }
+      .bus {
+        display: flex;
+        font-size: 2rem;
+        padding: 5px 0;
+        border-bottom: 1px solid #111;
+        align-items: center;
+      }
+      .line {
+        font-weight: bold;
+        color: #fff;
+        width: 80px;
+        flex-shrink: 0;
+      }
+      .dest {
+        flex: 1;
+        color: #fff;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding-right: 10px;
+      }
+      .status {
+        width: 250px;
+        text-align: right;
+        font-size: 2rem;
+      }
+      .time {
+        color: #fff;
+        width: 150px;
+        text-align: right;
+        font-weight: bold;
+      }
+      .time.special {
+        color: #ff7777;
+        font-weight: bold;
+      }
+      /* Replacement for the sun graph. Its former neighbouring image is preserved. */
+      #polymarket-panel {
+        position: fixed;
+        left: 10px;
+        bottom: 10px;
+        width: calc(100% - 20px);
+        height: 350px;
+        z-index: 100;
+        background: #000;
+        display: flex;
+        flex-direction: column;
+        gap: 9px;
+      }
+      .pm-heading {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: baseline;
+        gap: 10px;
+        font-size: 18px;
+        color: #bbb;
+      }
+      .pm-heading strong {
+        font-size: 22px;
+        color: #fff;
+        font-weight: 500;
+      }
+      #pm-status {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        font-size: 13px;
+        text-align: right;
+        color: #aaa;
+      }
+      #pm-grid {
+        flex: 1;
+        min-height: 0;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-rows: repeat(2, minmax(0, 1fr));
+        gap: 9px;
+      }
+      .pm-card {
+        box-sizing: border-box;
+        min-width: 0;
+        overflow: hidden;
+        padding: 11px 12px;
+        border: 0;
+        border-radius: 0;
+        background: transparent;
+        color: #fff;
+        text-decoration: none;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+      }
+      .pm-category {
+        font-size: 11px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: #aaa;
+      }
+      .pm-question {
+        font-size: 17px;
+        line-height: 1.2;
+        margin: 0;
+        font-weight: 500;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+        overflow: hidden;
+      }
+      .pm-bottom {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 6px;
+        margin-top: auto;
+      }
+      .pm-price {
+        font-size: 31px;
+        line-height: 1;
+        font-variant-numeric: tabular-nums;
+        white-space: nowrap;
+      }
+      .pm-price small {
+        font-size: 13px;
+        color: #aaa;
+        margin-left: 5px;
+      }
+      .pm-volume {
+        font-size: 11px;
+        color: #999;
+        text-align: right;
+      }
+      .pm-bar {
+        height: 3px;
+        background: #242424;
+        border-radius: 3px;
+        overflow: hidden;
+        flex-shrink: 0;
+      }
+      .pm-bar span {
+        display: block;
+        height: 100%;
+        background: #8eb8ab;
+      }
+      .pm-empty {
+        justify-content: center;
+        color: #888;
+        font-size: 15px;
+      }
+      #bottom-right-img-container {
+        position: fixed;
+        right: 10px;
+        bottom: 10px;
+        height: 180px;
+        width: 220px;
+        z-index: 100;
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+      }
+      #bottom-right-img-container img {
+        max-height: 100%;
+        max-width: 100%;
+        object-fit: contain;
+        border-radius: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <section
+      id="polymarket-panel"
+      aria-label="Polymarket – geopolitikk og verdensøkonomi"
+    >
+      <div class="pm-heading">
+        <strong>Polymarket</strong
+        ><span id="pm-status" role="status">Henter markeder …</span>
+      </div>
+      <div id="pm-grid"></div>
+    </section>
+    <div id="bottom-right-img-container">
+      <!-- REPLACE 'din-bilde-fil.jpg' WITH YOUR ACTUAL IMAGE PATH
+ <img src="bildehihi.png" alt="Bilde" />-->
+    </div>
+    <div class="main-content">
+      <div class="clocks-row">
+        <div class="digital-clock">
+          <div class="digital-time" id="digitalTime">00:00</div>
+          <div class="digital-date" id="digitalDate"></div>
+          <div class="digital-week" id="digitalWeek"></div>
+          <div class="digital-week" id="countdown"></div>
+        </div>
+        <div class="clock-container">
+          <img id="hourImage" src="" alt="Timebilde" />
+        </div>
+      </div>
+      <div class="quote-section">
+        <h2></h2>
+        <div id="quote">Velkommen Lene!❤️<br /></div>
+      </div>
+      <div class="section">
+        <h2>Buss fra Jakob kirke</h2>
+        <div id="jakob-bus"></div>
+      </div>
+      <div class="section">
+        <h2>Trikk fra Nybrua</h2>
+        <div id="nybrua-trikk"></div>
+      </div>
+      <div style="margin-top: 2.5rem; width: 100%">
+        <img
+          src="https://www.yr.no/nb/innhold/1-72837/meteogram.svg?mode=dark"
+          width="100%"
+          style="
+            display: block;
+            max-height: 360px;
+            object-fit: contain;
+            filter: brightness(1.08) contrast(1.12) saturate(0.95);
+          "
+          alt="Været"
+        />
+      </div>
+    </div>
+    <script>
+      async function loadDailyQuote() {
+        const START_DATE = new Date("2026-08-02"),
+          QUOTES_FILE = "quotes.txt";
+        try {
+          const response = await fetch(QUOTES_FILE);
+          if (!response.ok) throw new Error("Could not load quotes file.");
+          const text = await response.text(),
+            quotes = text
+              .split("\n")
+              .map((line) => line.trim())
+              .filter(Boolean);
+          if (!quotes.length) return;
+          const today = new Date(),
+            startUtc = Date.UTC(
+              START_DATE.getFullYear(),
+              START_DATE.getMonth(),
+              START_DATE.getDate(),
+            ),
+            todayUtc = Date.UTC(
+              today.getFullYear(),
+              today.getMonth(),
+              today.getDate(),
+            );
+          let dayIndex = Math.floor(
+            (todayUtc - startUtc) / (1000 * 60 * 60 * 24),
+          );
+          if (dayIndex < 0) dayIndex = 0;
+          document.getElementById("quote").textContent =
+            quotes[dayIndex % quotes.length];
+        } catch (error) {
+          console.error(error);
+          document.getElementById("quote").textContent =
+            "Could not load quote today.";
+        }
+      }
+      loadDailyQuote();
+      function getISOWeek(date) {
+        const d = new Date(
+          Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()),
+        );
+        d.setUTCDate(d.getUTCDate() + 3 - ((d.getUTCDay() + 6) % 7));
+        const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+        return Math.ceil(((d - yearStart) / 86400000 + 1) / 7);
+      }
+      function updateDigitalClock() {
+        const now = new Date(),
+          targetDate = new Date("2027-07-24T13:00:00"),
+          diffInMs = targetDate - now,
+          days = Math.ceil(diffInMs / (1000 * 60 * 60 * 24));
+        let countdownText = `${days} dager igjen! ❤️`;
+        const timeStr = now.toLocaleTimeString("no-NO", {
+            hour: "2-digit",
+            minute: "2-digit",
+          }),
+          dateStr = now.toLocaleDateString("no-NO", {
+            weekday: "long",
+            day: "numeric",
+            month: "long",
+          });
+        document.getElementById("digitalTime").textContent = timeStr;
+        document.getElementById("digitalDate").textContent =
+          dateStr.charAt(0).toUpperCase() + dateStr.slice(1);
+        document.getElementById("digitalWeek").textContent =
+          `Uke ${getISOWeek(now)}`;
+        document.getElementById("countdown").textContent = countdownText;
+      }
+      setInterval(updateDigitalClock, 1000);
+      updateDigitalClock();
+      function updateHourImage() {
+        const now = new Date(),
+          hour = now.getHours(),
+          imgNumber = Math.abs((24 + 12 - hour) % 24 || 24),
+          imgElement = document.getElementById("hourImage"),
+          newSrc = `globetime/t${imgNumber}.jpeg`;
+        if (!imgElement.src.endsWith(newSrc)) imgElement.src = newSrc;
+      }
+      setInterval(updateHourImage, 60000);
+      updateHourImage();
+      const API_URL = "https://api.entur.io/journey-planner/v3/graphql",
+        JAKOB_KIRKE_ID = "NSR:StopPlace:6435",
+        NYBRUA_ID = "NSR:StopPlace:61989";
+      const query = `{ stopPlace(id: "STOP_ID") { estimatedCalls(numberOfDepartures: 4, timeRange: 3600) { expectedDepartureTime destinationDisplay { frontText } serviceJourney { journeyPattern { line { publicCode } } } } } }`;
+      async function fetchDepartures(stopId, elementId) {
+        const el = document.getElementById(elementId);
+        try {
+          const res = await fetch(API_URL, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "ET-Client-Name": "stue-skjerm-v2",
+            },
+            body: JSON.stringify({ query: query.replace("STOP_ID", stopId) }),
+          });
+          const json = await res.json(),
+            calls = json.data?.stopPlace?.estimatedCalls || [];
+          let html = "";
+          for (let call of calls) {
+            const time = new Date(call.expectedDepartureTime),
+              diffMin = Math.round((time - new Date()) / 60000);
+            let statusStr = "",
+              timeStr = "";
+            if (diffMin <= 0) timeStr = "nå...";
+            else if (diffMin === 1) {
+              statusStr = "Ikke prøv deg";
+              timeStr = "1 min";
+            } else if (diffMin === 2) {
+              statusStr = "Løp!";
+              timeStr = "2 min";
+            } else if (diffMin === 3) {
+              statusStr = "Goood tid";
+              timeStr = "3 min";
+            } else if (diffMin < 60) timeStr = `${diffMin} min`;
+            else
+              timeStr = time.toLocaleTimeString("no-NO", {
+                hour: "2-digit",
+                minute: "2-digit",
+              });
+            const line =
+                call.serviceJourney?.journeyPattern?.line?.publicCode || "–",
+              dest = call.destinationDisplay?.frontText || "Ukjent";
+            html += `<div class="bus"><span class="line">${line}</span><span class="dest">${dest}</span><span class="status">${statusStr}</span><span class="time ${diffMin === 2 ? "special" : ""}">${timeStr}</span></div>`;
+          }
+          el.innerHTML = html || `<p style="opacity:0.6">Ingen avganger</p>`;
+        } catch (e) {
+          el.innerHTML = `<p style="color:#f55">Feil ved lasting</p>`;
+        }
+      }
+      const refreshAll = () => {
+        fetchDepartures(JAKOB_KIRKE_ID, "jakob-bus");
+        fetchDepartures(NYBRUA_ID, "nybrua-trikk");
+      };
+      refreshAll();
+      setInterval(refreshAll, 15000);
+    </script>
+    <script>
+      /* Public, read-only Gamma API. No wallet, key, third-party proxy or trading. */
+      const PM_CACHE = "stue-polymarket-v2",
+        PM_TTL = 5 * 60 * 1000;
+      const PM_EXCLUDED =
+        /\b(sports?|soccer|football|basketball|baseball|hockey|tennis|nba|nfl|mlb|nhl|ufc|fifa|esports?|celebrity|celebrities|entertainment|pop.culture|music|movies?|awards?|crypto|bitcoin|ethereum|token|nft)\b/i;
+      const PM_PERSON =
+        /\b(who|prime minister|president|leadership|leader|resign|out as|trump|biden|harris|musk|putin|zelenskyy?|netanyahu|khamenei|xi jinping|modi|macron|starmer|taylor swift|sam altman)\b/i;
+      const PM_GEO =
+        /\b(ceasefire|war|inva[sd]|invasion|military|peace|blockade|sanctions?|nato|nuclear|missile|territor|hormuz|diplomatic|diplomacy|treaty|annex|recapture|strike|attack|conflict)\w*/i;
+      const PM_ECON =
+        /\b(inflation|interest rate|fed|fomc|ecb|central bank|bank of|rates?|gdp|recession|unemployment|employment|payroll|cpi|pce|tariff|trade|oil|crude|brent|gold|silver|commodit|treasur|bond|yield|debt|deficit|economic|economy|growth|exports?|imports?)\w*/i;
+      const PM_POLITICS =
+        /\b(election|electoral|midterm|senate|congress|parliament|house|party|government|referendum|coalition|cabinet|majority|primary|shutdown|bill|legislation|approval|politic|policy)\w*/i;
+      function pmArray(value) {
+        try {
+          return Array.isArray(value) ? value : JSON.parse(value || "[]");
+        } catch {
+          return [];
+        }
+      }
+      function pmOpen(x) {
+        return (
+          x.active !== false &&
+          !x.closed &&
+          !x.archived &&
+          (!x.endDate ||
+            !Number.isFinite(Date.parse(x.endDate)) ||
+            Date.parse(x.endDate) > Date.now())
+        );
+      }
+      function pmCategory(e) {
+        const tags = (e.tags || [])
+            .map((t) => t.slug || t.label || "")
+            .join(" "),
+          title = e.title || "",
+          text = title + " " + tags;
+        if (!pmOpen(e) || PM_EXCLUDED.test(text) || PM_PERSON.test(title))
+          return null;
+        if (PM_GEO.test(title)) return "Geopolitikk";
+        if (PM_ECON.test(title)) return "Økonomi";
+        if (PM_POLITICS.test(title)) return "Politikk";
+        if (PM_GEO.test(tags)) return "Geopolitikk";
+        if (PM_ECON.test(tags)) return "Økonomi";
+        if (PM_POLITICS.test(tags)) return "Politikk";
+        return null; // Strict topic allowlist: never fill empty slots with unrelated markets.
+      }
+      function pmCandidate(e) {
+        const category = pmCategory(e);
+        if (!category) return null;
+        const markets = (e.markets || [])
+          .filter(
+            (m) =>
+              pmOpen(m) &&
+              !PM_PERSON.test(m.question || "") &&
+              !PM_EXCLUDED.test(m.question || ""),
+          )
+          .map((m) => {
+            const outcomes = pmArray(m.outcomes),
+              prices = pmArray(m.outcomePrices),
+              i = outcomes.findIndex((o) => String(o).toLowerCase() === "yes"),
+              raw = prices[i];
+            const p =
+              raw === null || raw === undefined || raw === ""
+                ? NaN
+                : Number(raw);
+            return { m, p };
+          })
+          .filter((x) => Number.isFinite(x.p) && x.p > 0.02 && x.p < 0.97)
+          .sort(
+            (a, b) =>
+              (Number(b.m.volume24hr) || 0) - (Number(a.m.volume24hr) || 0),
+          );
+        if (!markets.length) return null;
+        const { m, p } = markets[0];
+        return {
+          id: String(e.id),
+          category,
+          title: m.question || e.title,
+          p,
+          volume: Number(e.volume24hr) || 0,
+          slug: e.slug,
+          endDate: m.endDate || e.endDate,
+        };
+      }
+      function pmSelect(events) {
+        const candidates = [...new Map(events.map((e) => [e.id, e])).values()]
+          .map(pmCandidate)
+          .filter(Boolean)
+          .sort((a, b) => b.volume - a.volume);
+        // Two cards from each topic, highest event volume first.
+        return ["Politikk", "Geopolitikk", "Økonomi"].flatMap((c) => {
+          const a = candidates.filter((x) => x.category === c).slice(0, 2);
+          while (a.length < 2) a.push({ empty: true, category: c });
+          return a;
+        });
+      }
+      function pmNode(tag, cls, text) {
+        const n = document.createElement(tag);
+        n.className = cls;
+        if (text !== undefined) n.textContent = text;
+        return n;
+      }
+      function pmRender(cards) {
+        const grid = document.getElementById("pm-grid");
+        grid.replaceChildren();
+        for (const card of cards) {
+          if (card.empty) {
+            const box = pmNode("div", "pm-card pm-empty");
+            box.append(
+              pmNode("span", "pm-category", card.category),
+              pmNode("span", "", "Ingen passende markeder"),
+            );
+            grid.append(box);
+            continue;
+          }
+          const a = pmNode("a", "pm-card");
+          a.href =
+            "https://polymarket.com/event/" + encodeURIComponent(card.slug);
+          a.target = "_blank";
+          a.rel = "noopener noreferrer";
+          a.title = card.title;
+          a.append(
+            pmNode("span", "pm-category", card.category),
+            pmNode("h3", "pm-question", card.title),
+          );
+          const bottom = pmNode("div", "pm-bottom"),
+            pct = card.p * 100;
+          const value =
+            pct > 0 && pct < 1
+              ? "<1"
+              : pct > 99 && pct < 100
+                ? ">99"
+                : String(Math.round(pct));
+          const price = pmNode("span", "pm-price", value + " %");
+          price.append(pmNode("small", "", "JA"));
+          bottom.append(
+            price,
+            pmNode(
+              "span",
+              "pm-volume",
+              new Intl.NumberFormat("nb-NO", {
+                notation: "compact",
+                maximumFractionDigits: 1,
+              }).format(card.volume) + " USD / 24 t",
+            ),
+          );
+          const bar = pmNode("div", "pm-bar"),
+            fill = document.createElement("span");
+          fill.style.width = pct + "%";
+          bar.append(fill);
+          a.append(bottom, bar);
+          grid.append(a);
+        }
+      }
+      let pmSaved = null;
+      try {
+        const cache = JSON.parse(localStorage.getItem(PM_CACHE));
+        if (
+          cache &&
+          Array.isArray(cache.cards) &&
+          Number.isFinite(cache.time) &&
+          cache.time <= Date.now()
+        )
+          pmSaved = cache;
+      } catch {}
+      function pmDisplay(saved, failed = false) {
+        const freshCards = saved.cards.map((c) =>
+          !c.empty && c.endDate && Date.parse(c.endDate) <= Date.now()
+            ? { empty: true, category: c.category }
+            : c,
+        );
+        pmRender(freshCards);
+        const stale = failed || Date.now() - saved.time > PM_TTL;
+        document.getElementById("pm-status").textContent =
+          (stale ? "Lagrede tall · " : "Hentet ") +
+          new Date(saved.time).toLocaleString("nb-NO", {
+            day: "2-digit",
+            month: "2-digit",
+            hour: "2-digit",
+            minute: "2-digit",
+          }) +
+          (failed ? " · oppdatering feilet" : "");
+      }
+      async function pmFetchPage(tag, cursor) {
+        const params = new URLSearchParams({
+          closed: "false",
+          limit: "100",
+          order: "volume24hr",
+          ascending: "false",
+          tag_slug: tag,
+        });
+        if (cursor) params.set("after_cursor", cursor);
+        const controller = new AbortController(),
+          timer = setTimeout(() => controller.abort(), 12000);
+        try {
+          const r = await fetch(
+            "https://gamma-api.polymarket.com/events/keyset?" + params,
+            { signal: controller.signal },
+          );
+          if (!r.ok) throw Error("Polymarket HTTP " + r.status);
+          const j = await r.json();
+          if (!Array.isArray(j.events)) throw Error("Unexpected API response");
+          return j;
+        } finally {
+          clearTimeout(timer);
+        }
+      }
+      async function pmFetchTopic(tag) {
+        let events = [],
+          cursor = null;
+        // Ordered scan: stop when two eligible events are found in this source.
+        for (let page = 0; page < 5; page++) {
+          const j = await pmFetchPage(tag, cursor);
+          events.push(...j.events);
+          const category =
+            tag === "politics"
+              ? "Politikk"
+              : tag === "geopolitics"
+                ? "Geopolitikk"
+                : "Økonomi";
+          if (
+            events.map(pmCandidate).filter((c) => c && c.category === category)
+              .length >= 2 ||
+            !j.next_cursor ||
+            !j.events.length
+          )
+            break;
+          cursor = j.next_cursor;
+        }
+        return events;
+      }
+      async function pmUpdate() {
+        if (pmSaved) {
+          pmDisplay(pmSaved);
+          if (Date.now() - pmSaved.time < PM_TTL) return;
+        } else
+          pmRender(
+            [
+              "Politikk",
+              "Politikk",
+              "Geopolitikk",
+              "Geopolitikk",
+              "Økonomi",
+              "Økonomi",
+            ].map((category) => ({ empty: true, category })),
+          );
+        try {
+          const sources = await Promise.all(
+            ["politics", "geopolitics", "economy", "finance"].map(pmFetchTopic),
+          );
+          const cards = pmSelect(sources.flat());
+          if (!cards.some((c) => !c.empty)) throw Error("No matching markets");
+          pmSaved = { cards, time: Date.now() };
+          try {
+            localStorage.setItem(PM_CACHE, JSON.stringify(pmSaved));
+          } catch {}
+          pmDisplay(pmSaved);
+        } catch (error) {
+          console.error("Polymarket:", error);
+          if (pmSaved) pmDisplay(pmSaved, true);
+          else
+            document.getElementById("pm-status").textContent =
+              "Kunne ikke hente Polymarket · prøver igjen";
+        }
+      }
+      pmUpdate();
+      setInterval(pmUpdate, 60000);
+    </script>
+  </body>
+</html>
