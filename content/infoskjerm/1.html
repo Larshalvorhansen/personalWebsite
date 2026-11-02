@@ -271,10 +271,7 @@
     </style>
   </head>
   <body>
-    <section
-      id="polymarket-panel"
-      aria-label="Polymarket – geopolitikk og verdensøkonomi"
-    >
+    <section id="polymarket-panel">
       <div class="pm-heading">
         <strong>Polymarket</strong
         ><span id="pm-status" role="status">Henter markeder …</span>
@@ -498,8 +495,8 @@
           PM_PERSON.test(title)
         )
           return null;
-        if (PM_ECON.test(title)) return "Økonomi";
-        if (PM_GEO.test(title)) return "Geopolitikk";
+        if (PM_ECON.test(title)) return "";
+        if (PM_GEO.test(title)) return "";
         return null; // Strict topic allowlist: never fill empty slots with unrelated markets.
       }
       function pmCandidate(e) {
