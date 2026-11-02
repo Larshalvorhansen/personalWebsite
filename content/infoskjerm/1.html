@@ -273,7 +273,6 @@
   <body>
     <section id="polymarket-panel">
       <div class="pm-heading">
-        <strong>Polymarket</strong
         ><span id="pm-status" role="status">Henter markeder …</span>
       </div>
       <div id="pm-grid"></div>
@@ -543,7 +542,7 @@
           .filter(Boolean)
           .sort((a, b) => b.volume - a.volume);
         // Keep each topic in its own row, highest event volume first.
-        return ["Geopolitikk", "Økonomi"].flatMap((c) => {
+        return ["", ""].flatMap((c) => {
           const a = candidates.filter((x) => x.category === c).slice(0, 3);
           while (a.length < 3) a.push({ empty: true, category: c });
           return a;
@@ -627,7 +626,7 @@
         pmRender(freshCards);
         const stale = failed || Date.now() - saved.time > PM_TTL;
         document.getElementById("pm-status").textContent =
-          (stale ? "Lagrede tall · " : "Hentet ") +
+          (stale ? "" : "Hentet ") +
           new Date(saved.time).toLocaleString("nb-NO", {
             day: "2-digit",
             month: "2-digit",
