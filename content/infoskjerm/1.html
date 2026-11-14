@@ -85,6 +85,74 @@
         object-fit: contain;
         border-radius: 10px;
       }
+      /* Kampkort: Norge–Wales (vises i stedet for globusbildet på kampdagen) */
+      .match-card {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        text-align: center;
+      }
+      .match-card[hidden] {
+        display: none;
+      }
+      .match-league {
+        font-size: 1.5rem;
+        color: #bbb;
+        letter-spacing: 1px;
+      }
+      .match-row {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+        width: 100%;
+        gap: 16px;
+      }
+      .match-team {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+        font-size: 2.2rem;
+      }
+      .match-flag {
+        font-size: 5rem;
+        line-height: 1;
+        height: 90px;
+        display: flex;
+        align-items: center;
+      }
+      .clock-container .match-flag img {
+        width: auto;
+        height: 90px;
+        border-radius: 0;
+      }
+      .match-score {
+        font-size: 7rem;
+        font-weight: 300;
+        line-height: 1;
+        white-space: nowrap;
+        font-variant-numeric: tabular-nums;
+      }
+      .match-status {
+        font-size: 2.2rem;
+        font-weight: 500;
+      }
+      .match-status.live {
+        color: #ff7777;
+      }
+      .match-scorers {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        width: 100%;
+        gap: 16px;
+        font-size: 1.3rem;
+        line-height: 1.3;
+        color: #ccc;
+      }
       .quote-section,
       .section {
         width: 92%;
@@ -294,6 +362,25 @@
         </div>
         <div class="clock-container">
           <img id="hourImage" src="" alt="Timebilde" />
+          <div class="match-card" id="matchCard" hidden>
+            <div class="match-league">Nations League · Ullevaal</div>
+            <div class="match-row">
+              <div class="match-team">
+                <span class="match-flag" id="mFlagHome"></span>
+                <span id="mNameHome">Norge</span>
+              </div>
+              <div class="match-score" id="mScore">–</div>
+              <div class="match-team">
+                <span class="match-flag" id="mFlagAway"></span>
+                <span id="mNameAway">Wales</span>
+              </div>
+            </div>
+            <div class="match-status" id="mStatus"></div>
+            <div class="match-scorers">
+              <div id="mGoalsHome"></div>
+              <div id="mGoalsAway"></div>
+            </div>
+          </div>
         </div>
       </div>
       <div class="quote-section">
@@ -456,6 +543,141 @@
       };
       refreshAll();
       setInterval(refreshAll, 15000);
+    </script>
+    <script>
+      /* Norge–Wales, Nations League 14.11.2026. Erstatter globusbildet kun på
+         kampdagen; dagen etter kommer globusen tilbake av seg selv.
+         Live-data: ESPNs åpne scoreboard-endepunkt (ingen nøkkel). */
+      (function () {
+        const KICKOFF = new Date("2026-11-14T17:00:00Z"), // 18:00 norsk tid
+          URL_ =
+            "https://site.api.espn.com/apis/site/v2/sports/soccer/uefa.nations/scoreboard?dates=20261114",
+          CACHE = "stue-kamp-nor-wal-20261114",
+          ymd = (d) =>
+            d.getFullYear() * 10000 + (d.getMonth() + 1) * 100 + d.getDate();
+        if (ymd(new Date()) !== ymd(KICKOFF)) return;
+        const $ = (id) => document.getElementById(id);
+        $("hourImage").hidden = true;
+        $("matchCard").hidden = false;
+        const FLAGS = {
+          Norge: "\u{1F1F3}\u{1F1F4}",
+          Wales: "\u{1F3F4}\u{E0067}\u{E0062}\u{E0077}\u{E006C}\u{E0073}\u{E007F}",
+        };
+        const kickoffStr = KICKOFF.toLocaleTimeString("no-NO", {
+          hour: "2-digit",
+          minute: "2-digit",
+        });
+        let data = null,
+          failed = false;
+        try {
+          data = JSON.parse(localStorage.getItem(CACHE));
+        } catch {}
+        function parse(json) {
+          const ev = (json.events || []).find(
+            (e) => /norway/i.test(e.name) && /wales/i.test(e.name),
+          );
+          if (!ev) return null;
+          const comp = ev.competitions[0],
+            status = comp.status || ev.status,
+            goals = (comp.details || []).filter((d) => d.scoringPlay),
+            side = (ha) => {
+              const c = comp.competitors.find((x) => x.homeAway === ha);
+              return {
+                name: /norway/i.test(c.team.displayName)
+                  ? "Norge"
+                  : /wales/i.test(c.team.displayName)
+                    ? "Wales"
+                    : c.team.displayName,
+                score: c.score,
+                goals: goals
+                  .filter((d) => d.team && d.team.id === c.team.id)
+                  .map((d) => {
+                    const a = (d.athletesInvolved || [])[0] || {};
+                    return (
+                      (a.shortName || a.displayName || "Mål") +
+                      " " +
+                      ((d.clock && d.clock.displayValue) || "") +
+                      (d.penaltyKick ? " (str.)" : "") +
+                      (d.ownGoal ? " (selvmål)" : "")
+                    );
+                  }),
+              };
+            };
+          return {
+            state: status.type.state, // pre | in | post
+            half: status.type.name === "STATUS_HALFTIME",
+            clock: status.displayClock || status.type.shortDetail || "",
+            home: side("home"),
+            away: side("away"),
+          };
+        }
+        function render() {
+          const now = new Date(),
+            home = (data && data.home) || { name: "Norge", goals: [] },
+            away = (data && data.away) || { name: "Wales", goals: [] },
+            state = data ? data.state : "pre",
+            st = $("mStatus");
+          $("mNameHome").textContent = home.name;
+          $("mNameAway").textContent = away.name;
+          $("mFlagHome").textContent = FLAGS[home.name] || "";
+          $("mFlagAway").textContent = FLAGS[away.name] || "";
+          $("mScore").textContent =
+            state === "pre" ? "–" : `${home.score} – ${away.score}`;
+          $("mGoalsHome").replaceChildren(
+            ...home.goals.map((g) => {
+              const d = document.createElement("div");
+              d.textContent = g;
+              return d;
+            }),
+          );
+          $("mGoalsAway").replaceChildren(
+            ...away.goals.map((g) => {
+              const d = document.createElement("div");
+              d.textContent = g;
+              return d;
+            }),
+          );
+          st.classList.toggle("live", state === "in");
+          if (state === "post") st.textContent = "Slutt";
+          else if (state === "in")
+            st.textContent = data.half ? "Pause" : data.clock;
+          else if (now < KICKOFF) {
+            const min = Math.ceil((KICKOFF - now) / 60000),
+              h = Math.floor(min / 60);
+            st.textContent =
+              `Avspark ${kickoffStr} · om ` +
+              (h ? `${h} t ${min % 60} min` : `${min} min`);
+          } else
+            st.textContent =
+              failed || !data
+                ? "Live-stilling utilgjengelig"
+                : "Venter på avspark …";
+        }
+        async function update() {
+          const controller = new AbortController(),
+            timer = setTimeout(() => controller.abort(), 10000);
+          try {
+            const r = await fetch(URL_, { signal: controller.signal });
+            if (!r.ok) throw Error("ESPN HTTP " + r.status);
+            const parsed = parse(await r.json());
+            if (!parsed) throw Error("Fant ikke kampen");
+            data = parsed;
+            failed = false;
+            try {
+              localStorage.setItem(CACHE, JSON.stringify(data));
+            } catch {}
+          } catch (e) {
+            console.error("Kamp:", e);
+            failed = true;
+          } finally {
+            clearTimeout(timer);
+          }
+          render();
+        }
+        render();
+        update();
+        setInterval(update, 20000);
+      })();
     </script>
     <script>
       /* Public, read-only Gamma API. No wallet, key, third-party proxy or trading. */
