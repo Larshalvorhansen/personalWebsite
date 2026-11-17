@@ -391,7 +391,65 @@
       }
       setInterval(updateDigitalClock, 1000);
       updateDigitalClock();
+      // If an image exists in ./funimage/, show it instead of the globe.
+      const FUN_EXT = /\.(jpe?g|png|gif|webp|avif|bmp|svg|heic|tiff?)$/i;
+      let funImageSrc = null;
+      function probeImage(src) {
+        return new Promise((resolve) => {
+          const img = new Image();
+          img.onload = () => resolve(true);
+          img.onerror = () => resolve(false);
+          img.src = src + "?t=" + Date.now();
+        });
+      }
+      async function findFunImage() {
+        // 1) Directory listing (works with most web servers, e.g. python -m http.server)
+        try {
+          const r = await fetch("funimage/", { cache: "no-store" });
+          if (r.ok) {
+            const doc = new DOMParser().parseFromString(
+              await r.text(),
+              "text/html",
+            );
+            for (const a of doc.querySelectorAll("a[href]")) {
+              const href = a.getAttribute("href");
+              if (FUN_EXT.test(href.split("?")[0])) {
+                const src = "funimage/" + href.split("/").pop();
+                if (await probeImage(src)) return src;
+              }
+            }
+          }
+        } catch {}
+        // 2) Fallback: common file names with any common extension
+        for (const name of ["funimage", "image", "bilde"])
+          for (const ext of [
+            "jpg",
+            "jpeg",
+            "png",
+            "gif",
+            "webp",
+            "avif",
+            "bmp",
+            "svg",
+            "JPG",
+            "JPEG",
+            "PNG",
+          ]) {
+            const src = `funimage/${name}.${ext}`;
+            if (await probeImage(src)) return src;
+          }
+        return null;
+      }
+      async function refreshFunImage() {
+        funImageSrc = await findFunImage();
+        updateHourImage();
+      }
       function updateHourImage() {
+        const imgEl = document.getElementById("hourImage");
+        if (funImageSrc) {
+          if (!imgEl.src.endsWith(funImageSrc)) imgEl.src = funImageSrc;
+          return;
+        }
         const now = new Date(),
           hour = now.getHours(),
           imgNumber = Math.abs((24 + 12 - hour) % 24 || 24),
@@ -401,6 +459,7 @@
       }
       setInterval(updateHourImage, 60000);
       updateHourImage();
+      refreshFunImage();
       const API_URL = "https://api.entur.io/journey-planner/v3/graphql",
         JAKOB_KIRKE_ID = "NSR:StopPlace:6435",
         NYBRUA_ID = "NSR:StopPlace:61989";
