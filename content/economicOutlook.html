@@ -9,18 +9,14 @@
       rel="stylesheet"
     />
     <script>
-      try {
-        const savedTheme = localStorage.getItem("eo-theme");
-        const prefersDark = window.matchMedia(
-          "(prefers-color-scheme: dark)",
-        ).matches;
-        document.documentElement.dataset.theme =
-          savedTheme === "dark" || (!savedTheme && prefersDark)
-            ? "dark"
-            : "light";
-      } catch (_) {
-        document.documentElement.dataset.theme = "light";
-      }
+      (function () {
+        var mq = window.matchMedia("(prefers-color-scheme: dark)");
+        function apply() {
+          document.documentElement.dataset.theme = mq.matches ? "dark" : "light";
+        }
+        apply();
+        mq.addEventListener("change", apply);
+      })();
     </script>
     <style>
       :root {
@@ -738,7 +734,7 @@
   <body>
     <div class="mobile-bar">
       <a href="#home" class="brand" aria-label="Economic Outlambdaook home"
-        ><img src="./eo/eo.webp" alt="Economic Outlook" class="brand-mini" /></a
+        ><img src="./eo/eo.webp" width="1920" height="226" alt="Economic Outlook" class="brand-mini" /></a
       ><button
         class="menu-toggle"
         id="menu-toggle"
@@ -751,7 +747,7 @@
     <div class="scrim" id="scrim"></div>
     <aside class="sidebar" id="sidebar" aria-label="Main navigation">
       <a href="#home" class="brand" aria-label="Economic Outlambdaook home"
-        ><img src="./eo/eo.webp" alt="Economic Outlook" class="brand-wordmark"
+        ><img src="./eo/eo.webp" width="1920" height="226" alt="Economic Outlook" class="brand-wordmark"
       /></a>
       <nav aria-label="Article navigation">
         <div class="navgroup">
@@ -771,18 +767,6 @@
         <a href="https://halvorhansen.no" target="_blank" rel="noopener"
           >← halvorhansen.no</a
         >
-        <button
-          type="button"
-          class="theme-toggle"
-          id="theme-toggle"
-          aria-label="Switch to dark mode"
-          aria-pressed="false"
-        >
-          <span id="theme-toggle-label">Dark mode</span>
-          <span class="theme-toggle-indicator" id="theme-toggle-state"
-            >Off</span
-          >
-        </button>
       </div>
     </aside>
     <div class="shell">
@@ -890,31 +874,7 @@
       </main>
     </div>
     <script>
-      const themeToggle = document.getElementById("theme-toggle");
-      function updateThemeToggle() {
-        const dark = document.documentElement.dataset.theme === "dark";
-        themeToggle.setAttribute("aria-pressed", String(dark));
-        themeToggle.setAttribute(
-          "aria-label",
-          dark ? "Switch to light mode" : "Switch to dark mode",
-        );
-        document.getElementById("theme-toggle-label").textContent = dark
-          ? "Light mode"
-          : "Dark mode";
-        document.getElementById("theme-toggle-state").textContent = dark
-          ? "On"
-          : "Off";
-      }
-      themeToggle.addEventListener("click", () => {
-        const dark = document.documentElement.dataset.theme !== "dark";
-        document.documentElement.dataset.theme = dark ? "dark" : "light";
-        try {
-          localStorage.setItem("eo-theme", dark ? "dark" : "light");
-        } catch (_) {}
-        updateThemeToggle();
-      });
-      updateThemeToggle();
-
+      
       const sidebar = document.getElementById("sidebar");
       const toggle = document.getElementById("menu-toggle");
       const scrim = document.getElementById("scrim");

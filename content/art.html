@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Halvor Hansen</title>
+    <title>Art – Halvor Hansen</title>
 
     <!-- Added Google Fonts for a modern look -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -30,9 +30,14 @@
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "Organization",
-        "url": "http://www.your-website.com",
-        "logo": "http://www.your-website.com/path/to/logo.png"
+        "@type": "Person",
+        "name": "Lars Halvor Hansen",
+        "url": "https://halvorhansen.no",
+        "sameAs": [
+          "https://github.com/larshalvorhansen",
+          "https://www.linkedin.com/in/larshalvorhansen/",
+          "https://x.com/lars_hansen1"
+        ]
       }
     </script>
 
@@ -43,7 +48,7 @@
         navigator.clipboard
           .writeText(email)
           .then(() => {
-            alert("Email copied to clipboard: " + email);
+            const b = document.activeElement; if (b && b.tagName === "BUTTON") { const t = b.textContent; b.textContent = "Copied ✓"; setTimeout(() => (b.textContent = t), 1800); }
           })
           .catch((err) => {
             console.error("Could not copy text: ", err);
@@ -56,43 +61,9 @@
         font-family: "Plus Jakarta Sans", sans-serif;
       }
 
-      @media (min-width: 768px) {
-        .sidebar {
-          width: auto;
-          max-width: 20%;
-          height: 100vh;
-          position: fixed;
-          top: 0;
-          left: 0;
-          z-index: 1;
-        }
+      
 
-        .main-content {
-          margin-left: 20%;
-          z-index: 1;
-        }
-      }
-
-      @media (max-width: 767px) {
-        .sidebar {
-          width: 100%;
-          max-width: none;
-          height: auto;
-          position: fixed;
-          top: 0;
-          left: 0;
-          display: flex;
-          flex-direction: row;
-          justify-content: space-around;
-          align-items: center;
-          padding: 0.75rem 1rem;
-          z-index: 50;
-        }
-
-        .main-content {
-          margin-top: 70px;
-        }
-      }
+      
 
       .gradient-text {
         background: linear-gradient(135deg, #002896, #0084ff, #77cfff);
@@ -120,155 +91,63 @@
         },
       ]);
     </script>
+      <meta name="color-scheme" content="light dark" />
+    <script>document.documentElement.classList.add("js");</script>
+    <link rel="stylesheet" href="hh-site.css" />
+    <script src="hh-site.js" defer></script>
   </head>
-  <thead class="sticky top-0 bg-white z-10 shadow-sm">
-    <tr>
-      <th class="p-3 text-left bg-white">Column 1</th>
-      <th class="p-3 text-left bg-white">Column 2</th>
-    </tr>
-  </thead>
   <body class="bg-gray-50 text-gray-800 antialiased">
-    <!-- Sidebar -->
-    <div
-      class="sidebar bg-black text-gray-300 p-6 shadow-2xl flex flex-col justify-start"
-    >
-      <a href="index.html" class="mb-2 md:mb-8 block">
-        <img
-          class="object-scale-down max-h-12 md:max-h-20 max-w-full drop-shadow-xl rounded-xl m-auto transform hover:scale-105 transition duration-300"
-          src="logo3art.png"
-          alt=""
-        />
-      </a>
-      <div class="flex-grow space-y-1">
-        <a
-          href="LambdaSim.html"
-          class="block p-2 md:px-4 md:py-3 rounded-lg transition-all duration-200 hover:bg-gray-900 hover:text-white md:w-full text-center md:text-left font-medium"
-          >Lambdasim</a
-        >
-        <a
-          href="art.html"
-          class="block p-2 md:px-4 md:py-3 rounded-lg transition-all duration-200 hover:bg-gray-900 hover:text-white md:w-full text-center md:text-left font-medium"
-          >Art</a
-        >
-        <a
-          href="Economicoutlook.html"
-          class="block p-2 md:px-4 md:py-3 rounded-lg transition-all duration-200 hover:bg-gray-900 hover:text-white md:w-full text-center md:text-left font-medium"
-          >Economic Outλook</a
-        >
-        <a
-          href="cv.html"
-          class="block p-2 md:px-4 md:py-3 rounded-lg transition-all duration-200 hover:bg-gray-900 hover:text-white md:w-full text-center md:text-left font-medium"
-          >CV</a
-        >
-        <a
-          href="index.html"
-          class="block p-2 md:px-4 md:py-3 rounded-lg transition-all duration-200 hover:bg-gray-900 hover:text-white md:w-full text-center md:text-left font-medium"
-          >About</a
-        >
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-nav" id="site-nav">
+      <div class="site-nav__bar">
+        <a href="index.html" class="site-nav__logo" aria-label="Halvor Hansen, home">
+          <img class="hh-ph" src="logo3art.png" width="400" height="400" alt="HH" decoding="async" />
+        </a>
+        <button type="button" class="site-nav__toggle" aria-expanded="false" aria-controls="site-menu" aria-label="Open menu">
+          <span class="burger" aria-hidden="true"><span></span><span></span><span></span></span>
+        </button>
       </div>
-
-      <!-- Social Icons -->
-      <div class="hidden md:flex items-center space-x-5 mt-auto pt-6 px-4">
-        <a
-          href="mailto:larshalvorhansen1@gmail.com"
-          target="_blank"
-          title="Send an email"
-          rel="noreferrer"
-          class="text-gray-400 hover:text-blue-400 transition-colors"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="h-6 w-6"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
-            />
-          </svg>
+      <div class="site-nav__menu" id="site-menu">
+        <nav aria-label="Main">
+        <ul class="site-nav__links">
+          <li><a href="LambdaSim.html">Lambdasim</a></li>
+          <li><a href="art.html" aria-current="page">Art</a></li>
+          <li><a href="economicOutlook.html">Economic Outλook</a></li>
+          <li><a href="CV.html">CV</a></li>
+          <li><a href="index.html">About</a></li>
+        </ul>
+        <a class="site-nav__minor" href="Blogg.html">Blog</a>
+        </nav>
+      <div class="site-nav__social">
+        <a href="mailto:larshalvorhansen1@gmail.com" title="Send an email" aria-label="Email">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
         </a>
-        <a
-          href="https://x.com/lars_hansen1"
-          target="_blank"
-          title="Add me on X"
-          rel="noreferrer"
-          class="text-gray-400 hover:text-blue-400 transition-colors"
-        >
-          <svg
-            class="w-5 h-5"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              d="M13.795 10.533 20.68 2h-3.073l-5.255 6.517L7.69 2H1l7.806 10.91L1.47 22h3.074l5.705-7.07L15.31 22H22l-8.205-11.467Zm-2.38 2.95L9.97 11.464 4.36 3.627h2.31l4.528 6.317 1.443 2.02 6.018 8.409h-2.31l-4.934-6.89Z"
-            />
-          </svg>
+        <a href="https://x.com/lars_hansen1" target="_blank" rel="noreferrer" title="X" aria-label="X">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true" style="width:1.1rem;height:1.1rem"><path d="M13.795 10.533 20.68 2h-3.073l-5.255 6.517L7.69 2H1l7.806 10.91L1.47 22h3.074l5.705-7.07L15.31 22H22l-8.205-11.467Zm-2.38 2.95L9.97 11.464 4.36 3.627h2.31l4.528 6.317 1.443 2.02 6.018 8.409h-2.31l-4.934-6.89Z"/></svg>
         </a>
-        <a
-          href="https://www.linkedin.com/in/larshalvorhansen/"
-          target="_blank"
-          title="Add me on Linked in"
-          rel="noreferrer"
-          class="text-gray-400 hover:text-blue-400 transition-colors"
-        >
-          <svg
-            class="w-6 h-6"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M12.51 8.796v1.697a3.738 3.738 0 0 1 3.288-1.684c3.455 0 4.202 2.16 4.202 4.97V19.5h-3.2v-5.072c0-1.21-.244-2.766-2.128-2.766-1.827 0-2.139 1.317-2.139 2.676V19.5h-3.19V8.796h3.168ZM7.2 6.106a1.61 1.61 0 0 1-.988 1.483 1.595 1.595 0 0 1-1.743-.348A1.607 1.607 0 0 1 5.6 4.5a1.601 1.601 0 0 1 1.6 1.606Z"
-              clip-rule="evenodd"
-            />
-            <path d="M7.2 8.809H4V19.5h3.2V8.809Z" />
-          </svg>
+        <a href="https://www.linkedin.com/in/larshalvorhansen/" target="_blank" rel="noreferrer" title="LinkedIn" aria-label="LinkedIn">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12.51 8.796v1.697a3.738 3.738 0 0 1 3.288-1.684c3.455 0 4.202 2.16 4.202 4.97V19.5h-3.2v-5.072c0-1.21-.244-2.766-2.128-2.766-1.827 0-2.139 1.317-2.139 2.676V19.5h-3.19V8.796h3.168ZM7.2 6.106a1.61 1.61 0 0 1-.988 1.483 1.595 1.595 0 0 1-1.743-.348A1.607 1.607 0 0 1 5.6 4.5a1.601 1.601 0 0 1 1.6 1.606Z" clip-rule="evenodd"/><path d="M7.2 8.809H4V19.5h3.2V8.809Z"/></svg>
         </a>
-        <a
-          href="https://github.com/larshalvorhansen"
-          target="_blank"
-          title="Go to Githbub"
-          rel="noreferrer"
-          class="text-gray-400 hover:text-blue-400 transition-colors"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 98 96"
-            class="h-6 w-6"
-          >
-            <path
-              fill="currentColor"
-              fill-rule="evenodd"
-              d="M48.854 0C21.839 0 0 22 0 49.217c0 21.756 13.993 40.172 33.405 46.69 2.427.49 3.316-1.059 3.316-2.362 0-1.141-.08-5.052-.08-9.127-13.59 2.934-16.42-5.867-16.42-5.867-2.184-5.704-5.42-7.17-5.42-7.17-4.448-3.015.324-3.015.324-3.015 4.934.326 7.523 5.052 7.523 5.052 4.367 7.496 11.404 5.378 14.235 4.074.404-3.178 1.699-5.378 3.074-6.6-10.839-1.141-22.243-5.378-22.243-24.283 0-5.378 1.94-9.778 5.014-13.2-.485-1.222-2.184-6.275.486-13.038 0 0 4.125-1.304 13.426 5.052a46.97 46.97 0 0 1 12.214-1.63c4.125 0 8.33.571 12.213 1.63 9.302-6.356 13.427-5.052 13.427-5.052 2.67 6.763.97 11.816.485 13.038 3.155 3.422 5.015 7.822 5.015 13.2 0 18.905-11.404 23.06-22.324 24.283 1.78 1.548 3.316 4.481 3.316 9.126 0 6.6-.08 11.897-.08 13.526 0 1.304.89 2.853 3.316 2.364 19.412-6.52 33.405-24.935 33.405-46.691C97.707 22 75.788 0 48.854 0z"
-              clip-rule="evenodd"
-            />
-          </svg>
+        <a href="https://github.com/larshalvorhansen" target="_blank" rel="noreferrer" title="GitHub" aria-label="GitHub">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 98 96" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M48.854 0C21.839 0 0 22 0 49.217c0 21.756 13.993 40.172 33.405 46.69 2.427.49 3.316-1.059 3.316-2.362 0-1.141-.08-5.052-.08-9.127-13.59 2.934-16.42-5.867-16.42-5.867-2.184-5.704-5.42-7.17-5.42-7.17-4.448-3.015.324-3.015.324-3.015 4.934.326 7.523 5.052 7.523 5.052 4.367 7.496 11.404 5.378 14.235 4.074.404-3.178 1.699-5.378 3.074-6.6-10.839-1.141-22.243-5.378-22.243-24.283 0-5.378 1.94-9.778 5.014-13.2-.485-1.222-2.184-6.275.486-13.038 0 0 4.125-1.304 13.426 5.052a46.97 46.97 0 0 1 12.214-1.63c4.125 0 8.33.571 12.213 1.63 9.302-6.356 13.427-5.052 13.427-5.052 2.67 6.763.97 11.816.485 13.038 3.155 3.422 5.015 7.822 5.015 13.2 0 18.905-11.404 23.06-22.324 24.283 1.78 1.548 3.316 4.481 3.316 9.126 0 6.6-.08 11.897-.08 13.526 0 1.304.89 2.853 3.316 2.364 19.412-6.52 33.405-24.935 33.405-46.691C97.707 22 75.788 0 48.854 0z" clip-rule="evenodd"/></svg>
         </a>
       </div>
-    </div>
-
-    <!-- Main Content -->
-    <div class="main-content bg-white p-4 md:px-8 max-w-full mx-auto">
+      </div>
+    </header>
+    <div class="site-main" id="main">
+    <div class="page-content p-4 md:px-8 max-w-4xl mx-auto">
       <br />
       <h1 class="text-2xl textcolor-blue font-bold mb-4">Art gallery</h1>
       <h2 class="text-xl text-gray-500 mb-10"></h2>
 
       <!-- Each post starts here -->
-      <div class="rounde<br><br>d-lg overflow-hidden shadow-md">
-        <img
+      <div class="rounded-lg overflow-hidden">
+        <img decoding="async" width="5155" height="2856"
           id="40"
           src="art/art44.png"
           loading="lazy"
           alt="Dinna her no!"
-          class="w-full h-auto object-cover"
+          class="hh-ph w-full h-auto object-cover"
         />
         <div class="px-4 py-2 text-gray-700">
           <h3 class="text-base font-bold">Respectral</h3>
@@ -279,12 +158,12 @@
           <p class="text-sm">September, 2026</p>
         </div>
         <br /><br />
-        <img
+        <img decoding="async" width="1080" height="1080"
           id="39"
           src="art/art43.png"
           loading="lazy"
           alt="Dinna her no!"
-          class="w-full h-auto object-cover"
+          class="hh-ph w-full h-auto object-cover"
         />
         <div class="px-4 py-2 text-gray-700">
           <h3 class="text-base font-bold">Paint</h3>
@@ -292,12 +171,12 @@
           <p class="text-sm">December, 2024</p>
         </div>
         <br /><br />
-        <img
+        <img decoding="async" width="5760" height="3954"
           id="38"
           src="art/art42.jpg"
           loading="lazy"
           alt="Dinna her no!"
-          class="w-full h-auto object-cover"
+          class="hh-ph w-full h-auto object-cover"
         />
         <div class="px-4 py-2 text-gray-700">
           <h3 class="text-base font-bold">Lambda🌻</h3>
@@ -305,12 +184,12 @@
           <p class="text-sm">November, 2024</p>
         </div>
         <br /><br />
-        <img
+        <img decoding="async" width="3843" height="2883"
           id="37"
           src="art/art41.jpg"
           loading="lazy"
           alt="Dinna her no!"
-          class="w-full h-auto object-cover"
+          class="hh-ph w-full h-auto object-cover"
         />
         <div class="px-4 py-2 text-gray-700">
           <h3 class="text-base font-bold">AMBIVALENT</h3>
@@ -318,12 +197,12 @@
           <p class="text-sm">November, 2024</p>
         </div>
         <br /><br />
-        <img
+        <img decoding="async" width="1586" height="768"
           id="36"
           src="art/art40.png"
           loading="lazy"
           alt="Dinna her no!"
-          class="w-full h-auto object-cover"
+          class="hh-ph w-full h-auto object-cover"
         />
         <div class="px-4 py-2 text-gray-700">
           <h3 class="text-base font-bold">Dinna her no!</h3>
@@ -334,12 +213,12 @@
           <p class="text-sm">October, 2024</p>
         </div>
         <br /><br />
-        <img
+        <img decoding="async" width="2518" height="1795"
           id="35"
           src="art/art0.jpg"
           loading="lazy"
           alt="Old's-New's"
-          class="w-full h-auto object-cover"
+          class="hh-ph w-full h-auto object-cover"
         />
         <div class="px-4 py-2 text-gray-700">
           <h3 class="text-base font-bold">Old's-New's</h3>
@@ -347,12 +226,12 @@
           <p class="text-sm">May, 2024</p>
         </div>
         <br /><br />
-        <img
+        <img decoding="async" width="720" height="720"
           id="34"
           src="art/art1.jpg"
           loading="lazy"
           alt="Future"
-          class="w-full h-auto object-cover"
+          class="hh-ph w-full h-auto object-cover"
         />
         <div class="px-4 py-2 text-gray-700">
           <h3 class="text-base font-bold">Future</h3>
@@ -360,12 +239,12 @@
           <p class="text-sm">April 25, 2024</p>
         </div>
         <br /><br />
-        <img
+        <img decoding="async" width="1080" height="566"
           id="33"
           src="art/art2.jpg"
           loading="lazy"
           alt="Grass"
-          class="w-full h-auto object-cover"
+          class="hh-ph w-full h-auto object-cover"
         />
         <div class="px-4 py-2 text-gray-700">
           <h3 class="text-base font-bold">Grass</h3>
@@ -379,12 +258,12 @@
 					<p class="text-sm">This was the best I could get out of Dall-e</p>
 					<p class="text-sm">December 19, 2023</p>
 </div><br><br>-->
-        <img
+        <img decoding="async" width="1080" height="757"
           id="31"
           src="art/art4.jpg"
           loading="lazy"
           alt="Ælvsjø sjø"
-          class="w-full h-auto object-cover"
+          class="hh-ph w-full h-auto object-cover"
         />
         <div class="px-4 py-2 text-gray-700">
           <h3 class="text-base font-bold">Sun River</h3>
@@ -392,12 +271,12 @@
           <p class="text-sm">December 6, 2023</p>
         </div>
         <br /><br />
-        <img
+        <img decoding="async" width="1080" height="757"
           id="30"
           src="art/art5.jpg"
           loading="lazy"
           alt="Tridno"
-          class="w-full h-auto object-cover"
+          class="hh-ph w-full h-auto object-cover"
         />
         <div class="px-4 py-2 text-gray-700">
           <h3 class="text-base font-bold">City</h3>
@@ -405,12 +284,12 @@
           <p class="text-sm">December 6, 2023</p>
         </div>
         <br /><br />
-        <img
+        <img decoding="async" width="1080" height="757"
           id="29"
           src="art/art6.jpg"
           loading="lazy"
           alt="Bakklandet"
-          class="w-full h-auto object-cover"
+          class="hh-ph w-full h-auto object-cover"
         />
         <div class="px-4 py-2 text-gray-700">
           <h3 class="text-base font-bold">Bakklandet</h3>
@@ -418,12 +297,12 @@
           <p class="text-sm">December 6, 2023</p>
         </div>
         <br /><br />
-        <img
+        <img decoding="async" width="1080" height="757"
           id="28"
           src="art/art7.jpg"
           loading="lazy"
           alt="Demning"
-          class="w-full h-auto object-cover"
+          class="hh-ph w-full h-auto object-cover"
         />
         <div class="px-4 py-2 text-gray-700">
           <h3 class="text-base font-bold">Demning</h3>
@@ -431,12 +310,12 @@
           <p class="text-sm">December 6, 2023</p>
         </div>
         <br /><br />
-        <img
+        <img decoding="async" width="1080" height="757"
           id="27"
           src="art/art8.jpg"
           loading="lazy"
           alt="LysPåSki"
-          class="w-full h-auto object-cover"
+          class="hh-ph w-full h-auto object-cover"
         />
         <div class="px-4 py-2 text-gray-700">
           <h3 class="text-base font-bold">Snw</h3>
@@ -444,12 +323,12 @@
           <p class="text-sm">Winter, 2023</p>
         </div>
         <br /><br />
-        <img
+        <img decoding="async" width="1080" height="720"
           id="25"
           src="art/art10.jpg"
           loading="lazy"
           alt="Glassgården"
-          class="w-full h-auto object-cover"
+          class="hh-ph w-full h-auto object-cover"
         />
         <div class="px-4 py-2 text-gray-700">
           <h3 class="text-base font-bold">Glassgården</h3>
@@ -469,12 +348,12 @@
 					<p class="text-sm">Description of your art</p>
 					<p class="text-sm">March 21, 202</p>
 				</div> --><br /><br />
-        <img
+        <img decoding="async" width="1080" height="722"
           id="24"
           src="art/art13.jpg"
           loading="lazy"
           alt="Lokk"
-          class="w-full h-auto object-cover"
+          class="hh-ph w-full h-auto object-cover"
         />
         <div class="px-4 py-2 text-gray-700">
           <h3 class="text-base font-bold">Ohma Elektra!</h3>
@@ -482,12 +361,12 @@
           <p class="text-sm">November 16, 2023</p>
         </div>
         <br /><br />
-        <img
+        <img decoding="async" width="1080" height="810"
           id="23"
           src="art/art14.jpg"
           loading="lazy"
           alt="Akademika trapp"
-          class="w-full h-auto object-cover"
+          class="hh-ph w-full h-auto object-cover"
         />
         <div class="px-4 py-2 text-gray-700">
           <h3 class="text-base font-bold">Light</h3>
@@ -495,12 +374,12 @@
           <p class="text-sm">October 26, 2023</p>
         </div>
         <br /><br />
-        <img
+        <img decoding="async" width="1080" height="810"
           id="22"
           src="art/art15.jpg"
           loading="lazy"
           alt="Spygrønn"
-          class="w-full h-auto object-cover"
+          class="hh-ph w-full h-auto object-cover"
         />
         <div class="px-4 py-2 text-gray-700">
           <h3 class="text-base font-bold">Spygrønn</h3>
@@ -515,12 +394,12 @@
           <p class="text-sm">October 26, 2023</p>
         </div>
         <br /><br />
-        <img
+        <img decoding="async" width="1080" height="810"
           id="21"
           src="art/art16.jpg"
           loading="lazy"
           alt="Math"
-          class="w-full h-auto object-cover"
+          class="hh-ph w-full h-auto object-cover"
         />
         <div class="px-4 py-2 text-gray-700">
           <h3 class="text-base font-bold">Math?</h3>
@@ -528,12 +407,12 @@
           <p class="text-sm">October 26, 2023</p>
         </div>
         <br /><br />
-        <img
+        <img decoding="async" width="1080" height="810"
           id="20"
           src="art/art17.jpg"
           loading="lazy"
           alt="Bench"
-          class="w-full h-auto object-cover"
+          class="hh-ph w-full h-auto object-cover"
         />
         <div class="px-4 py-2 text-gray-700">
           <h3 class="text-base font-bold">Bench</h3>
@@ -541,12 +420,12 @@
           <p class="text-sm">October 26, 2023</p>
         </div>
         <br /><br />
-        <img
+        <img decoding="async" width="1080" height="810"
           id="19"
           src="art/art18.jpg"
           loading="lazy"
           alt="Birds nest"
-          class="w-full h-auto object-cover"
+          class="hh-ph w-full h-auto object-cover"
         />
         <div class="px-4 py-2 text-gray-700">
           <h3 class="text-base font-bold">Birds nest</h3>
@@ -560,12 +439,12 @@
 					<p class="text-sm">Description of your art</p>
 					<p class="text-sm">March 21, 202</p>
 				</div> --><br /><br />
-        <img
+        <img decoding="async" width="1080" height="815"
           id="18"
           src="art/art20.jpg"
           loading="lazy"
           alt="Sky?"
-          class="w-full h-auto object-cover"
+          class="hh-ph w-full h-auto object-cover"
         />
         <div class="px-4 py-2 text-gray-700">
           <h3 class="text-base font-bold">Sky?</h3>
@@ -576,12 +455,12 @@
           <p class="text-sm">October 26, 2023</p>
         </div>
         <br /><br />
-        <img
+        <img decoding="async" width="1080" height="754"
           id="17"
           src="art/art21.jpg"
           loading="lazy"
           alt="Swish"
-          class="w-full h-auto object-cover"
+          class="hh-ph w-full h-auto object-cover"
         />
         <div class="px-4 py-2 text-gray-700">
           <h3 class="text-base font-bold">Swish</h3>
@@ -589,12 +468,12 @@
           <p class="text-sm">August 12, 2023</p>
         </div>
         <br /><br />
-        <img
+        <img decoding="async" width="1080" height="736"
           id="16"
           src="art/art22.jpg"
           loading="lazy"
           alt="Glimt av himmel"
-          class="w-full h-auto object-cover"
+          class="hh-ph w-full h-auto object-cover"
         />
         <div class="px-4 py-2 text-gray-700">
           <h3 class="text-base font-bold">Glimt av himmel</h3>
@@ -602,12 +481,12 @@
           <p class="text-sm">July 27, 2023</p>
         </div>
         <br /><br />
-        <img
+        <img decoding="async" width="1080" height="981"
           id="15"
           src="art/art23.jpg"
           loading="lazy"
           alt="Venner vinter"
-          class="w-full h-auto object-cover"
+          class="hh-ph w-full h-auto object-cover"
         />
         <div class="px-4 py-2 text-gray-700">
           <h3 class="text-base font-bold">Togetherness</h3>
@@ -615,12 +494,12 @@
           <p class="text-sm">March 18, 2023</p>
         </div>
         <br /><br />
-        <img
+        <img decoding="async" width="1080" height="1350"
           id="14"
           src="art/art24.jpg"
           loading="lazy"
           alt="Kraft til å bære"
-          class="w-full h-auto object-cover"
+          class="hh-ph w-full h-auto object-cover"
         />
         <div class="px-4 py-2 text-gray-700">
           <h3 class="text-base font-bold">Kraft til å bære</h3>
@@ -628,12 +507,12 @@
           <p class="text-sm">July 12, 2022</p>
         </div>
         <br /><br />
-        <img
+        <img decoding="async" width="1080" height="755"
           id="13"
           src="art/art25.jpg"
           loading="lazy"
           alt="Newtongreier"
-          class="w-full h-auto object-cover"
+          class="hh-ph w-full h-auto object-cover"
         />
         <div class="px-4 py-2 text-gray-700">
           <h3 class="text-base font-bold">WWXXZZ</h3>
@@ -641,12 +520,12 @@
           <p class="text-sm">July 7, 2022</p>
         </div>
         <br /><br />
-        <img
+        <img decoding="async" width="1080" height="754"
           id="12"
           src="art/art26.jpg"
           loading="lazy"
           alt="Striper"
-          class="w-full h-auto object-cover"
+          class="hh-ph w-full h-auto object-cover"
         />
         <div class="px-4 py-2 text-gray-700">
           <h3 class="text-base font-bold">C</h3>
@@ -654,12 +533,12 @@
           <p class="text-sm">March 11, 2022</p>
         </div>
         <br /><br />
-        <img
+        <img decoding="async" width="1080" height="1350"
           id="11"
           src="art/art27.jpg"
           loading="lazy"
           alt="Fyr"
-          class="w-full h-auto object-cover"
+          class="hh-ph w-full h-auto object-cover"
         />
         <div class="px-4 py-2 text-gray-700">
           <h3 class="text-base font-bold">Øy i havet</h3>
@@ -667,12 +546,12 @@
           <p class="text-sm">August 2, 2021</p>
         </div>
         <br /><br />
-        <img
+        <img decoding="async" width="1080" height="597"
           id="10"
           src="art/art28.jpg"
           loading="lazy"
           alt="Place to be"
-          class="w-full h-auto object-cover"
+          class="hh-ph w-full h-auto object-cover"
         />
         <div class="px-4 py-2 text-gray-700">
           <h3 class="text-base font-bold">Place to be</h3>
@@ -683,12 +562,12 @@
           <p class="text-sm">June 6, 2021</p>
         </div>
         <br /><br />
-        <img
+        <img decoding="async" width="1080" height="754"
           id="9"
           src="art/art29.jpg"
           loading="lazy"
           alt="Road"
-          class="w-full h-auto object-cover"
+          class="hh-ph w-full h-auto object-cover"
         />
         <div class="px-4 py-2 text-gray-700">
           <h3 class="text-base font-bold">
@@ -724,12 +603,12 @@
           <p class="text-sm">May 20, 2021</p>
         </div>
         <br /><br />
-        <img
+        <img decoding="async" width="1080" height="1067"
           id="8"
           src="art/art30.jpg"
           loading="lazy"
           alt="Ærlend2"
-          class="w-full h-auto object-cover"
+          class="hh-ph w-full h-auto object-cover"
         />
         <div class="px-4 py-2 text-gray-700">
           <h3 class="text-base font-bold">Ærlænd2</h3>
@@ -737,12 +616,12 @@
           <p class="text-sm">April 9, 2021</p>
         </div>
         <br /><br />
-        <img
+        <img decoding="async" width="1080" height="607"
           id="7"
           src="art/art31.jpg"
           loading="lazy"
           alt="Swing"
-          class="w-full h-auto object-cover"
+          class="hh-ph w-full h-auto object-cover"
         />
         <div class="px-4 py-2 text-gray-700">
           <h3 class="text-base font-bold">Swing</h3>
@@ -752,12 +631,12 @@
           <p class="text-sm">April 1, 2021</p>
         </div>
         <br /><br />
-        <img
+        <img decoding="async" width="1080" height="637"
           id="6"
           src="art/art32.jpg"
           loading="lazy"
           alt="Distance"
-          class="w-full h-auto object-cover"
+          class="hh-ph w-full h-auto object-cover"
         />
         <div class="px-4 py-2 text-gray-700">
           <h3 class="text-base font-bold">Distance</h3>
@@ -765,12 +644,12 @@
           <p class="text-sm">March 28, 2021</p>
         </div>
         <br /><br />
-        <img
+        <img decoding="async" width="1080" height="1350"
           id="5"
           src="art/art33.jpg"
           loading="lazy"
           alt="Sailaway"
-          class="w-full h-auto object-cover"
+          class="hh-ph w-full h-auto object-cover"
         />
         <div class="px-4 py-2 text-gray-700">
           <h3 class="text-base font-bold">~~~~~Sailaway~~~~~</h3>
@@ -778,12 +657,12 @@
           <p class="text-sm">March 26, 2021</p>
         </div>
         <br /><br />
-        <img
+        <img decoding="async" width="1080" height="755"
           id="5"
           src="art/art34.jpg"
           loading="lazy"
           alt="Ærlend"
-          class="w-full h-auto object-cover"
+          class="hh-ph w-full h-auto object-cover"
         />
         <div class="px-4 py-2 text-gray-700">
           <h3 class="text-base font-bold">Ærlænd.</h3>
@@ -791,12 +670,12 @@
           <p class="text-sm">March 23, 2021</p>
         </div>
         <br /><br />
-        <img
+        <img decoding="async" width="1080" height="1080"
           id="4"
           src="art/art35.jpg"
           loading="lazy"
           alt="sup"
-          class="w-full h-auto object-cover"
+          class="hh-ph w-full h-auto object-cover"
         />
         <div class="px-4 py-2 text-gray-700">
           <h3 class="text-base font-bold">sup</h3>
@@ -804,12 +683,12 @@
           <p class="text-sm">March 22, 2021</p>
         </div>
         <br /><br />
-        <img
+        <img decoding="async" width="1080" height="800"
           id="3"
           src="art/art36.jpg"
           loading="lazy"
           alt="Vikheim"
-          class="w-full h-auto object-cover"
+          class="hh-ph w-full h-auto object-cover"
         />
         <div class="px-4 py-2 text-gray-700">
           <h3 class="text-base font-bold">Vikeim</h3>
@@ -824,12 +703,12 @@
           <p class="text-sm">March 21, 2021</p>
         </div>
         <br /><br />
-        <img
+        <img decoding="async" width="1080" height="779"
           id="2"
           src="art/art37.jpg"
           loading="lazy"
           alt="Art title"
-          class="w-full h-auto object-cover"
+          class="hh-ph w-full h-auto object-cover"
         />
         <div class="px-4 py-2 text-gray-700">
           <h3 class="text-base font-bold">Sun?</h3>
@@ -837,12 +716,12 @@
           <p class="text-sm">March 21, 2021</p>
         </div>
         <br /><br />
-        <img
+        <img decoding="async" width="1080" height="1350"
           id="1"
           src="art/art39.jpg"
           loading="lazy"
           alt="Art title"
-          class="w-full h-auto object-cover"
+          class="hh-ph w-full h-auto object-cover"
         />
         <div class="px-4 py-2 text-gray-700">
           <h3 class="text-base font-bold">Nigth</h3>
@@ -850,12 +729,12 @@
           <p class="text-sm">March 21, 2021</p>
         </div>
         <br /><br />
-        <img
+        <img decoding="async" width="1080" height="1349"
           id="0"
           src="art/art38.jpg"
           loading="lazy"
           alt="Art title"
-          class="w-full h-auto object-cover"
+          class="hh-ph w-full h-auto object-cover"
         />
         <div id="target-section" class="px-4 py-2 text-gray-700">
           <h3 class="text-base font-bold">Day</h3>
@@ -863,6 +742,7 @@
           <p class="text-sm">March 21, 2021</p>
         </div>
       </div>
+    </div>
     </div>
   </body>
 </html>
